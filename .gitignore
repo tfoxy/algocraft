@@ -1,8 +1,20 @@
 # Eclipse
-bin
+bin/
 .classpath
 .project
 
 # Idea
-.idea
+.idea/
 algocraft.iml
+
+# Proyecto base
+*.sw*
+build/
+libs/
+tmp/
+.settings/
+build.xml.old
+#*.jar
+
+# Ant reports
+pmd_report.html
