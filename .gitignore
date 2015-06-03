@@ -1,5 +1,6 @@
 # Eclipse
 bin/
+.settings/
 .classpath
 .project
 
@@ -12,7 +13,6 @@ algocraft.iml
 build/
 libs/
 tmp/
-.settings/
 build.xml.old
 #*.jar
 
