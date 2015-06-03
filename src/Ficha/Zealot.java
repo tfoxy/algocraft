@@ -44,6 +44,7 @@ public class Zealot extends Unidad implements FichaTerrestre {
 			
 	}
 
+	@Override
 	public void PasarTurno() {
 	}
 

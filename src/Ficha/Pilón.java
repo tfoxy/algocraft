@@ -39,6 +39,7 @@ public class Pilón extends Edificio implements FichaTerrestre {
 			Extrategia.Creame(this);}
 	}
 
+	@Override
 	public void PasarTurno() {
 		Extrategia = Extrategia.PasarTurno();
 	}

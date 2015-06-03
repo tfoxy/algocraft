@@ -20,7 +20,7 @@ public class NodoMineral implements FuenteDeRecurso {
         Minerales= mineral;
     }
 	
-	public NodoMineral (int mineral,Tablero mapa, Cordenada lugar) {
+	public NodoMineral(int mineral, Tablero mapa, Cordenada lugar) {
 		Minerales= mineral;
 		if (!(mapa.HayEspacioTerreste (lugar))){
 			throw new NoSePuedeCrear("Espacio Ocupado");

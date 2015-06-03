@@ -38,7 +38,8 @@ public class Asimilador extends FichaDeJugador implements FichaTerrestre {
 		if (Extrategia.MePuedeCrear()){
 			Extrategia.Creame(this);}
 	}
-	
+
+    @Override
 	public void PasarTurno() {
 		Extrategia = Extrategia.PasarTurno();
 	}

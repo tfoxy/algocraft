@@ -2,10 +2,12 @@ package Ficha;
 
 public class FichaVacia implements FichaTerrestre, FichaAerea {
 
+	@Override
 	public boolean EstasVacia() {
 		return true;
 	}
 
+	@Override
 	public void PasarTurno() {
 		
 	}
@@ -13,7 +15,6 @@ public class FichaVacia implements FichaTerrestre, FichaAerea {
 	@Override
 	public void Muerete() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }

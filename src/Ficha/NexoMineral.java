@@ -15,7 +15,8 @@ public class NexoMineral extends Edificio implements FichaTerrestre {
 		Coste = new Recursos (50, 0);
 		TurnosParaCrear = 4;
 	}
-	
+
+	@Override
 	public void PasarTurno() {
 		Propetario.AgregarRecursosLineales(10,0);
 	}

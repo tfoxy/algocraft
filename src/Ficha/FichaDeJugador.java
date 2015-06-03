@@ -7,11 +7,12 @@ import Jugador.TablaJugador;
 public abstract class FichaDeJugador implements Ficha {
 
 	protected TablaJugador Propetario;
-	
+
+    @Override
 	public boolean EstasVacia() {
 		return false;
 	}
-	
+
 	protected boolean HayRecursosSuficientesParaCrearme(Recursos coste) { //Puede que se balla esta funcion//
 		return Propetario.TengoSuficientesRecursos (coste);
 	}
