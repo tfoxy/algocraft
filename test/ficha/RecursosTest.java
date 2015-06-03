@@ -1,7 +1,7 @@
 package ficha;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class RecursosTest {
         FichaDeJugador NuevoEdificio= new NexoMineral(Protos);
         Protos.NewFicha(NuevoEdificio);
         Protos.PasarTurno ();
-        assertTrue(Protos.CantidadCriztal() == 10);
+        assertEquals(Protos.CantidadCriztal(), 10);
 
     }
 
@@ -38,7 +38,7 @@ public class RecursosTest {
         Protos.NewFicha(NuevoEdificio);
         Protos.PasarTurno ();
         Protos.PasarTurno ();
-        assertTrue(Protos.CantidadCriztal() == 40);
+        assertEquals(Protos.CantidadCriztal(), 40);
 
     }
 
@@ -48,7 +48,7 @@ public class RecursosTest {
         FichaDeJugador NuevoEdificio= new Asimilador(Protos);
         Protos.NewFicha(NuevoEdificio);
         Protos.PasarTurno ();
-        assertTrue(Protos.CantidadGaz() == 10);
+        assertEquals(Protos.CantidadGaz(), 10);
     }
 
     @Test
@@ -59,8 +59,8 @@ public class RecursosTest {
         NuevoEdificio= new NexoMineral(Protos);
         Protos.NewFicha(NuevoEdificio);
         Protos.PasarTurno ();
-        assertTrue(Protos.CantidadGaz() == 10);
-        assertTrue(Protos.CantidadCriztal() == 10);
+        assertEquals(Protos.CantidadGaz(), 10);
+        assertEquals(Protos.CantidadCriztal(), 10);
     }
 
     @Test
@@ -73,8 +73,8 @@ public class RecursosTest {
         Protos.NewFicha(NuevoEdificio);
         Protos.PasarTurno ();
         Protos.PasarTurno ();
-        assertTrue(Protos.CantidadGaz() == 20);
-        assertTrue(Protos.CantidadCriztal() == 40);
+        assertEquals(Protos.CantidadGaz(), 20);
+        assertEquals(Protos.CantidadCriztal(), 40);
     }
 
     @Test
@@ -86,14 +86,14 @@ public class RecursosTest {
         Protos.NewFicha(NuevoEdificio);
         Protos.NewFicha(NuevoEdificio);
         Protos.PasarTurno ();
-        Protos.PasarTurno ();
-        assertTrue(Protos.CantidadGaz() == 20);
-        assertTrue(Protos.CantidadCriztal() == 40);
+        Protos.PasarTurno();
+        assertEquals(Protos.CantidadGaz(), 20);
+        assertEquals(Protos.CantidadCriztal(), 40);
         Protos.PerderFicha(NuevoEdificio);
-        Protos.PasarTurno ();
-        Protos.PasarTurno ();
-        assertTrue(Protos.CantidadGaz() == 40);
-        assertTrue(Protos.CantidadCriztal() == 60);
+        Protos.PasarTurno();
+        Protos.PasarTurno();
+        assertEquals(Protos.CantidadGaz(), 40);
+        assertEquals(Protos.CantidadCriztal(), 60);
     }
 
 
@@ -106,9 +106,9 @@ public class RecursosTest {
         Protos.AgregarTecnologia("Acceso");
         FichaDeJugador NuevaUnidad = new Zealot(Protos,Lugar,Mapa);
         Protos.NewFicha(NuevoEdificio);
-        assertTrue(Protos.PoblcacionActual() == 2);
+        assertEquals(Protos.PoblcacionActual(), 2);
         NuevaUnidad.Muerete();
-        assertTrue(Protos.PoblcacionActual() == 0);
+        assertEquals(Protos.PoblcacionActual(), 0);
     }
 
     @Test
@@ -122,9 +122,9 @@ public class RecursosTest {
         ficha.PasarTurno();
         ficha.PasarTurno();
         ficha.PasarTurno();
-        assertTrue(Protos.PoblcacionPosible() == 5);
+        assertEquals(Protos.PoblcacionPosible(), 5);
         ficha.Muerete();
-        assertTrue(Protos.PoblcacionPosible() == 0);
+        assertEquals(Protos.PoblcacionPosible(), 0);
 
     }
 }

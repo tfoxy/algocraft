@@ -28,7 +28,7 @@ public class Zealot extends Unidad {
 		
 		if (Extrategia.MePuedeCrear()){
 			Extrategia.Creame(this);
-		}	
+		}
 	}
 	
 	public Zealot( TablaJugador propetario) throws NoSePuedeCrear {

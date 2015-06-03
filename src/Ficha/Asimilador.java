@@ -1,6 +1,7 @@
 package Ficha;
 
 import Errores.NoSePuedeCrear;
+import ExtrategiasFicha.ExtrategiaEdificioRecursosGas;
 import ExtrategiasFicha.ExtrategiaFicha;
 import ExtrategiasFicha.ExtrategiasConstruccion.ExtrategiaConstruccionPilon;
 import ExtrategiasFicha.ExtrategiasConstruccion.ExtrategiaConstrucionAsimilador;
@@ -24,6 +25,7 @@ public class Asimilador extends FichaDeJugador {
 		Propetario = propetario;
 		Coste = new Recursos (100, 0);
 		TurnosParaCrear = 6;
+		Extrategia = new ExtrategiaEdificioRecursosGas(Propetario, null, null, new Volcan());
 	}
 	
 	public Asimilador( TablaJugador propetario, Cordenada lugar, Tablero mapa) throws NoSePuedeCrear {

@@ -5,7 +5,6 @@ import Errores.FichaSobreOtraFichaException;
 import Ficha.Espectro;
 import Ficha.Ficha;
 import Ficha.FichaAerea;
-import Ficha.FichaVacia;
 import Ficha.FichasNaturales.NodoMineral;
 import Ficha.FuenteDeRecurso;
 import Ficha.Marine;
