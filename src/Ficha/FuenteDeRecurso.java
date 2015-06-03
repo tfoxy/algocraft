@@ -1,4 +1,4 @@
 package Ficha;
 
-public interface FuenteDeRecurso extends Ficha {
+public interface FuenteDeRecurso extends FichaTerrestre {
 }

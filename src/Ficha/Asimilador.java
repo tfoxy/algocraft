@@ -13,7 +13,7 @@ import Tablero.Tablero;
 import Tecnologia.ListaDeTecnologias;
 
 
-public class Asimilador extends FichaDeJugador {
+public class Asimilador extends FichaDeJugador implements FichaTerrestre {
 
 	private Recursos Coste;
 	private int TurnosParaCrear;

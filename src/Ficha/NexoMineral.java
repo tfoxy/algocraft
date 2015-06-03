@@ -4,7 +4,7 @@ import Jugador.Recursos;
 import Jugador.TablaJugador;
 
 
-public class NexoMineral extends Edificio {
+public class NexoMineral extends Edificio implements FichaTerrestre {
 	
 	private Recursos Coste;
 	private int TurnosParaCrear;

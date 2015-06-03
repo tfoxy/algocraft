@@ -10,7 +10,7 @@ import Tablero.Cordenada;
 import Tablero.Tablero;
 import Tecnologia.ListaDeTecnologias;
 
-public class Zealot extends Unidad {
+public class Zealot extends Unidad implements FichaTerrestre {
 
 	private Recursos Coste;
 	private int TurnosParaCrear;

@@ -1,6 +1,6 @@
 package Ficha;
 
-public class FichaVacia implements Ficha, FichaAerea {
+public class FichaVacia implements FichaTerrestre, FichaAerea {
 
 	public boolean EstasVacia() {
 		return true;
