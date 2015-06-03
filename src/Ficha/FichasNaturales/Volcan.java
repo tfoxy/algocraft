@@ -41,10 +41,4 @@ public class Volcan implements Ficha {
 	public void Muerete() {
 	}
 
-	@Override
-	public String HeresUnRecurso() {
-		return "Volcan";
-	}
-
-
 }

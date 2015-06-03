@@ -42,9 +42,4 @@ public class NodoMineral implements FuenteDeRecurso {
 	public void Muerete() {
 	}
 
-	@Override
-	public String HeresUnRecurso() {
-		return "NodoMinerales";
-	}
-
 }

@@ -16,10 +16,4 @@ public class FichaVacia implements FichaTerrestre, FichaAerea {
 		
 	}
 
-	@Override
-	public String HeresUnRecurso() {
-		// TODO Auto-generated method stub
-		return "no";
-	}
-
 }

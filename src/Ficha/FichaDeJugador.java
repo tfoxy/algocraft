@@ -14,10 +14,6 @@ public abstract class FichaDeJugador implements Ficha {
 	
 	protected boolean HayRecursosSuficientesParaCrearme(Recursos coste) { //Puede que se balla esta funcion//
 		return Propetario.TengoSuficientesRecursos (coste);
-
-	}
-	public String HeresUnRecurso(){
-		return "no";
 	}
 
 }

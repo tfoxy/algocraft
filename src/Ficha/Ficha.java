@@ -9,6 +9,4 @@ public interface Ficha {
 
 	void Muerete();
 
-	String HeresUnRecurso();
-
 }
