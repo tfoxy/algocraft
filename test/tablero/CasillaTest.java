@@ -1,6 +1,5 @@
 package tablero;
 
-import Errores.FichaEnTerrenoIncorrectoException;
 import Errores.FichaSobreOtraFichaException;
 import Ficha.Espectro;
 import Ficha.Ficha;
@@ -12,7 +11,7 @@ import Ficha.FichaTerrestre;
 import Jugador.TablaJugador;
 import Tablero.Casilla;
 import Tablero.Casillero;
-import Tablero.Terreno;
+import ficha.FichaEspacial;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,14 +25,6 @@ public class CasillaTest {
     public void initialize() {
         casilla = new Casillero();
         jugador = new TablaJugador("Juan", "protoss");
-    }
-
-
-    @Test
-    public void tieneTerrenoTerrestreAlCrearse() {
-        Terreno terreno = casilla.getTerreno();
-
-        Assert.assertSame(terreno, Terreno.TERRESTRE);
     }
 
 
@@ -54,14 +45,14 @@ public class CasillaTest {
 
 
     @Test
-    public void puedeTenerTerrenoEspacial() {
-        Terreno terreno = Terreno.ESPACIAL;
+    public void puedeTenerAreasEspaciales() {
+        FichaTerrestre areaEspacial = new FichaEspacial();
 
-        casilla.modificar(terreno);
+        casilla.insertar(areaEspacial);
 
-        Terreno terrenoObtenido = casilla.getTerreno();
+        FichaTerrestre fichaObtenida = casilla.getFichaTerrestre();
 
-        Assert.assertSame(terreno, terrenoObtenido);
+        Assert.assertSame(areaEspacial, fichaObtenida);
     }
 
 
@@ -117,23 +108,23 @@ public class CasillaTest {
     }
 
 
-    @Test(expected= FichaEnTerrenoIncorrectoException.class)
-    public void tiraErrorAlInsertarUnidadDeTierraEnTerrenoEspacial() {
-        Terreno terreno = Terreno.ESPACIAL;
+    @Test(expected= FichaSobreOtraFichaException.class)
+    public void tiraErrorAlInsertarUnidadDeTierraEnAreaEspacial() {
+        FichaTerrestre areaEspacial = new FichaEspacial();
         FichaTerrestre unidad = new Marine(jugador);
 
-        casilla.modificar(terreno);
+        casilla.insertar(areaEspacial);
         casilla.insertar(unidad);
     }
 
 
-    @Test(expected=FichaEnTerrenoIncorrectoException.class)
-    public void tiraErrorAlInsertarTerrenoEspacialDondeHayUnidadDeTierra() {
-        Terreno terreno = Terreno.ESPACIAL;
+    @Test(expected=FichaSobreOtraFichaException.class)
+    public void tiraErrorAlInsertarAreaEspacialDondeHayUnidadDeTierra() {
+        FichaTerrestre areaEspacial = new FichaEspacial();
         FichaTerrestre unidad = new Marine(jugador);
 
         casilla.insertar(unidad);
-        casilla.modificar(terreno);
+        casilla.insertar(areaEspacial);
     }
 
 

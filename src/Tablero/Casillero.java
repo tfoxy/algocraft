@@ -1,6 +1,5 @@
 package Tablero;
 
-import Errores.FichaEnTerrenoIncorrectoException;
 import Errores.FichaSobreOtraFichaException;
 import Ficha.FichaTerrestre;
 import Ficha.FichaAerea;
@@ -8,12 +7,10 @@ import Ficha.FichaVacia;
 
 public class Casillero implements Casilla {
 
-	private Terreno terreno;
 	private FichaTerrestre fichaTerreste;
 	private FichaAerea fichaAerea;
 	
 	public Casillero() {
-		terreno = Terreno.TERRESTRE;
 		fichaTerreste = new FichaVacia();
 		fichaAerea = new FichaVacia();
 	}
@@ -39,12 +36,6 @@ public class Casillero implements Casilla {
 		return fichaTerreste;
 	}
 
-
-    @Override
-    public Terreno getTerreno() {
-        return terreno;
-    }
-
     @Override
     public FichaTerrestre getFichaTerrestre() {
         return fichaTerreste;
@@ -59,9 +50,6 @@ public class Casillero implements Casilla {
     public void insertar(FichaTerrestre ficha) {
         if (!fichaTerreste.EstasVacia()) {
             throw new FichaSobreOtraFichaException();
-        }
-        else if (terreno == Terreno.ESPACIAL) {
-            throw new FichaEnTerrenoIncorrectoException();
         }
         else {
             fichaTerreste = ficha;
@@ -86,16 +74,6 @@ public class Casillero implements Casilla {
     @Override
     public void eliminarFichaAerea() {
         fichaAerea = new FichaVacia();
-    }
-
-    @Override
-    public void modificar(Terreno terreno) {
-        if (!fichaTerreste.EstasVacia()) {
-            throw new FichaEnTerrenoIncorrectoException();
-        }
-        else {
-            this.terreno = terreno;
-        }
     }
 
 
