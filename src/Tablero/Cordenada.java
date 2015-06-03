@@ -7,12 +7,7 @@ public class Cordenada {
 	private static int xMax = 100000000;
 	private static int yMax = 100000000;
 	
-	public static void Limites(int x, int y){
-		xMax = x;
-		yMax = y;
-	}
-	
-	public Cordenada(int x, int y){
+	public Cordenada(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -43,9 +38,9 @@ public class Cordenada {
 	//movimiento entre cordenandas. Si llegas al limite no te avisan. Quedas caminando contra la pered.
 	
 	public Cordenada arriba() {
-		if(y +1 <= yMax)
-		return new Cordenada(x, y +1);
-		
+		if(y + 1 <= yMax)
+      return new Cordenada(x, y + 1);
+
 		return this;
 	}
 	public Cordenada abajo() {

@@ -3,12 +3,13 @@ package Ficha;
 import Errores.ArgumentoNoPuedeSerNegativoException;
 import Jugador.Gaia;
 
-public abstract class FuenteDeRecurso extends FichaAbstracta implements FichaTerrestre {
+public abstract class FuenteDeRecurso
+        extends FichaAbstracta implements FichaTerrestre {
 
     private int cantidadDeRecursos;
 
 
-    public FuenteDeRecurso(int cantidadDeRecursos) throws ArgumentoNoPuedeSerNegativoException {
+    public FuenteDeRecurso(int cantidadDeRecursos) {
         super(new Gaia());
 
         if (cantidadDeRecursos < 0) {
