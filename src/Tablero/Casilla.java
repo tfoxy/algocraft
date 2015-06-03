@@ -1,18 +1,18 @@
 package Tablero;
 
-import Ficha.Ficha;
+import Ficha.FichaTerrestre;
 import Ficha.FichaAerea;
 
 public interface Casilla {
     Terreno getTerreno();
 
-    Ficha getFichaTerrestre();
+    FichaTerrestre getFichaTerrestre();
 
     FichaAerea getFichaAerea();
 
     void modificar(Terreno terreno);
 
-    void insertar(Ficha ficha);
+    void insertar(FichaTerrestre ficha);
 
     void insertar(FichaAerea ficha);
 

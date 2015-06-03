@@ -2,45 +2,45 @@ package Tablero;
 
 import Errores.FichaEnTerrenoIncorrectoException;
 import Errores.FichaSobreOtraFichaException;
-import Ficha.Ficha;
+import Ficha.FichaTerrestre;
 import Ficha.FichaAerea;
 import Ficha.FichaVacia;
 
 public class Casillero implements Casilla {
 
 	private Terreno terreno;
-	private Ficha FichaTerreste;
-	private FichaAerea FichaVoladora;
+	private FichaTerrestre fichaTerreste;
+	private FichaAerea fichaAerea;
 	
 	public Casillero() {
 		terreno = Terreno.TERRESTRE;
-		FichaTerreste = new FichaVacia();
-		FichaVoladora = new FichaVacia();
+		fichaTerreste = new FichaVacia();
+		fichaAerea = new FichaVacia();
 	}
 	
 	public boolean EstasVacia() {
-		return (FichaTerreste.EstasVacia() && FichaVoladora.EstasVacia());
+		return (fichaTerreste.EstasVacia() && fichaAerea.EstasVacia());
 	}
 
 	public boolean HayespacioTerreste() {
-		return FichaTerreste.EstasVacia();
+		return fichaTerreste.EstasVacia();
 	}
 
-	public void NewFichaTerreste(Ficha ficha) {
-		FichaTerreste = ficha;
+	public void NewFichaTerreste(FichaTerrestre ficha) {
+		fichaTerreste = ficha;
 		
 	}
 
 	public void MuereFichaTerreste() {
-		FichaTerreste = new FichaVacia();	
+		fichaTerreste = new FichaVacia();
 	}
 
 	public String TienesUnRecurso() {
-		return FichaTerreste.HeresUnRecurso();
+		return fichaTerreste.HeresUnRecurso();
 	}
 
-	public Ficha FichaTerreste() {
-		return 	FichaTerreste;
+	public FichaTerrestre FichaTerreste() {
+		return fichaTerreste;
 	}
 
 
@@ -50,51 +50,51 @@ public class Casillero implements Casilla {
     }
 
     @Override
-    public Ficha getFichaTerrestre() {
-        return FichaTerreste;
+    public FichaTerrestre getFichaTerrestre() {
+        return fichaTerreste;
     }
 
     @Override
     public FichaAerea getFichaAerea() {
-        return FichaVoladora;
+        return fichaAerea;
     }
 
     @Override
-    public void insertar(Ficha ficha) {
-        if (!FichaTerreste.EstasVacia()) {
+    public void insertar(FichaTerrestre ficha) {
+        if (!fichaTerreste.EstasVacia()) {
             throw new FichaSobreOtraFichaException();
         }
         else if (terreno == Terreno.ESPACIAL) {
             throw new FichaEnTerrenoIncorrectoException();
         }
         else {
-            FichaTerreste = ficha;
+            fichaTerreste = ficha;
         }
     }
 
     @Override
     public void insertar(FichaAerea ficha) {
-        if (!FichaVoladora.EstasVacia()) {
+        if (!fichaAerea.EstasVacia()) {
             throw new FichaSobreOtraFichaException();
         }
         else {
-            FichaVoladora = ficha;
+            fichaAerea = ficha;
         }
     }
 
     @Override
     public void eliminarFichaTerrestre() {
-        FichaTerreste = new FichaVacia();
+        fichaTerreste = new FichaVacia();
     }
 
     @Override
     public void eliminarFichaAerea() {
-        FichaVoladora = new FichaVacia();
+        fichaAerea = new FichaVacia();
     }
 
     @Override
     public void modificar(Terreno terreno) {
-        if (!FichaTerreste.EstasVacia()) {
+        if (!fichaTerreste.EstasVacia()) {
             throw new FichaEnTerrenoIncorrectoException();
         }
         else {
