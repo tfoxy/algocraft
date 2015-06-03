@@ -1,11 +1,11 @@
 package Ficha.FichasNaturales;
 
 import Errores.NoSePuedeCrear;
-import Ficha.Ficha;
+import Ficha.FuenteDeRecurso;
 import Tablero.Cordenada;
 import Tablero.Tablero;
 
-public class Volcan implements Ficha {
+public class Volcan implements FuenteDeRecurso {
 
     private static final int GAS_POR_DEFECTO = 5000;
 
