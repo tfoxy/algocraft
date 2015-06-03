@@ -2,65 +2,67 @@ package Tablero;
 
 public class Cordenada {
 	
-	private int X;
-	private int Y;
-	static private int XMax = 100000000;
-	static private int YMax = 100000000;
+	private int x;
+	private int y;
+	private static int xMax = 100000000;
+	private static int yMax = 100000000;
 	
 	public static void Limites(int x, int y){
-		XMax = x;
-		YMax = y;
+		xMax = x;
+		yMax = y;
 	}
 	
 	public Cordenada(int x, int y){
-		X = x;
-		Y = y;
+		this.x = x;
+		this.y = y;
 	}
 
 	
+	@Override
 	public boolean equals(Object Otra) {
         //noinspection SimplifiableIfStatement
         if (Otra instanceof Cordenada){
-            return (X == ((Cordenada)Otra).X && Y == ((Cordenada)Otra).Y);
+            return (x == ((Cordenada)Otra).x && y == ((Cordenada)Otra).y);
         }
 
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-        return X;
+        return x;
     }
 
 
 	
 	public int DistanciaAObjetivo (Cordenada Objetivo){
 //MasDificilDeLoQueParece. QUe pasa si conviernteo bollean a int?
-		return 	(int) Math.sqrt((X - Objetivo.X)*(X - Objetivo.X) + (Y - Objetivo.Y)*(Y - Objetivo.Y));
+		return 	(int) Math.sqrt((x - Objetivo.x)*(x - Objetivo.x) + (y - Objetivo.y)*(y - Objetivo.y));
 	}
 	
 	//movimiento entre cordenandas. Si llegas al limite no te avisan. Quedas caminando contra la pered.
 	
 	public Cordenada arriba() {
-		if(Y+1 <= YMax)
-		return new Cordenada(X,Y+1);
+		if(y +1 <= yMax)
+		return new Cordenada(x, y +1);
 		
 		return this;
 	}
 	public Cordenada abajo() {
-		if(Y+1 >= 0)
-		return new Cordenada(X,Y-1);
+		if(y +1 >= 0)
+		return new Cordenada(x, y -1);
 		
 		return this;
 	}
 	public Cordenada derecha() {
-		if(X+1 <= XMax)
-		return new Cordenada(X+1,Y);
+		if(x +1 <= xMax)
+		return new Cordenada(x +1, y);
 	
 		return this;
 	}
 	public Cordenada izquierda() {
-		if(X+1 >= 0)
-		return new Cordenada(X-1,Y);
+		if(x +1 >= 0)
+		return new Cordenada(x -1, y);
 		
 		return this;
 	}

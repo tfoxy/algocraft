@@ -2,7 +2,6 @@ package Ficha;
 
 import Errores.ArgumentoNoPuedeSerNegativoException;
 import Jugador.Gaia;
-import Jugador.TablaJugador;
 
 public abstract class FuenteDeRecurso extends FichaAbstracta implements FichaTerrestre {
 
