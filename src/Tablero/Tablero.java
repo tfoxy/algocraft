@@ -5,6 +5,8 @@ import java.util.Map;
 
 import Errores.PosicionFueraDeLimiteException;
 import Ficha.Ficha;
+import Ficha.FichaAerea;
+import Ficha.FichaTerrestre;
 
 public class Tablero {
 
@@ -29,7 +31,7 @@ public class Tablero {
 		return Tablero.get(lugar).HayespacioTerreste();
 	}
 
-	public void NewFichaTerreste(Cordenada lugar, Ficha ficha) {
+	public void NewFichaTerreste(Cordenada lugar, FichaTerrestre ficha) {
 		Casillero Lugar = Tablero.get(lugar);
 		Lugar.NewFichaTerreste (ficha);
 	}	
@@ -59,7 +61,11 @@ public class Tablero {
         return casilla;
 	}
 
-	public void insertar(Cordenada lugar, Ficha ficha) {
+	public void insertar(Cordenada lugar, FichaTerrestre ficha) {
+		getCasilla(lugar).insertar(ficha);
+	}
+
+	public void insertar(Cordenada lugar, FichaAerea ficha) {
 		getCasilla(lugar).insertar(ficha);
 	}
 
