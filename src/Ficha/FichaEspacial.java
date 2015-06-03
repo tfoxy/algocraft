@@ -1,4 +1,4 @@
-package ficha;
+package Ficha;
 
 import Ficha.FichaTerrestre;
 

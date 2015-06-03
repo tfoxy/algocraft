@@ -11,7 +11,7 @@ import Ficha.FichaTerrestre;
 import Jugador.TablaJugador;
 import Tablero.Casilla;
 import Tablero.Casillero;
-import ficha.FichaEspacial;
+import Ficha.FichaEspacial;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
