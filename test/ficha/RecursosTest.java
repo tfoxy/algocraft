@@ -8,7 +8,6 @@ import org.junit.Test;
 import Errores.NoSePuedeCrear;
 import Ficha.Asimilador;
 import Ficha.Ficha;
-import Ficha.FichaDeJugador;
 import Ficha.NexoMineral;
 import Ficha.Pilón;
 import Ficha.Zealot;
@@ -23,7 +22,7 @@ public class RecursosTest {
     @Test
     public void RecuersosPorTurnoCristaBasicol() {
         TablaJugador Protos = new TablaJugador("Proto","Protos");
-        FichaDeJugador NuevoEdificio= new NexoMineral(Protos);
+        Ficha NuevoEdificio= new NexoMineral(Protos);
         Protos.NewFicha(NuevoEdificio);
         Protos.PasarTurno ();
         assertEquals(Protos.CantidadCriztal(), 10);
@@ -33,7 +32,7 @@ public class RecursosTest {
     @Test
     public void RecuersosPorTurnoCristal() {
         TablaJugador Protos = new TablaJugador("Proto","Protos");
-        FichaDeJugador NuevoEdificio= new NexoMineral(Protos);
+        Ficha NuevoEdificio= new NexoMineral(Protos);
         Protos.NewFicha(NuevoEdificio);
         Protos.NewFicha(NuevoEdificio);
         Protos.PasarTurno ();
@@ -45,7 +44,7 @@ public class RecursosTest {
     @Test
     public void RecuersosPorTurnoGasBasicol() {
         TablaJugador Protos = new TablaJugador("Proto","Protos");
-        FichaDeJugador NuevoEdificio= new Asimilador(Protos);
+        Ficha NuevoEdificio= new Asimilador(Protos);
         Protos.NewFicha(NuevoEdificio);
         Protos.PasarTurno ();
         assertEquals(Protos.CantidadGaz(), 10);
@@ -54,7 +53,7 @@ public class RecursosTest {
     @Test
     public void RecuersosPorTurnoGasyCristalBasicol() {
         TablaJugador Protos = new TablaJugador("Proto","Protos");
-        FichaDeJugador NuevoEdificio= new Asimilador(Protos);
+        Ficha NuevoEdificio= new Asimilador(Protos);
         Protos.NewFicha(NuevoEdificio);
         NuevoEdificio= new NexoMineral(Protos);
         Protos.NewFicha(NuevoEdificio);
@@ -66,7 +65,7 @@ public class RecursosTest {
     @Test
     public void RecuersosPorTurnoGasyCristalComplejo() {
         TablaJugador Protos = new TablaJugador("Proto","Protos");
-        FichaDeJugador NuevoEdificio= new Asimilador(Protos);
+        Ficha NuevoEdificio= new Asimilador(Protos);
         Protos.NewFicha(NuevoEdificio);
         NuevoEdificio= new NexoMineral(Protos);
         Protos.NewFicha(NuevoEdificio);
@@ -80,7 +79,7 @@ public class RecursosTest {
     @Test
     public void PerderFuenteDeRecursosYVerficiarQueNoLosGanesPorTurno() {
         TablaJugador Protos = new TablaJugador("Proto","Protos");
-        FichaDeJugador NuevoEdificio= new Asimilador(Protos);
+        Ficha NuevoEdificio= new Asimilador(Protos);
         Protos.NewFicha(NuevoEdificio);
         NuevoEdificio= new NexoMineral(Protos);
         Protos.NewFicha(NuevoEdificio);
@@ -98,17 +97,29 @@ public class RecursosTest {
 
 
     @Test
+    public void CreamosUnidadPerdemosPoblacio() throws NoSePuedeCrear {
+        Tablero Mapa = new Tablero(10, 10);
+        Cordenada Lugar = new Cordenada(3, 3);
+        TablaJugador Protos = new TablaJugador("Proto", "Protos", 200, 200);
+        Ficha NuevoEdificio = new Pilón(Protos);
+        Protos.AgregarTecnologia("Acceso");
+        Protos.NewFicha(NuevoEdificio);
+        Ficha NuevaUnidad = new Zealot(Protos, Lugar, Mapa);
+        assertEquals(2, Protos.PoblcacionActual());
+    }
+
+
+    @Test
     public void MuereUnidadGanamosPoblacio() throws NoSePuedeCrear {
         Tablero Mapa = new Tablero (10,10);
         Cordenada Lugar = new Cordenada(3,3);
         TablaJugador Protos = new TablaJugador("Proto","Protos",200,200);
-        FichaDeJugador NuevoEdificio= new Pilón(Protos);
+        Ficha NuevoEdificio= new Pilón(Protos);
         Protos.AgregarTecnologia("Acceso");
-        FichaDeJugador NuevaUnidad = new Zealot(Protos,Lugar,Mapa);
         Protos.NewFicha(NuevoEdificio);
-        assertEquals(Protos.PoblcacionActual(), 2);
+        Ficha NuevaUnidad = new Zealot(Protos,Lugar,Mapa);
         NuevaUnidad.Muerete();
-        assertEquals(Protos.PoblcacionActual(), 0);
+        assertEquals(0, Protos.PoblcacionActual());
     }
 
     @Test
@@ -122,9 +133,9 @@ public class RecursosTest {
         ficha.PasarTurno();
         ficha.PasarTurno();
         ficha.PasarTurno();
-        assertEquals(Protos.PoblcacionPosible(), 5);
+        assertEquals(5, Protos.PoblcacionPosible());
         ficha.Muerete();
-        assertEquals(Protos.PoblcacionPosible(), 0);
+        assertEquals(0, Protos.PoblcacionPosible());
 
     }
 }

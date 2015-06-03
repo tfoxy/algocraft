@@ -35,10 +35,6 @@ public class Casillero implements Casilla {
 		fichaTerreste = new FichaVacia();
 	}
 
-	public String TienesUnRecurso() {
-		return fichaTerreste.HeresUnRecurso();
-	}
-
 	public FichaTerrestre FichaTerreste() {
 		return fichaTerreste;
 	}

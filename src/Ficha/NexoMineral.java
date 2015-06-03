@@ -8,10 +8,9 @@ public class NexoMineral extends Edificio implements FichaTerrestre {
 	
 	private Recursos Coste;
 	private int TurnosParaCrear;
-	private TablaJugador Propetario;
 
 	public NexoMineral( TablaJugador propetario) {
-		Propetario = propetario;
+		super(propetario);
 		Coste = new Recursos (50, 0);
 		TurnosParaCrear = 4;
 	}

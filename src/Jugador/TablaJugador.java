@@ -3,7 +3,6 @@ package Jugador;
 import java.util.ArrayList;
 
 import Ficha.Ficha;
-import Ficha.FichaDeJugador;
 import Tecnologia.ListaDeTecnologias;
 
 
@@ -58,7 +57,6 @@ public class TablaJugador {
 	}
 	public void AgregarPoblacionTotal(int AumentoDePoblacion) {
 		recursos.AgregarPoblacionTotal(AumentoDePoblacion);
-		
 	}
 	public void PerderPoblacionTotal(int desensoDePoblacion) {
 		recursos.PerderPoblacionTotal(desensoDePoblacion);
@@ -69,11 +67,11 @@ public class TablaJugador {
 	}
 
 	//Ficha
-	public void NewFicha(FichaDeJugador nuevaFicha) {
+	public void NewFicha(Ficha nuevaFicha) {
 		MisFichas.add(nuevaFicha);
 		
 	}
-	public void PerderFicha(FichaDeJugador fichaPerdida) {
+	public void PerderFicha(Ficha fichaPerdida) {
 		MisFichas.remove(fichaPerdida);
 		
 	}

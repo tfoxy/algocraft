@@ -5,7 +5,7 @@ import Jugador.TablaJugador;
 public class Marine extends Unidad implements FichaTerrestre {
 
     public Marine(TablaJugador jugador) {
-        Propetario = jugador;
+        super(jugador);
     }
 
     @Override

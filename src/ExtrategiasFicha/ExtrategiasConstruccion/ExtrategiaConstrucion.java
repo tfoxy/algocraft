@@ -1,10 +1,10 @@
 package ExtrategiasFicha.ExtrategiasConstruccion;
 
 import Errores.NoSePuedeCrear;
-import ExtrategiasFicha.ExtrategiaCasa;
 import ExtrategiasFicha.ExtrategiaFicha;
-import Ficha.FichaDeJugador;
 
+import Ficha.Ficha;
+import Ficha.FichaTerrestre;
 import Jugador.Recursos;
 import Jugador.TablaJugador;
 import Tablero.Cordenada;
@@ -28,7 +28,8 @@ public class ExtrategiaConstrucion extends ExtrategiaFicha {
 			Lugar = lugar;
 			LasTecnologiasNecesarias = lasTecnologiasNecesarias;
 		}
-		
+
+        @Override
 		public boolean MePuedeCrear() throws NoSePuedeCrear {
 			if ( !(Propetario.TengoSuficientesRecursos (Coste))){
 				throw new NoSePuedeCrear("Faltan Recursos");			
@@ -43,12 +44,18 @@ public class ExtrategiaConstrucion extends ExtrategiaFicha {
 			return true;
 		}
 
-		public void Creame( FichaDeJugador Nueva) {
-		Propetario.GastaRecursos (Coste);			
-		Propetario.NewFicha(Nueva);
-		Mapa.NewFichaTerreste(Lugar, Nueva);
+        @Override
+        public void Creame(Ficha Nueva) {
+            Creame((FichaTerrestre) Nueva);
+        }
+
+		public void Creame(FichaTerrestre Nueva) {
+			Propetario.GastaRecursos(Coste);
+			Propetario.NewFicha(Nueva);
+			Mapa.NewFichaTerreste(Lugar, Nueva);
 		}
-			
+
+        @Override
 		public  ExtrategiaFicha PasarTurno() { //voy a tener que ahcer hjas solo para variar esta funcion. T.T
 			return this;
 		}

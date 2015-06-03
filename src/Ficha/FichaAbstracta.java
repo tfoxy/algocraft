@@ -4,9 +4,17 @@ import Jugador.Recursos;
 import Jugador.TablaJugador;
 
 
-public abstract class FichaDeJugador implements Ficha {
+public abstract class FichaAbstracta implements Ficha {
 
 	protected TablaJugador Propetario;
+
+	public FichaAbstracta(TablaJugador jugador) {
+        if (jugador == null) {
+            throw new NullPointerException("Jugador es nulo");
+        }
+
+        Propetario = jugador;
+	}
 
     @Override
 	public boolean EstasVacia() {

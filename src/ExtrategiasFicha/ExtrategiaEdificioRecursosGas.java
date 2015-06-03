@@ -1,13 +1,14 @@
 package ExtrategiasFicha;
 
-import Ficha.FichaDeJugador;
+import Ficha.Ficha;
 import Ficha.FichasNaturales.Volcan;
-import Jugador.Recursos;
 import Jugador.TablaJugador;
 import Tablero.Cordenada;
 import Tablero.Tablero;
 
 public class ExtrategiaEdificioRecursosGas extends ExtrategiaFicha {
+
+    private int CANTIDAD_EXTRAIDA_POR_TURNO = 10;
 
 	private TablaJugador Propetario;
 	private Tablero Mapa;
@@ -22,16 +23,17 @@ public class ExtrategiaEdificioRecursosGas extends ExtrategiaFicha {
 		Lugar = lugar;
 		FuenteDeRecursos = fuenteDeRecursos;
 	}
-	
+
+    @Override
 	public ExtrategiaFicha PasarTurno() {
-		if (FuenteDeRecursos.Gaces > 0){
-		Propetario.AgregarRecursosLineales(0,10);
-		FuenteDeRecursos.Gaces = FuenteDeRecursos.Gaces - 10;}
+        int gasExtraido = FuenteDeRecursos.extraer(CANTIDAD_EXTRAIDA_POR_TURNO);
+        Propetario.AgregarRecursosLineales(0, gasExtraido);
 		return this;
 	}
-	
-	
-	public void Morir(FichaDeJugador casa) {
+
+
+    @Override
+	public void Morir(Ficha casa) {
 		Propetario.PerderFicha(casa);
 		Mapa.MuereFichaTerreste(Lugar, casa);
 		Mapa.NewFichaTerreste(Lugar, FuenteDeRecursos);

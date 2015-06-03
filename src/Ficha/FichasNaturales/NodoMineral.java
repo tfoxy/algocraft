@@ -1,45 +1,39 @@
 package Ficha.FichasNaturales;
 
+import Errores.ArgumentoNoPuedeSerNegativoException;
 import Errores.NoSePuedeCrear;
-import Ficha.Ficha;
 import Ficha.FuenteDeRecurso;
 import Tablero.Cordenada;
 import Tablero.Tablero;
 
-public class NodoMineral implements FuenteDeRecurso {
+public class NodoMineral extends FuenteDeRecurso {
 
-    public static int MINERALES_POR_DEFECTO = 1500;
-
-	public int Minerales;
+    private static int MINERALES_POR_DEFECTO = 1500;
 
     public NodoMineral() {
-        Minerales = MINERALES_POR_DEFECTO;
+		super(MINERALES_POR_DEFECTO);
     }
 
-    public NodoMineral(int mineral) {
-        Minerales= mineral;
+    public NodoMineral(int mineral) throws ArgumentoNoPuedeSerNegativoException {
+		super(mineral);
     }
 	
-	public NodoMineral(int mineral, Tablero mapa, Cordenada lugar) {
-		Minerales= mineral;
+	public NodoMineral(int mineral, Tablero mapa, Cordenada lugar) throws ArgumentoNoPuedeSerNegativoException {
+		this(mineral);
 		if (!(mapa.HayEspacioTerreste (lugar))){
 			throw new NoSePuedeCrear("Espacio Ocupado");
 		}
 		mapa.NewFichaTerreste(lugar, this);
 	}
-	
-	@Override
-	public boolean EstasVacia() {
-		return false;
-	}
 
 	@Override
 	public void PasarTurno() {
-		
+		// TODO implementar
 	}
 
 	@Override
 	public void Muerete() {
+		// TODO implementar
 	}
 
 }

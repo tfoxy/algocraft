@@ -1,5 +1,10 @@
 package Ficha;
 
-public abstract class Edificio extends FichaDeJugador {
+import Jugador.TablaJugador;
 
+public abstract class Edificio extends FichaAbstracta {
+
+    public Edificio(TablaJugador jugador) {
+        super(jugador);
+    }
 }

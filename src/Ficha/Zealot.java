@@ -18,8 +18,8 @@ public class Zealot extends Unidad implements FichaTerrestre {
 	private ListaDeTecnologias LasTecnologiasNecesarias;
 	
 	public Zealot( TablaJugador propetario, Cordenada lugar, Tablero mapa) throws NoSePuedeCrear {
-		Propetario = propetario;
-		Coste = new Recursos (100, 0 ,2);
+		super(propetario);
+		Coste = new Recursos (100, 0, 2);
 		TurnosParaCrear = 4;
 		LasTecnologiasNecesarias = new ListaDeTecnologias();
 		LasTecnologiasNecesarias.Agregar("Acceso");
@@ -32,7 +32,7 @@ public class Zealot extends Unidad implements FichaTerrestre {
 	}
 	
 	public Zealot( TablaJugador propetario) throws NoSePuedeCrear {
-		Propetario = propetario;
+		super(propetario);
 		Coste = new Recursos (100, 0 ,2);
 		TurnosParaCrear = 4;
 		if (HayRecursosSuficientesParaCrearme (Coste)){

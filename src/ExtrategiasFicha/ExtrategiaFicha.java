@@ -1,7 +1,7 @@
 package ExtrategiasFicha;
 
 import Errores.NoSePuedeCrear;
-import Ficha.FichaDeJugador;
+import Ficha.Ficha;
 
 
 
@@ -11,14 +11,14 @@ public abstract class ExtrategiaFicha {
 		return false;
 	}
 	
-	public void Creame( FichaDeJugador Nueva) {
+	public void Creame( Ficha Nueva) {
 	}
 
 	public ExtrategiaFicha PasarTurno() {
 		return this;
 	}
 
-	public void Morir(FichaDeJugador ficha) {
+	public void Morir(Ficha ficha) {
 		
 	}
 

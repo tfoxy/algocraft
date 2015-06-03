@@ -17,9 +17,11 @@ public class ExtrategiaConstruccionPilon extends ExtrategiaConstrucion {
 
 	}//se puede no repetir este Codigo?
 
+    @Override
 	public  ExtrategiaFicha PasarTurno() {
 		TurnosParaCrear = TurnosParaCrear-1;
-		if (TurnosParaCrear == 0){ return (new ExtrategiaCasa(Propetario, Mapa, Lugar));
+		if (TurnosParaCrear == 0){
+			return new ExtrategiaCasa(Propetario, Mapa, Lugar);
 		}		
 		return this;
 	}

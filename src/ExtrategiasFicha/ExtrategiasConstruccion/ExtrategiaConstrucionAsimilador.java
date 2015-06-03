@@ -3,8 +3,7 @@ package ExtrategiasFicha.ExtrategiasConstruccion;
 import Errores.NoSePuedeCrear;
 import ExtrategiasFicha.ExtrategiaEdificioRecursosGas;
 import ExtrategiasFicha.ExtrategiaFicha;
-import ExtrategiasFicha.ExtrategiaUnidadSoldado;
-import Ficha.FichaDeJugador;
+import Ficha.Ficha;
 import Ficha.FichasNaturales.Volcan;
 import Jugador.Recursos;
 import Jugador.TablaJugador;
@@ -20,12 +19,14 @@ public class ExtrategiaConstrucionAsimilador extends ExtrategiaConstrucion {
 			ListaDeTecnologias lasTecnologiasNecesarias) {
 		super(coste, turnosParaCrear, propetario, mapa, lugar, lasTecnologiasNecesarias);
 	}
-	
+
+    @Override
 	public boolean MePuedeCrear() throws NoSePuedeCrear {
 		if ( !(Propetario.TengoSuficientesRecursos (Coste))){
 			throw new NoSePuedeCrear("Faltan Recursos");			
 		}
-		if (!Mapa.HayUnaFuenteDeRecuros(Lugar).equals("Volcan")){
+		// TODO solucionar sin usar instanceof
+		if (!(Mapa.getCasilla(Lugar).getFichaTerrestre() instanceof Volcan)) {
 			throw new NoSePuedeCrear("No Es un Volcan");
 		}	
 		if (!(Propetario.TienesLasTecnologias (LasTecnologiasNecesarias))){
@@ -34,17 +35,20 @@ public class ExtrategiaConstrucionAsimilador extends ExtrategiaConstrucion {
 		
 		return true;
 	}
- 
-	public void Creame( FichaDeJugador Nueva) {
-	Propetario.GastaRecursos (Coste);			
-	Propetario.NewFicha(Nueva);
-	FuenteRecursos = (Volcan) Mapa.DameLaFichaTerresteEn(Lugar); //no se por que me olvida a hacer el Caste
-	Mapa.NewFichaTerreste(Lugar, Nueva);
+
+    @Override
+	public void Creame(Ficha Nueva) {
+        // TODO Solucionar sin castear
+        FuenteRecursos = (Volcan) Mapa.DameLaFichaTerresteEn(Lugar);
+
+		super.Creame(Nueva);
 	}
-	
+
+    @Override
 	public  ExtrategiaFicha PasarTurno() {
 		TurnosParaCrear = TurnosParaCrear-1;
-		if (TurnosParaCrear == 0){ return (new ExtrategiaEdificioRecursosGas(Propetario, Mapa, Lugar, FuenteRecursos));
+		if (TurnosParaCrear == 0) {
+			return new ExtrategiaEdificioRecursosGas(Propetario, Mapa, Lugar, FuenteRecursos);
 		}		
 		return this;
 	}

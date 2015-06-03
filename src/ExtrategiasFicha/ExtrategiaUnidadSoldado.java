@@ -1,6 +1,6 @@
 package ExtrategiasFicha;
 
-import Ficha.FichaDeJugador;
+import Ficha.Ficha;
 import Jugador.TablaJugador;
 import Tablero.Cordenada;
 import Tablero.Tablero;
@@ -17,9 +17,10 @@ public class ExtrategiaUnidadSoldado extends ExtrategiaFicha {
 		Mapa = mapa;
 		Lugar = lugar;
 		PoblacionOpcupada = poblacionOpcupada;
-		}
-	
-	public void Morir(FichaDeJugador Soldado) {
+	}
+
+	@Override
+	public void Morir(Ficha Soldado) {
 		Propetario.PerderPoblacionActual(PoblacionOpcupada);
 		Propetario.PerderFicha(Soldado);
 	}

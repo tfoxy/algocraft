@@ -32,27 +32,22 @@ public class Tablero {
 	}
 
 	public void NewFichaTerreste(Cordenada lugar, FichaTerrestre ficha) {
-		Casillero Lugar = Tablero.get(lugar);
-		Lugar.NewFichaTerreste (ficha);
+		Casillero Lugar = getCasilla(lugar);
+		Lugar.NewFichaTerreste(ficha);
 	}	
 	
 	public void MuereFichaTerreste(Cordenada lugar, Ficha ficha) {
-		Casillero Lugar = Tablero.get(lugar);
+		Casillero Lugar = getCasilla(lugar);
 		Lugar.MuereFichaTerreste();
-	}
-	
-	public String HayUnaFuenteDeRecuros(Cordenada lugar) {
-		Casillero Lugar = Tablero.get(lugar);
-		return Lugar.TienesUnRecurso();
 	}
 
 	public Ficha DameLaFichaTerresteEn(Cordenada lugar) {
-		Casillero Lugar = Tablero.get(lugar);
+		Casillero Lugar = getCasilla(lugar);
 		return Lugar.FichaTerreste();
 	}
 
-	public Casilla getCasilla(Cordenada lugar) {
-		Casilla casilla = Tablero.get(lugar);
+	public Casillero getCasilla(Cordenada lugar) {
+		Casillero casilla = Tablero.get(lugar);
 
         if (casilla == null) {
             throw new PosicionFueraDeLimiteException();

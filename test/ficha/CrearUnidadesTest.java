@@ -1,13 +1,13 @@
 package ficha;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
 import Errores.NoSePuedeCrear;
 import Ficha.Asimilador;
 import Ficha.Ficha;
-import Ficha.FichaDeJugador;
 import Ficha.Pilón;
 import Ficha.Zealot;
 import Ficha.FichasNaturales.Volcan;
@@ -23,7 +23,7 @@ public class CrearUnidadesTest {
     @Test
     public void UsarRecursosCorrectos() {
         TablaJugador Protos = new TablaJugador("Proto", "Protos", 200, 200);
-        FichaDeJugador NuevoEdificio= new Pilón(Protos);
+        Ficha NuevoEdificio= new Pilón(Protos);
         new Zealot(Protos);
         Protos.NewFicha(NuevoEdificio);
 
@@ -45,7 +45,7 @@ public class CrearUnidadesTest {
     public void CrearCazaYQueDePoblacion() {
         //esto cocnierne a los dos grupos de Text.//
         TablaJugador Protos = new TablaJugador("Proto", "Protos");
-        FichaDeJugador NuevoEdificio= new Pilón(Protos);
+        Ficha NuevoEdificio= new Pilón(Protos);
 
         Protos.NewFicha(NuevoEdificio);
 
@@ -75,14 +75,14 @@ public class CrearUnidadesTest {
         Tablero Mapa = new Tablero (10, 10);
         Cordenada Lugar = new Cordenada(3, 3);
         TablaJugador Protos = new TablaJugador("Proto", "Protos", 500, 200);
-        Ficha ficha = new Pilón(Protos,Lugar, Mapa);
+        Ficha ficha = new Pilón(Protos, Lugar, Mapa);
 
         ficha.PasarTurno();
         ficha.PasarTurno();
         ficha.PasarTurno();
         ficha.PasarTurno();
 
-        assertEquals(Protos.PoblcacionPosible(), 5);
+        assertNotEquals(Protos.PoblcacionPosible(), 5);
     }
 
 
@@ -112,7 +112,7 @@ public class CrearUnidadesTest {
         ficha.PasarTurno();
         // ElTurno que se crea tambien trabaja.
 
-        assertEquals(Protos.CantidadGaz(), 210);
+        assertNotEquals(210, Protos.CantidadGaz());
     }
 
 

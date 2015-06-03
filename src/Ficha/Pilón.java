@@ -14,21 +14,20 @@ public class Pilón extends Edificio implements FichaTerrestre {
 
 	private Recursos Coste;
 	private int TurnosParaCrear;
-	private TablaJugador Propetario;
 	private ExtrategiaFicha Extrategia;
 	private ListaDeTecnologias LasTecnologiasNecesarias;
 	
 	
 	//constructorObseleto
 	public Pilón( TablaJugador propetario) {
-		Propetario = propetario;
+		super(propetario);
 		Coste = new Recursos (100, 0);
 		TurnosParaCrear = 5;
 		propetario.AgregarPoblacionTotal(5);
 	}
 	//constructor
 	public Pilón(TablaJugador propetario, Cordenada lugar, Tablero mapa) throws NoSePuedeCrear{
-		Propetario = propetario;
+		super(propetario);
 		Coste = new Recursos (100, 0, 0);
 		TurnosParaCrear = 5;
 		LasTecnologiasNecesarias = new ListaDeTecnologias();

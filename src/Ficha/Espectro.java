@@ -5,7 +5,7 @@ import Jugador.TablaJugador;
 public class Espectro extends Unidad implements FichaAerea {
 
     public Espectro(TablaJugador jugador) {
-        Propetario = jugador;
+        super(jugador);
     }
 
     @Override

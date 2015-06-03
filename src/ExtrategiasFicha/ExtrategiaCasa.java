@@ -1,6 +1,6 @@
 package ExtrategiasFicha;
 
-import Ficha.FichaDeJugador;
+import Ficha.Ficha;
 import Jugador.TablaJugador;
 import Tablero.Cordenada;
 import Tablero.Tablero;
@@ -19,8 +19,9 @@ public class ExtrategiaCasa extends ExtrategiaFicha {
 		propetario.AgregarPoblacionTotal(5);
 		
 	}
-	
-	public void Morir(FichaDeJugador casa) {
+
+	@Override
+	public void Morir(Ficha casa) {
 		Propetario.PerderPoblacionTotal(5);
 		Propetario.PerderFicha(casa);
 		Mapa.MuereFichaTerreste(Lugar, casa);
