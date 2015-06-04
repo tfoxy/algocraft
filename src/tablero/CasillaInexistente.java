@@ -1,14 +1,13 @@
 package tablero;
 
 import ficha.FichaAerea;
-import ficha.FichaAire;
+import ficha.FichaFueraDeTablero;
 import ficha.FichaTerrestre;
-import ficha.FichaTierra;
 
 public class CasillaInexistente implements Casilla {
 
-    private FichaTerrestre fichaTerreste = new FichaTierra();
-    private FichaAerea fichaAerea = new FichaAire();
+    private FichaTerrestre fichaTerreste = new FichaFueraDeTablero();
+    private FichaAerea fichaAerea = new FichaFueraDeTablero();
 
     @Override
     public FichaTerrestre getFichaTerrestre() {
