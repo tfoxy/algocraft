@@ -5,101 +5,100 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import Tecnologia.ListaDeTecnologias;
-import Tecnologia.Tecnologias;
-
+import tecnologia.ListaDeTecnologias;
+import tecnologia.Tecnologia;
 
 
 public class TecnologicosXDTest {
 
     @Test
-    public void TieneEso() {
-        ListaDeTecnologias TecnologiasDelJugador = new ListaDeTecnologias();
-        ListaDeTecnologias TecnologiasNecesarias = new ListaDeTecnologias();
-        TecnologiasDelJugador.Agregar("Protos");
-        TecnologiasDelJugador.Agregar("Acceso");
-        TecnologiasNecesarias.Agregar("Protos");
-        assertTrue(TecnologiasDelJugador.ContengoEstasTecnologias(TecnologiasNecesarias));
+    public void tieneEso() {
+        ListaDeTecnologias tecnologiasDelJugador = new ListaDeTecnologias();
+        ListaDeTecnologias tecnologiasNecesarias = new ListaDeTecnologias();
+        tecnologiasDelJugador.agregar(Tecnologia.PROTOSS);
+        tecnologiasDelJugador.agregar(Tecnologia.ACCESO);
+        tecnologiasNecesarias.agregar(Tecnologia.PROTOSS);
+        assertTrue(tecnologiasDelJugador.contengo(tecnologiasNecesarias));
 
     }
 
     @Test
-    public void NoTieneEso() {
-        ListaDeTecnologias TecnologiasDelJugador = new ListaDeTecnologias();
-        ListaDeTecnologias TecnologiasNecesarias = new ListaDeTecnologias();
-        TecnologiasDelJugador.Agregar("Protos");
-        TecnologiasDelJugador.Agregar("Acceso");
-        TecnologiasNecesarias.Agregar("Zergg");
-        assertFalse(TecnologiasDelJugador.ContengoEstasTecnologias(TecnologiasNecesarias));
+    public void noTieneEso() {
+        ListaDeTecnologias tecnologiasDelJugador = new ListaDeTecnologias();
+        ListaDeTecnologias tecnologiasNecesarias = new ListaDeTecnologias();
+        tecnologiasDelJugador.agregar(Tecnologia.PROTOSS);
+        tecnologiasDelJugador.agregar(Tecnologia.ACCESO);
+        tecnologiasNecesarias.agregar(Tecnologia.GAIA);
+        assertFalse(tecnologiasDelJugador.contengo(tecnologiasNecesarias));
 
     }
 
     @Test
-    public void TieneEsoySoloeso() {
-        ListaDeTecnologias TecnologiasDelJugador = new ListaDeTecnologias();
-        ListaDeTecnologias TecnologiasNecesarias = new ListaDeTecnologias();
-        TecnologiasDelJugador.Agregar("Protos");
-        TecnologiasNecesarias.Agregar("Protos");
-        assertTrue(TecnologiasDelJugador.ContengoEstasTecnologias(TecnologiasNecesarias));
+    public void tieneEsoySoloeso() {
+        ListaDeTecnologias tecnologiasDelJugador = new ListaDeTecnologias();
+        ListaDeTecnologias tecnologiasNecesarias = new ListaDeTecnologias();
+        tecnologiasDelJugador.agregar(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.agregar(Tecnologia.PROTOSS);
+        assertTrue(tecnologiasDelJugador.contengo(tecnologiasNecesarias));
     }
 
     @Test
-    public void TieneEsoyMasdeEso() {
-        ListaDeTecnologias TecnologiasDelJugador = new ListaDeTecnologias();
-        ListaDeTecnologias TecnologiasNecesarias = new ListaDeTecnologias();
-        TecnologiasDelJugador.Agregar("Protos");
-        TecnologiasDelJugador.Agregar("Acceso");
-        TecnologiasDelJugador.Agregar("Protos");
-        TecnologiasNecesarias.Agregar("Protos");
-        assertTrue(TecnologiasDelJugador.ContengoEstasTecnologias(TecnologiasNecesarias));
+    public void tieneEsoyMasdeEso() {
+        ListaDeTecnologias tecnologiasDelJugador = new ListaDeTecnologias();
+        ListaDeTecnologias tecnologiasNecesarias = new ListaDeTecnologias();
+        tecnologiasDelJugador.agregar(Tecnologia.PROTOSS);
+        tecnologiasDelJugador.agregar(Tecnologia.ACCESO);
+        tecnologiasDelJugador.agregar(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.agregar(Tecnologia.PROTOSS);
+        assertTrue(tecnologiasDelJugador.contengo(tecnologiasNecesarias));
     }
 
     @Test
-    public void TieneEsoyEso() {
-        ListaDeTecnologias TecnologiasDelJugador = new ListaDeTecnologias();
-        ListaDeTecnologias TecnologiasNecesarias = new ListaDeTecnologias();
-        TecnologiasDelJugador.Agregar("Protos");
-        TecnologiasDelJugador.Agregar("Acceso");
+    public void tieneEsoyEso() {
+        ListaDeTecnologias tecnologiasDelJugador = new ListaDeTecnologias();
+        ListaDeTecnologias tecnologiasNecesarias = new ListaDeTecnologias();
+        tecnologiasDelJugador.agregar(Tecnologia.PROTOSS);
+        tecnologiasDelJugador.agregar(Tecnologia.ACCESO);
 
-        TecnologiasNecesarias.Agregar("Protos");
-        TecnologiasNecesarias.Agregar("Acceso");
-        assertTrue(TecnologiasDelJugador.ContengoEstasTecnologias(TecnologiasNecesarias));
+        tecnologiasNecesarias.agregar(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.agregar(Tecnologia.ACCESO);
+        assertTrue(tecnologiasDelJugador.contengo(tecnologiasNecesarias));
     }
 
     @Test
-    public void TieneEsoPeroNoEso() {
-        ListaDeTecnologias TecnologiasDelJugador = new ListaDeTecnologias();
-        ListaDeTecnologias TecnologiasNecesarias = new ListaDeTecnologias();
-        TecnologiasDelJugador.Agregar("Protos");
+    public void tieneEsoPeroNoEso() {
+        ListaDeTecnologias tecnologiasDelJugador = new ListaDeTecnologias();
+        ListaDeTecnologias tecnologiasNecesarias = new ListaDeTecnologias();
+        tecnologiasDelJugador.agregar(Tecnologia.PROTOSS);
 
-        TecnologiasNecesarias.Agregar("Protos");
-        TecnologiasNecesarias.Agregar("Acceso");
-        assertFalse(TecnologiasDelJugador.ContengoEstasTecnologias(TecnologiasNecesarias));
+        tecnologiasNecesarias.agregar(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.agregar(Tecnologia.ACCESO);
+        assertFalse(tecnologiasDelJugador.contengo(tecnologiasNecesarias));
     }
 
-    public void TeniaEso() {
-        ListaDeTecnologias TecnologiasDelJugador = new ListaDeTecnologias();
-        ListaDeTecnologias TecnologiasNecesarias = new ListaDeTecnologias();
-        TecnologiasDelJugador.Agregar("Protos");
-        TecnologiasDelJugador.Agregar("Acceso");
-        TecnologiasDelJugador.Quitar("Protos");
+    public void teniaEso() {
+        ListaDeTecnologias tecnologiasDelJugador = new ListaDeTecnologias();
+        ListaDeTecnologias tecnologiasNecesarias = new ListaDeTecnologias();
+        tecnologiasDelJugador.agregar(Tecnologia.PROTOSS);
+        tecnologiasDelJugador.agregar(Tecnologia.ACCESO);
+        tecnologiasDelJugador.quitar(Tecnologia.PROTOSS);
 
-        TecnologiasNecesarias.Agregar("Protos");
-        TecnologiasNecesarias.Agregar("Acceso");
-        assertFalse(TecnologiasDelJugador.ContengoEstasTecnologias(TecnologiasNecesarias));
+        tecnologiasNecesarias.agregar(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.agregar(Tecnologia.ACCESO);
+        assertFalse(tecnologiasDelJugador.contengo(tecnologiasNecesarias));
     }
 
-    public void AunMeQuedanDeEsos() {
-        ListaDeTecnologias TecnologiasDelJugador = new ListaDeTecnologias();
-        ListaDeTecnologias TecnologiasNecesarias = new ListaDeTecnologias();
-        TecnologiasDelJugador.Agregar("Protos");
-        TecnologiasDelJugador.Agregar("Acceso");
-        TecnologiasDelJugador.Agregar("Acceso");
-        TecnologiasDelJugador.Quitar("Acceso");
+    public void aunMeQuedanDeEsos() {
+        ListaDeTecnologias tecnologiasDelJugador = new ListaDeTecnologias();
+        ListaDeTecnologias tecnologiasNecesarias = new ListaDeTecnologias();
+        tecnologiasDelJugador.agregar(Tecnologia.PROTOSS);
+        tecnologiasDelJugador.agregar(Tecnologia.ACCESO);
+        tecnologiasDelJugador.agregar(Tecnologia.ACCESO);
+        tecnologiasDelJugador.quitar(Tecnologia.ACCESO);
 
-        TecnologiasNecesarias.Agregar("Protos");
-        TecnologiasNecesarias.Agregar("Acceso");
-        assertTrue(TecnologiasDelJugador.ContengoEstasTecnologias(TecnologiasNecesarias));
+        tecnologiasNecesarias.agregar(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.agregar(Tecnologia.ACCESO);
+        assertTrue(tecnologiasDelJugador.contengo(tecnologiasNecesarias));
     }
 
 }

@@ -1,141 +1,160 @@
 package ficha;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import Errores.NoSePuedeCrear;
-import Ficha.Asimilador;
-import Ficha.Ficha;
-import Ficha.NexoMineral;
-import Ficha.Pilón;
-import Ficha.Zealot;
-import Jugador.TablaJugador;
-import Tablero.Cordenada;
-import Tablero.Tablero;
-
+import jugador.TablaJugador;
+import tablero.Coordenada;
+import tablero.Tablero;
+import tecnologia.Tecnologia;
 
 
 public class RecursosTest {
 
+    private TablaJugador protoss;
+
+    @Before
+    public void initialize() {
+        protoss = new TablaJugador("Proto", Tecnologia.PROTOSS, 200, 200);
+    }
+
     @Test
-    public void RecuersosPorTurnoCristaBasicol() {
-        TablaJugador Protos = new TablaJugador("Proto","Protos");
-        Ficha NuevoEdificio= new NexoMineral(Protos);
-        Protos.NewFicha(NuevoEdificio);
-        Protos.PasarTurno ();
-        assertEquals(Protos.CantidadCriztal(), 10);
+    public void recuersosPorTurnoCristaBasico() {
+        Ficha nuevoEdificio = new NexoMineral(protoss);
+
+        protoss.newFicha(nuevoEdificio);
+
+        protoss.pasarTurno();
+
+        assertEquals(210, protoss.cantidadCristal());
+    }
+
+    @Test
+    public void recuersosPorTurnoCristal() {
+        Ficha nuevoEdificio = new NexoMineral(protoss);
+
+        protoss.newFicha(nuevoEdificio);
+        protoss.newFicha(nuevoEdificio);
+
+        protoss.pasarTurno();
+        protoss.pasarTurno();
+
+        assertEquals(240, protoss.cantidadCristal());
 
     }
 
     @Test
-    public void RecuersosPorTurnoCristal() {
-        TablaJugador Protos = new TablaJugador("Proto","Protos");
-        Ficha NuevoEdificio= new NexoMineral(Protos);
-        Protos.NewFicha(NuevoEdificio);
-        Protos.NewFicha(NuevoEdificio);
-        Protos.PasarTurno ();
-        Protos.PasarTurno ();
-        assertEquals(Protos.CantidadCriztal(), 40);
+    public void recuersosPorTurnoGasBasicol() {
+        Ficha nuevoEdificio = new Asimilador(protoss);
+        protoss.newFicha(nuevoEdificio);
 
+        protoss.pasarTurno();
+
+        assertEquals(210, protoss.cantidadGas());
     }
 
     @Test
-    public void RecuersosPorTurnoGasBasicol() {
-        TablaJugador Protos = new TablaJugador("Proto","Protos");
-        Ficha NuevoEdificio= new Asimilador(Protos);
-        Protos.NewFicha(NuevoEdificio);
-        Protos.PasarTurno ();
-        assertEquals(Protos.CantidadGaz(), 10);
+    public void recuersosPorTurnoGasYCristalBasico() {
+        Ficha nuevoEdificio = new Asimilador(protoss);
+        protoss.newFicha(nuevoEdificio);
+        nuevoEdificio = new NexoMineral(protoss);
+        protoss.newFicha(nuevoEdificio);
+        protoss.pasarTurno();
+        assertEquals(210, protoss.cantidadGas());
+        assertEquals(210, protoss.cantidadCristal());
     }
 
     @Test
-    public void RecuersosPorTurnoGasyCristalBasicol() {
-        TablaJugador Protos = new TablaJugador("Proto","Protos");
-        Ficha NuevoEdificio= new Asimilador(Protos);
-        Protos.NewFicha(NuevoEdificio);
-        NuevoEdificio= new NexoMineral(Protos);
-        Protos.NewFicha(NuevoEdificio);
-        Protos.PasarTurno ();
-        assertEquals(Protos.CantidadGaz(), 10);
-        assertEquals(Protos.CantidadCriztal(), 10);
+    public void recuersosPorTurnoGasYCristalComplejo() {
+        Ficha nuevoEdificio = new Asimilador(protoss);
+        protoss.newFicha(nuevoEdificio);
+        nuevoEdificio = new NexoMineral(protoss);
+        protoss.newFicha(nuevoEdificio);
+        protoss.newFicha(nuevoEdificio);
+        protoss.pasarTurno();
+        protoss.pasarTurno();
+        assertEquals(220, protoss.cantidadGas());
+        assertEquals(240, protoss.cantidadCristal());
     }
 
     @Test
-    public void RecuersosPorTurnoGasyCristalComplejo() {
-        TablaJugador Protos = new TablaJugador("Proto","Protos");
-        Ficha NuevoEdificio= new Asimilador(Protos);
-        Protos.NewFicha(NuevoEdificio);
-        NuevoEdificio= new NexoMineral(Protos);
-        Protos.NewFicha(NuevoEdificio);
-        Protos.NewFicha(NuevoEdificio);
-        Protos.PasarTurno ();
-        Protos.PasarTurno ();
-        assertEquals(Protos.CantidadGaz(), 20);
-        assertEquals(Protos.CantidadCriztal(), 40);
-    }
-
-    @Test
-    public void PerderFuenteDeRecursosYVerficiarQueNoLosGanesPorTurno() {
-        TablaJugador Protos = new TablaJugador("Proto","Protos");
-        Ficha NuevoEdificio= new Asimilador(Protos);
-        Protos.NewFicha(NuevoEdificio);
-        NuevoEdificio= new NexoMineral(Protos);
-        Protos.NewFicha(NuevoEdificio);
-        Protos.NewFicha(NuevoEdificio);
-        Protos.PasarTurno ();
-        Protos.PasarTurno();
-        assertEquals(Protos.CantidadGaz(), 20);
-        assertEquals(Protos.CantidadCriztal(), 40);
-        Protos.PerderFicha(NuevoEdificio);
-        Protos.PasarTurno();
-        Protos.PasarTurno();
-        assertEquals(Protos.CantidadGaz(), 40);
-        assertEquals(Protos.CantidadCriztal(), 60);
+    public void perderFuenteDeRecursosYVerficiarQueNoLosGanesPorTurno() {
+        Ficha nuevoEdificio = new Asimilador(protoss);
+        protoss.newFicha(nuevoEdificio);
+        nuevoEdificio = new NexoMineral(protoss);
+        protoss.newFicha(nuevoEdificio);
+        protoss.newFicha(nuevoEdificio);
+        protoss.pasarTurno();
+        protoss.pasarTurno();
+        assertEquals(220, protoss.cantidadGas());
+        assertEquals(240, protoss.cantidadCristal());
+        protoss.perderFicha(nuevoEdificio);
+        protoss.pasarTurno();
+        protoss.pasarTurno();
+        assertEquals(240, protoss.cantidadGas());
+        assertEquals(260, protoss.cantidadCristal());
     }
 
 
     @Test
-    public void CreamosUnidadPerdemosPoblacio() throws NoSePuedeCrear {
-        Tablero Mapa = new Tablero(10, 10);
-        Cordenada Lugar = new Cordenada(3, 3);
-        TablaJugador Protos = new TablaJugador("Proto", "Protos", 200, 200);
-        Ficha NuevoEdificio = new Pilón(Protos);
-        Protos.AgregarTecnologia("Acceso");
-        Protos.NewFicha(NuevoEdificio);
-        Ficha NuevaUnidad = new Zealot(Protos, Lugar, Mapa);
-        assertEquals(2, Protos.PoblcacionActual());
+    public void creamosUnidadPerdemosPoblacion() {
+        Ficha nuevoEdificio = new Pilon(protoss);
+
+        protoss.agregarTecnologia(Tecnologia.ACCESO);
+        protoss.newFicha(nuevoEdificio);
+
+        new Zealot(protoss);
+
+        assertEquals(2, protoss.poblcacionActual());
     }
 
 
     @Test
-    public void MuereUnidadGanamosPoblacio() throws NoSePuedeCrear {
-        Tablero Mapa = new Tablero (10,10);
-        Cordenada Lugar = new Cordenada(3,3);
-        TablaJugador Protos = new TablaJugador("Proto","Protos",200,200);
-        Ficha NuevoEdificio= new Pilón(Protos);
-        Protos.AgregarTecnologia("Acceso");
-        Protos.NewFicha(NuevoEdificio);
-        Ficha NuevaUnidad = new Zealot(Protos,Lugar,Mapa);
-        NuevaUnidad.Muerete();
-        assertEquals(0, Protos.PoblcacionActual());
+    public void muereUnidadGanamosPoblacion() {
+        Tablero mapa = new Tablero(10, 10);
+        Coordenada lugar = new Coordenada(5, 5);
+        Ficha nuevoEdificio = new Pilon(protoss);
+
+        protoss.agregarTecnologia(Tecnologia.ACCESO);
+        protoss.newFicha(nuevoEdificio);
+
+        Ficha nuevaUnidad = new Zealot(protoss, lugar, mapa);
+        nuevaUnidad.muerete();
+
+        assertEquals(0, protoss.poblcacionActual());
     }
 
     @Test
-    public void MuereCasaPerdemosPoblacio() throws NoSePuedeCrear {
-        Tablero Mapa = new Tablero (10,10);
-        Cordenada Lugar = new Cordenada(3,3);
-        TablaJugador Protos = new TablaJugador("Proto","Protos",500,200);
-        Ficha ficha = new Pilón(Protos,Lugar, Mapa);
-        ficha.PasarTurno();
-        ficha.PasarTurno();
-        ficha.PasarTurno();
-        ficha.PasarTurno();
-        ficha.PasarTurno();
-        assertEquals(5, Protos.PoblcacionPosible());
-        ficha.Muerete();
-        assertEquals(0, Protos.PoblcacionPosible());
+    public void poblacionPosibleEsCeroAlInicio() {
+        assertEquals(0, protoss.poblcacionPosible());
+    }
+
+    @Test
+    public void hayPoblacionPosibleAlCrearCasa() {
+        Ficha ficha = new Pilon(protoss);
+
+        assertEquals(5, protoss.poblcacionPosible());
+    }
+
+    @Test
+    public void muereCasaPerdemosPoblacion() {
+        Tablero mapa = new Tablero(10, 10);
+        Coordenada lugar = new Coordenada(5, 5);
+        Ficha ficha = new Pilon(protoss, lugar, mapa);
+
+        ficha.pasarTurno();
+        ficha.pasarTurno();
+        ficha.pasarTurno();
+        ficha.pasarTurno();
+        ficha.pasarTurno();
+
+        assertEquals(5, protoss.poblcacionPosible());
+
+        ficha.muerete();
+
+        assertEquals(0, protoss.poblcacionPosible());
 
     }
 }

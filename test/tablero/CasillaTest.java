@@ -1,20 +1,19 @@
 package tablero;
 
-import Errores.FichaSobreOtraFichaException;
-import Ficha.Espectro;
-import Ficha.Ficha;
-import Ficha.FichaAerea;
-import Ficha.FichasNaturales.NodoMineral;
-import Ficha.FuenteDeRecurso;
-import Ficha.Marine;
-import Ficha.FichaTerrestre;
-import Jugador.TablaJugador;
-import Tablero.Casilla;
-import Tablero.Casillero;
-import Ficha.FichaEspacial;
+import error.FichaSobreOtraFichaException;
+import ficha.Espectro;
+import ficha.Ficha;
+import ficha.FichaAerea;
+import ficha.natural.NodoMineral;
+import ficha.FuenteDeRecurso;
+import ficha.Marine;
+import ficha.FichaTerrestre;
+import jugador.TablaJugador;
+import ficha.FichaEspacial;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import tecnologia.Tecnologia;
 
 public class CasillaTest {
 
@@ -23,8 +22,8 @@ public class CasillaTest {
 
     @Before
     public void initialize() {
-        casilla = new Casillero();
-        jugador = new TablaJugador("Juan", "protoss");
+        casilla = new CasillaDeTablero();
+        jugador = new TablaJugador("Juan", Tecnologia.PROTOSS);
     }
 
 
@@ -32,7 +31,7 @@ public class CasillaTest {
     public void noTieneFichaTerrestreAlCrearse() {
         Ficha ficha = casilla.getFichaTerrestre();
 
-        Assert.assertTrue(ficha.EstasVacia());
+        Assert.assertTrue(ficha.estaVacia());
     }
 
 
@@ -40,7 +39,7 @@ public class CasillaTest {
     public void noTieneFichaAereaAlCrearse() {
         Ficha ficha = casilla.getFichaAerea();
 
-        Assert.assertTrue(ficha.EstasVacia());
+        Assert.assertTrue(ficha.estaVacia());
     }
 
 
@@ -108,7 +107,7 @@ public class CasillaTest {
     }
 
 
-    @Test(expected= FichaSobreOtraFichaException.class)
+    @Test(expected = FichaSobreOtraFichaException.class)
     public void tiraErrorAlInsertarUnidadDeTierraEnAreaEspacial() {
         FichaTerrestre areaEspacial = new FichaEspacial();
         FichaTerrestre unidad = new Marine(jugador);
@@ -118,7 +117,7 @@ public class CasillaTest {
     }
 
 
-    @Test(expected=FichaSobreOtraFichaException.class)
+    @Test(expected = FichaSobreOtraFichaException.class)
     public void tiraErrorAlInsertarAreaEspacialDondeHayUnidadDeTierra() {
         FichaTerrestre areaEspacial = new FichaEspacial();
         FichaTerrestre unidad = new Marine(jugador);
@@ -128,7 +127,7 @@ public class CasillaTest {
     }
 
 
-    @Test(expected= FichaSobreOtraFichaException.class)
+    @Test(expected = FichaSobreOtraFichaException.class)
     public void tiraErrorAlInsertarUnidadDeTierraSobreRecurso() {
         FuenteDeRecurso recurso = new NodoMineral();
         FichaTerrestre unidad = new Marine(jugador);
@@ -138,7 +137,7 @@ public class CasillaTest {
     }
 
 
-    @Test(expected=FichaSobreOtraFichaException.class)
+    @Test(expected = FichaSobreOtraFichaException.class)
     public void tiraErrorAlInsertarUnidadDeTierraSobreUnidadDeTierra() {
         FichaTerrestre unaUnidad = new Marine(jugador);
         FichaTerrestre otraUnidad = new Marine(jugador);
@@ -148,7 +147,7 @@ public class CasillaTest {
     }
 
 
-    @Test(expected=FichaSobreOtraFichaException.class)
+    @Test(expected = FichaSobreOtraFichaException.class)
     public void tiraErrorAlInsertarUnidadDeAireSobreUnidadDeAire() {
         FichaAerea unaUnidad = new Espectro(jugador);
         FichaAerea otraUnidad = new Espectro(jugador);
@@ -168,7 +167,7 @@ public class CasillaTest {
 
         Ficha ficha = casilla.getFichaTerrestre();
 
-        Assert.assertTrue(ficha.EstasVacia());
+        Assert.assertTrue(ficha.estaVacia());
     }
 
 

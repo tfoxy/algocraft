@@ -1,7 +1,7 @@
 package ficha;
 
-import Errores.ArgumentoNoPuedeSerNegativoException;
-import Ficha.FichasNaturales.Volcan;
+import error.ArgumentoNoPuedeSerNegativoException;
+import ficha.natural.Volcan;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

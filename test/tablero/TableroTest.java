@@ -1,10 +1,8 @@
 package tablero;
 
-import Errores.PosicionFueraDeLimiteException;
-import Ficha.FichasNaturales.NodoMineral;
-import Ficha.FuenteDeRecurso;
-import Tablero.Cordenada;
-import Tablero.Tablero;
+import error.PosicionFueraDeLimiteException;
+import ficha.natural.NodoMineral;
+import ficha.FuenteDeRecurso;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,34 +30,34 @@ public class TableroTest {
 
     @Test
     public void noTiraErrorAlObtenerCasillaDeLasEsquinas() {
-        Cordenada lugarSuperiorIzquierdo = new Cordenada(1, 1);
-        Cordenada lugarInferiorDerecho = new Cordenada(6, 8);
+        Coordenada lugarSuperiorIzquierdo = new Coordenada(1, 1);
+        Coordenada lugarInferiorDerecho = new Coordenada(6, 8);
 
         tablero.getCasilla(lugarSuperiorIzquierdo);
         tablero.getCasilla(lugarInferiorDerecho);
     }
 
 
-    @Test(expected=PosicionFueraDeLimiteException.class)
+    @Test(expected = PosicionFueraDeLimiteException.class)
     public void tiraErrorAlObtenerCasillaCeroCero() {
-        Cordenada lugar = new Cordenada(0, 0);
+        Coordenada lugar = new Coordenada(0, 0);
 
         tablero.getCasilla(lugar);
     }
 
 
-    @Test(expected=PosicionFueraDeLimiteException.class)
+    @Test(expected = PosicionFueraDeLimiteException.class)
     public void tiraErrorAlObtenerCasillaFueraDeTablero() {
-        Cordenada lugar = new Cordenada(7, 5);
+        Coordenada lugar = new Coordenada(7, 5);
 
         tablero.getCasilla(lugar);
     }
 
 
-    @Test(expected=PosicionFueraDeLimiteException.class)
+    @Test(expected = PosicionFueraDeLimiteException.class)
     public void tiraErrorAlInsertarEntidadFueraDeTablero() {
         FuenteDeRecurso recurso = new NodoMineral();
-        Cordenada lugar = new Cordenada(7, 5);
+        Coordenada lugar = new Coordenada(7, 5);
 
         tablero.insertar(lugar, recurso);
     }

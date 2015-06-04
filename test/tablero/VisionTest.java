@@ -3,33 +3,34 @@ package tablero;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import Tablero.CasillasVisibles;
-import Tablero.Cordenada;
-
 public class VisionTest {
-    @Test
-    public void visionDistanciaMaxima() {
-        CasillasVisibles vision = new CasillasVisibles();
-        Cordenada.Limites(10, 10);
-        vision.VerDesdeEstePunto(new Cordenada(5, 5), 5);
-        assertTrue(vision.PuedeVerEsto(new Cordenada(5, 0)));
-        assertTrue(vision.PuedeVerEsto(new Cordenada(0, 5)));
-        assertTrue(vision.PuedeVerEsto(new Cordenada(5, 10)));
-        assertTrue(vision.PuedeVerEsto(new Cordenada(10, 5)));
-        assertTrue(vision.PuedeVerEsto(new Cordenada(8, 7)));
+
+    private Tablero tablero;
+
+    private Casilla getCasilla(int x, int y) {
+        return tablero.getCasilla(new Coordenada(x, y));
+    }
+
+    @Before
+    public void initialize() {
+        tablero = new Tablero(12, 12);
     }
 
     @Test
-    public void visionDistanciaMaximaNoFueraDelMapa() {
+    public void visionDistanciaMaxima() {
         CasillasVisibles vision = new CasillasVisibles();
-        Cordenada.Limites(4, 10); //que pasa cone sto y lo de arriba?
-        vision.VerDesdeEstePunto(new Cordenada(0, 0), 5);
-        assertFalse(vision.PuedeVerEsto(new Cordenada(-5, 0)));
-        assertFalse(vision.PuedeVerEsto(new Cordenada(5, 0)));
-        assertTrue(vision.PuedeVerEsto(new Cordenada(0, 5)));
-        assertTrue(vision.PuedeVerEsto(new Cordenada(4, 0)));
+
+        vision.verDesdeEstePunto(getCasilla(5, 5), 5);
+        assertTrue(vision.puedeVer(getCasilla(5, 1)));
+        assertTrue(vision.puedeVer(getCasilla(1, 5)));
+        assertTrue(vision.puedeVer(getCasilla(5, 10)));
+        assertTrue(vision.puedeVer(getCasilla(10, 5)));
+        assertTrue(vision.puedeVer(getCasilla(8, 7)));
+
+        assertFalse(vision.puedeVer(getCasilla(11, 1)));
     }
 
 }
