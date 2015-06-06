@@ -5,8 +5,8 @@ import tablero.Tablero;
 
 public interface Ficha {
 
-    Coordenada ubicacion = null; //new 6
-	Tablero mapa = null;
+    public Coordenada ubicacion = null; //new 6
+    public Tablero mapa = null;
 
     boolean estaVacia();
 
