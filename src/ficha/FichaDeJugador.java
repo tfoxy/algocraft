@@ -38,16 +38,17 @@ public final class FichaDeJugador extends FichaAbstracta {
     private final int ataqueTierra;
     private final int ataqueAire;
 
-    private final int rangoAtaqueTierra;
-    private final int rangoAtaqueAire;
+    private final int rangoDeAtaqueTierra;
+    private final int rangoDeAtaqueAire;
 
-    private final int visibilidad;
+    private final int vision;
+    private final int tiempoDeConstruccion;
 
     // TODO agregar unidades posibles para crear: List<FichaDeJugador>
 
 
 
-    private FichaDeJugador(FichaBuilder builder, TablaJugador propietario) {
+    private FichaDeJugador(Builder builder, TablaJugador propietario) {
         super(propietario);
 
         this.nombre = builder.nombre;
@@ -74,10 +75,11 @@ public final class FichaDeJugador extends FichaAbstracta {
         this.ataqueTierra = builder.ataqueTierra;
         this.ataqueAire = builder.ataqueAire;
 
-        this.rangoAtaqueTierra = builder.rangoAtaqueTierra;
-        this.rangoAtaqueAire = builder.rangoAtaqueAire;
+        this.rangoDeAtaqueTierra = builder.rangoDeAtaqueTierra;
+        this.rangoDeAtaqueAire = builder.rangoDeAtaqueAire;
 
-        this.visibilidad = builder.visibilidad;
+        this.vision = builder.vision;
+        this.tiempoDeConstruccion = builder.tiempoDeConstruccion;
 
         fichasTransportadas = builder.transporteMaximo > 0
                 ? new ArrayList<>()
@@ -98,7 +100,7 @@ public final class FichaDeJugador extends FichaAbstracta {
 
 
 
-    public static class FichaBuilder {
+    public static class Builder {
         private static final String NOMBRE_POR_DEFECTO = "undefined";
         private static final Recursos COSTE_POR_DEFECTO = new Recursos(0, 0);
         private static final int VIDA_POR_DEFECTO = 50;
@@ -132,19 +134,20 @@ public final class FichaDeJugador extends FichaAbstracta {
         private int ataqueTierra = 0;
         private int ataqueAire = 0;
 
-        private int rangoAtaqueTierra = 0;
-        private int rangoAtaqueAire = 0;
+        private int rangoDeAtaqueTierra = 0;
+        private int rangoDeAtaqueAire = 0;
 
-        private int visibilidad = 0;
+        private int vision = 0;
+        private int tiempoDeConstruccion = 0;
 
         // TODO agregar unidades posibles para crear: List<FichaDeJugador>
 
 
-        public FichaBuilder() {
+        public Builder() {
             // noop
         }
 
-        public FichaBuilder nombre(String nombre) {
+        public Builder nombre(String nombre) {
             if (nombre == null) {
                 throw new NullPointerException();
             }
@@ -154,7 +157,7 @@ public final class FichaDeJugador extends FichaAbstracta {
             return this;
         }
 
-        public FichaBuilder coste(Recursos coste) {
+        public Builder coste(Recursos coste) {
             if (nombre == null) {
                 throw new NullPointerException();
             }
@@ -164,71 +167,97 @@ public final class FichaDeJugador extends FichaAbstracta {
             return this;
         }
 
-        public FichaBuilder vida(int vida) {
+        public Builder vida(int vida) {
             this.vidaInicial(vida);
             this.vidaMaxima(vida);
             return this;
         }
 
-        public FichaBuilder vidaInicial(int vidaInicial) {
+        public Builder vidaInicial(int vidaInicial) {
             this.vida = vidaInicial;
             return this;
         }
 
-        public FichaBuilder vidaMaxima(int vidaMaxima) {
+        public Builder vidaMaxima(int vidaMaxima) {
             this.vidaMaxima = vidaMaxima;
             return this;
         }
 
-        public FichaBuilder regeneracionDeVida(int vidaMaxima) {
+        public Builder regeneracionDeVida(int vidaMaxima) {
             this.vidaMaxima = vidaMaxima;
             return this;
         }
 
-        public FichaBuilder escudo(int escudo) {
+        public Builder escudo(int escudo) {
             this.vidaInicial(escudo);
             this.vidaMaxima(escudo);
             return this;
         }
 
-        public FichaBuilder escudoInicial(int escudoInicial) {
+        public Builder escudoInicial(int escudoInicial) {
             this.escudo = escudoInicial;
             return this;
         }
 
-        public FichaBuilder escudoMaximo(int escudoMaximo) {
+        public Builder escudoMaximo(int escudoMaximo) {
             this.escudoMaximo = escudoMaximo;
             return this;
         }
 
-        public FichaBuilder ocupacionEnTransporte(int ocupacionEnTransporte) {
+        public Builder ocupacionEnTransporte(int ocupacionEnTransporte) {
             this.ocupacionEnTransporte = ocupacionEnTransporte;
             return this;
         }
 
-        public FichaBuilder transporteMaximo(int transporteMaximo) {
+        public Builder transporteMaximo(int transporteMaximo) {
             this.transporteMaximo = transporteMaximo;
             return this;
         }
 
-        public FichaBuilder ataque(int ataque) {
+        public Builder ataque(int ataque) {
             this.ataqueTierra(ataque);
             this.ataqueAire(ataque);
             return this;
         }
 
-        public FichaBuilder ataqueTierra(int ataqueTierra) {
+        public Builder ataqueTierra(int ataqueTierra) {
             this.ataqueTierra = ataqueTierra;
             return this;
         }
 
-        public FichaBuilder ataqueAire(int ataqueAire) {
+        public Builder ataqueAire(int ataqueAire) {
             this.ataqueAire = ataqueAire;
             return this;
         }
+
+        public Builder rangoDeAtaque(int ataque) {
+            this.rangoDeAtaqueTierra(ataque);
+            this.rangoDeAtaqueAire(ataque);
+            return this;
+        }
+
+        public Builder rangoDeAtaqueTierra(int rangoDeAtaqueTierra) {
+            this.rangoDeAtaqueTierra = rangoDeAtaqueTierra;
+            return this;
+        }
+
+        public Builder rangoDeAtaqueAire(int rangoDeAtaqueAire) {
+            this.rangoDeAtaqueAire = rangoDeAtaqueAire;
+            return this;
+        }
         
-        public FichaBuilder visibilidad(int visibilidad) {
-            this.visibilidad = visibilidad;
+        public Builder vision(int vision) {
+            this.vision = vision;
+            return this;
+        }
+
+        public Builder movimiento(int movimiento) {
+            this.movimiento = movimiento;
+            return this;
+        }
+
+        public Builder tiempoDeConstruccion(int tiempoDeConstruccion) {
+            this.tiempoDeConstruccion = tiempoDeConstruccion;
             return this;
         }
 
