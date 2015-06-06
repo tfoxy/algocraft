@@ -1,10 +1,10 @@
 package ficha;
 
-import tablero.CasillaDeTablero;//new 6
+import tablero.Coordenada;//new 6
 
 public interface Ficha {
 
-    CasillaDeTablero ubicacion = null; //new 6
+    Coordenada ubicacion = null; //new 6
 
     boolean estaVacia();
 
