@@ -1,6 +1,10 @@
 package ficha;
 
 
+import jugador.TablaJugador;
+import tablero.Coordenada;
+import tablero.Tablero;
+
 public interface Ficha {
 
     boolean estaVacia();
@@ -8,5 +12,13 @@ public interface Ficha {
     void pasarTurno();
 
     void muerete();
+
+    TablaJugador getPropietario();
+
+    Tablero getTablero();
+
+    Coordenada getCoordenada();
+
+    String getNombre();
 
 }
