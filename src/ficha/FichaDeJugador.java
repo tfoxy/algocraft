@@ -5,6 +5,8 @@ import jugador.TablaJugador;
 
 import java.util.List;
 
+import estrategia.ficha.EstrategiaFicha;
+
 import stats.BarrasEscudoVidaEnergia;
 import tablero.Coordenada;
 import tablero.Tablero;
@@ -16,6 +18,7 @@ public class FichaDeJugador extends FichaAbstracta {
 	}
 
 
+	private EstrategiaFicha estrategia = null;
 	private String nombre = null;
     private Recursos coste = null;
     private BarrasEscudoVidaEnergia barras = null;
