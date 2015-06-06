@@ -4,7 +4,7 @@ public class Coordenada {
 
     private int x;
     private int y;
-    
+
     public Coordenada(int x, int y) {
         this.x = x;
         this.y = y;
@@ -46,10 +46,10 @@ public class Coordenada {
 
         return (int) Math.sqrt(xSquare + ySquare);
     }
-    
-        //new 6
-    public Coordenada dameCordenadaAtu (Movimiento dirreccion){
-        return new Coordenada(x + dirreccion.getX(),y + dirreccion.getY());
+
+    //new 6
+    public Coordenada dameCordenadaHacia(Movimiento dirreccion) {
+        return new Coordenada(x + dirreccion.getX(), y + dirreccion.getY());
     }
 
 }

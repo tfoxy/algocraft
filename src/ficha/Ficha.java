@@ -23,5 +23,5 @@ public interface Ficha {
 
     String getNombre();
 
-    Coordenada setCoordenada(Coordenada coordenada);
+    void setCoordenada(Coordenada coordenada);
 }

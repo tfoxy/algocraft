@@ -36,6 +36,16 @@ public abstract class FichaAbstracta implements Ficha {
     }
 
     @Override
+    public void setTablero(Tablero tablero) {
+        this.coordenada = coordenada;
+    }
+
+    @Override
+    public void setCoordenada(Coordenada coordenada) {
+        this.coordenada = coordenada;
+    }
+
+    @Override
     public boolean estaVacia() {
         return false;
     }

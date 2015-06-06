@@ -1,6 +1,7 @@
 package ficha;
 
 import static org.junit.Assert.assertEquals;
+
 import jugador.TablaJugador;
 
 import org.junit.Before;
@@ -12,36 +13,36 @@ import ficha.Pilon;
 import stats.BarrasEscudoVidaEnergia;
 import tecnologia.Tecnologia;
 
-public class PruevasBarras {
+public class BarrasTest {
 
-	BarrasEscudoVidaEnergia barras;
-	TablaJugador protoss;
-	Ficha nuevoEdificio;
-	
+    private BarrasEscudoVidaEnergia barras;
+    private TablaJugador protoss;
+    private Ficha nuevoEdificio;
+
     @Before
     public void initialize() {
-        barras = new BarrasEscudoVidaEnergia(100,100,100);
+        barras = new BarrasEscudoVidaEnergia(100, 100, 100);
         protoss = new TablaJugador("Proto", Tecnologia.PROTOSS, 500, 200);
-		nuevoEdificio = new Pilon(protoss);
+        nuevoEdificio = new Pilon(protoss);
     }
-    
+
     @Test
-    public void DestruirEscudoYVida() {
-    	barras.sufrirDaño(100, nuevoEdificio);  
+    public void destruirEscudoYVida() {
+        barras.sufrirDaño(100, nuevoEdificio);
         assertEquals(barras.vidaActual(), 100);
         assertEquals(barras.escudoActual(), 0);
-        
-    	barras.sufrirDaño(99, nuevoEdificio);
+
+        barras.sufrirDaño(99, nuevoEdificio);
         assertEquals(barras.vidaActual(), 1);
-        assertEquals(barras.escudoActual(), 0); //Halgo raro hay aca. Por que me sale error diciendo que no esperaba 0 y recive 0.
+        assertEquals(barras.escudoActual(), 0);
     }
-    
+
     @Test
-    public void CurrsePorTurno() {
-    	barras.sufrirDaño(100, nuevoEdificio);  
+    public void currsePorTurno() {
+        barras.sufrirDaño(100, nuevoEdificio);
         assertEquals(barras.escudoActual(), 0);
         barras.pasarTurno();
         assertEquals(barras.escudoActual(), 10);
     }
-	
+
 }
