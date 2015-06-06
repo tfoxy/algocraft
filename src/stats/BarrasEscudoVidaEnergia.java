@@ -38,7 +38,7 @@ public class BarrasEscudoVidaEnergia {
 		escudoActual = (escudoActual - daño);
 	}
 	
-	public void pasarTurno (int daño, Ficha ficha)
+	public void pasarTurno ()
 	{
 		vidaActual = vidaActual + vidaPorTurno;
 		escudoActual= escudoActual + escudoPorTurno;
