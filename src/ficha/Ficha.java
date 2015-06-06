@@ -9,9 +9,6 @@ import tablero.Tablero;
 
 public interface Ficha {
 
-    public Coordenada ubicacion = null; //new 6
-    public Tablero mapa = null;
-
     boolean estaVacia();
 
     void pasarTurno();
@@ -26,4 +23,5 @@ public interface Ficha {
 
     String getNombre();
 
+    Coordenada setCoordenada(Coordenada coordenada);
 }
