@@ -46,5 +46,10 @@ public class Coordenada {
 
         return (int) Math.sqrt(xSquare + ySquare);
     }
+    
+        //new 6
+    public Coordenada dameCordenadaAtu (Movimiento dirreccion){
+        return new Coordenada(x + dirreccion.getX(),y + dirreccion.getY());
+    }
 
 }

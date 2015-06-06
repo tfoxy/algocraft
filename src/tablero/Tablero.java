@@ -64,6 +64,10 @@ public class Tablero {
     public boolean hayEspacioTerreste(Coordenada lugar) {
         return casillas.get(lugar).hayEspacioTerreste();
     }
+    
+    public boolean hayEspacioArreo(Coordenada lugar) { //new 6
+		return casillas.get(lugar).hayEspacioArreo();
+	}
 
 
     public CasillaDeTablero getCasilla(Coordenada lugar) {

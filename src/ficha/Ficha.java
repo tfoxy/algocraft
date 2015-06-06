@@ -1,11 +1,16 @@
 package ficha;
 
+import tablero.Coordenada;//new 6
+import tablero.Tablero;
 
 import jugador.TablaJugador;
 import tablero.Coordenada;
 import tablero.Tablero;
 
 public interface Ficha {
+
+    public Coordenada ubicacion = null; //new 6
+    public Tablero mapa = null;
 
     boolean estaVacia();
 
