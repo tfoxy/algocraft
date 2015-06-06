@@ -1,8 +1,11 @@
 package stats;
 
+import ficha.Ficha;
+
+//new 6
 public class BarrasEscudoVidaEnergia {
 	private int vidaMaxima;
-	private int escudoMaxim0;
+	private int escudoMaximo;
 	private int energuiaMaxima;
 	
 	private int vidaActual;
@@ -16,7 +19,7 @@ public class BarrasEscudoVidaEnergia {
 	public BarrasEscudoVidaEnergia (int VidaMaxima, int EscudoMaximo, int EnerguiaMaxima)
 	{
 		vidaMaxima = VidaMaxima;
-		escudoMaxim0 = EscudoMaximo;
+		escudoMaximo = EscudoMaximo;
 		energuiaMaxima = EnerguiaMaxima;
 		vidaActual = VidaMaxima;
 		escudoActual= EscudoMaximo;
@@ -32,7 +35,7 @@ public class BarrasEscudoVidaEnergia {
 			escudoActual = 0;
 			if ( 0>= vidaActual)
 			{
-				ficha.Muerete();
+				ficha.muerete();
 			}
 		}
 		escudoActual = (escudoActual - daño);
@@ -51,6 +54,14 @@ public class BarrasEscudoVidaEnergia {
 		
 		if ( energuiaActual > energuiaMaxima)
 			energuiaActual = energuiaMaxima;
+	}
+
+	public int vidaActual() {
+		return 	vidaActual;
+	}
+
+	public int escudoActual() {
+		return escudoActual;
 	}
 
 }
