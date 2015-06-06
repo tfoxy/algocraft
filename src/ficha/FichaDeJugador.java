@@ -84,6 +84,8 @@ public final class FichaDeJugador extends FichaAbstracta {
         fichasTransportadas = builder.transporteMaximo > 0
                 ? new ArrayList<>()
                 : Collections.EMPTY_LIST;
+
+        // TODO observer para crear
     }
 
     @Override
@@ -91,11 +93,30 @@ public final class FichaDeJugador extends FichaAbstracta {
         return nombre;
     }
 
+    // TODO hacer test de sufrirDanio
+    public void sufrirDanio(int danio) {
+        if (0 > escudo - danio) {
+            vida = vida + (escudo - danio);
+            escudo = 0;
+            if (0 >= vida) {
+                this.muerete();
+            }
+        }
 
+        escudo = (escudo - danio);
+    }
+
+    private void regenerarBarras() {
+        vida = Math.min(vida + regeneracionDeVida, vidaMaxima);
+        escudo = Math.min(escudo + regeneracionDeEscudo, escudoMaximo);
+        energia = Math.min(energia + regeneracionDeEnergia, energiaMaxima);
+    }
 
     @Override
     public void pasarTurno() {
-        // TODO observer
+        regenerarBarras();
+
+        // TODO observer para pasarTurno
     }
 
 
