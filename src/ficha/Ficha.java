@@ -19,6 +19,8 @@ public interface Ficha {
 
     Tablero getTablero();
 
+    void setTablero(Tablero tablero);
+
     Coordenada getCoordenada();
 
     String getNombre();
