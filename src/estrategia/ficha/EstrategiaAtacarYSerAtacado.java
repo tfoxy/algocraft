@@ -10,7 +10,7 @@ public class EstrategiaAtacarYSerAtacado {
     int alcanse;
 
     public void serAtacado(int danio, FichaDeJugador defensor) {
-        defensor.getbarras().sufrirDaño(danio, defensor);
+        defensor.getbarras().sufrirDanio(danio, defensor);
     }
 
     public boolean atacado(FichaDeJugador agresor, FichaTerrestre defensor) {

@@ -4,64 +4,53 @@ import ficha.Ficha;
 
 //new 6
 public class BarrasEscudoVidaEnergia {
-	private int vidaMaxima;
-	private int escudoMaximo;
-	private int energuiaMaxima;
-	
-	private int vidaActual;
-	private int escudoActual;
-	private int energuiaActual;
-	
-	private int vidaPorTurno= 1;
-	private int escudoPorTurno= 10;
-	private int energuiaPorTurno= 10;
+    private int vidaMaxima;
+    private int escudoMaximo;
+    private int energiaMaxima;
 
-	public BarrasEscudoVidaEnergia (int VidaMaxima, int EscudoMaximo, int EnerguiaMaxima)
-	{
-		vidaMaxima = VidaMaxima;
-		escudoMaximo = EscudoMaximo;
-		energuiaMaxima = EnerguiaMaxima;
-		vidaActual = VidaMaxima;
-		escudoActual= EscudoMaximo;
-		energuiaActual = EnerguiaMaxima;
-		
-	}
+    private int vidaActual;
+    private int escudoActual;
+    private int energiaActual;
 
-	public void sufrirDaño (int daño, Ficha ficha)
-	{
-		if ( 0>escudoActual - daño)
-		{
-			vidaActual = vidaActual + (escudoActual - daño);
-			escudoActual = 0;
-			if ( 0>= vidaActual)
-			{
-				ficha.muerete();
-			}
-		}
-		escudoActual = (escudoActual - daño);
-	}
-	
-	public void pasarTurno ()
-	{
-		vidaActual = vidaActual + vidaPorTurno;
-		escudoActual= escudoActual + escudoPorTurno;
-		energuiaActual = energuiaActual + energuiaPorTurno;
-		if ( vidaActual > vidaMaxima)
-			vidaActual = vidaMaxima;
+    private int vidaPorTurno = 1;
+    private int escudoPorTurno = 10;
+    private int energiaPorTurno = 10;
 
-		if ( escudoActual > escudoMaximo)
-			escudoActual = escudoMaximo;
-		
-		if ( energuiaActual > energuiaMaxima)
-			energuiaActual = energuiaMaxima;
-	}
+    public BarrasEscudoVidaEnergia(int vidaMaxima,
+                                   int escudoMaximo,
+                                   int energiaMaxima) {
+        this.vidaMaxima = vidaMaxima;
+        this.escudoMaximo = escudoMaximo;
+        this.energiaMaxima = energiaMaxima;
+        vidaActual = vidaMaxima;
+        escudoActual = escudoMaximo;
+        energiaActual = energiaMaxima;
 
-	public int vidaActual() {
-		return 	vidaActual;
-	}
+    }
 
-	public int escudoActual() {
-		return escudoActual;
-	}
+    public void sufrirDanio(int danio, Ficha ficha) {
+        if (0 > escudoActual - danio) {
+            vidaActual = vidaActual + (escudoActual - danio);
+            escudoActual = 0;
+            if (0 >= vidaActual) {
+                ficha.muerete();
+            }
+        }
+        escudoActual = (escudoActual - danio);
+    }
+
+    public void pasarTurno() {
+        vidaActual = Math.min(vidaActual + vidaPorTurno, vidaMaxima);
+        escudoActual = Math.min(escudoActual + escudoPorTurno, escudoMaximo);
+        energiaActual = Math.min(energiaActual + energiaPorTurno, energiaMaxima);
+    }
+
+    public int vidaActual() {
+        return vidaActual;
+    }
+
+    public int escudoActual() {
+        return escudoActual;
+    }
 
 }

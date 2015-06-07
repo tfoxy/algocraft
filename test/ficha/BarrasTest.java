@@ -7,9 +7,6 @@ import jugador.TablaJugador;
 import org.junit.Before;
 import org.junit.Test;
 
-import ficha.Ficha;
-import ficha.Pilon;
-
 import stats.BarrasEscudoVidaEnergia;
 import tecnologia.Tecnologia;
 
@@ -28,18 +25,18 @@ public class BarrasTest {
 
     @Test
     public void destruirEscudoYVida() {
-        barras.sufrirDaño(100, nuevoEdificio);
+        barras.sufrirDanio(100, nuevoEdificio);
         assertEquals(barras.vidaActual(), 100);
         assertEquals(barras.escudoActual(), 0);
 
-        barras.sufrirDaño(99, nuevoEdificio);
+        barras.sufrirDanio(99, nuevoEdificio);
         assertEquals(barras.vidaActual(), 1);
         assertEquals(barras.escudoActual(), 0);
     }
 
     @Test
     public void currsePorTurno() {
-        barras.sufrirDaño(100, nuevoEdificio);
+        barras.sufrirDanio(100, nuevoEdificio);
         assertEquals(barras.escudoActual(), 0);
         barras.pasarTurno();
         assertEquals(barras.escudoActual(), 10);
