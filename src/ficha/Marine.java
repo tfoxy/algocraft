@@ -1,21 +1,23 @@
 package ficha;
 
+import jugador.Recursos;
 import jugador.TablaJugador;
+import stats.BarrasEscudoVidaEnergia;
 
 public class Marine extends Unidad implements FichaTerrestre {
-
-    vida = 40;
-    coste = new Recursos(50, 0, 1);
-    ataque = 6;
-    rangoDeAtaque = 4;
-    transporteMaximo = 1;
-    vision = 7;
-    tiempoDeConstruccion = 3;
-    movimiento = 3;
 
 
     public Marine(TablaJugador jugador) {
         super(jugador);
+
+        barras = new BarrasEscudoVidaEnergia(40, 0, 0);
+        coste = new Recursos(50, 0, 1);
+        ataqueTierra = ataqueAire = 6;
+        rangoDeAtaqueTierra = rangoDeAtaqueAire = 4;
+        transporteMaximo = 1;
+        vision = 7;
+        tiempoDeConstruccion = 3;
+        movimiento = 3;
     }
 
     @Override

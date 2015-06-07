@@ -172,7 +172,9 @@
         <module name="HiddenField"/>
         -->
         <module name="IllegalInstantiation"/>
+        <!-- EXCLUDED to support: x = y = 0
         <module name="InnerAssignment"/>
+        -->
         <!-- EXCLUDED
         <module name="MagicNumber"/>
         -->

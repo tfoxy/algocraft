@@ -18,32 +18,32 @@ public class FichaDeJugador extends FichaAbstracta {
 	}
 
 
-	private EstrategiaFicha estrategia = null;
-	private String nombre = null;
-    private Recursos coste = null;
-    private BarrasEscudoVidaEnergia barras = null;
+	protected EstrategiaFicha estrategia = null;
+    protected String nombre = null;
+    protected Recursos coste = null;
+    protected BarrasEscudoVidaEnergia barras = null;
 
 
-    private int movimiento = 0;
-    private int movimientoMaximo = 0;
+    protected int movimiento = 0;
+    protected int movimientoMaximo = 0;
 
 
-    private List<FichaDeJugador> fichasTransportadas = null; //hayAlgoRaroAca
-    private int transporteMaximo = 0;
-    private int ocupacionEnTransporte = 0;
+    protected List<FichaDeJugador> fichasTransportadas = null; //hayAlgoRaroAca
+    protected int transporteMaximo = 0;
+    protected int ocupacionEnTransporte = 0;
     
     
 
     // TODO agregar magias: List<Magia>
 
-    private int ataqueTierra = 0;
-    private int ataqueAire = 0;
+    protected int ataqueTierra = 0;
+    protected int ataqueAire = 0;
 
-    private int rangoDeAtaqueTierra = 0;
-    private int rangoDeAtaqueAire = 0;
+    protected int rangoDeAtaqueTierra = 0;
+    protected int rangoDeAtaqueAire = 0;
 
-    private int vision = 0;
-    private int tiempoDeConstruccion = 0;
+    protected int vision = 0;
+    protected int tiempoDeConstruccion = 0;
 
     // TODO agregar unidades posibles para crear: List<FichaDeJugador>
 
