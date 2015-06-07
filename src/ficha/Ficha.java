@@ -30,4 +30,8 @@ public interface Ficha {
     int getMovimiento();
 
     int getMovimientoMaximo();
+
+    int getAtaqueTierra();
+
+    int getAtaqueAire();
 }

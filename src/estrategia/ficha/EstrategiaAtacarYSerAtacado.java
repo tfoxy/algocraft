@@ -1,5 +1,6 @@
 package estrategia.ficha;
 
+import ficha.Ficha;
 import tablero.Coordenada;
 import ficha.FichaAerea;
 import ficha.FichaDeJugador;
@@ -15,7 +16,7 @@ public class EstrategiaAtacarYSerAtacado {
 
     public boolean atacado(FichaDeJugador agresor, FichaTerrestre defensor) {
 
-        int alcanse = agresor.getRangoDeAtaqueTierra();
+        alcanse = agresor.getRangoDeAtaqueTierra();
         if (this.puedoAtacar(agresor, defensor)) {
             this.serAtacado(defensor.getAtaqueTierra(), defensor);
             return true;
@@ -25,7 +26,7 @@ public class EstrategiaAtacarYSerAtacado {
 
     public boolean atacado(FichaDeJugador agresor, FichaAerea defensor) {
 
-        int alcanse = agresor.getRangoDeAtaqueAire();
+        alcanse = agresor.getRangoDeAtaqueAire();
         if (this.puedoAtacar(agresor, defensor)) {
             this.serAtacado(defensor.getAtaqueAire(), defensor);
             return true;
@@ -35,7 +36,7 @@ public class EstrategiaAtacarYSerAtacado {
     //se puede ahoraar unas 3 lineas mas de codigo... pero ya qudaria confuso.
 
 
-    private boolean puedoAtacar(FichaDeJugador agresor, FichaDeJugador defensor) {
+    private boolean puedoAtacar(Ficha agresor, Ficha defensor) {
 
         Coordenada posicionAgresor = agresor.getCoordenada();
         Coordenada posicionDefensor = defensor.getCoordenada();
