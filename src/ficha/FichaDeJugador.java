@@ -78,4 +78,13 @@ public class FichaDeJugador extends FichaAbstracta {
 		return rangoDeAtaqueAire;
 	}
 
+    @Override
+    public int getMovimientoMaximo() {
+        return movimientoMaximo;
+    }
+
+    @Override
+    public int getMovimiento() {
+        return movimiento;
+    }
 }

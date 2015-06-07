@@ -26,4 +26,8 @@ public interface Ficha {
     String getNombre();
 
     void setCoordenada(Coordenada coordenada);
+
+    int getMovimiento();
+
+    int getMovimientoMaximo();
 }
