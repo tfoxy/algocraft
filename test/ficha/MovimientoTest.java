@@ -105,6 +105,64 @@ public class MovimientoTest {
     }
 
 
+    @Test
+    public void gastaUnMovimientoAlMoverse() {
+        mapa.insertar(new Coordenada(3, 3), unidad);
+
+        int movimientoOriginal = unidad.getMovimiento();
+
+        estrategiaMover.intentarMovimiento(unidad, Movimiento.ARRIBA);
+
+        Assert.assertEquals(movimientoOriginal - 1, unidad.getMovimiento());
+    }
+
+
+    @Test
+    public void noGastaUnMovimientoAlNoMoverse() {
+        FichaTerrestre otraUnidad = new Marine(jugador);
+
+        mapa.insertar(new Coordenada(3, 4), otraUnidad);
+        mapa.insertar(new Coordenada(3, 3), unidad);
+
+        int movimientoOriginal = unidad.getMovimiento();
+
+        estrategiaMover.intentarMovimiento(unidad, Movimiento.ARRIBA);
+
+        Assert.assertEquals(movimientoOriginal, unidad.getMovimiento());
+    }
+
+
+    @Test
+    public void noPuedeMoverseMasAllaDelLimiteDelMapa() {
+        mapa.insertar(new Coordenada(1, 1), unidad);
+
+        boolean seMovio =
+                estrategiaMover.intentarMovimiento(unidad, Movimiento.ARRIBA);
+
+        Assert.assertFalse(seMovio);
+    }
+
+
+    @Test
+    public void noPuedeMoverseMasQueSuMaximo() {
+        boolean seMovio;
+
+        mapa.insertar(new Coordenada(1, 1), unidad);
+
+        for (int i = 0; i < unidad.getMovimientoMaximo(); i++) {
+            seMovio =
+                    estrategiaMover.intentarMovimiento(unidad, Movimiento.ARRIBA);
+
+            Assert.assertTrue(seMovio);
+        }
+
+        seMovio =
+                estrategiaMover.intentarMovimiento(unidad, Movimiento.ARRIBA);
+
+        Assert.assertFalse(seMovio);
+    }
+
+
 
 
 }
