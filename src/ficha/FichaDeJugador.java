@@ -58,4 +58,24 @@ public class FichaDeJugador extends FichaAbstracta {
         // TODO observer para pasarTurno
     }
 
+
+	public BarrasEscudoVidaEnergia getbarras() {
+		return barras;
+	}
+
+
+	public int getAtaqueTierra() {
+		return ataqueTierra;
+	}
+
+
+	public int getRangoDeAtaqueTierra() {
+		return rangoDeAtaqueTierra;
+	}
+
+
+	public int getRangoDeAtaqueAire() {
+		return rangoDeAtaqueAire;
+	}
+
 }
