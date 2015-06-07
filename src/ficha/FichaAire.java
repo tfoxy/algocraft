@@ -1,6 +1,6 @@
 package ficha;
 
-public class FichaAire extends FichaVacia implements Ficha {
+public class FichaAire extends FichaVacia implements FichaAerea {
 
 
 
