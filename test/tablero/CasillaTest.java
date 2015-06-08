@@ -2,7 +2,6 @@ package tablero;
 
 import error.FichaSobreOtraFichaException;
 import ficha.Espectro;
-import ficha.Ficha;
 import ficha.FichaAerea;
 import ficha.natural.NodoMineral;
 import ficha.FuenteDeRecurso;

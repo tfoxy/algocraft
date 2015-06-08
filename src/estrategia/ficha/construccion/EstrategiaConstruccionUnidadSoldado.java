@@ -2,7 +2,6 @@ package estrategia.ficha.construccion;
 
 import estrategia.ficha.EstrategiaFicha;
 import estrategia.ficha.EstrategiaUnidadSoldado;
-import ficha.Ficha;
 import jugador.Recursos;
 import jugador.TablaJugador;
 import tablero.Coordenada;

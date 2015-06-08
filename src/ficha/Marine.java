@@ -4,7 +4,7 @@ import jugador.Recursos;
 import jugador.TablaJugador;
 import stats.BarrasEscudoVidaEnergia;
 
-public class Marine extends Unidad implements FichaTerrestre {
+public class Marine extends UnidadTerrestre {
 
 
     public Marine(TablaJugador jugador) {
@@ -14,7 +14,7 @@ public class Marine extends Unidad implements FichaTerrestre {
         coste = new Recursos(50, 0, 1);
         ataqueTierra = ataqueAire = 6;
         rangoDeAtaqueTierra = rangoDeAtaqueAire = 4;
-        transporteMaximo = 1;
+        // TODO transporteMaximo = 1;
         vision = 7;
         tiempoDeConstruccion = 3;
         movimiento = 3;

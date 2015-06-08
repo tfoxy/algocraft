@@ -1,7 +1,6 @@
 package tablero;
 
 import ficha.FichaAerea;
-import ficha.FichaFueraDeTablero;
 import ficha.FichaTerrestre;
 
 public class CasillaInexistente implements Casilla {

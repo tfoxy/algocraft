@@ -3,8 +3,7 @@ package ficha;
 import error.ArgumentoNoPuedeSerNegativoException;
 import jugador.Gaia;
 
-public abstract class FuenteDeRecurso
-        extends FichaAbstracta implements FichaTerrestre {
+public abstract class FuenteDeRecurso extends FichaTerrestre {
 
     private int cantidadDeRecursos;
 

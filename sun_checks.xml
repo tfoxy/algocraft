@@ -190,7 +190,10 @@
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
-        <module name="VisibilityModifier"/>
+        <module name="VisibilityModifier">
+            <!-- INCLUDED to support protected attributes -->
+            <property name="protectedAllowed" value="true"/>
+        </module>
 
 
         <!-- Miscellaneous other checks.                   -->

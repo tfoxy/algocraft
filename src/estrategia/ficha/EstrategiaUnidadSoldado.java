@@ -1,6 +1,5 @@
 package estrategia.ficha;
 
-import ficha.Ficha;
 import jugador.TablaJugador;
 import tablero.Coordenada;
 import tablero.Tablero;

@@ -3,8 +3,6 @@ package tablero;
 import error.FichaSobreOtraFichaException;
 import ficha.FichaTerrestre;
 import ficha.FichaAerea;
-import ficha.FichaTierra;
-import ficha.FichaAire;
 
 import java.util.EnumMap;
 

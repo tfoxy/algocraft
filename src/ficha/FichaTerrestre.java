@@ -1,5 +1,5 @@
 package ficha;
 
-public interface FichaTerrestre extends Ficha {
+public class FichaTerrestre extends Ficha {
 
 }

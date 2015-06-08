@@ -6,11 +6,14 @@ import ficha.Ficha;
 
 public abstract class EstrategiaFicha {
 
-    public boolean mePuedeCrear() throws NoSePuedeCrearFicha {
-        return false;
+    protected Ficha ficha;
+
+    public EstrategiaFicha(Ficha ficha) {
+        this.ficha = ficha;
     }
 
     public void creame(Ficha nueva) {
+
     }
 
     public EstrategiaFicha pasarTurno() {

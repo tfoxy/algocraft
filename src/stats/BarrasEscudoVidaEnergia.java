@@ -1,7 +1,5 @@
 package stats;
 
-import ficha.Ficha;
-
 //new 6
 public class BarrasEscudoVidaEnergia {
     private int vidaMaxima;

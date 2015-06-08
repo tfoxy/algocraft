@@ -2,7 +2,6 @@ package jugador;
 
 import java.util.ArrayList;
 
-import ficha.Ficha;
 import tecnologia.ListaDeTecnologias;
 import tecnologia.Tecnologia;
 

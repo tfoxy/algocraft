@@ -5,9 +5,7 @@ import tablero.Movimiento;
 import tablero.Tablero;
 import error.PosicionFueraDeLimiteException;
 import ficha.FichaAerea;
-import ficha.FichaAire;
 import ficha.FichaTerrestre;
-import ficha.FichaTierra;
 
 //la ide es que sea implementada por otras Estrategias.
 public class EstrategiaMover {

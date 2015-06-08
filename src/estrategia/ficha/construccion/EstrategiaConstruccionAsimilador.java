@@ -3,7 +3,6 @@ package estrategia.ficha.construccion;
 import error.NoSePuedeCrearFicha;
 import estrategia.ficha.EstrategiaEdificioRecursosGas;
 import estrategia.ficha.EstrategiaFicha;
-import ficha.Ficha;
 import ficha.natural.Volcan;
 import jugador.Recursos;
 import jugador.TablaJugador;

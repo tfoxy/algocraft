@@ -1,4 +1,5 @@
 package ficha;
 
-public interface FichaAerea extends Ficha {
+public class FichaAerea extends Ficha {
+
 }

@@ -1,6 +1,5 @@
 package estrategia.ficha;
 
-import ficha.Ficha;
 import ficha.natural.Volcan;
 import jugador.TablaJugador;
 import tablero.Coordenada;

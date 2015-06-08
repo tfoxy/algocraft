@@ -1,9 +1,7 @@
 package estrategia.ficha;
 
-import ficha.Ficha;
 import tablero.Coordenada;
 import ficha.FichaAerea;
-import ficha.FichaDeJugador;
 import ficha.FichaTerrestre;
 
 public class EstrategiaAtacarYSerAtacado {
