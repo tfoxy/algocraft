@@ -9,7 +9,7 @@ import org.junit.Test;
 import tablero.Coordenada;
 import tablero.Movimiento;
 import tablero.Tablero;
-import tecnologia.Tecnologia;
+import jugador.Tecnologia;
 
 public class MovimientoTest {
 

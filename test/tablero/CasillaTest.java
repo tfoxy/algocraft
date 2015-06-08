@@ -12,7 +12,7 @@ import ficha.FichaEspacial;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import tecnologia.Tecnologia;
+import jugador.Tecnologia;
 
 public class CasillaTest {
 

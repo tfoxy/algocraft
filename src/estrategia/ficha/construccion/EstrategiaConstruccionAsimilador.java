@@ -9,7 +9,6 @@ import jugador.TablaJugador;
 import tablero.Casilla;
 import tablero.Coordenada;
 import tablero.Tablero;
-import tecnologia.ListaDeTecnologias;
 
 public class EstrategiaConstruccionAsimilador extends EstrategiaConstruccion {
 

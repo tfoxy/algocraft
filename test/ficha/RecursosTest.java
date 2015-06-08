@@ -8,7 +8,7 @@ import org.junit.Test;
 import jugador.TablaJugador;
 import tablero.Coordenada;
 import tablero.Tablero;
-import tecnologia.Tecnologia;
+import jugador.Tecnologia;
 
 
 public class RecursosTest {

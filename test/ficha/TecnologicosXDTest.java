@@ -5,8 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import tecnologia.ListaDeTecnologias;
-import tecnologia.Tecnologia;
+import jugador.Tecnologia;
 
 
 public class TecnologicosXDTest {

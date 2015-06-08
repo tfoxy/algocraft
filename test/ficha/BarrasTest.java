@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import stats.BarrasEscudoVidaEnergia;
-import tecnologia.Tecnologia;
+import jugador.Tecnologia;
 
 public class BarrasTest {
 

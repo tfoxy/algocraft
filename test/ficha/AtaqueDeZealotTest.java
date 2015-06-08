@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import tablero.Coordenada;
 import tablero.Tablero;
-import tecnologia.Tecnologia;
+import jugador.Tecnologia;
 
 public class AtaqueDeZealotTest {
 

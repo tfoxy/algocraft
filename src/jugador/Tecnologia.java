@@ -1,4 +1,4 @@
-package tecnologia;
+package jugador;
 
 public enum Tecnologia {
 	PROTOSS,

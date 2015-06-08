@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ficha.Ficha;
-import tecnologia.ListaDeTecnologias;
-import tecnologia.Tecnologia;
 
 
 public class TablaJugador {

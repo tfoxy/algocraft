@@ -7,7 +7,7 @@ import stats.BarrasEscudoVidaEnergia;
 import tablero.Coordenada;
 import tablero.Movimiento;
 import tablero.Tablero;
-import tecnologia.Tecnologia;
+import jugador.Tecnologia;
 
 import java.util.List;
 

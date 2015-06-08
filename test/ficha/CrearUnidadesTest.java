@@ -11,7 +11,7 @@ import ficha.natural.Volcan;
 import jugador.TablaJugador;
 import tablero.Coordenada;
 import tablero.Tablero;
-import tecnologia.Tecnologia;
+import jugador.Tecnologia;
 
 
 public class CrearUnidadesTest {

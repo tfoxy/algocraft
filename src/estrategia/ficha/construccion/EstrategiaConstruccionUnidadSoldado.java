@@ -6,7 +6,6 @@ import jugador.Recursos;
 import jugador.TablaJugador;
 import tablero.Coordenada;
 import tablero.Tablero;
-import tecnologia.ListaDeTecnologias;
 
 public class EstrategiaConstruccionUnidadSoldado extends EstrategiaConstruccion {
 
