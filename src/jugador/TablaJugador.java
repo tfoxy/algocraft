@@ -1,7 +1,9 @@
 package jugador;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import ficha.Ficha;
 import tecnologia.ListaDeTecnologias;
 import tecnologia.Tecnologia;
 
@@ -10,103 +12,49 @@ public class TablaJugador {
 
     private ArrayList<Ficha> misFichas = new ArrayList<>();
     private String nombre;
-    private Tecnologia raza;
+    private Raza raza;
     private Recursos recursos;
-    private ListaDeTecnologias tecnologias;
+    private List<Tecnologia> tecnologias;
 
 
-    public TablaJugador(String nombre, Tecnologia raza) {
+    public TablaJugador(String nombre, Raza raza) {
         this.nombre = nombre;
         this.raza = raza;
+
+        tecnologias = new ArrayList<>();
+        tecnologias.addAll(raza.tecnologiasIniciales());
+
         recursos = new Recursos(0, 0, 0);
     }
 
 
-    //constuctorCompleto
     public TablaJugador(String nombre,
-                        Tecnologia raza,
+                        Raza raza,
                         int cristalInicial,
                         int gasInicial) {
-        this.nombre = nombre;
-        this.raza = raza;
+        this(nombre, raza);
         recursos = new Recursos(cristalInicial, gasInicial, 0);
-        tecnologias = new ListaDeTecnologias();
-        tecnologias.agregar(raza);
-    }
-
-    //get para Text//
-    public int cantidadCristal() {
-        return recursos.cantidadCristal();
-    }
-
-    public int cantidadGas() {
-        return recursos.cantidadGas();
-    }
-
-    public int poblcacionPosible() {
-        return recursos.poblacionPosible();
-    }
-
-    public int poblcacionActual() {
-        return recursos.poblcacionActual();
     }
 
 
-    //recursos
-    public void agregarRecursosLineales(int cristal, int gas) {
-        recursos.agregarRecursosLineales(cristal, gas);
-    }
-
-    public void gastaRecursos(Recursos coste) {
-        recursos.gastaRecursos(coste);
-    }
-
-    public void agregarPoblacionTotal(int aumentoDePoblacion) {
-        recursos.agregarPoblacionTotal(aumentoDePoblacion);
-    }
-
-    public void perderPoblacionTotal(int desensoDePoblacion) {
-        recursos.perderPoblacionTotal(desensoDePoblacion);
-
-    }
-
-    public void perderPoblacionActual(int desensoDePoblacion) {
-        recursos.perderPoblacionActual(desensoDePoblacion);
-    }
-
-    //Ficha
-    public void newFicha(Ficha nuevaFicha) {
-        misFichas.add(nuevaFicha);
-
-    }
-
-    public void perderFicha(Ficha fichaPerdida) {
-        misFichas.remove(fichaPerdida);
-
+    public String nombre() {
+        return nombre;
     }
 
 
-    //otros
+    public Recursos recursos() {
+        return recursos;
+    }
+
+    public List<Tecnologia> tecnologias() {
+        return tecnologias;
+    }
 
 
     public void pasarTurno() {
-        for (Ficha object: misFichas) {
-            object.pasarTurno();
+        for (Ficha ficha: misFichas) {
+            ficha.pasarTurno();
         }
-    }
-
-
-    public boolean tengoSuficientesRecursos(Recursos coste) {
-        return recursos.tengoSuficientesRecursos(coste);
-    }
-
-    //tecnologia
-    public void agregarTecnologia(Tecnologia tecnologia) {
-        tecnologias.agregar(tecnologia);
-    }
-
-    public boolean tienesLasTecnologias(ListaDeTecnologias tecnologiasNecesarias) {
-        return tecnologias.contengo(tecnologiasNecesarias);
     }
 
 
