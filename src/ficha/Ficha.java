@@ -1,7 +1,7 @@
 package ficha;
 
+import estrategia.ficha.EstrategiaConsturccion;
 import estrategia.ficha.EstrategiaFicha;
-import estrategia.ficha.construccion.EstrategiaConstruccion;
 import juego.Recursos;
 import juego.Jugador;
 import stats.BarrasEscudoVidaEnergia;
@@ -30,7 +30,7 @@ public abstract class Ficha {
     protected List<Tecnologia> tecnologiasNecesarias = null;
     protected int turnosParaCrear = 0;
 
-    protected FuenteDeRecurso fuenteDeRecursos = null;
+    protected Ficha fuenteDeRecursos = null;
     protected Recursos recursosVirgenes = null;
     protected Recursos recursosExtraidosPorTurno = null;
     protected int poblacionQueDa = 0;
@@ -80,7 +80,7 @@ public abstract class Ficha {
         return coste;
     }
 
-    public FuenteDeRecurso fuenteDeRecursos() {
+    public Ficha fuenteDeRecursos() {
         return fuenteDeRecursos;
     }
 
@@ -138,19 +138,19 @@ public abstract class Ficha {
     }
 
     public void enConstruccion() {
-        estrategia = new EstrategiaConstruccion(this, estrategia);
+        estrategia = new EstrategiaConsturccion();
     }
 
     public void setCoordenada(Coordenada nuevaUbicacion) {
         coordenada = nuevaUbicacion;
     }
 
-    public void fuenteDeRecursos(FuenteDeRecurso recurso) {
+    public void fuenteDeRecursos(Ficha recurso) {
         fuenteDeRecursos = recurso;
     }
 
-    public void estrategia(EstrategiaFicha estrategia) {
-        this.estrategia = estrategia;
+    public void turnosParaCrear(int turnosParaCrear) {
+        this.turnosParaCrear = turnosParaCrear;
     }
 
 
@@ -162,10 +162,11 @@ public abstract class Ficha {
 
 
     public void pasarTurno() {
-        estrategia.pasarTurno(this); //y por la magia del polimorfismos el metodo save como matar a todos los tipos de unidades.
+        estrategia = estrategia.pasarTurno(this);
     }
 
-    public void serAtacado(int danio) { //en si esto solo se utalisaria para text. Ataca no lo utiliza.
+    public void serAtacado(int danio) {
+        //en si esto solo se utalisaria para text. Ataca no lo utiliza.
         estrategia.serAtacado(danio, this);
     }
 
