@@ -52,7 +52,7 @@ public class RecursosDeJugador {
         }
 
         public boolean haySuficiente(int aumento) {
-            return actual + aumento < posible;
+            return actual + aumento <= posible || aumento <= 0;
         }
     }
 

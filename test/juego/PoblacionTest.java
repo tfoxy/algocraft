@@ -148,4 +148,12 @@ public class PoblacionTest {
     }
 
 
+    @Test
+    public void siempreTieneSuficientePoblacionCuandoElAumentoEsCero() {
+        poblacion.aumentarActualForzadamente(5);
+
+        Assert.assertTrue(poblacion.haySuficiente(0));
+    }
+
+
 }
