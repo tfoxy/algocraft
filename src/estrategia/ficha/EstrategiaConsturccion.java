@@ -5,7 +5,7 @@ import ficha.Ficha;
 
 public class EstrategiaConsturccion extends EstrategiaFicha {
 
-    ModuloConstruccion moduloConstruccion = new ModuloConstruccion();
+    private ModuloConstruccion moduloConstruccion = new ModuloConstruccion();
 
 
     public void PonerEnJuego(Ficha nueva) {
