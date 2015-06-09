@@ -1,5 +1,5 @@
 package ficha;
 
-public class UnidadAerea {
+public class UnidadAerea extends FichaAerea {
 
 }
