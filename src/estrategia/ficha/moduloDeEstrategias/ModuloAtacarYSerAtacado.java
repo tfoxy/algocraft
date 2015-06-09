@@ -8,7 +8,7 @@ import tablero.Coordenada;
 
 public class ModuloAtacarYSerAtacado {
 
-    int alcanse;
+    private int alcanse;
 
     public void serAtacado(int danio, Ficha defensor) {
         defensor.barras().sufrirDanio(danio, defensor);
