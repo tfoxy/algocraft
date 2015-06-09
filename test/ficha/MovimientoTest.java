@@ -2,8 +2,6 @@ package ficha;
 
 import error.FichaSobreOtraFichaException;
 import estrategia.ficha.moduloDeEstrategias.ModuloMover;
-import juego.Jugador;
-import juego.Raza;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
