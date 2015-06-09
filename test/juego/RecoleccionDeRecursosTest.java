@@ -50,35 +50,4 @@ public class RecoleccionDeRecursosTest {
         assertEquals(240, protoss.cantidadGas());
         assertEquals(260, protoss.cantidadMineral());
     }
-
-
-    @Test
-    public void creamosUnidadPerdemosPoblacion() {
-        Ficha nuevoEdificio = new Pilon(protoss);
-
-        protoss.agregarTecnologia(Tecnologia.ACCESO);
-        protoss.newFicha(nuevoEdificio);
-
-        new Zealot(protoss);
-
-        assertEquals(2, protoss.poblcacionActual());
-    }
-
-
-    @Test
-    public void muereUnidadGanamosPoblacion() {
-        Tablero mapa = new Tablero(10, 10);
-        Coordenada lugar = new Coordenada(5, 5);
-        Ficha nuevoEdificio = new Pilon();
-
-        protoss.asignar(nuevoEdificio);
-        protoss.agregarTecnologia(Tecnologia.ACCESO);
-        protoss.newFicha(nuevoEdificio);
-
-        Ficha nuevaUnidad = new Zealot();
-        protoss.asignar(nuevaUnidad);
-        nuevaUnidad.muerete();
-
-        assertEquals(0, protoss.poblcacionActual());
-    }
 }
