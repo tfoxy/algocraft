@@ -1,7 +1,11 @@
 package estrategia.ficha.moduloDeEstrategias;
 
 
+import juego.Jugador;
+import tablero.Coordenada;
+import tablero.Tablero;
 import error.NoSePuedeCrearFicha;
+import ficha.CasaTerrestre;
 import ficha.EdifcioDeRecusosTerrestre;
 import ficha.Ficha;
 import ficha.FichaTerrestre;
@@ -19,11 +23,12 @@ public class ModuloConstruccion {
 
 
     // Fichaterrestre.
+    
     public void PonerEnJuego(FichaTerrestre nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().gastaRecursos(nueva.coste());
             nueva.propietario().newFicha(nueva);
-            nueva.tablero().insertar(nueva.coordenada(), nueva);
+            nueva.tablero().insertar2(nueva.coordenada(), nueva);
         }
     }
 
@@ -84,5 +89,12 @@ public class ModuloConstruccion {
     public boolean estaCreada(Ficha nueva) {
         return (nueva.turnosParaCrear() == 0);
     }
+
+
+	public void PonerEnJuego(CasaTerrestre nuevoEdificio, Jugador protoss,
+			Tablero mapa, Coordenada coordenada) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

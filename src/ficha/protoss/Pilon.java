@@ -17,5 +17,7 @@ public class Pilon extends CasaTerrestre {
         barras = new BarrasEscudoVidaEnergia(300, 300);
         tecnologiasNecesarias = new ArrayList<>();
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        estoyVacio = false;
     }
+    
 }
