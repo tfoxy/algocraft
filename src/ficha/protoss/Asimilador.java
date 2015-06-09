@@ -15,8 +15,6 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
         coste = new Recursos(100, 0);
         tiempoDeConstruccion = 6;
         barras = new BarrasEscudoVidaEnergia(450, 450);
-        
-        tecnologiasNecesarias = new ArrayList<>();
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         estoyVacio = false;
         
