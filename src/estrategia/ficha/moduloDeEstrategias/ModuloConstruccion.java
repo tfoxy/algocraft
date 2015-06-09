@@ -5,7 +5,6 @@ import error.NoSePuedeCrearFicha;
 import ficha.EdifcioDeRecusosTerrestre;
 import ficha.Ficha;
 import ficha.FichaTerrestre;
-import ficha.natural.Volcan;
 
 
 public class ModuloConstruccion {

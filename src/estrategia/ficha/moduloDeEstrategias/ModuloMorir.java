@@ -7,6 +7,7 @@ import Fichas.EdificioTerrestre;
 import Fichas.Ficha;
 import Fichas.UnidadAerea;
 import Fichas.UnidadTerrestre;
+import ficha.EdifcioDeRecusosTerrestre;
 
 
 public class ModuloMorir {

@@ -1,5 +1,6 @@
 package estrategia.ficha.moduloDeEstrategias;
 
+import ficha.EdifcioDeRecusosTerrestre;
 import jugador.Recursos;
 import Fichas.EdifcioDeRecusosTerrestre;
 import Fichas.Ficha;
