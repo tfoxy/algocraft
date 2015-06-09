@@ -1,5 +1,6 @@
-package ficha;
+package ficha.terrans;
 
+import ficha.UnidadTerrestre;
 import juego.Recursos;
 import stats.BarrasEscudoVidaEnergia;
 

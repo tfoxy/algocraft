@@ -1,5 +1,6 @@
-package ficha;
+package ficha.protoss;
 
+import ficha.CasaTerrestre;
 import juego.Recursos;
 import stats.BarrasEscudoVidaEnergia;
 
