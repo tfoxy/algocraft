@@ -1,13 +1,12 @@
 package estrategia.ficha.moduloDeEstrategias;
 
+import error.JuegoException;
 import ficha.Ficha;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
-import tablero.Casilla;
 import tablero.Coordenada;
 import tablero.Direccion;
 import tablero.Tablero;
-import error.PosicionFueraDeLimiteException;
 
 
 public class ModuloMover {
@@ -18,60 +17,44 @@ public class ModuloMover {
     }
 
     //terreste
-    public boolean intentarMovimiento(FichaTerrestre ficha, Direccion dirrecion) {
-
-        Tablero mapa = ficha.tablero();
-        Coordenada ubicacion = ficha.coordenada();
-        Coordenada nuevaUbicacion = ubicacion.dameCordenadaHacia(dirrecion);
-
-        if (this.sePuedeMoverEnTierra(nuevaUbicacion, mapa)) {
-            mapa.insertar(nuevaUbicacion, ficha);
-            mapa.insertar(ubicacion, new FichaTerrestre());
-            ficha.coordenada(nuevaUbicacion);
-        }
-
-        return false;
-    }
-
-    private boolean sePuedeMoverEnTierra(Coordenada ubicacion, Tablero mapa) {
-        Casilla casilla;
-
+    public boolean intentarMovimiento(FichaTerrestre ficha, Direccion direccion) {
         try {
-            casilla = mapa.getCasilla(ubicacion);
-        } catch (PosicionFueraDeLimiteException e) {
+            mover(ficha, direccion);
+            return true;
+        } catch (JuegoException e) {
             return false;
         }
+    }
 
-        return casilla.hayEspacioTerreste();
+    public void mover(FichaTerrestre ficha, Direccion direccion) {
+        Tablero mapa = ficha.tablero();
+        Coordenada ubicacion = ficha.coordenada();
+        Coordenada nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
+
+        mapa.insertar(nuevaUbicacion, ficha);
+        mapa.getCasilla(ubicacion).eliminarFichaTerrestre();
+        ficha.coordenada(nuevaUbicacion);
     }
 
 
     //areo
-    public boolean intentarMovimiento(FichaAerea ficha, Direccion dirrecion) {
-
-        Tablero mapa = ficha.tablero();
-        Coordenada ubicacion = ficha.coordenada();
-        Coordenada nuevaUbicacion = ubicacion.dameCordenadaHacia(dirrecion);
-
-        if (this.sePuedeMoverEnAire(ubicacion, mapa)) {
-            mapa.insertar(nuevaUbicacion, ficha);
-            mapa.insertar(ubicacion, new FichaAerea());
-            ficha.coordenada(nuevaUbicacion);
-        }
-        return false;
-    }
-
-    private boolean sePuedeMoverEnAire(Coordenada ubicacion, Tablero mapa) {
-        Casilla casilla;
-
+    public boolean intentarMovimiento(FichaAerea ficha, Direccion direccion) {
         try {
-            casilla = mapa.getCasilla(ubicacion);
-        } catch (PosicionFueraDeLimiteException e) {
+            mover(ficha, direccion);
+            return true;
+        } catch (JuegoException e) {
             return false;
         }
-
-        return casilla.hayEspacioTerreste();
     }
 
+    public void mover(FichaAerea ficha, Direccion direccion) {
+        Tablero mapa = ficha.tablero();
+        Coordenada ubicacion = ficha.coordenada();
+        Coordenada nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
+
+        mapa.insertar(nuevaUbicacion, ficha);
+        mapa.getCasilla(ubicacion).eliminarFichaAerea();
+        ficha.coordenada(nuevaUbicacion);
+    }
 
 }

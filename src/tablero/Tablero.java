@@ -58,6 +58,11 @@ public class Tablero {
 
 
     public void insertar(Coordenada lugar, FichaTerrestre ficha) {
+        if (lugar.equals(ficha.coordenada())) {
+            // Si la ficha se encuentra en el mismo lugar, no hacer nada
+            return;
+        }
+
         getCasilla(lugar).insertar(ficha);
 
         if (ficha.coordenada() != null) {
@@ -70,6 +75,11 @@ public class Tablero {
 
 
     public void insertar(Coordenada lugar, FichaAerea ficha) {
+        if (lugar.equals(ficha.coordenada())) {
+            // Si la ficha se encuentra en el mismo lugar, no hacer nada
+            return;
+        }
+
         getCasilla(lugar).insertar(ficha);
 
         if (ficha.coordenada() != null) {
