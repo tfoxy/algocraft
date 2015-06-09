@@ -63,7 +63,7 @@ public class PoblacionTest {
     }
 
 
-    @Test(expected = RecursosInsuficientesException.class)
+    @Test
     public void actualCambiaDeValor() {
         poblacion.cambiarPosible(5);
 
@@ -73,7 +73,7 @@ public class PoblacionTest {
     }
 
 
-    @Test
+    @Test(expected = RecursosInsuficientesException.class)
     public void actualNoPuedeAumentarMasQueLaPosibleAlInicio() {
         poblacion.cambiarActual(5);
     }

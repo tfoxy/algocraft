@@ -37,11 +37,10 @@ public class RecursosDeJugador {
         }
 
         public void cambiarActual(int cambio) {
-            if (cambio <= 0)
-                return;
-
-            if (actual + cambio > posible) {
-                throw new RecursosInsuficientesException("No hay población disponible");
+            if (cambio > 0) {
+                if (actual + cambio > posible) {
+                    throw new RecursosInsuficientesException("No hay población disponible");
+                }
             }
 
             actual += cambio;
