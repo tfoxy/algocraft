@@ -115,4 +115,15 @@ public class Jugador {
     }
 
 
+    public void perderPoblacionTotal(int cantidad) {
+        recursos.poblacion().cambiarPosible(-cantidad);
+    }
+
+    public void perderPoblacionActual(int cantidad) {
+        recursos.poblacion().cambiarActual(-cantidad);
+    }
+
+    public void perderFicha(Ficha ficha) {
+        this.perder(ficha);
+    }
 }

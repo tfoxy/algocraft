@@ -1,12 +1,7 @@
 package estrategia.ficha.moduloDeEstrategias;
 
 
-import Fichas.CasaTerrestre;
-import Fichas.EdifcioDeRecusosTerrestre;
-import Fichas.EdificioTerrestre;
-import Fichas.Ficha;
-import Fichas.UnidadAerea;
-import Fichas.UnidadTerrestre;
+import ficha.*;
 import ficha.EdifcioDeRecusosTerrestre;
 
 
@@ -23,13 +18,13 @@ public class ModuloMorir {
     }
 
     public void morir(UnidadTerrestre unidad) {
-        unidad.propietario().perderPoblacionActual(unidad.coste().poblcacionActual());
+        unidad.propietario().perderPoblacionActual(unidad.coste().poblacion());
         unidad.propietario().perderFicha(unidad);
         unidad.tablero().getCasilla(unidad.coordenada()).eliminarFichaTerrestre();
     }
 
     public void morir(UnidadAerea unidad) {
-        unidad.propietario().perderPoblacionActual(unidad.coste().poblcacionActual());
+        unidad.propietario().perderPoblacionActual(unidad.coste().poblacion());
         unidad.propietario().perderFicha(unidad);
         unidad.tablero().getCasilla(unidad.coordenada()).eliminarFichaAerea();
     }
