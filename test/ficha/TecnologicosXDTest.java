@@ -10,6 +10,11 @@ import juego.Tecnologia;
 
 public class TecnologicosXDTest {
 
+    // ListaDeTecnologias paso a ser List<Tecnologia>.
+    // Estos tests no tienen sentido dado que lo único que hacen
+    // es probar la implementación de una lista.
+    // No hay ningún comportamiento especial por ser Tecnologias.
+    /*
     @Test
     public void tieneEso() {
         ListaDeTecnologias tecnologiasDelJugador = new ListaDeTecnologias();
@@ -99,5 +104,6 @@ public class TecnologicosXDTest {
         tecnologiasNecesarias.agregar(Tecnologia.ACCESO);
         assertTrue(tecnologiasDelJugador.contengo(tecnologiasNecesarias));
     }
+    */
 
 }
