@@ -11,7 +11,7 @@ import ficha.FuenteDeRecurso;
 import ficha.UnidadAerea;
 import ficha.UnidadTerrestre;
 
-public class ExtrategiaConstrucccionOP extends EstrategiaFicha {
+public class ExtrategiaConstrucccionOP{
 
 
     private ModuloConstruccionOP moduloConstruccion = new ModuloConstruccionOP();
@@ -31,8 +31,6 @@ public class ExtrategiaConstrucccionOP extends EstrategiaFicha {
         moduloConstruccion.PonerEnJuego(nueva);
         nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
     }
-    
-    /*
     public void PonerEnJuego(UnidadTerrestre nueva) {
         moduloConstruccion.PonerEnJuego(nueva);
         nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
@@ -40,12 +38,7 @@ public class ExtrategiaConstrucccionOP extends EstrategiaFicha {
     public void PonerEnJuego(UnidadAerea  nueva) {
         moduloConstruccion.PonerEnJuego(nueva);
         nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
-    }*/
+    }
     
-    
-	@Override
-	public EstrategiaFicha pasarTurno(Ficha ficha) {
-		return new EstrategiaFichaViva();
-	}
 
 }
