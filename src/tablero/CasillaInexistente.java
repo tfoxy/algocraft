@@ -42,7 +42,7 @@ public class CasillaInexistente implements Casilla {
     }
 
     @Override
-    public Casilla get(Movimiento movimiento) {
+    public Casilla get(Direccion direccion) {
         return this;
     }
 }

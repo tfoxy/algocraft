@@ -6,7 +6,7 @@ import juego.Recursos;
 import juego.Jugador;
 import stats.BarrasEscudoVidaEnergia;
 import tablero.Coordenada;
-import tablero.Movimiento;
+import tablero.Direccion;
 import tablero.Tablero;
 import juego.Tecnologia;
 
@@ -190,7 +190,7 @@ public abstract class Ficha {
         estrategia.PonerEnJuego(this);
     }
 
-    public void intentarMovimiento(Movimiento dirrecion) {
+    public void intentarMovimiento(Direccion dirrecion) {
         estrategia.intentarMovimiento(this, dirrecion);
     }
 

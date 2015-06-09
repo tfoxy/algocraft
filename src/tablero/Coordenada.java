@@ -48,7 +48,7 @@ public class Coordenada {
     }
 
     //new 6
-    public Coordenada dameCordenadaHacia(Movimiento dirreccion) {
+    public Coordenada dameCordenadaHacia(Direccion dirreccion) {
         return new Coordenada(x + dirreccion.getX(), y + dirreccion.getY());
     }
 

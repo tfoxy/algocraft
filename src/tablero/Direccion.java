@@ -1,6 +1,6 @@
 package tablero;
 
-public enum Movimiento {
+public enum Direccion {
     ARRIBA(0, 1),
     ABAJO(0, -1),
     DERECHA(1, 0),
@@ -9,7 +9,7 @@ public enum Movimiento {
     private int x;
     private int y;
 
-    Movimiento(int x, int y) {
+    Direccion(int x, int y) {
         this.x = x;
         this.y = y;
     }

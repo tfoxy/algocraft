@@ -21,10 +21,10 @@ public class CasillasVisibles {
 
         if (vision > 0) {
             int siguienteVision = vision - 1;
-            verRecursivamente(casilla.get(Movimiento.ARRIBA), siguienteVision);
-            verRecursivamente(casilla.get(Movimiento.ABAJO), siguienteVision);
-            verRecursivamente(casilla.get(Movimiento.DERECHA), siguienteVision);
-            verRecursivamente(casilla.get(Movimiento.IZQUIERDA), siguienteVision);
+            verRecursivamente(casilla.get(Direccion.ARRIBA), siguienteVision);
+            verRecursivamente(casilla.get(Direccion.ABAJO), siguienteVision);
+            verRecursivamente(casilla.get(Direccion.DERECHA), siguienteVision);
+            verRecursivamente(casilla.get(Direccion.IZQUIERDA), siguienteVision);
         }
     }
 

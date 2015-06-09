@@ -16,5 +16,5 @@ public interface Casilla {
 
     void eliminarFichaAerea();
 
-    Casilla get(Movimiento movimiento);
+    Casilla get(Direccion direccion);
 }

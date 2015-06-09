@@ -4,7 +4,7 @@ import ficha.Ficha;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
 import tablero.Coordenada;
-import tablero.Movimiento;
+import tablero.Direccion;
 import tablero.Tablero;
 import error.PosicionFueraDeLimiteException;
 
@@ -14,13 +14,13 @@ public class ModuloMover {
     private Coordenada ubicacion;
     private Coordenada nuevaUbicacion;
 
-    public boolean intentarMovimiento(Ficha ficha, Movimiento dirrecion) {
+    public boolean intentarMovimiento(Ficha ficha, Direccion dirrecion) {
         //para el polimorfismo
         return false;
     }
 
     //terreste
-    public boolean intentarMovimiento(FichaTerrestre ficha, Movimiento dirrecion) {
+    public boolean intentarMovimiento(FichaTerrestre ficha, Direccion dirrecion) {
 
         mapa = ficha.tablero();
         ubicacion = ficha.coordenada();
@@ -35,7 +35,7 @@ public class ModuloMover {
         return false;
     }
 
-    private boolean sePuedeMover(FichaTerrestre ficha, Movimiento dirrecion) {
+    private boolean sePuedeMover(FichaTerrestre ficha, Direccion dirrecion) {
 
         //si se quita el private hay que re inicializar
         try {
@@ -53,7 +53,7 @@ public class ModuloMover {
 
 
     //areo
-    public boolean intentarMovimiento(FichaAerea ficha, Movimiento dirrecion) {
+    public boolean intentarMovimiento(FichaAerea ficha, Direccion dirrecion) {
 
         mapa = ficha.tablero();
         ubicacion = ficha.coordenada();
@@ -67,7 +67,7 @@ public class ModuloMover {
         return false;
     }
 
-    private boolean sePuedeMover(FichaAerea ficha, Movimiento dirrecion) {
+    private boolean sePuedeMover(FichaAerea ficha, Direccion dirrecion) {
 
         //si se quita el private hay que re inicializar
 

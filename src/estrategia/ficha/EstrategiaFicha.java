@@ -1,11 +1,9 @@
 package estrategia.ficha;
 
-import tablero.Movimiento;
+import tablero.Direccion;
 import ficha.Ficha;
-import error.NoSePuedeCrearFicha;
 import estrategia.ficha.moduloDeEstrategias.ModuloAtacarYSerAtacado;
 import estrategia.ficha.moduloDeEstrategias.ModuloMorir;
-import estrategia.ficha.moduloDeEstrategias.ModuloMover;
 
 
 public abstract class EstrategiaFicha {
@@ -30,7 +28,7 @@ public abstract class EstrategiaFicha {
         //nada
     }
 
-    public void intentarMovimiento(Ficha ficha, Movimiento dirrecion) {
+    public void intentarMovimiento(Ficha ficha, Direccion dirrecion) {
         //nada
     }
 

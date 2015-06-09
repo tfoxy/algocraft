@@ -11,20 +11,20 @@ public class CasillaDeTablero implements Casilla {
     private FichaTerrestre fichaTerreste;
     private FichaAerea fichaAerea;
 
-    private EnumMap<Movimiento, Casilla> casillasAdyacentes =
-            new EnumMap<>(Movimiento.class);
+    private EnumMap<Direccion, Casilla> casillasAdyacentes =
+            new EnumMap<>(Direccion.class);
 
     public CasillaDeTablero() {
         fichaTerreste = new FichaTerrestre();
         fichaAerea = new FichaAerea();
 
-        for (Movimiento movimiento: Movimiento.values()) {
-            insertarCasillaAdyacente(movimiento, new CasillaInexistente());
+        for (Direccion direccion : Direccion.values()) {
+            insertarCasillaAdyacente(direccion, new CasillaInexistente());
         }
     }
 
-    void insertarCasillaAdyacente(Movimiento movimiento, Casilla casilla) {
-        casillasAdyacentes.put(movimiento, casilla);
+    void insertarCasillaAdyacente(Direccion direccion, Casilla casilla) {
+        casillasAdyacentes.put(direccion, casilla);
     }
 
     public boolean estaVacia() {
@@ -78,8 +78,8 @@ public class CasillaDeTablero implements Casilla {
     }
 
     @Override
-    public Casilla get(Movimiento movimiento) {
-        return casillasAdyacentes.get(movimiento);
+    public Casilla get(Direccion direccion) {
+        return casillasAdyacentes.get(direccion);
     }
 
 

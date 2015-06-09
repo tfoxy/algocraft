@@ -1,11 +1,9 @@
 package estrategia.ficha;
 
-import tablero.Movimiento;
-import estrategia.ficha.moduloDeEstrategias.ModuloAtacarYSerAtacado;
+import tablero.Direccion;
 import estrategia.ficha.moduloDeEstrategias.ModuloEfectosDeTurno;
 import estrategia.ficha.moduloDeEstrategias.ModuloMover;
 import ficha.Ficha;
-import ficha.FichaTerrestre;
 
 public class EstrategiaFichaViva extends EstrategiaFicha {
 
@@ -16,7 +14,7 @@ public class EstrategiaFichaViva extends EstrategiaFicha {
         moduloAtacarYSerAtacado.atacar(agresor, defensor);
     }
 
-    public void intentarMovimiento(Ficha ficha, Movimiento dirrecion) {
+    public void intentarMovimiento(Ficha ficha, Direccion dirrecion) {
         moduloMover.intentarMovimiento(ficha, dirrecion);
     }
 
