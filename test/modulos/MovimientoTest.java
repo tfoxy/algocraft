@@ -1,8 +1,9 @@
-package ficha;
+package modulos;
 
 import error.FichaSobreOtraFichaException;
 import error.MovimientoInsuficienteException;
 import estrategia.ficha.moduloDeEstrategias.ModuloMover;
+import ficha.FichaTerrestre;
 import ficha.terrans.Marine;
 
 import org.junit.Assert;
