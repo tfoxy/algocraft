@@ -1,15 +1,16 @@
 package ficha;
 
 import juego.Recursos;
-import juego.Jugador;
+import stats.BarrasEscudoVidaEnergia;
 
 public class Marine extends UnidadTerrestre {
 
+    private static final BarrasEscudoVidaEnergia.Builder barrasBuilder =
+            new BarrasEscudoVidaEnergia.Builder()
+            .vida(40);
 
-    public Marine(Jugador jugador) {
-        super(jugador);
-
-        barras = new BarrasEscudoVidaEnergiaBuilder().setVidaMaxima(40).setEscudoMaximo(0).setEnergiaMaxima(0).createBarrasEscudoVidaEnergia();
+    public Marine() {
+        barras = barrasBuilder.build();
         coste = new Recursos(50, 0, 1);
         ataqueTierra = ataqueAire = 6;
         rangoDeAtaqueTierra = rangoDeAtaqueAire = 4;

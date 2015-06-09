@@ -65,7 +65,7 @@ public class BarrasEscudoVidaEnergia {
     }
 
     
-    public class Builder {
+    public static class Builder {
         private int vidaMaxima = 0;
         private int escudoMaximo = 0;
         private int energiaMaxima = 0;
@@ -141,7 +141,7 @@ public class BarrasEscudoVidaEnergia {
             return this;
         }
 
-        public BarrasEscudoVidaEnergia builder() {
+        public BarrasEscudoVidaEnergia build() {
             return new BarrasEscudoVidaEnergia(this);
         }
     }
