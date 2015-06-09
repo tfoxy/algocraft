@@ -12,16 +12,16 @@ public abstract class EstrategiaFicha {
         this.ficha = ficha;
     }
 
-    public void creame(Ficha nueva) {
-
+    public void creame() {
+        // noop
     }
 
-    public EstrategiaFicha pasarTurno() {
-        return this;
+    public void pasarTurno() {
+        // noop
     }
 
-    public void morir(Ficha ficha) {
-
+    public void morir() {
+        // noop
     }
 
 

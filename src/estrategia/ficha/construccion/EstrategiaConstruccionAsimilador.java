@@ -4,8 +4,8 @@ import error.NoSePuedeCrearFicha;
 import estrategia.ficha.EstrategiaEdificioRecursosGas;
 import estrategia.ficha.EstrategiaFicha;
 import ficha.natural.Volcan;
-import jugador.Recursos;
-import jugador.TablaJugador;
+import juego.Recursos;
+import juego.Jugador;
 import tablero.Casilla;
 import tablero.Coordenada;
 import tablero.Tablero;
@@ -15,7 +15,7 @@ public class EstrategiaConstruccionAsimilador extends EstrategiaConstruccion {
     private Volcan fuenteRecursos;
 
     public EstrategiaConstruccionAsimilador(Recursos coste, int turnosParaCrear,
-            TablaJugador propetario, Tablero mapa, Coordenada lugar,
+            Jugador propetario, Tablero mapa, Coordenada lugar,
             ListaDeTecnologias lasTecnologiasNecesarias) {
         super(
                 coste, turnosParaCrear, propetario,
@@ -51,8 +51,8 @@ public class EstrategiaConstruccionAsimilador extends EstrategiaConstruccion {
 
     @Override
     public EstrategiaFicha pasarTurno() {
-        turnosParaCrear = turnosParaCrear - 1;
-        if (turnosParaCrear == 0) {
+        turnosFaltantesParaCrear = turnosFaltantesParaCrear - 1;
+        if (turnosFaltantesParaCrear == 0) {
             return new EstrategiaEdificioRecursosGas(
                     propetario, mapa, lugar, fuenteRecursos
             );

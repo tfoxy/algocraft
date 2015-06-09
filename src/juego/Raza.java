@@ -1,4 +1,4 @@
-package jugador;
+package juego;
 
 import java.util.Arrays;
 import java.util.List;

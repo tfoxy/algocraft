@@ -1,13 +1,13 @@
 package ficha;
 
 import estrategia.ficha.EstrategiaAtacarYSerAtacado;
-import jugador.TablaJugador;
+import juego.Jugador;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import tablero.Coordenada;
 import tablero.Tablero;
-import jugador.Tecnologia;
+import juego.Tecnologia;
 
 public class AtaqueDeZealotTest {
 
@@ -16,8 +16,8 @@ public class AtaqueDeZealotTest {
     private FichaTerrestre unidad;
     private FichaTerrestre unidadEnemigaTerrestre;
     private FichaAerea unidadEnemigaAerea;
-    private TablaJugador jugador;
-    private TablaJugador enemigo;
+    private Jugador jugador;
+    private Jugador enemigo;
 
 
     @Before
@@ -28,8 +28,8 @@ public class AtaqueDeZealotTest {
 
         mapa = new Tablero(tamanioDeMapa, tamanioDeMapa);
 
-        jugador = new TablaJugador("miNombre", Tecnologia.PROTOSS);
-        enemigo = new TablaJugador("miEnemigo", Tecnologia.TERRAN);
+        jugador = new Jugador("miNombre", Tecnologia.PROTOSS);
+        enemigo = new Jugador("miEnemigo", Tecnologia.TERRAN);
 
         unidad = new Zealot(jugador);
 

@@ -1,20 +1,22 @@
 package ficha;
 
 import estrategia.ficha.EstrategiaFicha;
-import jugador.Recursos;
-import jugador.TablaJugador;
+import estrategia.ficha.construccion.EstrategiaConstruccion;
+import juego.Juego;
+import juego.Recursos;
+import juego.Jugador;
 import stats.BarrasEscudoVidaEnergia;
 import tablero.Coordenada;
 import tablero.Movimiento;
 import tablero.Tablero;
-import jugador.Tecnologia;
+import juego.Tecnologia;
 
 import java.util.List;
 
 
 public abstract class Ficha {
 
-    protected TablaJugador propietario; //despues cualquier cosa refactorisamos... pero sino es absurdo tener tantos Gets
+    protected Jugador propietario; //despues cualquier cosa refactorisamos... pero sino es absurdo tener tantos Gets
     protected Tablero tablero;
     protected Coordenada coordenada;
 
@@ -29,7 +31,7 @@ public abstract class Ficha {
     protected List<Tecnologia> tecnologiasNecesarias = null;
     protected int turnosParaCrear = 0;
 
-    protected Ficha fuenteDeRecursos = null;
+    protected FuenteDeRecurso fuenteDeRecursos = null;
     protected Recursos recursosVirgenes = null;
     protected Recursos recursosExtraidosPorTurno = null;
     protected int poblacionQueDa = 0;
@@ -59,7 +61,7 @@ public abstract class Ficha {
 
 
     //gets
-    public TablaJugador propietario() {
+    public Jugador propietario() {
         return propietario;
     }
 
@@ -79,7 +81,7 @@ public abstract class Ficha {
         return coste;
     }
 
-    public RecursosTerrestres fuenteDeRecursos() {
+    public FuenteDeRecurso fuenteDeRecursos() {
         return fuenteDeRecursos;
     }
 
@@ -124,17 +126,24 @@ public abstract class Ficha {
         return false;
     }
 
-    //set
-    public void turnosParaCrear(int i) {
-        turnosParaCrear = i;
+    public Jugador propietario(Jugador jugador) {
+        return propietario = jugador;
+    }
+
+    public void enConstruccion() {
+        estrategia = new EstrategiaConstruccion(this, estrategia);
     }
 
     public void setCoordenada(Coordenada nuevaUbicacion) {
         coordenada = nuevaUbicacion;
     }
 
-    public void fuenteDeRecursos(Ficha recurso) {
+    public void fuenteDeRecursos(FuenteDeRecurso recurso) {
         fuenteDeRecursos = recurso;
+    }
+
+    public void estrategia(EstrategiaFicha estrategia) {
+        this.estrategia = estrategia;
     }
 
 

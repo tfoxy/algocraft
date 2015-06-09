@@ -2,28 +2,28 @@ package ficha;
 
 import error.FichaSobreOtraFichaException;
 import estrategia.ficha.EstrategiaMover;
-import jugador.TablaJugador;
+import juego.Jugador;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import tablero.Coordenada;
 import tablero.Movimiento;
 import tablero.Tablero;
-import jugador.Tecnologia;
+import juego.Tecnologia;
 
 public class MovimientoTest {
 
     private EstrategiaMover estrategiaMover;
     private Tablero mapa;
     private FichaTerrestre unidad;
-    private TablaJugador jugador;
+    private Jugador jugador;
 
 
     @Before
     public void initialize() {
         estrategiaMover = new EstrategiaMover();
 
-        jugador = new TablaJugador("miNombre", Tecnologia.TERRAN);
+        jugador = new Jugador("miNombre", Tecnologia.TERRAN);
 
         unidad = new Marine(jugador);
 

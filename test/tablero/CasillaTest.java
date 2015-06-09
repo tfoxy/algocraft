@@ -7,22 +7,22 @@ import ficha.natural.NodoMineral;
 import ficha.FuenteDeRecurso;
 import ficha.Marine;
 import ficha.FichaTerrestre;
-import jugador.TablaJugador;
+import juego.Jugador;
 import ficha.FichaEspacial;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import jugador.Tecnologia;
+import juego.Tecnologia;
 
 public class CasillaTest {
 
     private Casilla casilla;
-    private TablaJugador jugador;
+    private Jugador jugador;
 
     @Before
     public void initialize() {
         casilla = new CasillaDeTablero();
-        jugador = new TablaJugador("Juan", Tecnologia.PROTOSS);
+        jugador = new Jugador("Juan", Tecnologia.PROTOSS);
     }
 
 

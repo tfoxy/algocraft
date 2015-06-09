@@ -8,19 +8,19 @@ import org.junit.Test;
 
 import error.NoSePuedeCrearFicha;
 import ficha.natural.Volcan;
-import jugador.TablaJugador;
+import juego.Jugador;
 import tablero.Coordenada;
 import tablero.Tablero;
-import jugador.Tecnologia;
+import juego.Tecnologia;
 
 
 public class CrearUnidadesTest {
 
-    private TablaJugador protoss;
+    private Jugador protoss;
 
     @Before
     public void initialize() {
-        protoss = new TablaJugador("Proto", Tecnologia.PROTOSS, 500, 200);
+        protoss = new Jugador("Proto", Tecnologia.PROTOSS, 500, 200);
     }
 
     @Test
@@ -87,8 +87,8 @@ public class CrearUnidadesTest {
     public void faltanTecnologias() {
         Tablero mapa = new Tablero(10, 10);
         Coordenada lugar = new Coordenada(3, 3);
-        TablaJugador humanos =
-                new TablaJugador("humanos", Tecnologia.TERRAN, 500, 200);
+        Jugador humanos =
+                new Jugador("humanos", Tecnologia.TERRAN, 500, 200);
 
         new Pilon(humanos, lugar, mapa);
     }

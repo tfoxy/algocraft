@@ -2,8 +2,8 @@ package estrategia.ficha.construccion;
 
 import estrategia.ficha.EstrategiaFicha;
 import estrategia.ficha.EstrategiaCasa;
-import jugador.Recursos;
-import jugador.TablaJugador;
+import juego.Recursos;
+import juego.Jugador;
 import tablero.Coordenada;
 import tablero.Tablero;
 
@@ -12,7 +12,7 @@ public class EstrategiaConstruccionPilon extends EstrategiaConstruccion {
     public EstrategiaConstruccionPilon(
             Recursos coste,
             int turnosParaCrear,
-            TablaJugador propetario,
+            Jugador propetario,
             Tablero mapa,
             Coordenada lugar,
             ListaDeTecnologias tecnologiasNecesarias) {
@@ -24,8 +24,8 @@ public class EstrategiaConstruccionPilon extends EstrategiaConstruccion {
 
     @Override
     public EstrategiaFicha pasarTurno() {
-        turnosParaCrear = turnosParaCrear - 1;
-        if (turnosParaCrear == 0) {
+        turnosFaltantesParaCrear = turnosFaltantesParaCrear - 1;
+        if (turnosFaltantesParaCrear == 0) {
             return new EstrategiaCasa(propetario, mapa, lugar);
         }
         return this;

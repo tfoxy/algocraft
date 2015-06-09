@@ -1,17 +1,17 @@
 package estrategia.ficha;
 
-import jugador.TablaJugador;
+import juego.Jugador;
 import tablero.Coordenada;
 import tablero.Tablero;
 
 
 public class EstrategiaCasa extends EstrategiaFicha {
 
-    private TablaJugador propetario;
+    private Jugador propetario;
     private Tablero mapa;
     private Coordenada lugar;
 
-    public EstrategiaCasa(TablaJugador propetario, Tablero mapa, Coordenada lugar) {
+    public EstrategiaCasa(Jugador propetario, Tablero mapa, Coordenada lugar) {
         this.propetario = propetario;
         this.mapa = mapa;
         this.lugar = lugar;

@@ -1,17 +1,17 @@
 package estrategia.ficha;
 
-import jugador.TablaJugador;
+import juego.Jugador;
 import tablero.Coordenada;
 import tablero.Tablero;
 
 public class EstrategiaUnidadSoldado extends EstrategiaFicha {
 
-    private TablaJugador propietario;
+    private Jugador propietario;
     private Tablero mapa;
     private Coordenada lugar;
     private int poblacionOpcupada;
 
-    public EstrategiaUnidadSoldado(TablaJugador propietario,
+    public EstrategiaUnidadSoldado(Jugador propietario,
                                    Tablero mapa,
                                    Coordenada lugar,
                                    int poblacionOpcupada) {

@@ -1,18 +1,23 @@
 package ficha;
 
-import error.ArgumentoNoPuedeSerNegativoException;
-import jugador.Gaia;
+import juego.Juego;
 
 public abstract class FuenteDeRecurso extends FichaTerrestre {
 
+    private static final int CANTIDAD_DE_RECURSOS_POR_DEFECTO = 1500;
+
     private int cantidadDeRecursos;
 
+    public FuenteDeRecurso(Juego juego) {
+        this(juego, CANTIDAD_DE_RECURSOS_POR_DEFECTO);
+    }
 
-    public FuenteDeRecurso(int cantidadDeRecursos) {
-        super(new Gaia());
 
-        if (cantidadDeRecursos < 0) {
-            throw new ArgumentoNoPuedeSerNegativoException();
+    public FuenteDeRecurso(Juego juego, int cantidadDeRecursos) {
+        super(juego);
+
+        if (cantidadDeRecursos <= 0) {
+            throw new IllegalArgumentException();
         }
 
         this.cantidadDeRecursos = cantidadDeRecursos;

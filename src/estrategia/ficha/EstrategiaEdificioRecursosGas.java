@@ -1,7 +1,7 @@
 package estrategia.ficha;
 
 import ficha.natural.Volcan;
-import jugador.TablaJugador;
+import juego.Jugador;
 import tablero.Coordenada;
 import tablero.Tablero;
 
@@ -9,13 +9,13 @@ public class EstrategiaEdificioRecursosGas extends EstrategiaFicha {
 
     private static final int CANTIDAD_EXTRAIDA_POR_TURNO = 10;
 
-    private TablaJugador propetario;
+    private Jugador propetario;
     private Tablero mapa;
     private Coordenada lugar;
     private Volcan fuenteDeRecursos;
 
 
-    public EstrategiaEdificioRecursosGas(TablaJugador propetario,
+    public EstrategiaEdificioRecursosGas(Jugador propetario,
                                          Tablero mapa,
                                          Coordenada lugar,
                                          Volcan fuenteDeRecursos) {
