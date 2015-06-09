@@ -16,16 +16,13 @@ public class MovimientoTest {
     private ModuloMover estrategiaMover;
     private Tablero mapa;
     private FichaTerrestre unidad;
-    private Jugador jugador;
 
 
     @Before
     public void initialize() {
         estrategiaMover = new ModuloMover();
 
-        jugador = new Jugador("miNombre", Raza.TERRAN);
-
-        unidad = new Marine(jugador);
+        unidad = new Marine();
 
         int tamanioDeMapa = unidad.movimientoMaximo() * 4;
 
@@ -46,7 +43,7 @@ public class MovimientoTest {
 
     @Test
     public void noPuedeMoverseDondeNoHayOtraUnidad() {
-        FichaTerrestre otraUnidad = new Marine(jugador);
+        FichaTerrestre otraUnidad = new Marine();
 
         mapa.insertar(new Coordenada(3, 3), unidad);
         mapa.insertar(new Coordenada(3, 4), otraUnidad);
@@ -60,7 +57,7 @@ public class MovimientoTest {
 
     @Test
     public void puedeInsertarseDondeHabiaOtraUnidadAntesDeMoverse() {
-        FichaTerrestre otraUnidad = new Marine(jugador);
+        FichaTerrestre otraUnidad = new Marine();
 
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
 
@@ -72,7 +69,7 @@ public class MovimientoTest {
 
     @Test(expected = FichaSobreOtraFichaException.class)
     public void noPuedeInsertarseDondeOtraUnidadSeMovio() {
-        FichaTerrestre otraUnidad = new Marine(jugador);
+        FichaTerrestre otraUnidad = new Marine();
 
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
 
@@ -84,7 +81,7 @@ public class MovimientoTest {
 
     @Test
     public void puedeMoverseDondeHabiaOtraUnidadAntesDeMoverse() {
-        FichaTerrestre otraUnidad = new Marine(jugador);
+        FichaTerrestre otraUnidad = new Marine();
 
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
         mapa.insertar(new Coordenada(3, 2), unidad);
@@ -96,7 +93,7 @@ public class MovimientoTest {
 
     @Test(expected = FichaSobreOtraFichaException.class)
     public void noPuedeMoverseDondeOtraUnidadSeMovio() {
-        FichaTerrestre otraUnidad = new Marine(jugador);
+        FichaTerrestre otraUnidad = new Marine();
 
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
         mapa.insertar(new Coordenada(3, 4), unidad);
@@ -119,7 +116,7 @@ public class MovimientoTest {
 
     @Test
     public void noGastaUnMovimientoAlNoMoverse() {
-        FichaTerrestre otraUnidad = new Marine(jugador);
+        FichaTerrestre otraUnidad = new Marine();
 
         mapa.insertar(new Coordenada(3, 4), otraUnidad);
         mapa.insertar(new Coordenada(3, 3), unidad);
