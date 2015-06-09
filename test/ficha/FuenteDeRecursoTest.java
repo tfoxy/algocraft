@@ -17,7 +17,7 @@ public class FuenteDeRecursoTest {
     public void puedeCrearseConCeroDeRecursos() {
         Volcan volcan = new Volcan(0);
 
-        assertEquals(0, volcan.getCantidadDeRecursos());
+        assertEquals(0, volcan.cantidadDeRecursos());
     }
 
     @Test
