@@ -7,6 +7,9 @@ import juego.Tecnologia;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import ficha.protoss.Pilon;
+import ficha.protoss.Zealot;
 import tablero.Coordenada;
 import tablero.Tablero;
 

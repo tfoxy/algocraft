@@ -3,6 +3,9 @@ package tablero;
 import error.FichaSobreOtraFichaException;
 import ficha.*;
 import ficha.natural.NodoMineral;
+import ficha.terrans.Espectro;
+import ficha.terrans.Marine;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

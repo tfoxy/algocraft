@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import error.NoSePuedeCrearFicha;
 import ficha.natural.Volcan;
+import ficha.protoss.Asimilador;
+import ficha.protoss.Pilon;
 import juego.Jugador;
 import tablero.Coordenada;
 import tablero.Tablero;

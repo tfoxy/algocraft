@@ -5,6 +5,8 @@ import juego.Raza;
 import org.junit.Before;
 import org.junit.Test;
 
+import ficha.protoss.Pilon;
+
 import static org.junit.Assert.assertEquals;
 
 public class ConstruccionTest {

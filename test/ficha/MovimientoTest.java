@@ -2,6 +2,8 @@ package ficha;
 
 import error.FichaSobreOtraFichaException;
 import estrategia.ficha.moduloDeEstrategias.ModuloMover;
+import ficha.terrans.Marine;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

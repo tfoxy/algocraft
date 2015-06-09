@@ -1,6 +1,9 @@
 package ficha;
 
 import estrategia.ficha.moduloDeEstrategias.ModuloAtacarYSerAtacado;
+import ficha.protoss.Zealot;
+import ficha.terrans.Espectro;
+import ficha.terrans.Marine;
 import juego.Jugador;
 import juego.Raza;
 import org.junit.Assert;

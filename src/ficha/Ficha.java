@@ -149,6 +149,13 @@ public abstract class Ficha {
     public Jugador propietario(Jugador jugador) {
         return propietario = jugador;
     }
+    
+    //si me olvido de comenetar. Se agrega esto. Puede que despues se cambie por un build.
+    public void setBasico (Jugador jugador, Tablero mapa, Coordenada lugar) {
+        propietario = jugador;
+        tablero = mapa;
+        coordenada = lugar;
+    }
 
     public void enConstruccion() {
         estrategia = new EstrategiaConsturccion();
