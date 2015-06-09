@@ -4,6 +4,8 @@ import ficha.Ficha;
 
 //new 6
 public class BarrasEscudoVidaEnergia {
+    private static final Builder EMPTY_BUILDER = new Builder();
+
     private int vidaMaxima;
     private int escudoMaximo;
     private int energiaMaxima;
@@ -28,6 +30,32 @@ public class BarrasEscudoVidaEnergia {
         vidaPorTurno = builder.vidaPorTurno;
         escudoPorTurno = builder.escudoPorTurno;
         energiaPorTurno = builder.energiaPorTurno;
+    }
+
+    private BarrasEscudoVidaEnergia() {
+        this(EMPTY_BUILDER);
+    }
+
+    public BarrasEscudoVidaEnergia(int vida) {
+        this();
+        vidaMaxima = vidaActual = vida;
+    }
+
+    public BarrasEscudoVidaEnergia(int vida, int escudo) {
+        this(vida);
+        escudoMaximo = escudoActual = escudo;
+    }
+
+    public BarrasEscudoVidaEnergia(int vida,
+                                   int escudo,
+                                   int energiaMaxima,
+                                   int energiaActual,
+                                   int energiaPorTurno) {
+        this(vida, escudo);
+
+        this.energiaMaxima = energiaMaxima;
+        this.energiaActual = energiaActual;
+        this.energiaPorTurno = energiaPorTurno;
     }
 
     public void sufrirDanio(int danio) {
