@@ -31,12 +31,14 @@ public class CasillaDeTablero implements Casilla {
         return (fichaTerreste.estaVacia() && fichaAerea.estaVacia());
     }
 
+    @Override
     public boolean hayEspacioTerreste() {
         return fichaTerreste.estaVacia();
     }
 
+    @Override
     public boolean hayEspacioArreo() { //new 6
-	return fichaAerea.estaVacia();
+	    return fichaAerea.estaVacia();
     }
 
     @Override

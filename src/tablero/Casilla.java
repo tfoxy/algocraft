@@ -17,4 +17,8 @@ public interface Casilla {
     void eliminarFichaAerea();
 
     Casilla get(Direccion direccion);
+
+    boolean hayEspacioTerreste();
+
+    boolean hayEspacioArreo();
 }

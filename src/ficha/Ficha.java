@@ -153,7 +153,7 @@ public abstract class Ficha {
         estrategia = new EstrategiaConsturccion();
     }
 
-    public void setCoordenada(Coordenada nuevaUbicacion) {
+    public void coordenada(Coordenada nuevaUbicacion) {
         coordenada = nuevaUbicacion;
     }
 

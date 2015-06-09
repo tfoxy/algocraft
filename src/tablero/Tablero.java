@@ -59,11 +59,23 @@ public class Tablero {
 
     public void insertar(Coordenada lugar, FichaTerrestre ficha) {
         getCasilla(lugar).insertar(ficha);
+
+        if (ficha.coordenada() != null) {
+            getCasilla(ficha.coordenada()).eliminarFichaTerrestre();
+        }
+
+        ficha.coordenada(lugar);
     }
 
 
     public void insertar(Coordenada lugar, FichaAerea ficha) {
         getCasilla(lugar).insertar(ficha);
+
+        if (ficha.coordenada() != null) {
+            getCasilla(ficha.coordenada()).eliminarFichaAerea();
+        }
+
+        ficha.coordenada(lugar);
     }
 
 

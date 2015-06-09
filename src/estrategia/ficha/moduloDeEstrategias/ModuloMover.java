@@ -3,6 +3,7 @@ package estrategia.ficha.moduloDeEstrategias;
 import ficha.Ficha;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
+import tablero.Casilla;
 import tablero.Coordenada;
 import tablero.Direccion;
 import tablero.Tablero;
@@ -10,9 +11,6 @@ import error.PosicionFueraDeLimiteException;
 
 
 public class ModuloMover {
-    private Tablero mapa;
-    private Coordenada ubicacion;
-    private Coordenada nuevaUbicacion;
 
     public boolean intentarMovimiento(Ficha ficha, Direccion dirrecion) {
         //para el polimorfismo
@@ -22,62 +20,57 @@ public class ModuloMover {
     //terreste
     public boolean intentarMovimiento(FichaTerrestre ficha, Direccion dirrecion) {
 
-        mapa = ficha.tablero();
-        ubicacion = ficha.coordenada();
-        nuevaUbicacion = ubicacion.dameCordenadaHacia(dirrecion);
+        Tablero mapa = ficha.tablero();
+        Coordenada ubicacion = ficha.coordenada();
+        Coordenada nuevaUbicacion = ubicacion.dameCordenadaHacia(dirrecion);
 
-        if (this.sePuedeMover(ficha, dirrecion)) {
+        if (this.sePuedeMoverEnTierra(nuevaUbicacion, mapa)) {
             mapa.insertar(nuevaUbicacion, ficha);
             mapa.insertar(ubicacion, new FichaTerrestre());
-            ficha.setCoordenada(nuevaUbicacion);
+            ficha.coordenada(nuevaUbicacion);
         }
 
         return false;
     }
 
-    private boolean sePuedeMover(FichaTerrestre ficha, Direccion dirrecion) {
+    private boolean sePuedeMoverEnTierra(Coordenada ubicacion, Tablero mapa) {
+        Casilla casilla;
 
-        //si se quita el private hay que re inicializar
         try {
-            mapa.getCasilla(ficha.coordenada().dameCordenadaHacia(dirrecion));
-        } catch (PosicionFueraDeLimiteException e) { //cosa a verificar.
+            casilla = mapa.getCasilla(ubicacion);
+        } catch (PosicionFueraDeLimiteException e) {
             return false;
         }
 
-        if (mapa.hayEspacioTerreste(ubicacion.dameCordenadaHacia(dirrecion))) {
-            return false;
-        }
-
-        return true;
+        return casilla.hayEspacioTerreste();
     }
 
 
     //areo
     public boolean intentarMovimiento(FichaAerea ficha, Direccion dirrecion) {
 
-        mapa = ficha.tablero();
-        ubicacion = ficha.coordenada();
-        nuevaUbicacion = ubicacion.dameCordenadaHacia(dirrecion);
+        Tablero mapa = ficha.tablero();
+        Coordenada ubicacion = ficha.coordenada();
+        Coordenada nuevaUbicacion = ubicacion.dameCordenadaHacia(dirrecion);
 
-        if (this.sePuedeMover(ficha, dirrecion)) {
+        if (this.sePuedeMoverEnAire(ubicacion, mapa)) {
             mapa.insertar(nuevaUbicacion, ficha);
             mapa.insertar(ubicacion, new FichaAerea());
-            ficha.setCoordenada(nuevaUbicacion);
+            ficha.coordenada(nuevaUbicacion);
         }
         return false;
     }
 
-    private boolean sePuedeMover(FichaAerea ficha, Direccion dirrecion) {
-
-        //si se quita el private hay que re inicializar
+    private boolean sePuedeMoverEnAire(Coordenada ubicacion, Tablero mapa) {
+        Casilla casilla;
 
         try {
-            mapa.getCasilla(ficha.coordenada().dameCordenadaHacia(dirrecion));
-        } catch (PosicionFueraDeLimiteException e) { //cosa a verificar.
+            casilla = mapa.getCasilla(ubicacion);
+        } catch (PosicionFueraDeLimiteException e) {
             return false;
         }
 
-        return mapa.hayEspacioArreo(ubicacion.dameCordenadaHacia(dirrecion));
+        return casilla.hayEspacioTerreste();
     }
 
 

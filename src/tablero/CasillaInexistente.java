@@ -22,6 +22,16 @@ public class CasillaInexistente implements Casilla {
     }
 
     @Override
+    public boolean hayEspacioTerreste() {
+        return fichaTerreste.estaVacia();
+    }
+
+    @Override
+    public boolean hayEspacioArreo() { //new 6
+        return fichaAerea.estaVacia();
+    }
+
+    @Override
     public void insertar(FichaTerrestre ficha) {
         // No hacer nada
     }

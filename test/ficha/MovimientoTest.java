@@ -58,7 +58,7 @@ public class MovimientoTest {
         FichaTerrestre otraUnidad = new Marine();
 
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
-
+        Assert.assertNotNull(otraUnidad.coordenada());
         estrategiaMover.intentarMovimiento(otraUnidad, Direccion.ARRIBA);
 
         mapa.insertar(new Coordenada(3, 3), unidad);
