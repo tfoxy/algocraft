@@ -29,6 +29,24 @@ public class MovimientoTest {
 
 
     @Test
+    public void tieneTableroAlInsertarseSobreTablero() {
+        mapa.insertar(new Coordenada(3, 3), unidad);
+
+        Assert.assertSame(mapa, unidad.tablero());
+    }
+
+
+    @Test
+    public void tieneCoordenadaAlInsertarseSobreTablero() {
+        Coordenada lugar = new Coordenada(3, 3);
+
+        mapa.insertar(lugar, unidad);
+
+        Assert.assertSame(lugar, unidad.coordenada());
+    }
+
+
+    @Test
     public void puedeMoverseDondeNoHayNada() {
         mapa.insertar(new Coordenada(3, 3), unidad);
 
@@ -58,7 +76,7 @@ public class MovimientoTest {
         FichaTerrestre otraUnidad = new Marine();
 
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
-        Assert.assertNotNull(otraUnidad.coordenada());
+
         estrategiaMover.intentarMovimiento(otraUnidad, Direccion.ARRIBA);
 
         mapa.insertar(new Coordenada(3, 3), unidad);

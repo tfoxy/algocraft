@@ -65,6 +65,7 @@ public class Tablero {
         }
 
         ficha.coordenada(lugar);
+        ficha.tablero(this);
     }
 
 
@@ -76,6 +77,7 @@ public class Tablero {
         }
 
         ficha.coordenada(lugar);
+        ficha.tablero(this);
     }
 
 

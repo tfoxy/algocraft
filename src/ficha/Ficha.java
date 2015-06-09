@@ -194,4 +194,7 @@ public abstract class Ficha {
         estrategia.intentarMovimiento(this, dirrecion);
     }
 
+    public void tablero(Tablero tablero) {
+        this.tablero = tablero;
+    }
 }
