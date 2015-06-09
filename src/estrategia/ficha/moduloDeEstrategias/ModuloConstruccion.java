@@ -28,7 +28,7 @@ public class ModuloConstruccion {
     }
 
     public boolean sePuedeCrear(FichaTerrestre nueva) throws NoSePuedeCrearFicha {
-        if ((nueva.propietario().tengoSuficientesRecursos(nueva.coste()))) { //!
+        if (!(nueva.propietario().tengoSuficientesRecursos(nueva.coste()))) { //!
             throw new NoSePuedeCrearFicha("Faltan Recursos");
         }
         if (!nueva.tablero().hayEspacioTerreste(nueva.coordenada())) {

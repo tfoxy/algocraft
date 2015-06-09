@@ -29,6 +29,12 @@ public class CasillaTest {
 
 
     @Test
+    public void tieneEspacioTerrestreAlCrearse() {
+        Assert.assertTrue(casilla.hayEspacioTerreste());
+    }
+
+
+    @Test
     public void noTieneFichaAereaAlCrearse() {
         Ficha ficha = casilla.getFichaAerea();
 
