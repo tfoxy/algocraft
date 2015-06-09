@@ -2,6 +2,7 @@ package ficha;
 
 import estrategia.ficha.EstrategiaConsturccion;
 import estrategia.ficha.EstrategiaFicha;
+import estrategia.ficha.EstrategiaFichaViva;
 import juego.Recursos;
 import juego.Jugador;
 import stats.BarrasEscudoVidaEnergia;
@@ -21,7 +22,7 @@ public abstract class Ficha {
 
     protected boolean estoyVacio = true;
 
-    protected EstrategiaFicha estrategia = null;
+    protected EstrategiaFicha estrategia = new EstrategiaFichaViva();
     protected String nombre = null;
 
 
