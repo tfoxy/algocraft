@@ -53,8 +53,8 @@ public abstract class Ficha {
     protected int ataqueTierra = 0;
     protected int ataqueAire = 0;
 
-    protected int rangoDeAtaqueTierra = 0;
-    protected int rangoDeAtaqueAire = 0;
+    protected int rangoDeAtaqueTierra = -1;
+    protected int rangoDeAtaqueAire = -1;
 
     protected int vision = 0;
     protected int tiempoDeConstruccion = 0;
