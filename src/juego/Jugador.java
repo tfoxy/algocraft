@@ -139,6 +139,10 @@ public class Jugador {
         return recursos.poblacion().actual();
     }
 
+    public int poblacionPosible() {
+        return recursos.poblacion().posible();
+    }
+
     public void agregarTecnologia(Tecnologia tecnologia) {
         tecnologias.add(tecnologia);
     }
