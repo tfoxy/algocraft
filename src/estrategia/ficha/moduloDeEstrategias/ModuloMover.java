@@ -1,8 +1,8 @@
 package estrategia.ficha.moduloDeEstrategias;
 
-import Fichas.Ficha;
-import Fichas.FichaAerea;
-import Fichas.FichaTerrestre;
+import ficha.Ficha;
+import ficha.FichaAerea;
+import ficha.FichaTerrestre;
 import tablero.Coordenada;
 import tablero.Movimiento;
 import tablero.Tablero;
@@ -40,8 +40,7 @@ public class ModuloMover {
         //si se quita el private hay que re inicializar
         try {
             mapa.getCasilla(ficha.coordenada().dameCordenadaHacia(dirrecion));
-        } catch (PosicionFueraDeLimiteException e) //cosa a verificar.
-        {
+        } catch (PosicionFueraDeLimiteException e) { //cosa a verificar.
             return false;
         }
 
@@ -74,8 +73,7 @@ public class ModuloMover {
 
         try {
             mapa.getCasilla(ficha.coordenada().dameCordenadaHacia(dirrecion));
-        } catch (PosicionFueraDeLimiteException e) //cosa a verificar.
-        {
+        } catch (PosicionFueraDeLimiteException e) { //cosa a verificar.
             return false;
         }
 
