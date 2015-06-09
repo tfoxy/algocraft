@@ -128,6 +128,10 @@ public abstract class Ficha {
         return estoyVacio;
     }
 
+    public boolean estaVacia() {
+        return estoyVacio();
+    }
+
     public int movimiento() {
         return movimiento;
     }
