@@ -48,7 +48,7 @@ public class RecoleccionDeRecursosTest {
 
         protoss.perderFicha(nuevoEdificio);
         assertEquals(240, protoss.cantidadGas());
-        assertEquals(260, protoss.cantidadCristal());
+        assertEquals(260, protoss.cantidadMineral());
     }
 
 
@@ -69,12 +69,14 @@ public class RecoleccionDeRecursosTest {
     public void muereUnidadGanamosPoblacion() {
         Tablero mapa = new Tablero(10, 10);
         Coordenada lugar = new Coordenada(5, 5);
-        Ficha nuevoEdificio = new Pilon(protoss);
+        Ficha nuevoEdificio = new Pilon();
 
+        protoss.asignar(nuevoEdificio);
         protoss.agregarTecnologia(Tecnologia.ACCESO);
         protoss.newFicha(nuevoEdificio);
 
-        Ficha nuevaUnidad = new Zealot(protoss, lugar, mapa);
+        Ficha nuevaUnidad = new Zealot();
+        protoss.asignar(nuevaUnidad);
         nuevaUnidad.muerete();
 
         assertEquals(0, protoss.poblcacionActual());

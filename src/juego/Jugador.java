@@ -126,4 +126,16 @@ public class Jugador {
     public void perderFicha(Ficha ficha) {
         this.perder(ficha);
     }
+
+    public int cantidadGas() {
+        return recursos.gas();
+    }
+
+    public int cantidadMineral() {
+        return recursos.mineral();
+    }
+
+    public int poblcacionActual() {
+        return recursos.poblacion().actual();
+    }
 }

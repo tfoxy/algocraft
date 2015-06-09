@@ -31,7 +31,7 @@ public class CrearUnidadesTest {
 
         assertEquals(protoss.poblcacionActual(), 2);
         assertEquals(protoss.cantidadGas(), 200);
-        assertEquals(protoss.cantidadCristal(), 400);
+        assertEquals(protoss.cantidadMineral(), 400);
     }
 
 
