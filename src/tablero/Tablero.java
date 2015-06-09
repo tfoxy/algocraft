@@ -34,40 +34,16 @@ public class Tablero {
                 casillas.put(coordenada, casilla);
             }
         }
-
-        // TODO hacer tests para comprobar casillas adyacentes
-        for (Map.Entry<Coordenada, CasillaDeTablero> entry: casillas.entrySet()) {
-            coordenada = entry.getKey();
-            casilla = entry.getValue();
-
-            rellenarCasillasAdyacentes(coordenada, casilla);
-        }
-    }
-
-
-    private void rellenarCasillasAdyacentes(Coordenada coordenada,
-                                            CasillaDeTablero casilla) {
-        for (Movimiento movimiento: Movimiento.values()) {
-            int x = coordenada.getX() + movimiento.getX();
-            int y = coordenada.getY() + movimiento.getY();
-
-            Coordenada coordenadaAdyacente = new Coordenada(x, y);
-            CasillaDeTablero casillaAdyacente = casillas.get(coordenadaAdyacente);
-
-            if (casillaAdyacente != null) {
-                casilla.insertarCasillaAdyacente(movimiento, casillaAdyacente);
-            }
-        }
     }
 
 
     public boolean hayEspacioTerreste(Coordenada lugar) {
         return casillas.get(lugar).hayEspacioTerreste();
     }
-    
+
     public boolean hayEspacioArreo(Coordenada lugar) { //new 6
-		return casillas.get(lugar).hayEspacioArreo();
-	}
+        return casillas.get(lugar).hayEspacioArreo();
+    }
 
 
     public CasillaDeTablero getCasilla(Coordenada lugar) {
