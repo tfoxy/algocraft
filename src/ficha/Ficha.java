@@ -121,6 +121,14 @@ public abstract class Ficha {
         return recursosVirgenes;
     }
 
+    public String tipoDeFuentaDeRecursos() {
+        return tipoDeFuentaDeRecursos;
+    }
+
+    public boolean estoyVacio() {
+        return estoyVacio;
+    }
+
     public boolean puedoReemplazarFicha(Ficha ficha) {
         // TODO puedoReemplazarFicha
         return false;

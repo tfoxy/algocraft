@@ -1,31 +1,14 @@
 package ficha;
 
 import juego.Juego;
+import juego.Recursos;
 
 public abstract class FuenteDeRecurso extends FichaTerrestre {
 
-    private static final int CANTIDAD_DE_RECURSOS_POR_DEFECTO = 1500;
+    protected int cantidadDeRecursos;
 
-    private int cantidadDeRecursos;
-
-    public FuenteDeRecurso(Juego juego) {
-        this(juego, CANTIDAD_DE_RECURSOS_POR_DEFECTO);
-    }
-
-
-    public FuenteDeRecurso(Juego juego, int cantidadDeRecursos) {
-        super(juego);
-
-        if (cantidadDeRecursos <= 0) {
-            throw new IllegalArgumentException();
-        }
-
+    public FuenteDeRecurso(int cantidadDeRecursos) {
         this.cantidadDeRecursos = cantidadDeRecursos;
-    }
-
-
-    public int getCantidadDeRecursos() {
-        return cantidadDeRecursos;
     }
 
 
@@ -36,5 +19,8 @@ public abstract class FuenteDeRecurso extends FichaTerrestre {
 
         return cantidadOriginal - cantidadDeRecursos;
     }
+
+    @Override
+    public abstract Recursos recursosVirgenes();
 
 }

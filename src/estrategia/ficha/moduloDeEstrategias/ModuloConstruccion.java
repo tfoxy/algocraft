@@ -48,7 +48,7 @@ public class ModuloConstruccion {
         }
         Ficha recurso = nueva.tablero().getCasilla(nueva.coordenada()).getFichaTerrestre();
 
-        if (!(recurso.TipoDeFuentaDeRecursos() == nueva.TipoDeFuentaDeRecursos())) {
+        if (!(recurso.tipoDeFuentaDeRecursos() == nueva.tipoDeFuentaDeRecursos())) {
             throw new NoSePuedeCrearFicha("No Es el Racurso Correcto");
         }
         if (!(nueva.propietario().tienesLasTecnologias(nueva.tecnologiasNecesarias()))) {

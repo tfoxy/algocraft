@@ -1,6 +1,7 @@
 package ficha.natural;
 
 import ficha.FuenteDeRecurso;
+import juego.Recursos;
 import tablero.Coordenada;
 import tablero.Tablero;
 
@@ -9,27 +10,17 @@ public class NodoMineral extends FuenteDeRecurso {
     private static final int MINERALES_POR_DEFECTO = 1500;
 
     public NodoMineral() {
-        super(MINERALES_POR_DEFECTO);
+        this(MINERALES_POR_DEFECTO);
     }
 
     public NodoMineral(int mineral) {
         super(mineral);
     }
 
-    public NodoMineral(int mineral, Tablero mapa, Coordenada lugar) {
-        this(mineral);
-
-        mapa.insertar(lugar, this);
-    }
-
     @Override
-    public void pasarTurno() {
-        // TODO implementar
-    }
+    public Recursos recursosVirgenes() {
+        return new Recursos(cantidadDeRecursos, 0);
+    };
 
-    @Override
-    public void muerete() {
-        // TODO implementar
-    }
 
 }
