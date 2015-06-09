@@ -1,17 +1,11 @@
 package ficha;
 
-import error.ArgumentoNoPuedeSerNegativoException;
 import ficha.natural.Volcan;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class FuenteDeRecursoTest {
-
-    @Test(expected = ArgumentoNoPuedeSerNegativoException.class)
-    public void noPuedeInicializarseConCantidadNegativa() {
-        new Volcan(-1);
-    }
 
     @Test
     public void puedeCrearseConCeroDeRecursos() {
