@@ -10,7 +10,6 @@ import org.junit.Test;
 import tablero.Coordenada;
 import tablero.Movimiento;
 import tablero.Tablero;
-import juego.Tecnologia;
 
 public class MovimientoTest {
 
@@ -28,7 +27,7 @@ public class MovimientoTest {
 
         unidad = new Marine(jugador);
 
-        int tamanioDeMapa = unidad.getMovimientoMaximo() * 4;
+        int tamanioDeMapa = unidad.movimientoMaximo() * 4;
 
         mapa = new Tablero(tamanioDeMapa, tamanioDeMapa);
     }
@@ -110,11 +109,11 @@ public class MovimientoTest {
     public void gastaUnMovimientoAlMoverse() {
         mapa.insertar(new Coordenada(3, 3), unidad);
 
-        int movimientoOriginal = unidad.getMovimiento();
+        int movimientoOriginal = unidad.movimiento();
 
         estrategiaMover.intentarMovimiento(unidad, Movimiento.ARRIBA);
 
-        Assert.assertEquals(movimientoOriginal - 1, unidad.getMovimiento());
+        Assert.assertEquals(movimientoOriginal - 1, unidad.movimiento());
     }
 
 
@@ -125,11 +124,11 @@ public class MovimientoTest {
         mapa.insertar(new Coordenada(3, 4), otraUnidad);
         mapa.insertar(new Coordenada(3, 3), unidad);
 
-        int movimientoOriginal = unidad.getMovimiento();
+        int movimientoOriginal = unidad.movimiento();
 
         estrategiaMover.intentarMovimiento(unidad, Movimiento.ARRIBA);
 
-        Assert.assertEquals(movimientoOriginal, unidad.getMovimiento());
+        Assert.assertEquals(movimientoOriginal, unidad.movimiento());
     }
 
 
@@ -150,7 +149,7 @@ public class MovimientoTest {
 
         mapa.insertar(new Coordenada(1, 1), unidad);
 
-        for (int i = 0; i < unidad.getMovimientoMaximo(); i++) {
+        for (int i = 0; i < unidad.movimientoMaximo(); i++) {
             seMovio =
                     estrategiaMover.intentarMovimiento(unidad, Movimiento.ARRIBA);
 

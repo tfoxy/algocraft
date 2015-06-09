@@ -128,6 +128,14 @@ public abstract class Ficha {
         return estoyVacio;
     }
 
+    public int movimiento() {
+        return movimiento;
+    }
+
+    public int movimientoMaximo() {
+        return movimientoMaximo;
+    }
+
     public boolean puedoReemplazarFicha(Ficha ficha) {
         // TODO puedoReemplazarFicha
         return false;
