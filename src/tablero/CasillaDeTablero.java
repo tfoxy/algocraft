@@ -15,8 +15,8 @@ public class CasillaDeTablero implements Casilla {
             new EnumMap<>(Movimiento.class);
 
     public CasillaDeTablero() {
-        fichaTerreste = new FichaTierra();
-        fichaAerea = new FichaAire();
+        fichaTerreste = new FichaTerrestre();
+        fichaAerea = new FichaAerea();
 
         for (Movimiento movimiento: Movimiento.values()) {
             insertarCasillaAdyacente(movimiento, new CasillaInexistente());
@@ -69,12 +69,12 @@ public class CasillaDeTablero implements Casilla {
 
     @Override
     public void eliminarFichaTerrestre() {
-        fichaTerreste = new FichaTierra();
+        fichaTerreste = new FichaTerrestre();
     }
 
     @Override
     public void eliminarFichaAerea() {
-        fichaAerea = new FichaAire();
+        fichaAerea = new FichaAerea();
     }
 
     @Override
