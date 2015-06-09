@@ -207,4 +207,8 @@ public abstract class Ficha {
     public void tablero(Tablero tablero) {
         this.tablero = tablero;
     }
+
+    public void disminuirMovimiento() {
+        movimiento -= 1;
+    }
 }

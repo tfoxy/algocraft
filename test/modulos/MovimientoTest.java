@@ -1,7 +1,6 @@
 package modulos;
 
 import error.FichaSobreOtraFichaException;
-import error.MovimientoInsuficienteException;
 import estrategia.ficha.moduloDeEstrategias.ModuloMover;
 import ficha.FichaTerrestre;
 import ficha.terrans.Marine;
@@ -163,12 +162,8 @@ public class MovimientoTest {
             estrategiaMover.mover(unidad, Direccion.ARRIBA);
         }
 
-        try {
-            estrategiaMover.mover(unidad, Direccion.ARRIBA);
-            Assert.fail();
-        } catch (MovimientoInsuficienteException e) {
-            // noop
-        }
+        seMovio = estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
+        Assert.assertFalse(seMovio);
     }
 
 
