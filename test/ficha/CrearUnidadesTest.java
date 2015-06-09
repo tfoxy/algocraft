@@ -1,18 +1,11 @@
 package ficha;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
+import juego.Jugador;
+import juego.Raza;
 import org.junit.Before;
 import org.junit.Test;
 
-import error.NoSePuedeCrearFicha;
-import ficha.natural.Volcan;
-import juego.Jugador;
-import tablero.Coordenada;
-import tablero.Tablero;
-import juego.Tecnologia;
-
+import static org.junit.Assert.assertEquals;
 
 public class CrearUnidadesTest {
 
@@ -20,105 +13,22 @@ public class CrearUnidadesTest {
 
     @Before
     public void initialize() {
-        protoss = new Jugador("Proto", Tecnologia.PROTOSS, 500, 200);
+        protoss = new Jugador("Poroto", Raza.PROTOSS, 500, 200);
     }
 
+    // TODO unidades deben crearse desde edificios
+    /*
     @Test
     public void usarRecursosCorrectos() {
-        Ficha nuevoEdificio = new Pilon(protoss);
-        new Zealot(protoss);
+        Ficha nuevoEdificio = new Pilon();
+        Ficha unidad = new Zealot();
         protoss.newFicha(nuevoEdificio);
+        protoss.newFicha(unidad);
 
-        assertEquals(protoss.poblcacionActual(), 2);
-        assertEquals(protoss.cantidadGas(), 200);
-        assertEquals(protoss.cantidadMineral(), 400);
+        assertEquals(2, protoss.poblcacionActual());
+        assertEquals(200, protoss.cantidadGas());
+        assertEquals(400, protoss.cantidadMineral());
     }
-
-
-    @Test(expected = NoSePuedeCrearFicha.class)
-    public void noPuedeCrearSiNohayRecurzos() {
-        new Zealot(protoss);
-    }
-
-
-    @Test
-    public void crearCasaYQueDePoblacion() {
-        //esto cocnierne a los dos grupos de Text.//
-        Ficha nuevoEdificio = new Pilon(protoss);
-
-        protoss.newFicha(nuevoEdificio);
-
-        assertEquals(protoss.poblcacionPosible(), 5);
-    }
-
-
-    @Test
-    public void queTardeElTiempoCorrecto() throws NoSePuedeCrearFicha {
-        Tablero mapa = new Tablero(10, 10);
-        Coordenada lugar = new Coordenada(3, 3);
-        Ficha ficha = new Pilon(protoss, lugar, mapa);
-
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-
-        assertEquals(protoss.poblcacionPosible(), 5);
-    }
-
-
-    @Test
-    public void queNoTardeMenosQueTiempoCorrecto() throws NoSePuedeCrearFicha {
-        Tablero mapa = new Tablero(10, 10);
-        Coordenada lugar = new Coordenada(3, 3);
-        Ficha ficha = new Pilon(protoss, lugar, mapa);
-
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-
-        assertNotEquals(protoss.poblcacionPosible(), 5);
-    }
-
-
-    @Test(expected = NoSePuedeCrearFicha.class)
-    public void faltanTecnologias() {
-        Tablero mapa = new Tablero(10, 10);
-        Coordenada lugar = new Coordenada(3, 3);
-        Jugador humanos =
-                new Jugador("humanos", Tecnologia.TERRAN, 500, 200);
-
-        new Pilon(humanos, lugar, mapa);
-    }
-
-
-    @Test
-    public void construccionDeAsimiladorEnUnVolcan() {
-        Tablero mapa = new Tablero(10, 10);
-        Coordenada lugar = new Coordenada(3, 3);
-        new Volcan(2000, lugar, mapa);
-        Ficha ficha = new Asimilador(protoss, lugar, mapa);
-
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        ficha.pasarTurno();
-        // ElTurno que se crea tambien trabaja.
-
-        assertNotEquals(210, protoss.cantidadGas());
-    }
-
-
-    @Test(expected = NoSePuedeCrearFicha.class)
-    public void construccionDeAsimiladorSinUnVolcan() {
-        Tablero mapa = new Tablero(10, 10);
-        Coordenada lugar = new Coordenada(3, 3);
-
-        new Asimilador(protoss, lugar, mapa);
-    }
+    */
 
 }
