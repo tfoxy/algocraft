@@ -1,10 +1,10 @@
 package juego;
 
+import dummy.UnidadTerrestreDummy;
 import ficha.Ficha;
-import ficha.FichaTerrestre;
-import ficha.Zealot;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class JugadorTest {
 
@@ -16,15 +16,31 @@ public class JugadorTest {
     }
 
     @Test
+    public void noPasaElTurnoDeLaFichaSiLaPerdio() {
+        Ficha unidad = Mockito.spy(new UnidadTerrestreDummy());
+
+        jugador.asignar(unidad);
+
+        jugador.perder(unidad);
+
+        jugador.pasarTurno();
+
+        Mockito.verify(unidad, Mockito.times(0)).pasarTurno();
+    }
+
+    @Test
     public void noPierdePrimeraFichaAlEliminarMismoTipoDeFicha() {
-        Ficha primerUnidad = new FichaTerrestre();
+        Ficha primerUnidad = Mockito.spy(new UnidadTerrestreDummy());
+        Ficha segundaUnidad = Mockito.spy(new UnidadTerrestreDummy());
 
         jugador.asignar(primerUnidad);
-        jugador.asignar(new Zealot());
+        jugador.asignar(segundaUnidad);
 
-        jugador.perder(primerUnidad);
+        jugador.perder(segundaUnidad);
 
+        jugador.pasarTurno();
 
+        Mockito.verify(primerUnidad, Mockito.times(1)).pasarTurno();
     }
 
 }
