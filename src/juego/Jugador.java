@@ -105,5 +105,9 @@ public class Jugador {
         return this.tecnologias.containsAll(tecnologias);
     }
 
+    public void agregarPoblacionTotal(int aumento) {
+        recursos.poblacion().cambiarPosible(aumento);
+    }
+
 
 }
