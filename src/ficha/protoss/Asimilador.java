@@ -3,6 +3,7 @@ package ficha.protoss;
 
 import java.util.ArrayList;
 
+import estrategia.ficha.EstrategiaConsturccion;
 import ficha.EdifcioDeRecusosTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;
@@ -26,5 +27,14 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
         int cantidadExtraida = fuenteDeRecursos.extraer(10);
 
         return new Recursos(0, cantidadExtraida);
-    };
+    }
+    
+    public void PonerEnJuego() {
+    	estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
+        estrategia.PonerEnJuego(this);
+    }
+    
+    public void muerete() {
+        estrategia.matar(this);
+    }
 }

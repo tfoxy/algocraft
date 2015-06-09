@@ -1,6 +1,7 @@
 package ficha.protoss;
 
 
+import estrategia.ficha.EstrategiaConsturccion;
 import ficha.UnidadTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;
@@ -19,5 +20,14 @@ public class Zealot extends UnidadTerrestre {
         estoyVacio = false;
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         // TODO transporte
+    }
+    
+    public void PonerEnJuego() {
+    	estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
+        estrategia.PonerEnJuego(this);
+    }
+    
+    public void muerete() {
+        estrategia.matar(this);
     }
 }

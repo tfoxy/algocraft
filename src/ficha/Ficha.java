@@ -215,4 +215,5 @@ public abstract class Ficha {
     public void recuperarPuntosDeMovimiento() {
         movimiento = movimientoMaximo;
     }
+
 }

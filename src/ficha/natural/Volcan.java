@@ -1,6 +1,7 @@
 package ficha.natural;
 
 import error.NoSePuedeCrearFicha;
+import estrategia.ficha.EstrategiaConsturccion;
 import ficha.FuenteDeRecurso;
 import juego.Recursos;
 import tablero.Coordenada;
@@ -26,4 +27,8 @@ public class Volcan extends FuenteDeRecurso {
         return new Recursos(0, cantidadDeRecursos);
     };
 
+    public void PonerEnJuego() {
+    	estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
+        estrategia.PonerEnJuego(this);
+    }
 }
