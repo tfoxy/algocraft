@@ -138,4 +138,8 @@ public class Jugador {
     public int poblcacionActual() {
         return recursos.poblacion().actual();
     }
+
+    public void agregarTecnologia(Tecnologia tecnologia) {
+        tecnologias.add(tecnologia);
+    }
 }
