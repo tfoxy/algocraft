@@ -2,6 +2,7 @@ package juego;
 
 import java.util.*;
 
+import error.TecnologiasInsuficientesException;
 import ficha.EdificioTerrestre;
 import ficha.Ficha;
 import tablero.Coordenada;
@@ -60,6 +61,10 @@ public class Jugador {
 
 
     public void asignar(Ficha ficha) {
+        if (!tecnologias.containsAll(ficha.tecnologiasNecesarias())) {
+            throw new TecnologiasInsuficientesException();
+        }
+
         int aumentoDePoblacion = ficha.coste().poblacion();
 
         recursos.poblacion().aumentarActualForzadamente(aumentoDePoblacion);
