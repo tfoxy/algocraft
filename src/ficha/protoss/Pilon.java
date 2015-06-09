@@ -10,7 +10,7 @@ public class Pilon extends CasaTerrestre {
     public Pilon() {
         nombre = "Pilón";
         coste = new Recursos(100, 0);
-        // TODO agregar tiempo construccion: 5
+        tiempoDeConstruccion = 5;
         barras = new BarrasEscudoVidaEnergia(300, 300);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         estoyVacio = false;
