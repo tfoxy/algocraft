@@ -5,8 +5,11 @@ import ficha.FichaTerrestre;
 
 public class CasillaInexistente implements Casilla {
 
-    private FichaTerrestre fichaTerreste = new FichaFueraDeTablero();
-    private FichaAerea fichaAerea = new FichaFueraDeTablero();
+    // TODO si CasillaInexistente no se utiliza en el proyecto en un futuro, eliminarla
+
+    // Se debería usar FichaFueraDeTablero
+    private FichaTerrestre fichaTerreste = new FichaTerrestre();
+    private FichaAerea fichaAerea = new FichaAerea();
 
     @Override
     public FichaTerrestre getFichaTerrestre() {
