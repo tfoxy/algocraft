@@ -88,4 +88,13 @@ public class Jugador {
     }
 
 
+    public void gastaRecursos(Recursos coste) {
+        recursos.gastar(coste);
+    }
+
+    public void newFicha(Ficha ficha) {
+        asignar(ficha);
+    }
+
+
 }
