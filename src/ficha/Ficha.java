@@ -2,7 +2,6 @@ package ficha;
 
 import estrategia.ficha.EstrategiaFicha;
 import estrategia.ficha.construccion.EstrategiaConstruccion;
-import juego.Juego;
 import juego.Recursos;
 import juego.Jugador;
 import stats.BarrasEscudoVidaEnergia;
@@ -35,7 +34,7 @@ public abstract class Ficha {
     protected Recursos recursosVirgenes = null;
     protected Recursos recursosExtraidosPorTurno = null;
     protected int poblacionQueDa = 0;
-    protected String tipoDeFuentaDeRecursos = null;
+    protected String tipoDeFuenteDeRecursos = null;
 
     protected int movimiento = 0;
     protected int movimientoMaximo = 0;
@@ -122,7 +121,7 @@ public abstract class Ficha {
     }
 
     public String tipoDeFuentaDeRecursos() {
-        return tipoDeFuentaDeRecursos;
+        return tipoDeFuenteDeRecursos;
     }
 
     public boolean estoyVacio() {

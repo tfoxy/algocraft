@@ -16,6 +16,8 @@ public class Volcan extends FuenteDeRecurso {
 
     public Volcan(int gas) {
         super(gas);
+
+        tipoDeFuenteDeRecursos = "Volcan";
     }
 
     @Override

@@ -15,6 +15,8 @@ public class NodoMineral extends FuenteDeRecurso {
 
     public NodoMineral(int mineral) {
         super(mineral);
+
+        tipoDeFuenteDeRecursos = "Mineral";
     }
 
     @Override
