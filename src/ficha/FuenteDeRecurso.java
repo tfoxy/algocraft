@@ -11,7 +11,6 @@ public abstract class FuenteDeRecurso extends FichaTerrestre {
         this.cantidadDeRecursos = cantidadDeRecursos;
     }
 
-
     public int extraer(int cantidad) {
         int cantidadOriginal = cantidadDeRecursos;
 

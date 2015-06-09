@@ -1,5 +1,9 @@
 package ficha;
 
-public class EdifcioDeRecusosTerrestre extends EdificioTerrestre {
+import juego.Recursos;
+
+public abstract class EdifcioDeRecusosTerrestre extends EdificioTerrestre {
+
+    public abstract Recursos extraer();
 
 }

@@ -30,7 +30,7 @@ public abstract class Ficha {
     protected List<Tecnologia> tecnologiasNecesarias = null;
     protected int turnosParaCrear = 0;
 
-    protected Ficha fuenteDeRecursos = null;
+    protected FuenteDeRecurso fuenteDeRecursos = null;
     protected Recursos recursosVirgenes = null;
     protected Recursos recursosExtraidosPorTurno = null;
     protected int poblacionQueDa = 0;
@@ -80,7 +80,7 @@ public abstract class Ficha {
         return coste;
     }
 
-    public Ficha fuenteDeRecursos() {
+    public FuenteDeRecurso fuenteDeRecursos() {
         return fuenteDeRecursos;
     }
 
@@ -145,7 +145,7 @@ public abstract class Ficha {
         coordenada = nuevaUbicacion;
     }
 
-    public void fuenteDeRecursos(Ficha recurso) {
+    public void fuenteDeRecursos(FuenteDeRecurso recurso) {
         fuenteDeRecursos = recurso;
     }
 

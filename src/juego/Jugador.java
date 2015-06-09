@@ -109,5 +109,10 @@ public class Jugador {
         recursos.poblacion().cambiarPosible(aumento);
     }
 
+    public void agregarRecursos(Recursos recursos) {
+        this.recursos.agregarMineral(recursos.mineral());
+        this.recursos.agregarGas(recursos.gas());
+    }
+
 
 }
