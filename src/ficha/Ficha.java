@@ -11,6 +11,7 @@ import tablero.Direccion;
 import tablero.Tablero;
 import juego.Tecnologia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,7 +29,8 @@ public abstract class Ficha {
 
     protected Recursos coste = null;
     protected BarrasEscudoVidaEnergia barras = null;
-    protected List<Tecnologia> tecnologiasNecesarias = null;
+    protected List<Tecnologia> tecnologiasNecesarias =
+            tecnologiasNecesarias = new ArrayList<>();
     protected int turnosParaCrear = 0;
 
     protected FuenteDeRecurso fuenteDeRecursos = null;
@@ -204,5 +206,9 @@ public abstract class Ficha {
 
     public void tablero(Tablero tablero) {
         this.tablero = tablero;
+    }
+
+    public void disminuirMovimiento() {
+        movimiento -= 1;
     }
 }

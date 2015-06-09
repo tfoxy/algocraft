@@ -1,7 +1,8 @@
-package ficha;
+package modulos;
 
 import error.FichaSobreOtraFichaException;
 import estrategia.ficha.moduloDeEstrategias.ModuloMover;
+import ficha.FichaTerrestre;
 import ficha.terrans.Marine;
 
 import org.junit.Assert;
@@ -52,24 +53,18 @@ public class MovimientoTest {
     public void puedeMoverseDondeNoHayNada() {
         mapa.insertar(new Coordenada(3, 3), unidad);
 
-        boolean seMovio =
-                estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
-
-        Assert.assertTrue(seMovio);
+        estrategiaMover.mover(unidad, Direccion.ARRIBA);
     }
 
 
-    @Test
+    @Test(expected = FichaSobreOtraFichaException.class)
     public void noPuedeMoverseDondeNoHayOtraUnidad() {
         FichaTerrestre otraUnidad = new Marine();
 
         mapa.insertar(new Coordenada(3, 3), unidad);
         mapa.insertar(new Coordenada(3, 4), otraUnidad);
 
-        boolean seMovio =
-                estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
-
-        Assert.assertFalse(seMovio);
+        estrategiaMover.mover(unidad, Direccion.ARRIBA);
     }
 
 
@@ -79,7 +74,7 @@ public class MovimientoTest {
 
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
 
-        estrategiaMover.intentarMovimiento(otraUnidad, Direccion.ARRIBA);
+        estrategiaMover.mover(otraUnidad, Direccion.ARRIBA);
 
         mapa.insertar(new Coordenada(3, 3), unidad);
     }
@@ -91,7 +86,7 @@ public class MovimientoTest {
 
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
 
-        estrategiaMover.intentarMovimiento(otraUnidad, Direccion.ARRIBA);
+        estrategiaMover.mover(otraUnidad, Direccion.ARRIBA);
 
         mapa.insertar(new Coordenada(3, 4), unidad);
     }
@@ -104,8 +99,8 @@ public class MovimientoTest {
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
         mapa.insertar(new Coordenada(3, 2), unidad);
 
-        estrategiaMover.intentarMovimiento(otraUnidad, Direccion.ARRIBA);
-        estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
+        estrategiaMover.mover(otraUnidad, Direccion.ARRIBA);
+        estrategiaMover.mover(unidad, Direccion.ARRIBA);
     }
 
 
@@ -116,7 +111,7 @@ public class MovimientoTest {
         mapa.insertar(new Coordenada(3, 3), otraUnidad);
         mapa.insertar(new Coordenada(3, 4), unidad);
 
-        estrategiaMover.intentarMovimiento(otraUnidad, Direccion.ARRIBA);
+        estrategiaMover.mover(otraUnidad, Direccion.ARRIBA);
     }
 
 
@@ -126,7 +121,7 @@ public class MovimientoTest {
 
         int movimientoOriginal = unidad.movimiento();
 
-        estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
+        estrategiaMover.mover(unidad, Direccion.ARRIBA);
 
         Assert.assertEquals(movimientoOriginal - 1, unidad.movimiento());
     }
@@ -141,8 +136,10 @@ public class MovimientoTest {
 
         int movimientoOriginal = unidad.movimiento();
 
-        estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
+        boolean seMovio =
+                estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
 
+        Assert.assertFalse(seMovio);
         Assert.assertEquals(movimientoOriginal, unidad.movimiento());
     }
 
@@ -151,10 +148,7 @@ public class MovimientoTest {
     public void noPuedeMoverseMasAllaDelLimiteDelMapa() {
         mapa.insertar(new Coordenada(1, 1), unidad);
 
-        boolean seMovio =
-                estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
-
-        Assert.assertFalse(seMovio);
+        estrategiaMover.mover(unidad, Direccion.ARRIBA);
     }
 
 
@@ -165,15 +159,10 @@ public class MovimientoTest {
         mapa.insertar(new Coordenada(1, 1), unidad);
 
         for (int i = 0; i < unidad.movimientoMaximo(); i++) {
-            seMovio =
-                    estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
-
-            Assert.assertTrue(seMovio);
+            estrategiaMover.mover(unidad, Direccion.ARRIBA);
         }
 
-        seMovio =
-                estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
-
+        seMovio = estrategiaMover.intentarMovimiento(unidad, Direccion.ARRIBA);
         Assert.assertFalse(seMovio);
     }
 

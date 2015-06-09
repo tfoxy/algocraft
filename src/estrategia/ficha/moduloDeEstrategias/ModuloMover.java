@@ -1,6 +1,7 @@
 package estrategia.ficha.moduloDeEstrategias;
 
 import error.JuegoException;
+import error.MovimientoInsuficienteException;
 import ficha.Ficha;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
@@ -31,9 +32,12 @@ public class ModuloMover {
         Coordenada ubicacion = ficha.coordenada();
         Coordenada nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
 
+        if (ficha.movimiento() <= 0) {
+            throw new MovimientoInsuficienteException();
+        }
+
         mapa.insertar(nuevaUbicacion, ficha);
-        mapa.getCasilla(ubicacion).eliminarFichaTerrestre();
-        ficha.coordenada(nuevaUbicacion);
+        ficha.disminuirMovimiento();
     }
 
 
@@ -52,9 +56,12 @@ public class ModuloMover {
         Coordenada ubicacion = ficha.coordenada();
         Coordenada nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
 
+        if (ficha.movimiento() <= 0) {
+            throw new MovimientoInsuficienteException();
+        }
+
         mapa.insertar(nuevaUbicacion, ficha);
-        mapa.getCasilla(ubicacion).eliminarFichaAerea();
-        ficha.coordenada(nuevaUbicacion);
+        ficha.disminuirMovimiento();
     }
 
 }
