@@ -10,27 +10,26 @@ public class VisionTest {
 
     private Tablero tablero;
 
-    private Casilla getCasilla(int x, int y) {
-        return tablero.getCasilla(new Coordenada(x, y));
-    }
-
     @Before
     public void initialize() {
-        tablero = new Tablero(12, 12);
+    tablero = new Tablero(12, 12);
     }
 
     @Test
     public void visionDistanciaMaxima() {
-        CasillasVisibles vision = new CasillasVisibles();
+    	
+    	CoordenadasVisibles vision = new CoordenadasVisibles();
 
-        vision.verDesdeEstePunto(getCasilla(5, 5), 5);
-        assertTrue(vision.puedeVer(getCasilla(5, 1)));
-        assertTrue(vision.puedeVer(getCasilla(1, 5)));
-        assertTrue(vision.puedeVer(getCasilla(5, 10)));
-        assertTrue(vision.puedeVer(getCasilla(10, 5)));
-        assertTrue(vision.puedeVer(getCasilla(8, 7)));
+        vision.verDesdeEstePunto(new Coordenada(5, 5), 5);
+        
+        
+        assertTrue(vision.puedeVer(new Coordenada(5, 1)));
+        assertTrue(vision.puedeVer(new Coordenada(1, 5)));
+        assertTrue(vision.puedeVer(new Coordenada(5, 10)));
+        assertTrue(vision.puedeVer(new Coordenada(10, 5)));
+        assertTrue(vision.puedeVer(new Coordenada(8, 7)));
 
-        assertFalse(vision.puedeVer(getCasilla(11, 1)));
+        assertFalse(vision.puedeVer(new Coordenada(11, 1)));
     }
 
 }
