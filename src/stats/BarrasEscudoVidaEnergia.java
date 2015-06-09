@@ -37,7 +37,7 @@ public class BarrasEscudoVidaEnergia {
         }
     }
 
-    public void regenerar() {
+    public void pasarTurno() {
         vidaActual = Math.min(vidaActual + vidaPorTurno, vidaMaxima);
         escudoActual = Math.min(escudoActual + escudoPorTurno, escudoMaximo);
         energiaActual = Math.min(energiaActual + energiaPorTurno, energiaMaxima);

@@ -4,8 +4,8 @@ import tablero.Movimiento;
 import estrategia.ficha.moduloDeEstrategias.ModuloAtacarYSerAtacado;
 import estrategia.ficha.moduloDeEstrategias.ModuloEfectosDeTurno;
 import estrategia.ficha.moduloDeEstrategias.ModuloMover;
-import Fichas.Ficha;
-import Fichas.FichaTerrestre;
+import ficha.Ficha;
+import ficha.FichaTerrestre;
 
 public class EstrategiaFichaViva extends EstrategiaFicha {
 
