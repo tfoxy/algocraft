@@ -46,9 +46,25 @@ public class ModuloConstruccion {
     }
     // Fichaterrestre.
 
+    //recursoTerrestre
+    public void PonerEnJuego(FuenteDeRecurso nueva) {
+        if (this.sePuedeCrear(nueva)) {
+            nueva.propietario().gastaRecursos(nueva.coste());
+            nueva.tablero().insertar2(nueva.coordenada(), nueva);
+        }
+    }
+    
+    public boolean sePuedeCrear(FuenteDeRecurso nueva) throws NoSePuedeCrearFicha {
+        if (!nueva.tablero().hayEspacioTerreste(nueva.coordenada())) {
+            throw new NoSePuedeCrearFicha("Espacio Ocupado");
+        }
+        return true;
+    }
 
+    //recursoTerrestre
+    
     //ExtrearRecursos
-    public boolean mePuedeCrear(EdifcioDeRecusosTerrestre nueva) throws NoSePuedeCrearFicha {
+    public boolean sePuedeCrear(EdifcioDeRecusosTerrestre nueva) throws NoSePuedeCrearFicha {
         if (!(nueva.propietario().tengoSuficientesRecursos(nueva.coste()))) {
             throw new NoSePuedeCrearFicha("Faltan Recursos");
         }
@@ -63,17 +79,17 @@ public class ModuloConstruccion {
         return true;
     }
 
-    public void creame(EdifcioDeRecusosTerrestre nueva) {
+    public void PonerEnJuego(EdifcioDeRecusosTerrestre nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().gastaRecursos(nueva.coste());
             nueva.propietario().newFicha(nueva);
-            nueva.tablero().insertar(nueva.coordenada(), nueva);
-
-            Ficha recurso = nueva.tablero().getCasilla(nueva.coordenada()).getFichaTerrestre();
-            // TODO evitar casteo de recurso de Ficha a ModuloEfectosDeTurno
-            nueva.fuenteDeRecursos((FuenteDeRecurso) recurso);
-
-            nueva.tablero().insertar(nueva.coordenada(), nueva);
+            
+            FuenteDeRecurso fuenteDeRecursos = (FuenteDeRecurso) nueva.tablero().getCasilla(nueva.coordenada()).getFichaTerrestre(); //si no puedo quitar el casteo
+            nueva.tablero().getCasilla(nueva.coordenada()).eliminarFichaTerrestre();
+            
+            nueva.fuenteDeRecursos(fuenteDeRecursos);
+            nueva.tablero().insertar2(nueva.coordenada(), nueva);
+            
         }
     }
     //ExtrearRecursos
@@ -87,14 +103,7 @@ public class ModuloConstruccion {
 
     //se supone que la estrategia de construccion llama esto todo los turnos
     public boolean estaCreada(Ficha nueva) {
-        return (nueva.turnosParaCrear() == 0);
+        return (nueva.turnosParaCrear() <= 0);
     }
-
-
-	public void PonerEnJuego(CasaTerrestre nuevoEdificio, Jugador protoss,
-			Tablero mapa, Coordenada coordenada) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
