@@ -1,6 +1,5 @@
 package ficha;
 
-import estrategia.ficha.EstrategiaAtacarYSerAtacado;
 import juego.Jugador;
 import org.junit.Assert;
 import org.junit.Before;
