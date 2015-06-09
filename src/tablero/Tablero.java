@@ -68,7 +68,18 @@ public class Tablero {
         ficha.coordenada(lugar);
         ficha.tablero(this);
     }
-    
+    //Refactorizar Despues.
+    public void insertar2(Coordenada lugar, FichaAerea ficha) {
+
+        getCasilla(lugar).insertar(ficha);
+
+        if (ficha.coordenada() != null  && ficha.coordenada()!= lugar) {
+            getCasilla(ficha.coordenada()).eliminarFichaAerea();
+        }
+
+        ficha.coordenada(lugar);
+        ficha.tablero(this);
+    }
     
     
     public void insertar(Coordenada lugar, FichaTerrestre ficha) {
