@@ -21,6 +21,7 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
         tipoDeFuenteDeRecursos = "Volcan";
     }
 
+    @Override
     public Recursos extraer() { //esto jode al polimorfismo. Seria emjor que pida que recursos extrear.
         int cantidadExtraida = fuenteDeRecursos.extraer(10);
 

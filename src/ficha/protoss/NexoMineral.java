@@ -1,11 +1,12 @@
 package ficha.protoss;
 
 
+import ficha.EdifcioDeRecusosTerrestre;
 import ficha.EdificioTerrestre;
 import juego.Recursos;
 import stats.BarrasEscudoVidaEnergia;
 
-public class NexoMineral extends EdificioTerrestre {
+public class NexoMineral extends EdifcioDeRecusosTerrestre {
 
     public NexoMineral() {
         nombre = "Nexo mineral";
@@ -14,6 +15,7 @@ public class NexoMineral extends EdificioTerrestre {
         barras = new BarrasEscudoVidaEnergia(250, 250);
     }
 
+    @Override
     public Recursos extraer() {
         int cantidadExtraida = fuenteDeRecursos.extraer(10);
 
