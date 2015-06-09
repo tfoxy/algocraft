@@ -1,8 +1,12 @@
 package estrategia.ficha.moduloDeEstrategias;
 
 
-import ficha.*;
+import ficha.CasaTerrestre;
 import ficha.EdifcioDeRecusosTerrestre;
+import ficha.EdificioTerrestre;
+import ficha.Ficha;
+import ficha.UnidadAerea;
+import ficha.UnidadTerrestre;
 
 
 public class ModuloMorir {
