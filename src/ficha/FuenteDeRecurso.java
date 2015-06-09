@@ -11,6 +11,7 @@ public abstract class FuenteDeRecurso extends FichaTerrestre {
         this.cantidadDeRecursos = cantidadDeRecursos;
 
         this.estoyVacio = false;
+        this.coste = new Recursos(0, 0, 0);
     }
 
     public int cantidadDeRecursos() {
