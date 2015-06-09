@@ -3,6 +3,7 @@ package ficha.protoss;
 
 import ficha.UnidadTerrestre;
 import juego.Recursos;
+import juego.Tecnologia;
 import stats.BarrasEscudoVidaEnergia;
 
 public class Zealot extends UnidadTerrestre {
@@ -15,6 +16,8 @@ public class Zealot extends UnidadTerrestre {
         barras = new BarrasEscudoVidaEnergia(100, 60);
         ataqueTierra = 8;
         rangoDeAtaqueTierra = 1;
+        estoyVacio = false;
+        tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         // TODO transporte
     }
 }

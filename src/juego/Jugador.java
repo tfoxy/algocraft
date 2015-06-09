@@ -59,7 +59,7 @@ public class Jugador {
         }
     }
 
-
+    
     public void asignar(Ficha ficha) {
         if (!tecnologias.containsAll(ficha.tecnologiasNecesarias())) {
             throw new TecnologiasInsuficientesException();
@@ -100,8 +100,11 @@ public class Jugador {
     public void newFicha(Ficha ficha) {
         asignar(ficha);
     }
-
-
+    
+    public void newFicha2(Ficha ficha) {
+    	this.fichas.add(ficha); //cual es el punto de tener una extrategia Construccion. Si separas las Consturccion entre todas las demas claces del prgorama?
+    }
+    
     public boolean tengoSuficientesRecursos(Recursos coste) {
         return recursos.haySuficienteRecursos(coste);
     }

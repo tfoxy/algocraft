@@ -14,7 +14,6 @@ import ficha.FuenteDeRecurso;
 
 public class ModuloConstruccion {
 
-// por ahora va solo el bascio de tierra.
 
 
     public void PonerEnJuego(Ficha nueva) {
@@ -27,7 +26,7 @@ public class ModuloConstruccion {
     public void PonerEnJuego(FichaTerrestre nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().gastaRecursos(nueva.coste());
-            nueva.propietario().newFicha(nueva);
+            nueva.propietario().newFicha2(nueva);
             nueva.tablero().insertar2(nueva.coordenada(), nueva);
         }
     }
@@ -49,7 +48,7 @@ public class ModuloConstruccion {
     //recursoTerrestre
     public void PonerEnJuego(FuenteDeRecurso nueva) {
         if (this.sePuedeCrear(nueva)) {
-            nueva.propietario().gastaRecursos(nueva.coste());
+            nueva.propietario().newFicha2(nueva);
             nueva.tablero().insertar2(nueva.coordenada(), nueva);
         }
     }
@@ -82,7 +81,7 @@ public class ModuloConstruccion {
     public void PonerEnJuego(EdifcioDeRecusosTerrestre nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().gastaRecursos(nueva.coste());
-            nueva.propietario().newFicha(nueva);
+            nueva.propietario().newFicha2(nueva);
             
             FuenteDeRecurso fuenteDeRecursos = (FuenteDeRecurso) nueva.tablero().getCasilla(nueva.coordenada()).getFichaTerrestre(); //si no puedo quitar el casteo
             nueva.tablero().getCasilla(nueva.coordenada()).eliminarFichaTerrestre();

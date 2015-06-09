@@ -12,6 +12,7 @@ public class Volcan extends FuenteDeRecurso {
 
     public Volcan() {
         this(GAS_POR_DEFECTO);
+        tipoDeFuenteDeRecursos = "Volcan";
     }
 
     public Volcan(int gas) {

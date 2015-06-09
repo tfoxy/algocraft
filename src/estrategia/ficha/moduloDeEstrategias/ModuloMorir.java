@@ -41,6 +41,8 @@ public class ModuloMorir {
     public void morir(EdifcioDeRecusosTerrestre edificio) {
         edificio.propietario().perderFicha(edificio);
         edificio.tablero().getCasilla(edificio.coordenada()).eliminarFichaTerrestre();
-        edificio.tablero().insertar(edificio.coordenada(), edificio.fuenteDeRecursos());
+        
+        ModuloConstruccion modulo = new ModuloConstruccion();
+        modulo.PonerEnJuego(edificio.fuenteDeRecursos());
     }
 }
