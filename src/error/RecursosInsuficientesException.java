@@ -1,6 +1,6 @@
 package error;
 
-public class RecursosInsuficientesException extends JuegoException {
+public class RecursosInsuficientesException extends NoSePuedeCrearFicha {
     public RecursosInsuficientesException() {
     }
 
