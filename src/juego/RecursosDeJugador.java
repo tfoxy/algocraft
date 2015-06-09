@@ -51,6 +51,10 @@ public class RecursosDeJugador {
             contador += cambio;
             posible = Math.min(maxima, contador);
         }
+
+        public boolean haySuficiente(int aumento) {
+            return actual + aumento < posible;
+        }
     }
 
     private int mineral;
@@ -79,6 +83,12 @@ public class RecursosDeJugador {
 
     public Poblacion poblacion() {
         return poblacion;
+    }
+
+    public boolean haySuficienteRecursos(Recursos coste) {
+        return coste.mineral() <= mineral
+                && coste.gas() < gas
+                && poblacion.haySuficiente(coste.poblacion());
     }
 
     public void gastar(Recursos coste) {

@@ -97,4 +97,13 @@ public class Jugador {
     }
 
 
+    public boolean tengoSuficientesRecursos(Recursos coste) {
+        return recursos.haySuficienteRecursos(coste);
+    }
+
+    public boolean tienesLasTecnologias(List<Tecnologia> tecnologias) {
+        return this.tecnologias.containsAll(tecnologias);
+    }
+
+
 }
