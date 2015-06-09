@@ -1,5 +1,7 @@
 package stats;
 
+import ficha.Ficha;
+
 //new 6
 public class BarrasEscudoVidaEnergia {
     private int vidaMaxima;
@@ -34,6 +36,13 @@ public class BarrasEscudoVidaEnergia {
             escudoActual = 0;
         } else {
             escudoActual = (escudoActual - danio);
+        }
+    }
+
+    public void sufrirDanio(int danio, Ficha ficha) {
+        sufrirDanio(danio);
+        if (this.estaMuerto()) {
+            ficha.muerete();
         }
     }
 
