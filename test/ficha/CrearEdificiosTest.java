@@ -34,17 +34,6 @@ public class CrearEdificiosTest {
 
 
     @Test
-    public void crearCasaYQueDePoblacion() {
-        //esto cocnierne a los dos grupos de Text.//
-        Ficha nuevoEdificio = new Pilon();
-
-        protoss.newFicha(nuevoEdificio);
-
-        assertEquals(5, protoss.poblacionPosible());
-    }
-
-
-    @Test
     public void queNoTardeMenosQueTiempoCorrecto() throws NoSePuedeCrearFicha {
         Pilon pilon = new Pilon();
         protoss.construir(pilon);

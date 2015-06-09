@@ -22,12 +22,13 @@ public class CasaTest {
     }
 
     @Test
-    public void hayPoblacionPosibleAlCrearCasa() {
+    public void crearCasaYQueDePoblacion() {
         Ficha ficha = new Pilon();
         Poblacion poblacion = protoss.recursos().poblacion();
 
         Assert.assertEquals(5, poblacion.posible());
     }
+
 
     @Test
     public void muereCasaPerdemosPoblacion() {
