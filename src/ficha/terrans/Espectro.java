@@ -7,6 +7,7 @@ import stats.BarrasEscudoVidaEnergia;
 public class Espectro extends UnidadAerea {
 
     public Espectro() {
+        nombre = "Espectro";
         barras = new BarrasEscudoVidaEnergia(120);
         coste = new Recursos(150, 100, 2);
         movimiento = movimientoMaximo = 3;
