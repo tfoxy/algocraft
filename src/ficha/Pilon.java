@@ -1,6 +1,6 @@
 package ficha;
 
-public class Pilon extends EdificioTerrestre {
+public class Pilon extends CasaTerrestre {
 
 
 
