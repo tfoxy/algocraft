@@ -3,12 +3,9 @@ package tablero;
 import error.FichaSobreOtraFichaException;
 import ficha.*;
 import ficha.natural.NodoMineral;
-import juego.Jugador;
-import juego.Raza;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import juego.Tecnologia;
 
 public class CasillaTest {
 
