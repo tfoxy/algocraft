@@ -21,7 +21,10 @@ public class EstrategiaFichaViva extends EstrategiaFicha {
     @Override
     public EstrategiaFicha pasarTurno(Ficha ficha) {
         ficha.barras().pasarTurno();
+        ficha.recuperarPuntosDeMovimiento();
+
         moduloEfectosDeTurno.pasarTurno(ficha);
+
         return this;
     }
 }

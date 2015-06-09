@@ -3,6 +3,7 @@ package ficha;
 import estrategia.ficha.EstrategiaConsturccion;
 import estrategia.ficha.EstrategiaFicha;
 import estrategia.ficha.EstrategiaFichaViva;
+import estrategia.ficha.moduloDeEstrategias.ModuloEfectosDeTurno;
 import juego.Recursos;
 import juego.Jugador;
 import stats.BarrasEscudoVidaEnergia;
@@ -25,7 +26,6 @@ public abstract class Ficha {
 
     protected EstrategiaFicha estrategia = new EstrategiaFichaViva();
     protected String nombre = null;
-
 
     protected Recursos coste = null;
     protected BarrasEscudoVidaEnergia barras = null;
@@ -210,5 +210,9 @@ public abstract class Ficha {
 
     public void disminuirMovimiento() {
         movimiento -= 1;
+    }
+
+    public void recuperarPuntosDeMovimiento() {
+        movimiento = movimientoMaximo;
     }
 }
