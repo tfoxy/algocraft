@@ -5,6 +5,7 @@ import error.NoSePuedeCrearFicha;
 import ficha.EdifcioDeRecusosTerrestre;
 import ficha.Ficha;
 import ficha.FichaTerrestre;
+import ficha.FuenteDeRecurso;
 
 
 public class ModuloConstruccion {
@@ -64,7 +65,8 @@ public class ModuloConstruccion {
             nueva.tablero().insertar(nueva.coordenada(), nueva);
 
             Ficha recurso = nueva.tablero().getCasilla(nueva.coordenada()).getFichaTerrestre();
-            nueva.fuenteDeRecursos(recurso);
+            // TODO evitar casteo de recurso de Ficha a ModuloEfectosDeTurno
+            nueva.fuenteDeRecursos((FuenteDeRecurso) recurso);
 
             nueva.tablero().insertar(nueva.coordenada(), nueva);
         }
@@ -72,15 +74,15 @@ public class ModuloConstruccion {
     //ExtrearRecursos
 
 
+    //la idea es que se cambia entre dos estrategias cuando se crea.
+    //Dos extrategias con distintos modulos.
     public void pasarTurno(Ficha nueva) {
         nueva.turnosParaCrear(nueva.turnosParaCrear() - 1);
-    } //la idea es que se cambia entre dos estrategias cuando se crea. Dos extrategias con distintos modulos.
+    }
 
-    public boolean estaCreada(Ficha nueva) { //se supone que la estrategia de construccion llama esto todo los turnos
-        if (nueva.turnosParaCrear() == 0) {
-            return true;
-        }
-        return false;
+    //se supone que la estrategia de construccion llama esto todo los turnos
+    public boolean estaCreada(Ficha nueva) {
+        return (nueva.turnosParaCrear() == 0);
     }
 
 }
