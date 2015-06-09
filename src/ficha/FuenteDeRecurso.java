@@ -9,6 +9,8 @@ public abstract class FuenteDeRecurso extends FichaTerrestre {
 
     public FuenteDeRecurso(int cantidadDeRecursos) {
         this.cantidadDeRecursos = cantidadDeRecursos;
+
+        this.estoyVacio = false;
     }
 
     public int cantidadDeRecursos() {
