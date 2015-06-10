@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import error.PosicionFueraDeLimiteException;
+import ficha.Ficha;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
 
@@ -57,11 +58,28 @@ public class Tablero {
     }
 
 
+    public Ficha getFicha(Coordenada3d lugar) {
+        Casilla casilla = getCasilla(lugar.proyeccion());
+        int z = lugar.getZ();
+        Ficha ficha;
+
+        if (z == 1) {
+            ficha = casilla.getFichaTerrestre();
+        } else if (z == 2) {
+            ficha = casilla.getFichaAerea();
+        } else {
+            throw new PosicionFueraDeLimiteException();
+        }
+
+        return ficha;
+    }
+
+
     //Refactorizar Despues.
     public void insertar2(Coordenada lugar, FichaTerrestre ficha) {
         getCasilla(lugar).insertar(ficha);
         
-        if (ficha.coordenada() != null  && ficha.coordenada()!= lugar) {
+        if (!ficha.coordenada().equals(lugar)) {
             getCasilla(ficha.coordenada()).eliminarFichaTerrestre();
         }
 
@@ -73,7 +91,7 @@ public class Tablero {
 
         getCasilla(lugar).insertar(ficha);
 
-        if (ficha.coordenada() != null  && ficha.coordenada()!= lugar) {
+        if (!ficha.coordenada().equals(lugar)) {
             getCasilla(ficha.coordenada()).eliminarFichaAerea();
         }
 
