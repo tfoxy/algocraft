@@ -20,7 +20,6 @@ public class Zealot extends UnidadTerrestre {
         estoyVacio = false;
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ACCESO);
-        //agregar AccesoDespues. Pero ver que no rompa uni
         // TODO transporte
     }
 

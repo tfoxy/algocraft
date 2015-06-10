@@ -18,7 +18,6 @@ public class AltoTemplario extends UnidadTerrestre {
         estoyVacio = false;
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ARCHIVOS_TEMPLARIOS);
-        //agregar AccesoDespues. Pero ver que no rompa uni
         // TODO transporte
     }
 
