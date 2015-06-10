@@ -14,8 +14,8 @@ public class ArchivosTemplarios extends EdificioTerrestre {
         tiempoDeConstruccion = 9;
         barras = new BarrasEscudoVidaEnergia(500, 500);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
-        estoyVacio = false;
         tecnologiasQueDa.add(Tecnologia.ARCHIVOS_TEMPLARIOS);
+        estoyVacio = false;
     }
     
     public void PonerEnJuego() {

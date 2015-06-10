@@ -14,8 +14,8 @@ public class Acceso extends EdificioTerrestre {
         tiempoDeConstruccion = 8;
         barras = new BarrasEscudoVidaEnergia(500, 500);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
-        estoyVacio = false;
         tecnologiasQueDa.add(Tecnologia.ACCESO);
+        estoyVacio = false;
     }
     
     public void PonerEnJuego() {

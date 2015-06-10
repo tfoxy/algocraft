@@ -17,15 +17,18 @@ public class Dragon extends UnidadTerrestre {
         barras = new BarrasEscudoVidaEnergia(100, 80);
         ataqueTierra = ataqueAire = new Ataque(20, 4);
         estoyVacio = false;
-        tecnologiasNecesarias.add(Tecnologia.PROTOSS.ACCESO);
+        tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.add(Tecnologia.ACCESO);
         // TODO transporte
     }
-    
+
+    @Override
     public void PonerEnJuego() {
     	estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
         estrategia.PonerEnJuego(this);
     }
-    
+
+    @Override
     public void muerete() {
         estrategia.matar(this);
     }

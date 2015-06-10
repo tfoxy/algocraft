@@ -14,8 +14,8 @@ public class PuertoEstelar extends EdificioTerrestre {
         tiempoDeConstruccion = 10;
         barras = new BarrasEscudoVidaEnergia(600, 600);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
-        estoyVacio = false;
         tecnologiasQueDa.add(Tecnologia.PUERTO_ESTELAR);
+        estoyVacio = false;
     }
     
     public void PonerEnJuego() {

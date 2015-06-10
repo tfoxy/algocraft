@@ -2,6 +2,7 @@ package ficha.terrans;
 
 import ficha.UnidadTerrestre;
 import juego.Recursos;
+import juego.Tecnologia;
 import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
 
@@ -14,9 +15,10 @@ public class Marine extends UnidadTerrestre {
         barras = BARRAS_BUILDER.build();
         coste = new Recursos(50, 0, 1);
         ataqueTierra = ataqueAire = new Ataque(6, 4);
-        // TODO transporteMaximo = 1;
+        // TODO transporte: 1
         vision = 7;
         tiempoDeConstruccion = 3;
         movimiento = movimientoMaximo = 3;
+        tecnologiasNecesarias.add(Tecnologia.TERRAN);
     }
 }
