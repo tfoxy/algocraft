@@ -24,6 +24,7 @@ public abstract class Ficha {
     protected Coordenada coordenada;
 
     protected boolean estoyVacio = true;
+    protected boolean esNatural = true;
 
     protected EstrategiaFicha estrategia = new EstrategiaFichaViva();
     protected String nombre = null;
@@ -217,4 +218,7 @@ public abstract class Ficha {
 
     public abstract Ataque tipoDeAtaqueRecibido(Ficha atacante);
 
+    public boolean esNatural() {
+        return esNatural;
+    }
 }
