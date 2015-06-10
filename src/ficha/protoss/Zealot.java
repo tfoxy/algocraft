@@ -7,6 +7,7 @@ import juego.Recursos;
 import juego.Tecnologia;
 import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
+import tablero.Direccion;
 
 public class Zealot extends UnidadTerrestre {
 
@@ -18,6 +19,7 @@ public class Zealot extends UnidadTerrestre {
         barras = new BarrasEscudoVidaEnergia(100, 60);
         ataqueTierra = new Ataque(8, 1);
         estoyVacio = false;
+        movimiento = movimientoMaximo = 3;
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ACCESO);
         // TODO transporte
@@ -32,5 +34,9 @@ public class Zealot extends UnidadTerrestre {
     @Override
     public void muerete() {
         estrategia.matar(this);
+    }
+    
+    public boolean intentarMovimiento(Direccion dirrecion) {
+        return estrategia.intentarMovimiento(this, dirrecion);
     }
 }

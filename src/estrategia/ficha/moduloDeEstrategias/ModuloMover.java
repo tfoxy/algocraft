@@ -1,5 +1,6 @@
 package estrategia.ficha.moduloDeEstrategias;
 
+import error.ErrorDePolimorfismo;
 import error.JuegoException;
 import error.MovimientoInsuficienteException;
 import ficha.Ficha;
@@ -13,8 +14,7 @@ import tablero.Tablero;
 public class ModuloMover {
 
     public boolean intentarMovimiento(Ficha ficha, Direccion dirrecion) {
-        //para el polimorfismo
-        return false;
+    	throw new ErrorDePolimorfismo();
     }
 
     //terreste

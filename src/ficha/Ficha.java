@@ -198,8 +198,8 @@ public abstract class Ficha {
         estrategia.PonerEnJuego(this);
     }
 
-    public void intentarMovimiento(Direccion dirrecion) {
-        estrategia.intentarMovimiento(this, dirrecion);
+    public boolean intentarMovimiento(Direccion dirrecion) {
+        return estrategia.intentarMovimiento(this, dirrecion);
     }
 
     public void tablero(Tablero tablero) {

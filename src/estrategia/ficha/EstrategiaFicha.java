@@ -5,6 +5,7 @@ import ficha.CasaTerrestre;
 import ficha.EdifcioDeRecusosTerrestre;
 import ficha.EdificioTerrestre;
 import ficha.Ficha;
+import ficha.FichaAerea;
 import ficha.FichaTerrestre;
 import ficha.FuenteDeRecurso;
 import ficha.UnidadAerea;
@@ -50,10 +51,13 @@ public abstract class EstrategiaFicha {
     public void PonerEnJuego(FuenteDeRecurso nueva){/*nada*/}
     public void PonerEnJuego(EdifcioDeRecusosTerrestre nueva){/*nada*/}
     
-    public void intentarMovimiento(Ficha ficha, Direccion dirrecion) {
-        //nada
-    }
-
+    public boolean intentarMovimiento(Ficha ficha, Direccion dirrecion) {
+		return false; /*nada*/ }
+    public boolean intentarMovimiento(FichaTerrestre ficha, Direccion dirrecion) {
+		return false; /*nada*/ }
+    public boolean intentarMovimiento(FichaAerea ficha, Direccion dirrecion) {
+		return false; /*nada*/ }
+    
     public abstract EstrategiaFicha pasarTurno(Ficha ficha);
 
 }
