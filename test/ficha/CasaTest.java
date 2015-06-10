@@ -29,6 +29,8 @@ public class CasaTest {
         Ficha ficha = new Pilon();
         Poblacion poblacion = protoss.recursos().poblacion();
 
+        protoss.asignar(ficha);
+
         Assert.assertEquals(5, poblacion.posible());
     }
 
@@ -38,12 +40,13 @@ public class CasaTest {
         Ficha ficha = new Pilon();
         Poblacion poblacion = protoss.recursos().poblacion();
 
+        protoss.asignar(ficha);
+
         protoss.pasarTurno();
 
         ficha.muerete();
 
         Assert.assertEquals(0, poblacion.posible());
-
     }
 
 

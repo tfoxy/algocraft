@@ -6,6 +6,7 @@ import estrategia.ficha.EstrategiaFichaViva;
 import estrategia.ficha.moduloDeEstrategias.ModuloEfectosDeTurno;
 import juego.Recursos;
 import juego.Jugador;
+import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
 import tablero.Coordenada;
 import tablero.Direccion;
@@ -53,12 +54,8 @@ public abstract class Ficha {
 
     // TODO agregar magias: List<Magia>
 
-    // TODO stats.Ataque
-    protected int ataqueTierra = 0;
-    protected int ataqueAire = 0;
-
-    protected int rangoDeAtaqueTierra = -1;
-    protected int rangoDeAtaqueAire = -1;
+    protected Ataque ataqueTierra = new Ataque(0, -1);
+    protected Ataque ataqueAire = new Ataque(0, -1);
 
     protected int vision = 0;
     protected int tiempoDeConstruccion = 0;
@@ -102,19 +99,19 @@ public abstract class Ficha {
     }
 
     public int rangoDeAtaqueTierra() {
-        return rangoDeAtaqueTierra;
+        return ataqueTierra.rango();
     }
 
     public int ataqueTierra() {
-        return ataqueTierra;
+        return ataqueTierra.danio();
     }
 
     public int rangoDeAtaqueAire() {
-        return rangoDeAtaqueAire;
+        return ataqueTierra.rango();
     }
 
     public int ataqueAire() {
-        return ataqueAire;
+        return ataqueTierra.danio();
     }
 
     public Recursos recursosExtraidosPorTurno() {
