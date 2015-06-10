@@ -1,6 +1,7 @@
 package ficha;
 
 import estrategia.ficha.ExtrategiaConstrucccionOP;
+import error.FueraDeRangoException;
 import estrategia.ficha.moduloDeEstrategias.ModuloAtacarYSerAtacado;
 import estrategia.ficha.moduloDeEstrategias.ModuloConstruccionOP;
 import ficha.protoss.Zealot;
@@ -53,46 +54,34 @@ public class AtaqueDeZealotTest {
     	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,4));
         moduloAux.PonerEnJuego(unidadEnemigaTerrestre);
 
-        boolean fueAtacado =
-                estrategia.atacar(unidad, unidadEnemigaTerrestre);
-
-        Assert.assertTrue(fueAtacado);
+        estrategia.realizarAtaque(unidad, unidadEnemigaTerrestre);
     }
 
 
-    @Test
+    @Test(expected = FueraDeRangoException.class)
     public void noPuedeAtacarUnidadAereaAdyacente() {
     	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,4));
         moduloAux.PonerEnJuego(unidadEnemigaAerea);
 
-        boolean fueAtacado =
-                estrategia.atacar(unidad, unidadEnemigaAerea);
-
-        Assert.assertFalse(fueAtacado);
+        estrategia.realizarAtaque(unidad, unidadEnemigaAerea);
     }
 
 
-    @Test
+    @Test(expected = FueraDeRangoException.class)
     public void noPuedeAtacarUnidadAereaEnLaMismaPosicion() {
     	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,3));
         moduloAux.PonerEnJuego(unidadEnemigaAerea);
 
-        boolean fueAtacado =
-                estrategia.atacar(unidad, unidadEnemigaAerea);
-
-        Assert.assertFalse(fueAtacado);
+        estrategia.realizarAtaque(unidad, unidadEnemigaAerea);
     }
 
 
-    @Test
+    @Test(expected = FueraDeRangoException.class)
     public void noPuedeAtacarUnidadTerrestreLejana() {
     	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,5));
         moduloAux.PonerEnJuego(unidadEnemigaTerrestre);
 
-        boolean fueAtacado =
-                estrategia.atacar(unidad, unidadEnemigaTerrestre);
-
-        Assert.assertFalse(fueAtacado);
+        estrategia.realizarAtaque(unidad, unidadEnemigaTerrestre);
     }
 
 
