@@ -5,6 +5,7 @@ import estrategia.ficha.EstrategiaConsturccion;
 import ficha.UnidadTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;
+import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
 
 public class Zealot extends UnidadTerrestre {
@@ -15,8 +16,7 @@ public class Zealot extends UnidadTerrestre {
         coste = new Recursos(100, 0, 2);
         // TODO tiempo construccion
         barras = new BarrasEscudoVidaEnergia(100, 60);
-        ataqueTierra = 8;
-        rangoDeAtaqueTierra = 1;
+        ataqueTierra = new Ataque(8, 1);
         estoyVacio = false;
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         // TODO transporte
