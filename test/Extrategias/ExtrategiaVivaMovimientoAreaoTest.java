@@ -10,40 +10,39 @@ import org.junit.Test;
 import tablero.Coordenada;
 import tablero.Direccion;
 import tablero.Tablero;
-import error.FichaSobreOtraFichaException;
 import error.NoSePuedeCrearFicha;
 import estrategia.ficha.ExtrategiaConstrucccionOP;
-import estrategia.ficha.moduloDeEstrategias.ModuloMover;
 import ficha.Ficha;
+import ficha.FichaAerea;
 import ficha.FichaTerrestre;
+import ficha.UnidadAerea;
 import ficha.UnidadTerrestre;
-
 import ficha.protoss.Zealot;
-import ficha.terrans.Marine;
+import ficha.protoss.unidades.Scout;
 
-public class ExtrategiaVivaMovimiento {
+public class ExtrategiaVivaMovimientoAreaoTest {
 
-	//en si tiene qeu tener los Test de todos sus modulos. Asi que se le tiene que agregar test mientras se les agrega modulo.
-    //private ModuloMover estrategiaMover;
     private Tablero mapa;
     private Ficha unidad;
     private Jugador jugador;
     private ExtrategiaConstrucccionOP moduloAux;
     private Coordenada lugar;
+    private UnidadAerea otraUnidad;
 
     @Before
     public void initialize() {
         moduloAux = new ExtrategiaConstrucccionOP();
         jugador = new Jugador("miNombre", Raza.PROTOSS);
         
-        unidad = new Zealot();
+        otraUnidad = new Scout(); 
+        unidad = new Scout();
 
         int tamanioDeMapa = unidad.movimientoMaximo() * 4;
         mapa = new Tablero(20, 20);
         lugar = new Coordenada(3, 3);
         
         unidad.setBasico(jugador, mapa, lugar);
-        moduloAux.PonerEnJuego((FichaTerrestre)unidad);
+        moduloAux.PonerEnJuego((FichaAerea)unidad);
     }
 
 
@@ -65,7 +64,6 @@ public class ExtrategiaVivaMovimiento {
 
     @Test
     public void noPuedeMoverseDondeNoHayOtraUnidad() {
-        UnidadTerrestre otraUnidad = new Zealot();
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
         moduloAux.PonerEnJuego(otraUnidad);
@@ -79,7 +77,6 @@ public class ExtrategiaVivaMovimiento {
     public void puedeInsertarseDondeHabiaOtraUnidadAntesDeMoverse() {
         unidad.intentarMovimiento(Direccion.ARRIBA);
     	
-        UnidadTerrestre otraUnidad = new Zealot();
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,3));
         moduloAux.PonerEnJuego(otraUnidad);
@@ -90,7 +87,6 @@ public class ExtrategiaVivaMovimiento {
     public void noPuedeInsertarseDondeOtraUnidadSeMovio() {
         unidad.intentarMovimiento(Direccion.ARRIBA);
     	
-        UnidadTerrestre otraUnidad = new Zealot();
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
         moduloAux.PonerEnJuego(otraUnidad);
@@ -111,7 +107,6 @@ public class ExtrategiaVivaMovimiento {
     
     @Test
     public void noPuedeMoverseDondeOtraUnidadSeMovio() {
-        UnidadTerrestre otraUnidad = new Zealot();
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,5));
         moduloAux.PonerEnJuego(otraUnidad);
