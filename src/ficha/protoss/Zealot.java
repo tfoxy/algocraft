@@ -14,11 +14,11 @@ public class Zealot extends UnidadTerrestre {
         nombre = "Zealot";
         vision = 7;
         coste = new Recursos(100, 0, 2);
-        // TODO tiempo construccion
+        turnosParaCrear = 4;
         barras = new BarrasEscudoVidaEnergia(100, 60);
         ataqueTierra = new Ataque(8, 1);
         estoyVacio = false;
-        tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.add(Tecnologia.PROTOSS.ACCESO); //agregar AccesoDespues. Pero ver que no rompa uni
         // TODO transporte
     }
     

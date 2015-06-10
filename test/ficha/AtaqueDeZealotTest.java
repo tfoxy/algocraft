@@ -1,6 +1,8 @@
 package ficha;
 
+import estrategia.ficha.ExtrategiaConstrucccionOP;
 import estrategia.ficha.moduloDeEstrategias.ModuloAtacarYSerAtacado;
+import estrategia.ficha.moduloDeEstrategias.ModuloConstruccionOP;
 import ficha.protoss.Zealot;
 import ficha.terrans.Espectro;
 import ficha.terrans.Marine;
@@ -15,6 +17,7 @@ import tablero.Tablero;
 public class AtaqueDeZealotTest {
 
     private ModuloAtacarYSerAtacado estrategia;
+    private ExtrategiaConstrucccionOP moduloAux;
     private Tablero mapa;
     private FichaTerrestre unidad;
     private FichaTerrestre unidadEnemigaTerrestre;
@@ -26,7 +29,8 @@ public class AtaqueDeZealotTest {
     @Before
     public void initialize() {
         estrategia = new ModuloAtacarYSerAtacado();
-
+        moduloAux = new ExtrategiaConstrucccionOP();
+        
         int tamanioDeMapa = 40;
 
         mapa = new Tablero(tamanioDeMapa, tamanioDeMapa);
@@ -35,20 +39,19 @@ public class AtaqueDeZealotTest {
         enemigo = new Jugador("miEnemigo", Raza.TERRAN);
 
         unidad = new Zealot();
-        jugador.asignar(unidad);
+        unidad.setBasico(jugador, mapa, new Coordenada (3,3));
+        moduloAux.PonerEnJuego(unidad);
 
         unidadEnemigaTerrestre = new Marine();
         unidadEnemigaAerea = new Espectro();
 
-        enemigo.asignar(unidadEnemigaTerrestre);
-        enemigo.asignar(unidadEnemigaAerea);
     }
 
 
     @Test
     public void puedeAtacarUnidadTerrestreAdyacente() {
-        mapa.insertar(new Coordenada(3, 3), unidad);
-        mapa.insertar(new Coordenada(3, 4), unidadEnemigaTerrestre);
+    	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,4));
+        moduloAux.PonerEnJuego(unidadEnemigaTerrestre);
 
         boolean fueAtacado =
                 estrategia.atacar(unidad, unidadEnemigaTerrestre);
@@ -59,8 +62,8 @@ public class AtaqueDeZealotTest {
 
     @Test
     public void noPuedeAtacarUnidadAereaAdyacente() {
-        mapa.insertar(new Coordenada(3, 3), unidad);
-        mapa.insertar(new Coordenada(3, 4), unidadEnemigaAerea);
+    	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,4));
+        moduloAux.PonerEnJuego(unidadEnemigaAerea);
 
         boolean fueAtacado =
                 estrategia.atacar(unidad, unidadEnemigaAerea);
@@ -71,8 +74,8 @@ public class AtaqueDeZealotTest {
 
     @Test
     public void noPuedeAtacarUnidadAereaEnLaMismaPosicion() {
-        mapa.insertar(new Coordenada(3, 3), unidad);
-        mapa.insertar(new Coordenada(3, 3), unidadEnemigaAerea);
+    	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,3));
+        moduloAux.PonerEnJuego(unidadEnemigaAerea);
 
         boolean fueAtacado =
                 estrategia.atacar(unidad, unidadEnemigaAerea);
@@ -83,8 +86,8 @@ public class AtaqueDeZealotTest {
 
     @Test
     public void noPuedeAtacarUnidadTerrestreLejana() {
-        mapa.insertar(new Coordenada(3, 3), unidad);
-        mapa.insertar(new Coordenada(3, 5), unidadEnemigaTerrestre);
+    	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,5));
+        moduloAux.PonerEnJuego(unidadEnemigaTerrestre);
 
         boolean fueAtacado =
                 estrategia.atacar(unidad, unidadEnemigaTerrestre);
