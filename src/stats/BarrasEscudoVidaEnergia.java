@@ -92,7 +92,11 @@ public class BarrasEscudoVidaEnergia {
         return escudoActual;
     }
 
-    
+    public int energiaActual() {
+        return energiaActual;
+    }
+
+
     public static class Builder {
         private int vidaMaxima = 0;
         private int escudoMaximo = 0;
