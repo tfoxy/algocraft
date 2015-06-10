@@ -16,7 +16,8 @@ public class NaveTransporte extends UnidadAerea {
         turnosParaCrear = 8;
         barras = new BarrasEscudoVidaEnergia(80,60);
         estoyVacio = false;
-        tecnologiasNecesarias.add(Tecnologia.PROTOSS.PUERTO_ESTELAR);
+        tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
         // TODO transporte
     }
     

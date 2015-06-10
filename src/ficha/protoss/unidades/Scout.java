@@ -18,7 +18,8 @@ public class Scout extends UnidadAerea {
         ataqueTierra = new Ataque(8, 4);
         ataqueAire = new Ataque(14, 4);
         estoyVacio = false;
-        tecnologiasNecesarias.add(Tecnologia.PROTOSS.PUERTO_ESTELAR);
+        tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
         // TODO transporte
     }
     

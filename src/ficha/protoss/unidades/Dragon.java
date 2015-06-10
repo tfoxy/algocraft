@@ -17,7 +17,8 @@ public class Dragon extends UnidadTerrestre {
         barras = new BarrasEscudoVidaEnergia(100, 80);
         ataqueTierra = ataqueAire = new Ataque(20, 4);
         estoyVacio = false;
-        tecnologiasNecesarias.add(Tecnologia.PROTOSS.ACCESO);
+        tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.add(Tecnologia.ACCESO);
         // TODO transporte
     }
     

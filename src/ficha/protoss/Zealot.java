@@ -18,7 +18,8 @@ public class Zealot extends UnidadTerrestre {
         barras = new BarrasEscudoVidaEnergia(100, 60);
         ataqueTierra = new Ataque(8, 1);
         estoyVacio = false;
-        tecnologiasNecesarias.add(Tecnologia.PROTOSS.ACCESO); //agregar AccesoDespues. Pero ver que no rompa uni
+        tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.add(Tecnologia.ACCESO);
         // TODO transporte
     }
     

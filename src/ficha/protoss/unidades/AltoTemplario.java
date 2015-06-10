@@ -16,7 +16,8 @@ public class AltoTemplario extends UnidadTerrestre {
         turnosParaCrear = 7;
         barras = new BarrasEscudoVidaEnergia(40, 40);
         estoyVacio = false;
-        tecnologiasNecesarias.add(Tecnologia.PROTOSS.ARCHIVOS_TEMPLARIOS); //agregar AccesoDespues. Pero ver que no rompa uni
+        tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.add(Tecnologia.ARCHIVOS_TEMPLARIOS);
         // TODO transporte
     }
     
