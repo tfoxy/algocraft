@@ -31,10 +31,8 @@ public abstract class Ficha {
 
     protected Recursos coste = null;
     protected BarrasEscudoVidaEnergia barras = null;
-    protected List<Tecnologia> tecnologiasNecesarias =
-            tecnologiasNecesarias = new ArrayList<>();
-    protected List<Tecnologia> tecnologiasQueDa =
-    		tecnologiasQueDa  = new ArrayList<>();
+    protected List<Tecnologia> tecnologiasNecesarias = new ArrayList<>();
+    protected List<Tecnologia> tecnologiasQueDa = new ArrayList<>();
     protected int turnosParaCrear = 0;
 
     protected FuenteDeRecurso fuenteDeRecursos = null;
