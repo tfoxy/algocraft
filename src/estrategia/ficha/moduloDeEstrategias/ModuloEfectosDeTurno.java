@@ -9,7 +9,7 @@ import ficha.Ficha;
 public class ModuloEfectosDeTurno {
 
     public void pasarTurno(Ficha ficha) {
-        //nada
+        ficha.recuperarPuntosDeMovimiento();
     }
 
     public void pasarTurno(EdifcioDeRecusosTerrestre recolector) {
