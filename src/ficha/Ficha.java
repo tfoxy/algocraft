@@ -213,4 +213,6 @@ public abstract class Ficha {
         movimiento = movimientoMaximo;
     }
 
+    public abstract Ataque tipoDeAtaqueRecibido(Ficha atacante);
+
 }
