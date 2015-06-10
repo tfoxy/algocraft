@@ -17,15 +17,17 @@ public class PuertoEstelar extends EdificioTerrestre {
         tecnologiasQueDa.add(Tecnologia.PUERTO_ESTELAR);
         estoyVacio = false;
     }
-    
+
+    @Override
     public void PonerEnJuego() {
-    	estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
+        estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
         estrategia.PonerEnJuego(this);
     }
-    
+
+    @Override
     public void muerete() {
         estrategia.matar(this);
     }
-	
-	
+
+
 }

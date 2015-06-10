@@ -18,12 +18,14 @@ public class Pilon extends CasaTerrestre {
         estoyVacio = false;
         poblacionQueDa = 5;
     }
-    
+
+    @Override
     public void PonerEnJuego() {
-    	estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
+        estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
         estrategia.PonerEnJuego(this);
     }
-    
+
+    @Override
     public void muerete() {
         estrategia.matar(this);
     }

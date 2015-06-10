@@ -17,14 +17,16 @@ public class Acceso extends EdificioTerrestre {
         tecnologiasQueDa.add(Tecnologia.ACCESO);
         estoyVacio = false;
     }
-    
+
+    @Override
     public void PonerEnJuego() {
-    	estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
+        estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
         estrategia.PonerEnJuego(this);
     }
-    
+
+    @Override
     public void muerete() {
         estrategia.matar(this);
     }
-	
+
 }

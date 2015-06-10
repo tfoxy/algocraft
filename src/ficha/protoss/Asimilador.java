@@ -18,7 +18,7 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
         barras = new BarrasEscudoVidaEnergia(450, 450);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         estoyVacio = false;
-        
+
         tipoDeFuenteDeRecursos = "Volcan";
     }
 
@@ -28,12 +28,14 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
 
         return new Recursos(0, cantidadExtraida);
     }
-    
+
+    @Override
     public void PonerEnJuego() {
-    	estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
+        estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
         estrategia.PonerEnJuego(this);
     }
-    
+
+    @Override
     public void muerete() {
         estrategia.matar(this);
     }
