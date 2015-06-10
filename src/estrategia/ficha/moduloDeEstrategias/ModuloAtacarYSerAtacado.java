@@ -1,5 +1,6 @@
 package estrategia.ficha.moduloDeEstrategias;
 
+import error.FueraDeRangoException;
 import ficha.Ficha;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
@@ -14,14 +15,24 @@ public class ModuloAtacarYSerAtacado {
     }
 
 
-    public boolean atacar(Ficha agresor, Ficha defensor) {
+    public void realizarAtaque(Ficha agresor, Ficha defensor) {
         final Ataque ataque = defensor.tipoDeAtaqueRecibido(agresor);
 
-        if (this.puedoAtacar(agresor, defensor, ataque.rango())) {
-            this.serAtacado(ataque.danio(), defensor);
-            return true;
+        if (!this.puedoAtacar(agresor, defensor, ataque.rango())) {
+            throw new FueraDeRangoException();
         }
-        return false;
+
+        this.serAtacado(ataque.danio(), defensor);
+    }
+
+
+    public boolean atacar(Ficha agresor, Ficha defensor) {
+        try {
+            this.realizarAtaque(agresor, defensor);
+            return true;
+        } catch(FueraDeRangoException e) {
+            return false;
+        }
     }
 
 
