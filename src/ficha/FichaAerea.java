@@ -1,6 +1,7 @@
 package ficha;
 
 import stats.Ataque;
+import tablero.Altura;
 
 public class FichaAerea extends Ficha {
 
@@ -9,4 +10,8 @@ public class FichaAerea extends Ficha {
         return atacante.ataqueAire;
     }
 
+    @Override
+    public int altura() {
+        return Altura.AIRE;
+    }
 }

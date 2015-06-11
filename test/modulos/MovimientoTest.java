@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import tablero.Coordenada;
+import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.Tablero;
 
@@ -45,7 +46,10 @@ public class MovimientoTest {
 
         mapa.insertar(lugar, unidad);
 
-        Assert.assertSame(lugar, unidad.coordenada());
+        Coordenada3d lugarDeUnidad = unidad.coordenada();
+
+        Assert.assertNotNull(lugarDeUnidad);
+        Assert.assertEquals(lugar, lugarDeUnidad.proyeccion());
     }
 
 

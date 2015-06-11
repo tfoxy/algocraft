@@ -1,4 +1,4 @@
-package Extrategias;
+package estrategias;
 
 import juego.Jugador;
 import juego.Raza;
@@ -10,16 +10,13 @@ import org.junit.Test;
 import tablero.Coordenada;
 import tablero.Direccion;
 import tablero.Tablero;
-import error.FichaSobreOtraFichaException;
 import error.NoSePuedeCrearFicha;
 import estrategia.ficha.ExtrategiaConstrucccionOP;
-import estrategia.ficha.moduloDeEstrategias.ModuloMover;
 import ficha.Ficha;
 import ficha.FichaTerrestre;
 import ficha.UnidadTerrestre;
 
 import ficha.protoss.Zealot;
-import ficha.terrans.Marine;
 
 public class ExtrategiaVivaMovimientoTest {
 
@@ -57,7 +54,8 @@ public class ExtrategiaVivaMovimientoTest {
 
     @Test
     public void tieneCoordenadaAlInsertarseSobreTablero() {
-        Assert.assertSame(lugar, unidad.coordenada());
+        Assert.assertNotNull(unidad.coordenada());
+        Assert.assertEquals(lugar, unidad.coordenada().proyeccion());
     }
 
     @Test

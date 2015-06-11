@@ -1,4 +1,4 @@
-package Extrategias;
+package estrategias;
 
 import juego.Jugador;
 import juego.Raza;
@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import tablero.Coordenada;
 import tablero.Tablero;
-import error.FueraDeRangoException;
 import estrategia.ficha.ExtrategiaConstrucccionOP;
 import estrategia.ficha.moduloDeEstrategias.ModuloAtacarYSerAtacado;
 import ficha.FichaAerea;

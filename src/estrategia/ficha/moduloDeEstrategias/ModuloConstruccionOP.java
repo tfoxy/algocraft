@@ -5,23 +5,11 @@ import ficha.*;
 
 public class ModuloConstruccionOP {
 
-    /* TODO implementar
-    public void PonerEnJuego(Ficha nueva) {
-        // para el polimorfismo.
-    }
-    */
 //No importan. Los recursos ni la Tecnologia.. es un Digamos Word Editor
 
 
-    public boolean sePuedeCrear(FichaTerrestre nueva) throws NoSePuedeCrearFicha {
-        if (!nueva.tablero().hayEspacioTerreste(nueva.coordenada())) {
-            throw new NoSePuedeCrearFicha("Espacio Ocupado");
-        }
-        return true;
-    }
-
-    public boolean sePuedeCrear(FichaAerea nueva) throws NoSePuedeCrearFicha {
-        if (!nueva.tablero().hayEspacioArreo(nueva.coordenada())) {
+    public boolean sePuedeCrear(Ficha nueva) throws NoSePuedeCrearFicha {
+        if (!nueva.tablero().hayEspacio(nueva.coordenada())) {
             throw new NoSePuedeCrearFicha("Espacio Ocupado");
         }
         return true;
@@ -29,10 +17,10 @@ public class ModuloConstruccionOP {
 
     // Fichaterrestre.
 
-    public void PonerEnJuego(FichaTerrestre nueva) {
+    public void PonerEnJuego(Ficha nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
-            nueva.tablero().insertar2(nueva.coordenada(), nueva);
+            nueva.tablero().insertar(nueva.coordenada(), nueva);
         }
     }
     // Fichaterrestre.
@@ -43,19 +31,9 @@ public class ModuloConstruccionOP {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
             nueva.propietario().newFicha2(nueva);
-            nueva.tablero().insertar2(nueva.coordenada(), nueva);
+            nueva.tablero().insertar(nueva.coordenada(), nueva);
         }
     }
-
-    // FichaAerea.
-
-    public void PonerEnJuego(FichaAerea nueva) {
-        if (this.sePuedeCrear(nueva)) {
-            nueva.propietario().newFicha2(nueva);
-            nueva.tablero().insertar2(nueva.coordenada(), nueva);
-        }
-    }
-    // FichaAerea.
 
     // UnidadArrea.
 
@@ -63,7 +41,7 @@ public class ModuloConstruccionOP {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
             nueva.propietario().newFicha2(nueva);
-            nueva.tablero().insertar2(nueva.coordenada(), nueva);
+            nueva.tablero().insertar(nueva.coordenada(), nueva);
         }
     }
     // UnidadArrea.
@@ -72,14 +50,14 @@ public class ModuloConstruccionOP {
     public void PonerEnJuego(FuenteDeRecurso nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
-            nueva.tablero().insertar2(nueva.coordenada(), nueva);
+            nueva.tablero().insertar(nueva.coordenada(), nueva);
         }
     }
     //recursoTerrestre
 
     //ExtrearRecursos
     public boolean sePuedeCrear(EdifcioDeRecusosTerrestre nueva) throws NoSePuedeCrearFicha {
-        Ficha recurso = nueva.tablero().getCasilla(nueva.coordenada()).getFichaTerrestre();
+        Ficha recurso = nueva.tablero().getFicha(nueva.coordenada());
 
         if (!(recurso.tipoDeFuentaDeRecursos() == nueva.tipoDeFuentaDeRecursos())) {
             throw new NoSePuedeCrearFicha("No Es el Racurso Correcto");
@@ -87,15 +65,17 @@ public class ModuloConstruccionOP {
         return true;
     }
 
-    public void PonerEnJuego(EdifcioDeRecusosTerrestre nueva) { //aun asi Se tiene que Crear la Fuente de Recursos
+    public void PonerEnJuego(EdifcioDeRecusosTerrestre nueva) {
+        //aun asi Se tiene que Crear la Fuente de Recursos
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
 
-            FuenteDeRecurso fuenteDeRecursos = (FuenteDeRecurso) nueva.tablero().getCasilla(nueva.coordenada()).getFichaTerrestre(); //si no puedo quitar el casteo
-            nueva.tablero().getCasilla(nueva.coordenada()).eliminarFichaTerrestre();
+            //si no puedo quitar el casteo
+            FuenteDeRecurso fuenteDeRecursos = (FuenteDeRecurso) nueva.tablero().getFicha(nueva.coordenada());
+            nueva.tablero().eliminarFicha(nueva.coordenada());
 
             nueva.fuenteDeRecursos(fuenteDeRecursos);
-            nueva.tablero().insertar2(nueva.coordenada(), nueva);
+            nueva.tablero().insertar(nueva.coordenada(), nueva);
 
         }
     }

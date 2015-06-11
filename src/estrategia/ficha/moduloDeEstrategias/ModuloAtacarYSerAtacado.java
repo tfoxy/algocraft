@@ -30,7 +30,7 @@ public class ModuloAtacarYSerAtacado {
         try {
             this.realizarAtaque(agresor, defensor);
             return true;
-        } catch(FueraDeRangoException e) {
+        } catch (FueraDeRangoException e) {
             return false;
         }
     }

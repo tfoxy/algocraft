@@ -9,6 +9,7 @@ import juego.Jugador;
 import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
 import tablero.Coordenada;
+import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.Tablero;
 import juego.Tecnologia;
@@ -73,8 +74,8 @@ public abstract class Ficha {
         return tablero;
     }
 
-    public Coordenada coordenada() {
-        return coordenada;
+    public Coordenada3d coordenada() {
+        return new Coordenada3d(coordenada, altura());
     }
 
     public Recursos coste() {
@@ -219,4 +220,6 @@ public abstract class Ficha {
     public boolean esNatural() {
         return esNatural;
     }
+
+    public abstract int altura();
 }

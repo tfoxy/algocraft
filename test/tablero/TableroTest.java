@@ -29,28 +29,28 @@ public class TableroTest {
 
 
     @Test
-    public void noTiraErrorAlObtenerCasillaDeLasEsquinas() {
+    public void noTiraErrorAlObtenerFichaDeLasEsquinas() {
         Coordenada lugarSuperiorIzquierdo = new Coordenada(1, 1);
         Coordenada lugarInferiorDerecho = new Coordenada(6, 8);
 
-        tablero.getCasilla(lugarSuperiorIzquierdo);
-        tablero.getCasilla(lugarInferiorDerecho);
+        tablero.getFichaTerrestre(lugarSuperiorIzquierdo);
+        tablero.getFichaTerrestre(lugarInferiorDerecho);
     }
 
 
     @Test(expected = PosicionFueraDeLimiteException.class)
-    public void tiraErrorAlObtenerCasillaCeroCero() {
+    public void tiraErrorAlObtenerFichaEnCeroCero() {
         Coordenada lugar = new Coordenada(0, 0);
 
-        tablero.getCasilla(lugar);
+        tablero.getFichaTerrestre(lugar);
     }
 
 
     @Test(expected = PosicionFueraDeLimiteException.class)
-    public void tiraErrorAlObtenerCasillaFueraDeTablero() {
+    public void tiraErrorAlObtenerFichaFueraDeTablero() {
         Coordenada lugar = new Coordenada(7, 5);
 
-        tablero.getCasilla(lugar);
+        tablero.getFichaTerrestre(lugar);
     }
 
 

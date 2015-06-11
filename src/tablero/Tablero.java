@@ -1,8 +1,11 @@
 package tablero;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import error.FichaSobreOtraFichaException;
 import error.PosicionFueraDeLimiteException;
 import ficha.Ficha;
 import ficha.FichaAerea;
@@ -10,127 +13,108 @@ import ficha.FichaTerrestre;
 
 public class Tablero {
 
+    private static final Map<Integer, Ficha> FICHAS_VACIAS;
+
+    static {
+        FICHAS_VACIAS = new HashMap<>();
+        FICHAS_VACIAS.put(Altura.TIERRA, new FichaTerrestre());
+        FICHAS_VACIAS.put(Altura.AIRE, new FichaAerea());
+    }
+
 
     private int longitudX;
     private int longitudY;
-    private Map<Coordenada, CasillaDeTablero> casillas = new HashMap<>();
+    private Map<Coordenada3d, Ficha> fichas = new HashMap<>();
 
 
     public Tablero(int x, int y) {
         longitudX = x;
         longitudY = y;
-
-        inicializarCasillas();
     }
 
 
-    private void inicializarCasillas() {
-        Coordenada coordenada;
-        CasillaDeTablero casilla;
+    private void verificar(Coordenada3d lugar) {
+        int x = lugar.getX();
+        int y = lugar.getY();
+        int z = lugar.getZ();
 
-        for (int i = 0; i < longitudX; i++) {
-            for (int j = 0; j < longitudY; j++) {
-                coordenada = new Coordenada(i + 1, j + 1);
-                casilla = new CasillaDeTablero();
-                casillas.put(coordenada, casilla);
-            }
-        }
-    }
-
-
-    public boolean hayEspacioTerreste(Coordenada lugar) {
-        return casillas.get(lugar).hayEspacioTerreste();
-    }
-
-    public boolean hayEspacioArreo(Coordenada lugar) { //new 6
-        return casillas.get(lugar).hayEspacioArreo();
-    }
-
-
-    public CasillaDeTablero getCasilla(Coordenada lugar) {
-        CasillaDeTablero casilla = casillas.get(lugar);
-
-        if (casilla == null) {
+        if (x < 1 || x > longitudX
+                || y < 1 || y > longitudY
+                || z < Altura.TIERRA || z > Altura.AIRE) {
             throw new PosicionFueraDeLimiteException();
         }
-
-        return casilla;
     }
 
 
     public Ficha getFicha(Coordenada3d lugar) {
-        Casilla casilla = getCasilla(lugar.proyeccion());
-        int z = lugar.getZ();
-        Ficha ficha;
+        verificar(lugar);
 
-        if (z == 1) {
-            ficha = casilla.getFichaTerrestre();
-        } else if (z == 2) {
-            ficha = casilla.getFichaAerea();
-        } else {
-            throw new PosicionFueraDeLimiteException();
+        Ficha ficha = fichas.get(lugar);
+
+        if (ficha == null) {
+            ficha = FICHAS_VACIAS.get(lugar.getZ());
         }
 
         return ficha;
     }
 
 
-    //Refactorizar Despues.
-    public void insertar2(Coordenada lugar, FichaTerrestre ficha) {
-        getCasilla(lugar).insertar(ficha);
-        
-        if (!ficha.coordenada().equals(lugar)) {
-            getCasilla(ficha.coordenada()).eliminarFichaTerrestre();
-        }
-
-        ficha.coordenada(lugar);
-        ficha.tablero(this);
+    public Ficha getFichaTerrestre(Coordenada lugar) {
+        return getFicha(new Coordenada3d(lugar, Altura.TIERRA));
     }
-    //Refactorizar Despues.
-    public void insertar2(Coordenada lugar, FichaAerea ficha) {
 
-        getCasilla(lugar).insertar(ficha);
 
-        if (!ficha.coordenada().equals(lugar)) {
-            getCasilla(ficha.coordenada()).eliminarFichaAerea();
-        }
-
-        ficha.coordenada(lugar);
-        ficha.tablero(this);
+    public Ficha getFichaAerea(Coordenada lugar) {
+        return getFicha(new Coordenada3d(lugar, Altura.AIRE));
     }
-    
-    
-    public void insertar(Coordenada lugar, FichaTerrestre ficha) {
-        if (lugar.equals(ficha.coordenada())) {
-            // Si la ficha se encuentra en el mismo lugar, no hacer nada
-            return;
+
+
+    public boolean hayEspacio(Coordenada3d coordenada) {
+        return getFicha(coordenada).estoyVacio();
+    }
+
+
+    public boolean hayEspacioTerreste(Coordenada lugar) {
+        return hayEspacio(new Coordenada3d(lugar, Altura.TIERRA));
+    }
+
+    public boolean hayEspacioArreo(Coordenada lugar) { //new 6
+        return hayEspacio(new Coordenada3d(lugar, Altura.AIRE));
+    }
+
+
+    public void insertar(Coordenada lugar, Ficha ficha) {
+        Coordenada3d coord3d = new Coordenada3d(lugar, ficha.altura());
+        Ficha fichaEnLugar = getFicha(coord3d);
+
+        if (!fichaEnLugar.estoyVacio()) {
+            throw new FichaSobreOtraFichaException();
         }
 
-        getCasilla(lugar).insertar(ficha);
-
-        if (ficha.coordenada() != null) {
-            getCasilla(ficha.coordenada()).eliminarFichaTerrestre();
-        }
+        fichas.put(coord3d, ficha);
 
         ficha.coordenada(lugar);
         ficha.tablero(this);
     }
 
 
-    public void insertar(Coordenada lugar, FichaAerea ficha) {
-        if (lugar.equals(ficha.coordenada())) {
-            // Si la ficha se encuentra en el mismo lugar, no hacer nada
-            return;
-        }
+    public void eliminarFicha(Coordenada3d lugar) {
+        fichas.remove(lugar);
+    }
 
-        getCasilla(lugar).insertar(ficha);
 
-        if (ficha.coordenada() != null) {
-            getCasilla(ficha.coordenada()).eliminarFichaAerea();
-        }
+    public void eliminarFichaTerrestre(Coordenada lugar) {
+        eliminarFicha(new Coordenada3d(lugar, Altura.TIERRA));
+    }
 
-        ficha.coordenada(lugar);
-        ficha.tablero(this);
+
+    public void eliminarFichaAerea(Coordenada lugar) {
+        eliminarFicha(new Coordenada3d(lugar, Altura.AIRE));
+    }
+
+
+    public Casilla getCasilla() {
+        return null;
     }
 
 

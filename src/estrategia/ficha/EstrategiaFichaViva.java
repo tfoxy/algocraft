@@ -9,21 +9,30 @@ import ficha.FichaTerrestre;
 
 public class EstrategiaFichaViva extends EstrategiaFicha {
 
-    ModuloMover moduloMover = new ModuloMover();
-    ModuloEfectosDeTurno moduloEfectosDeTurno = new ModuloEfectosDeTurno();
+    private ModuloMover moduloMover = new ModuloMover();
+    private ModuloEfectosDeTurno moduloEfectosDeTurno = new ModuloEfectosDeTurno();
 
-    
+
+    @Override
     public boolean atacar(Ficha agresor, Ficha defensor) {
-		return moduloAtacarYSerAtacado.atacar(agresor, defensor);
+        return moduloAtacarYSerAtacado.atacar(agresor, defensor);
     }
 
+    @Override
     public boolean intentarMovimiento(Ficha ficha, Direccion dirrecion) {
-		return  moduloMover.intentarMovimiento(ficha, dirrecion); }
+        return moduloMover.intentarMovimiento(ficha, dirrecion);
+    }
+
+    @Override
     public boolean intentarMovimiento(FichaTerrestre ficha, Direccion dirrecion) {
-		return  moduloMover.intentarMovimiento(ficha, dirrecion); }
+        return moduloMover.intentarMovimiento(ficha, dirrecion);
+    }
+
+    @Override
     public boolean intentarMovimiento(FichaAerea ficha, Direccion dirrecion) {
-		return  moduloMover.intentarMovimiento(ficha, dirrecion); }
-    
+        return moduloMover.intentarMovimiento(ficha, dirrecion);
+    }
+
     @Override
     public EstrategiaFicha pasarTurno(Ficha ficha) {
         ficha.barras().pasarTurno();

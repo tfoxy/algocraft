@@ -36,13 +36,13 @@ public class Coordenada3d extends Coordenada {
         return result;
     }
 
-    public Coordenada proyeccion() {
-        return new Coordenada(getX(), getY());
-    }
-
     @Override
     public Coordenada3d dameCordenadaHacia(Direccion direccion) {
         Coordenada coordenada = super.dameCordenadaHacia(direccion);
         return new Coordenada3d(coordenada.getX(), coordenada.getY(), z);
+    }
+
+    public Coordenada proyeccion() {
+        return new Coordenada(getX(), getY());
     }
 }

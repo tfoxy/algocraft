@@ -16,9 +16,6 @@ public class EstrategiaConsturccion extends EstrategiaFicha {
     public void PonerEnJuego(Ficha nueva) {
         moduloConstruccion.PonerEnJuego(nueva);
     }
-    public void PonerEnJuego(FichaTerrestre nueva) {
-        moduloConstruccion.PonerEnJuego(nueva);
-    }
     public void PonerEnJuego(FuenteDeRecurso nueva) {
         moduloConstruccion.PonerEnJuego(nueva);
     }
