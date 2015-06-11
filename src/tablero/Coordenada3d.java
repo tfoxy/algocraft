@@ -9,6 +9,11 @@ public class Coordenada3d extends Coordenada {
         this.z = z;
     }
 
+    public Coordenada3d(Coordenada coordenada, int z) {
+        super(coordenada.getX(), coordenada.getY());
+        this.z = z;
+    }
+
     public int getZ() {
         return z;
     }
@@ -35,7 +40,8 @@ public class Coordenada3d extends Coordenada {
         return new Coordenada(getX(), getY());
     }
 
-    public Coordenada3d dameCordenada3dHacia(Direccion direccion) {
+    @Override
+    public Coordenada3d dameCordenadaHacia(Direccion direccion) {
         Coordenada coordenada = this.dameCordenadaHacia(direccion);
         return new Coordenada3d(coordenada.getX(), coordenada.getY(), z);
     }
