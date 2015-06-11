@@ -12,8 +12,9 @@ public class EstrategiaFichaViva extends EstrategiaFicha {
     ModuloMover moduloMover = new ModuloMover();
     ModuloEfectosDeTurno moduloEfectosDeTurno = new ModuloEfectosDeTurno();
 
-    public void atacar(Ficha agresor, Ficha defensor) {
-        moduloAtacarYSerAtacado.atacar(agresor, defensor);
+    
+    public boolean atacar(Ficha agresor, Ficha defensor) {
+		return moduloAtacarYSerAtacado.atacar(agresor, defensor);
     }
 
     public boolean intentarMovimiento(Ficha ficha, Direccion dirrecion) {

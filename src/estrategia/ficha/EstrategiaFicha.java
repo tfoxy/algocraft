@@ -42,7 +42,8 @@ public abstract class EstrategiaFicha {
         moduloMorir.morir(ficha);
     }
 
-    public void atacar(Ficha agresor, Ficha defensor) {
+    public boolean atacar(Ficha agresor, Ficha defensor) {
+		return false;
         //nada
     }
 

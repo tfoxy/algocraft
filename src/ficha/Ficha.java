@@ -190,8 +190,8 @@ public abstract class Ficha {
         estrategia.serAtacado(danio, this);
     }
 
-    public void atacar(Ficha defensor) {
-        estrategia.atacar(this, defensor);
+    public boolean atacar(Ficha defensor) {
+        return estrategia.atacar(this, defensor);
     }
 
     public void PonerEnJuego() {
