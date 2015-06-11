@@ -42,7 +42,7 @@ public class Coordenada3d extends Coordenada {
 
     @Override
     public Coordenada3d dameCordenadaHacia(Direccion direccion) {
-        Coordenada coordenada = this.dameCordenadaHacia(direccion);
+        Coordenada coordenada = super.dameCordenadaHacia(direccion);
         return new Coordenada3d(coordenada.getX(), coordenada.getY(), z);
     }
 }
