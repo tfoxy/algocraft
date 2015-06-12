@@ -49,7 +49,7 @@ public final class CoordenadaUtil {
         }
     }
 
-    // TODO
+    // TODO public static List<Ficha> getFichasEnArea(Tablero mapa, Coordenada puntoMedio, int rango)
 
 
 }
