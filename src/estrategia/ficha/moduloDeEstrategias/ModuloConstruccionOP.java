@@ -72,7 +72,6 @@ public class ModuloConstruccionOP {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
 
-            //si no puedo quitar el casteo
             FuenteDeRecurso fuenteDeRecursos = (FuenteDeRecurso) nueva.tablero().getFicha(nueva.coordenada());
             nueva.tablero().eliminarFicha(nueva.coordenada());
 

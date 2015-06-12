@@ -1,13 +1,13 @@
 package estrategia.ficha.moduloDeEstrategias;
 
 
+import error.EdificioDeRecursosNecesitaFichaRecursoException;
 import error.FichaSobreOtraFichaException;
 import error.NoSePuedeCrearFicha;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
 import ficha.EdifcioDeRecusosTerrestre;
 import ficha.Ficha;
-import ficha.FichaTerrestre;
 import ficha.FuenteDeRecurso;
 
 
@@ -62,7 +62,7 @@ public class ModuloConstruccion {
         Ficha recurso = nueva.tablero().getFichaTerrestre(nueva.coordenada());
 
         if (!(recurso.tipoDeFuentaDeRecursos() == nueva.tipoDeFuentaDeRecursos())) {
-            throw new NoSePuedeCrearFicha("No Es el Recurso Correcto");
+            throw new EdificioDeRecursosNecesitaFichaRecursoException();
         }
         if (!(nueva.propietario().tienesLasTecnologias(nueva.tecnologiasNecesarias()))) {
             throw new TecnologiasInsuficientesException();
@@ -75,7 +75,8 @@ public class ModuloConstruccion {
             nueva.propietario().gastaRecursos(nueva.coste());
             nueva.propietario().newFicha2(nueva);
             
-            FuenteDeRecurso fuenteDeRecursos = (FuenteDeRecurso) nueva.tablero().getFichaTerrestre(nueva.coordenada()); //si no puedo quitar el casteo
+            FuenteDeRecurso fuenteDeRecursos =
+                    (FuenteDeRecurso) nueva.tablero().getFichaTerrestre(nueva.coordenada());
             nueva.tablero().eliminarFicha(nueva.coordenada());
             
             nueva.fuenteDeRecursos(fuenteDeRecursos);
