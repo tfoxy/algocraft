@@ -222,4 +222,28 @@ public abstract class Ficha {
     }
 
     public abstract int altura();
+    
+    public Ficha clone(){
+    	
+    	Ficha clone = null;
+    	try {
+			clone = (Ficha)super.clone();
+		} catch (CloneNotSupportedException e) {
+			// No debería ocurrir
+		} //cuando esten echos los Texy intentar quitar el (casteo)
+    	clone.barras = this.barras.clone();
+    	
+        return this;
+    }
+    
+    public Ficha expectro(){
+    	
+    	Ficha clone = this.clone();
+
+    	clone.barras = this.barras.expectro();
+    	clone.ataqueAire=clone.ataqueTierra= new Ataque(0,-1);
+    	
+        return this;
+    }
+   
 }

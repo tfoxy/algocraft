@@ -2,6 +2,7 @@ package magia;
 
 import error.UnicamenteObjetivoAliadoException;
 import ficha.Ficha;
+import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Tablero;
 
@@ -15,10 +16,12 @@ import tablero.Tablero;
  */
 public class AlucinacionMagia extends Magia {
 
+	private Ficha fichacopiar = null;
+	
     public AlucinacionMagia() {
         super(100, 4);
     }
-
+       
     @Override
     protected void verificarObjetivo(Ficha ficha, Coordenada3d objetivo) {
         Tablero mapa = ficha.tablero();
@@ -29,5 +32,25 @@ public class AlucinacionMagia extends Magia {
             throw new UnicamenteObjetivoAliadoException();
         }
     }
+    
+    //hay que pensar como seria esto en la ineterfas.. Pero deveria ser 2 funciones.
+    
+    public void selccionarEspectro (Ficha objetivo){
+    	fichacopiar  = objetivo;
+    }
+    
+    public void insertarEspectro (Ficha objetivo, Coordenada lugar){
+    	Ficha alucinacion = fichacopiar.expectro();
+    	alucinacion.setBasico(alucinacion.propietario(), alucinacion.tablero(), lugar);
+    	
+    	//tengo que pensar algo mas proligo despues. Aunque este es un exepcion a la regla.
+    	alucinacion.propietario().newFicha2(alucinacion);
+    	alucinacion.tablero().insertar(lugar, alucinacion);
+    }
+    
+    /*pero falta ver si el usario elige el lugar o sale alado de la ficha.
+     *  Voy a usar area de cordenada
+     *  y resolverlo como un repetir para toda la lista y un if.
+     */
 
 }

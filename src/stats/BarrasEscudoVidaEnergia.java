@@ -178,4 +178,23 @@ public class BarrasEscudoVidaEnergia {
         }
     }
 
+    public BarrasEscudoVidaEnergia expectro(){
+    	
+    	BarrasEscudoVidaEnergia clone = this.clone();
+
+    	clone.vidaActual = 0; //el morir dice que tiene que tener 0 vida y 0 escudo.
+    	clone.vidaPorTurno = 0; 
+        return clone;
+    }
+    
+    public BarrasEscudoVidaEnergia clone(){
+    	
+    	BarrasEscudoVidaEnergia clone = null;
+    	try {
+			clone = (BarrasEscudoVidaEnergia) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// No debería ocurrir
+		} //cuando esten echos los Texy intentar quitar el (casteo)
+        return clone;
+    }
 }
