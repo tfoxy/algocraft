@@ -1,5 +1,5 @@
 package error;
 
-public class FichaSobreOtraFichaException extends JuegoException {
+public class FichaSobreOtraFichaException extends NoSePuedeCrearFicha {
 
 }

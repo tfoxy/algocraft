@@ -1,7 +1,10 @@
 package estrategia.ficha.moduloDeEstrategias;
 
 
+import error.FichaSobreOtraFichaException;
 import error.NoSePuedeCrearFicha;
+import error.RecursosInsuficientesException;
+import error.TecnologiasInsuficientesException;
 import ficha.EdifcioDeRecusosTerrestre;
 import ficha.Ficha;
 import ficha.FichaTerrestre;
@@ -22,13 +25,13 @@ public class ModuloConstruccion {
 
     public boolean sePuedeCrear(Ficha nueva) throws NoSePuedeCrearFicha {
         if (!(nueva.propietario().tengoSuficientesRecursos(nueva.coste()))) { //!
-            throw new NoSePuedeCrearFicha("Faltan Recursos");
+            throw new RecursosInsuficientesException();
         }
         if (!nueva.tablero().hayEspacio(nueva.coordenada())) {
-            throw new NoSePuedeCrearFicha("Espacio Ocupado");
+            throw new FichaSobreOtraFichaException();
         }
         if (!(nueva.propietario().tienesLasTecnologias(nueva.tecnologiasNecesarias()))) {
-            throw new NoSePuedeCrearFicha("No Tienes las tecnologias");
+            throw new TecnologiasInsuficientesException();
         }
         return true;
     }
@@ -44,7 +47,7 @@ public class ModuloConstruccion {
     
     public boolean sePuedeCrear(FuenteDeRecurso nueva) throws NoSePuedeCrearFicha {
         if (!nueva.tablero().hayEspacioTerreste(nueva.coordenada())) {
-            throw new NoSePuedeCrearFicha("Espacio Ocupado");
+            throw new FichaSobreOtraFichaException();
         }
         return true;
     }
@@ -54,15 +57,15 @@ public class ModuloConstruccion {
     //ExtrearRecursos
     public boolean sePuedeCrear(EdifcioDeRecusosTerrestre nueva) throws NoSePuedeCrearFicha {
         if (!(nueva.propietario().tengoSuficientesRecursos(nueva.coste()))) {
-            throw new NoSePuedeCrearFicha("Faltan Recursos");
+            throw new RecursosInsuficientesException();
         }
         Ficha recurso = nueva.tablero().getFichaTerrestre(nueva.coordenada());
 
         if (!(recurso.tipoDeFuentaDeRecursos() == nueva.tipoDeFuentaDeRecursos())) {
-            throw new NoSePuedeCrearFicha("No Es el Racurso Correcto");
+            throw new NoSePuedeCrearFicha("No Es el Recurso Correcto");
         }
         if (!(nueva.propietario().tienesLasTecnologias(nueva.tecnologiasNecesarias()))) {
-            throw new NoSePuedeCrearFicha("No Tienes las tecnologias");
+            throw new TecnologiasInsuficientesException();
         }
         return true;
     }

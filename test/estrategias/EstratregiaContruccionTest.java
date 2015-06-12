@@ -2,6 +2,8 @@ package estrategias;
 
 import static org.junit.Assert.assertEquals;
 
+import error.FichaSobreOtraFichaException;
+import error.RecursosInsuficientesException;
 import juego.Gaia;
 import juego.Jugador;
 import juego.Raza;
@@ -43,7 +45,7 @@ public class EstratregiaContruccionTest {
         assertEquals(400, protoss.cantidadMineral());
     }
 
-    @Test(expected = NoSePuedeCrearFicha.class)
+    @Test(expected = RecursosInsuficientesException.class)
     public void falloPorFaltaDeRecursos() {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 0, 0);
         Ficha nuevoEdificio = new Pilon();
@@ -52,7 +54,7 @@ public class EstratregiaContruccionTest {
     }
 
 
-    @Test(expected = NoSePuedeCrearFicha.class)
+    @Test(expected = FichaSobreOtraFichaException.class)
     public void falloPorSobreposicion() {
         Ficha nuevoEdificio = new Pilon();
         Coordenada coordenada = new Coordenada(1, 1);
@@ -71,7 +73,7 @@ public class EstratregiaContruccionTest {
     //recursoTerrestre
 
     @Test
-    public void crearsseEnLugarCorrectoFuenteDeRecursos() {
+    public void crearseEnLugarCorrectoFuenteDeRecursos() {
         Ficha nuevoRecurso = new Volcan();
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
         nuevoRecurso.PonerEnJuego();
@@ -95,7 +97,7 @@ public class EstratregiaContruccionTest {
     // EdifcioDeRecusosTerrestre
 
     @Test
-    public void crearsseEnLugarCorrectoEdifcioDeRecusosTerrestre() {
+    public void crearseEnLugarCorrectoEdifcioDeRecusosTerrestre() {
         Ficha nuevoRecurso = new Volcan();
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
         nuevoRecurso.PonerEnJuego();
@@ -139,7 +141,7 @@ public class EstratregiaContruccionTest {
     //esto hirian en las pruevas de Extrategia Ficha.. pero al ser una clase abstarcta no se puede hacer.
 
     @Test
-    public void MuereCasaEnConsturccionNoPasaNadal() {
+    public void muereCasaEnConstruccionNoPasaNada() {
         Ficha nuevoEdificio = new Pilon();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
         nuevoEdificio.PonerEnJuego();
@@ -151,7 +153,7 @@ public class EstratregiaContruccionTest {
     }
 
     @Test
-    public void MuereTerrestreSeLiveraElEspacio() {
+    public void muereTerrestreSeLiberaElEspacio() {
         Ficha nuevoEdificio = new Pilon();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
         nuevoEdificio.PonerEnJuego();
@@ -163,7 +165,7 @@ public class EstratregiaContruccionTest {
 
 
     @Test
-    public void MuereUnidadPierdesPoblacionaActual() {
+    public void muereUnidadPierdesPoblacionaActual() {
         Ficha nuevaUnidad = new Zealot();
         protoss.agregarPoblacionTotal(10);
         nuevaUnidad.setBasico(protoss, mapa, new Coordenada(1, 1));
@@ -176,7 +178,7 @@ public class EstratregiaContruccionTest {
     }
 
     @Test
-    public void MuereFuenteDeRecursoDejaElRecurso() {
+    public void muereFuenteDeRecursoDejaElRecurso() {
         Ficha nuevoRecurso = new Volcan();
         Coordenada coordenada = new Coordenada(1, 1);
         nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
@@ -189,4 +191,7 @@ public class EstratregiaContruccionTest {
         nuevoEdificio.muerete();
         assertEquals(pachaMama, mapa.getFichaTerrestre(coordenada).propietario());
     }
+
+    // TODO test que pruebe TecnologiasInsuficientesException
+
 }

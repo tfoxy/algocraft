@@ -1,23 +1,25 @@
 package estrategia.ficha.moduloDeEstrategias;
 
+import error.EdificioDeRecursosNecesitaFichaRecursoException;
+import error.FichaSobreOtraFichaException;
 import error.NoSePuedeCrearFicha;
 import ficha.*;
 
 public class ModuloConstruccionOP {
 
-//No importan. Los recursos ni la Tecnologia.. es un Digamos Word Editor
+//No importan. Los recursos ni la Tecnologia.. es un Digamos World Editor
 
 
     public boolean sePuedeCrear(Ficha nueva) throws NoSePuedeCrearFicha {
         if (!nueva.tablero().hayEspacio(nueva.coordenada())) {
-            throw new NoSePuedeCrearFicha("Espacio Ocupado");
+            throw new FichaSobreOtraFichaException();
         }
         return true;
     }
 
     // Fichaterrestre.
 
-    public void PonerEnJuego(Ficha nueva) {
+    public void ponerEnJuego(Ficha nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
             nueva.tablero().insertar(nueva.coordenada(), nueva);
@@ -27,7 +29,7 @@ public class ModuloConstruccionOP {
 
     // UnidadTerrestre.
 
-    public void PonerEnJuego(UnidadTerrestre nueva) {
+    public void ponerEnJuego(UnidadTerrestre nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
             nueva.propietario().newFicha2(nueva);
@@ -37,7 +39,7 @@ public class ModuloConstruccionOP {
 
     // UnidadArrea.
 
-    public void PonerEnJuego(UnidadAerea nueva) {
+    public void ponerEnJuego(UnidadAerea nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
             nueva.propietario().newFicha2(nueva);
@@ -47,7 +49,7 @@ public class ModuloConstruccionOP {
     // UnidadArrea.
 
     //recursoTerrestre
-    public void PonerEnJuego(FuenteDeRecurso nueva) {
+    public void ponerEnJuego(FuenteDeRecurso nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
             nueva.tablero().insertar(nueva.coordenada(), nueva);
@@ -60,12 +62,12 @@ public class ModuloConstruccionOP {
         Ficha recurso = nueva.tablero().getFicha(nueva.coordenada());
 
         if (!(recurso.tipoDeFuentaDeRecursos() == nueva.tipoDeFuentaDeRecursos())) {
-            throw new NoSePuedeCrearFicha("No Es el Racurso Correcto");
+            throw new EdificioDeRecursosNecesitaFichaRecursoException();
         }
         return true;
     }
 
-    public void PonerEnJuego(EdifcioDeRecusosTerrestre nueva) {
+    public void ponerEnJuego(EdifcioDeRecusosTerrestre nueva) {
         //aun asi Se tiene que Crear la Fuente de Recursos
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
