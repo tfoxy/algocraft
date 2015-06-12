@@ -34,7 +34,7 @@ public class CoordenadaUtilTest {
     }
 
     @Test
-    public void areaDeCoordenadasContieneCoordenadaEnRango() {
+    public void areaDeCoordenadasContieneCoordenadaEnBorde() {
         final Set<Coordenada> coordenadaSet =
                 CoordenadaUtil.areaDeCoordenadas(new Coordenada(3, 3), 2);
 
@@ -56,6 +56,22 @@ public class CoordenadaUtilTest {
                 CoordenadaUtil.areaDeCoordenadas(new Coordenada(3, 3), -1);
 
         assertThat(coordenadaSet, hasSize(0));
+    }
+
+    @Test
+    public void areaDeCoordenadasContieneCoordenadaLejanas() {
+        final Set<Coordenada> coordenadaSet =
+                CoordenadaUtil.areaDeCoordenadas(new Coordenada(3, 3), 3);
+
+        assertThat(coordenadaSet, hasItem(new Coordenada(1, 3)));
+        assertThat(coordenadaSet, hasItem(new Coordenada(2, 2)));
+        assertThat(coordenadaSet, hasItem(new Coordenada(3, 1)));
+        assertThat(coordenadaSet, hasItem(new Coordenada(4, 2)));
+        assertThat(coordenadaSet, hasItem(new Coordenada(5, 3)));
+        assertThat(coordenadaSet, hasItem(new Coordenada(4, 4)));
+        assertThat(coordenadaSet, hasItem(new Coordenada(3, 5)));
+        assertThat(coordenadaSet, hasItem(new Coordenada(2, 4)));
+
     }
 
 }

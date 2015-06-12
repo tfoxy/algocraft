@@ -21,8 +21,11 @@ public class VisionTest {
     	CoordenadasVisibles vision = new CoordenadasVisibles();
 
         vision.verDesdeEstePunto(new Coordenada(5, 5), 5);
-        
-        
+
+
+        assertTrue(vision.puedeVer(new Coordenada(5, 5)));
+        assertTrue(vision.puedeVer(new Coordenada(5, 4)));
+        assertTrue(vision.puedeVer(new Coordenada(5, 3)));
         assertTrue(vision.puedeVer(new Coordenada(5, 1)));
         assertTrue(vision.puedeVer(new Coordenada(1, 5)));
         assertTrue(vision.puedeVer(new Coordenada(5, 10)));
