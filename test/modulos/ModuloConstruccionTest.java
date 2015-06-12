@@ -14,8 +14,6 @@ import error.NoSePuedeCrearFicha;
 import estrategia.ficha.moduloDeEstrategias.ModuloConstruccion;
 import ficha.CasaTerrestre;
 import ficha.EdifcioDeRecusosTerrestre;
-import ficha.EdificioTerrestre;
-import ficha.Ficha;
 import ficha.FuenteDeRecurso;
 import ficha.natural.Volcan;
 import ficha.protoss.Asimilador;
@@ -43,7 +41,7 @@ public class ModuloConstruccionTest {
     public void usarRecursosCorrectos() {
         CasaTerrestre nuevoEdificio = new Pilon();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1,1));
-        modulo.PonerEnJuego(nuevoEdificio);
+        modulo.ponerEnJuego(nuevoEdificio);
 
         assertEquals(200, protoss.cantidadGas());
         assertEquals(400, protoss.cantidadMineral());
@@ -54,7 +52,7 @@ public class ModuloConstruccionTest {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 0, 0);
         CasaTerrestre nuevoEdificio = new Pilon();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1,1));
-        modulo.PonerEnJuego(nuevoEdificio);
+        modulo.ponerEnJuego(nuevoEdificio);
     }
     
     @Test (expected = NoSePuedeCrearFicha.class)
@@ -64,11 +62,11 @@ public class ModuloConstruccionTest {
         
         
         nuevoEdificio.setBasico(protoss, mapa, coordenada);
-        modulo.PonerEnJuego(nuevoEdificio);
+        modulo.ponerEnJuego(nuevoEdificio);
         
         nuevoEdificio = new Pilon();
         nuevoEdificio.setBasico(protoss, mapa, coordenada);
-        modulo.PonerEnJuego(nuevoEdificio);
+        modulo.ponerEnJuego(nuevoEdificio);
     }
     //fichaTerrestre/casa
     
@@ -79,7 +77,7 @@ public class ModuloConstruccionTest {
     public void crearsseEnLugarCorrectoFuenteDeRecursos() {
         FuenteDeRecurso nuevoRecurso = new Volcan();
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1,1));
-        modulo.PonerEnJuego(nuevoRecurso);
+        modulo.ponerEnJuego(nuevoRecurso);
 
         Assert.assertFalse(mapa.hayEspacioTerreste(new Coordenada(1,1)));
     }
@@ -88,11 +86,11 @@ public class ModuloConstruccionTest {
     public void fallaLugarIncorrectoFuenteDeRecursos() {
         FuenteDeRecurso nuevoRecurso = new Volcan();
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1,1));
-        modulo.PonerEnJuego(nuevoRecurso);
+        modulo.ponerEnJuego(nuevoRecurso);
 
         nuevoRecurso = new Volcan();
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1,1));
-        modulo.PonerEnJuego(nuevoRecurso);
+        modulo.ponerEnJuego(nuevoRecurso);
     }
 
     //recursoTerrestre
@@ -103,11 +101,11 @@ public class ModuloConstruccionTest {
     public void crearsseEnLugarCorrectoEdifcioDeRecusosTerrestre() {
         FuenteDeRecurso nuevoRecurso = new Volcan();
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1,1));
-        modulo.PonerEnJuego(nuevoRecurso);
+        modulo.ponerEnJuego(nuevoRecurso);
     	
     	EdifcioDeRecusosTerrestre nuevoEdificio = new Asimilador();
     	nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1,1));
-        modulo.PonerEnJuego(nuevoEdificio);
+        modulo.ponerEnJuego(nuevoEdificio);
 
         assertEquals(200, protoss.cantidadGas());
         assertEquals(400, protoss.cantidadMineral());
@@ -117,7 +115,7 @@ public class ModuloConstruccionTest {
     public void fallaLugarIncorrectoEdifcioDeRecusosTerrestre() {
     	EdifcioDeRecusosTerrestre nuevoEdificio = new Asimilador();
     	nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1,1));
-        modulo.PonerEnJuego(nuevoEdificio);
+        modulo.ponerEnJuego(nuevoEdificio);
         
     }
     
@@ -128,7 +126,7 @@ public class ModuloConstruccionTest {
     public void tiempoCorrecto() {
         CasaTerrestre nuevoEdificio = new Pilon();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1,1));
-        modulo.PonerEnJuego(nuevoEdificio);
+        modulo.ponerEnJuego(nuevoEdificio);
         
         modulo.pasarTurno(nuevoEdificio);
         modulo.pasarTurno(nuevoEdificio);

@@ -48,6 +48,6 @@ public class ModuloMorir {
         edificio.tablero().eliminarFichaTerrestre(edificio.coordenada());
         
         ModuloConstruccion modulo = new ModuloConstruccion();
-        modulo.PonerEnJuego(edificio.fuenteDeRecursos());
+        modulo.ponerEnJuego(edificio.fuenteDeRecursos());
     }
 }

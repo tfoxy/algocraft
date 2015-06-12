@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import tablero.Coordenada;
 import tablero.Tablero;
-import error.NoSePuedeCrearFicha;
 import estrategia.ficha.moduloDeEstrategias.ModuloConstruccion;
 import estrategia.ficha.moduloDeEstrategias.ModuloMorir;
 import ficha.CasaTerrestre;
@@ -45,7 +44,7 @@ public class ModuloMorirTest {
     public void MuereCasaPierdesPoblacionTotal() {
         CasaTerrestre nuevoEdificio = new Pilon();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        moduloAux.PonerEnJuego(nuevoEdificio);
+        moduloAux.ponerEnJuego(nuevoEdificio);
         protoss.agregarPoblacionTotal(10); //el agregar poblacion iria durante la Extrategia. No en el moduloConstucccion.
 
         modulo.morir(nuevoEdificio);
@@ -57,7 +56,7 @@ public class ModuloMorirTest {
     public void MuereTerrestreSeLiveraElEspacio() {
         EdificioTerrestre nuevoEdificio = new Pilon();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        moduloAux.PonerEnJuego(nuevoEdificio);
+        moduloAux.ponerEnJuego(nuevoEdificio);
 
         modulo.morir(nuevoEdificio);
 
@@ -70,7 +69,7 @@ public class ModuloMorirTest {
         UnidadTerrestre nuevaUnidad = new Zealot();
         protoss.agregarPoblacionTotal(10);
         nuevaUnidad.setBasico(protoss, mapa, new Coordenada(1, 1));
-        moduloAux.PonerEnJuego(nuevaUnidad);
+        moduloAux.ponerEnJuego(nuevaUnidad);
 
         modulo.morir(nuevaUnidad); //el morir funciona
 
@@ -83,11 +82,11 @@ public class ModuloMorirTest {
         FuenteDeRecurso nuevoRecurso = new Volcan();
         Coordenada coordenada = new Coordenada(1, 1);
         nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
-        moduloAux.PonerEnJuego(nuevoRecurso);
+        moduloAux.ponerEnJuego(nuevoRecurso);
 
         EdifcioDeRecusosTerrestre nuevoEdificio = new Asimilador();
         nuevoEdificio.setBasico(protoss, mapa, coordenada);
-        moduloAux.PonerEnJuego(nuevoEdificio);
+        moduloAux.ponerEnJuego(nuevoEdificio);
 
         modulo.morir(nuevoEdificio);
         assertEquals(pachaMama, mapa.getFichaTerrestre(coordenada).propietario());

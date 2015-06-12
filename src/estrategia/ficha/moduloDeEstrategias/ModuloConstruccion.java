@@ -14,7 +14,7 @@ import ficha.FuenteDeRecurso;
 public class ModuloConstruccion {
 
 
-    public void PonerEnJuego(Ficha nueva) {
+    public void ponerEnJuego(Ficha nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().gastaRecursos(nueva.coste());
             nueva.propietario().newFicha2(nueva);
@@ -38,7 +38,7 @@ public class ModuloConstruccion {
     // Fichaterrestre.
 
     //recursoTerrestre
-    public void PonerEnJuego(FuenteDeRecurso nueva) {
+    public void ponerEnJuego(FuenteDeRecurso nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
             nueva.tablero().insertar(nueva.coordenada(), nueva);
@@ -70,7 +70,7 @@ public class ModuloConstruccion {
         return true;
     }
 
-    public void PonerEnJuego(EdifcioDeRecusosTerrestre nueva) {
+    public void ponerEnJuego(EdifcioDeRecusosTerrestre nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().gastaRecursos(nueva.coste());
             nueva.propietario().newFicha2(nueva);

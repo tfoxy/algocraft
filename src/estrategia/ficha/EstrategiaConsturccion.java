@@ -5,7 +5,6 @@ import ficha.CasaTerrestre;
 import ficha.EdifcioDeRecusosTerrestre;
 import ficha.EdificioTerrestre;
 import ficha.Ficha;
-import ficha.FichaTerrestre;
 import ficha.FuenteDeRecurso;
 
 public class EstrategiaConsturccion extends EstrategiaFicha {
@@ -14,13 +13,13 @@ public class EstrategiaConsturccion extends EstrategiaFicha {
 
 
     public void PonerEnJuego(Ficha nueva) {
-        moduloConstruccion.PonerEnJuego(nueva);
+        moduloConstruccion.ponerEnJuego(nueva);
     }
     public void PonerEnJuego(FuenteDeRecurso nueva) {
-        moduloConstruccion.PonerEnJuego(nueva);
+        moduloConstruccion.ponerEnJuego(nueva);
     }
     public void PonerEnJuego(EdifcioDeRecusosTerrestre nueva) {
-        moduloConstruccion.PonerEnJuego(nueva);
+        moduloConstruccion.ponerEnJuego(nueva);
     }
     
     public void matar(CasaTerrestre ficha) {
