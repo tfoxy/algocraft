@@ -2,7 +2,7 @@ package tablero;
 
 public class Coordenada3d extends Coordenada {
 
-    private int z;
+    private final int z;
 
     public Coordenada3d(int x, int y, int z) {
         super(x, y);
@@ -34,6 +34,11 @@ public class Coordenada3d extends Coordenada {
         int result = super.hashCode();
         result = 31 * result + z;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Coordenada3d{" + getX() + ", " + getY() + ", " + z + '}';
     }
 
     @Override

@@ -2,8 +2,8 @@ package tablero;
 
 public class Coordenada {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     public Coordenada(int x, int y) {
         this.x = x;
@@ -34,6 +34,12 @@ public class Coordenada {
         int result = x;
         result = 31 * result + y;
         return result;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Coordenada{" + x + ", " + y + '}';
     }
 
 
