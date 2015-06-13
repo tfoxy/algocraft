@@ -2,7 +2,7 @@ package tablero;
 
 public class Coordenada {
 
-    private final int x;
+    protected final int x;
     private final int y;
 
     public Coordenada(int x, int y) {

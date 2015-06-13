@@ -20,7 +20,7 @@ public class ModuloMorir {
 
     // TODO quitar resto de los métodos (excepto EdifcioDeRecusosTerrestre) y ver si los tests pasan
 
-    public void morir(CasaTerrestre casa) {
+    public void morir(CasaTerrestre casa) { //este hay que verlo por que varia para edificio vivo y muerto.
         casa.propietario().perderPoblacionTotal(casa.poblacionQueDa());
         casa.propietario().perderFicha(casa);
         casa.tablero().eliminarFichaTerrestre(casa.coordenada());

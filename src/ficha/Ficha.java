@@ -1,5 +1,9 @@
 package ficha;
 
+import error.FichaSobreOtraFichaException;
+import error.NoSePuedeCrearFicha;
+import error.RecursosInsuficientesException;
+import error.TecnologiasInsuficientesException;
 import estrategia.ficha.EstrategiaConsturccion;
 import estrategia.ficha.EstrategiaFicha;
 import estrategia.ficha.EstrategiaFichaViva;
@@ -23,10 +27,12 @@ public abstract class Ficha {
     protected Jugador propietario; //despues cualquier cosa refactorisamos... pero sino es absurdo tener tantos Gets
     protected Tablero tablero;
     protected Coordenada coordenada;
+    protected Coordenada3d coordenada2; //la idea es implemetar las funciones con esta cordenada asta tener todas implementadas y borrar la cordenada anterior
 
     protected boolean estoyVacio = true;
     protected boolean esNatural = true;
-
+    protected boolean esToyConstruido = false;
+    
     protected EstrategiaFicha estrategia = new EstrategiaFichaViva();
     protected String nombre = null;
 
@@ -195,10 +201,6 @@ public abstract class Ficha {
         return estrategia.atacar(this, defensor);
     }
 
-    public void PonerEnJuego() {
-        estrategia.PonerEnJuego(this);
-    }
-
     public boolean intentarMovimiento(Direccion dirrecion) {
         return estrategia.intentarMovimiento(this, dirrecion);
     }
@@ -245,5 +247,43 @@ public abstract class Ficha {
     	
         return this;
     }
+    
+    //poner En juego
+    
+    public void setBasico2 (Jugador jugador, Tablero mapa, Coordenada3d lugar) {
+        propietario = jugador;
+        tablero = mapa;
+        coordenada2 = lugar;
+    }
+
+    
+    //el viejo
+    public void PonerEnJuego() {
+        estrategia.PonerEnJuego(this);
+    }
+    
+    //el nuevo
+    public void ponerEnJuego() {
+        if (this.sePuedeCrear()) {
+        	propietario.gastaRecursos(coste);
+            propietario.newFicha2(this);
+            tablero.insertar(coordenada2, this);
+        }
+    }
+
+    public boolean sePuedeCrear() throws NoSePuedeCrearFicha {
+        if (!(propietario.tengoSuficientesRecursos(coste))) {
+            throw new RecursosInsuficientesException();
+        }
+        if (!(tablero.hayEspacio(coordenada2))) {
+            throw new FichaSobreOtraFichaException();
+        }
+        if (!(propietario.tienesLasTecnologias(tecnologiasNecesarias()))) {
+            throw new TecnologiasInsuficientesException();
+        }
+        return true;
+    }
+    
+    //poner En juego
    
 }

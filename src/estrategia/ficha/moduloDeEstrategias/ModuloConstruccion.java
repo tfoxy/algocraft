@@ -24,7 +24,7 @@ public class ModuloConstruccion {
 
 
     public boolean sePuedeCrear(Ficha nueva) throws NoSePuedeCrearFicha {
-        if (!(nueva.propietario().tengoSuficientesRecursos(nueva.coste()))) { //!
+        if (!(nueva.propietario().tengoSuficientesRecursos(nueva.coste()))) {
             throw new RecursosInsuficientesException();
         }
         if (!nueva.tablero().hayEspacio(nueva.coordenada())) {

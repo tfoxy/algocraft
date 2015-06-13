@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tablero.Coordenada;
+import tablero.Coordenada3d;
 import tablero.Tablero;
 import error.NoSePuedeCrearFicha;
 import ficha.Ficha;
@@ -38,8 +39,8 @@ public class EstratregiaContruccionTest {
     @Test
     public void usarRecursosCorrectos() {
         Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        nuevoEdificio.PonerEnJuego();
+        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
 
         assertEquals(200, protoss.cantidadGas());
         assertEquals(400, protoss.cantidadMineral());
@@ -49,8 +50,8 @@ public class EstratregiaContruccionTest {
     public void falloPorFaltaDeRecursos() {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 0, 0);
         Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        nuevoEdificio.PonerEnJuego();
+        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
     }
 
 
@@ -60,12 +61,12 @@ public class EstratregiaContruccionTest {
         Coordenada coordenada = new Coordenada(1, 1);
 
 
-        nuevoEdificio.setBasico(protoss, mapa, coordenada);
-        nuevoEdificio.PonerEnJuego();
+        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
 
         nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico(protoss, mapa, coordenada);
-        nuevoEdificio.PonerEnJuego();
+        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
     }
     //fichaTerrestre/casa
 
@@ -75,8 +76,8 @@ public class EstratregiaContruccionTest {
     @Test
     public void crearseEnLugarCorrectoFuenteDeRecursos() {
         Ficha nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        nuevoRecurso.PonerEnJuego();
+        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.ponerEnJuego();
 
         Assert.assertFalse(mapa.hayEspacioTerreste(new Coordenada(1, 1)));
     }
@@ -84,12 +85,12 @@ public class EstratregiaContruccionTest {
     @Test(expected = NoSePuedeCrearFicha.class)
     public void fallaLugarIncorrectoFuenteDeRecursos() {
         Ficha nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        nuevoRecurso.PonerEnJuego();
+        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.ponerEnJuego();
 
         nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        nuevoRecurso.PonerEnJuego();
+        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.ponerEnJuego();
     }
 
     //recursoTerrestre
@@ -99,12 +100,12 @@ public class EstratregiaContruccionTest {
     @Test
     public void crearseEnLugarCorrectoEdifcioDeRecusosTerrestre() {
         Ficha nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        nuevoRecurso.PonerEnJuego();
+        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.ponerEnJuego();
 
         Ficha nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        nuevoEdificio.PonerEnJuego();
+        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
 
         assertEquals(200, protoss.cantidadGas());
         assertEquals(400, protoss.cantidadMineral());
@@ -124,8 +125,9 @@ public class EstratregiaContruccionTest {
     @Test
     public void tiempoCorrecto() {
         Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        nuevoEdificio.PonerEnJuego();
+        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
+        
 
         nuevoEdificio.pasarTurno();
         nuevoEdificio.pasarTurno();
@@ -168,7 +170,7 @@ public class EstratregiaContruccionTest {
     public void muereUnidadPierdesPoblacionaActual() {
         Ficha nuevaUnidad = new Zealot();
         protoss.agregarPoblacionTotal(10);
-        nuevaUnidad.setBasico(protoss, mapa, new Coordenada(1, 1));
+        nuevaUnidad.setBasico(protoss, mapa, new Coordenada (1, 1));
         nuevaUnidad.PonerEnJuego();
 
         nuevaUnidad.muerete();

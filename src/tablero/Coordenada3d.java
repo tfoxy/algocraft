@@ -1,5 +1,8 @@
 package tablero;
 
+// TIERRA = 1;
+// AIRE = 2;
+
 public class Coordenada3d extends Coordenada {
 
     private final int z;
