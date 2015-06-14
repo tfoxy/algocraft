@@ -105,11 +105,11 @@ public class RecursosDeJugador {
     }
 
     public void agregarMineral(int mineral) {
-        mineral += mineral;
+        this.mineral += mineral;
     }
 
     public void agregarGas(int gas) {
-        gas += gas;
+        this.gas += gas;
     }
 
 
