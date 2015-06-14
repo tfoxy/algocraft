@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class Ficha implements Cloneable{
+public abstract class Ficha implements Cloneable /*agregar en unidades que quiera clonar, osea solo las Protos.*/{
 
     protected Jugador propietario; //despues cualquier cosa refactorisamos... pero sino es absurdo tener tantos Gets
     protected Tablero tablero;
