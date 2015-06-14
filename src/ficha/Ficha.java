@@ -12,6 +12,7 @@ import juego.Recursos;
 import juego.Jugador;
 import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
+import stats.Transportacion;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Direccion;
@@ -54,11 +55,9 @@ public abstract class Ficha {
     protected int movimientoMaximo = 0;
 
 
-    /* TODO agregar transporte
-    protected List<Ficha> fichasTransportadas = null;
+    protected Transportacion transportacion = Transportacion.VACIA;
     protected int transporteMaximo = 0;
     protected int ocupacionEnTransporte = 0;
-    */
 
     // TODO agregar magias: List<Magia>
 
@@ -293,7 +292,11 @@ public abstract class Ficha {
         }
         return true;
     }
-    
+
+    public int ocupacionEnTransporte() {
+        return ocupacionEnTransporte;
+    }
+
     //poner En juego
    
 }
