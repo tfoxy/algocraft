@@ -46,8 +46,10 @@ public abstract class Ficha {
     protected Recursos recursosVirgenes = null;
     protected Recursos recursosExtraidosPorTurno = null;
     protected int poblacionQueDa = 0;
+    
     protected String tipoDeFuenteDeRecursos = null;
-
+    protected String tipoDeFuenteDeRecursosQueNecesito = null; //sino puede construir sobre otro edificio XD.
+    
     protected int movimiento = 0;
     protected int movimientoMaximo = 0;
 
@@ -264,6 +266,14 @@ public abstract class Ficha {
     
     //el nuevo
     public void ponerEnJuego() {
+    	/*this.sePuedeCrear(); 
+    	propietario.gastaRecursos(coste);
+        propietario.newFicha2(this);
+        tablero.insertar(coordenada2, this);
+    	*/
+    	// tener en cuenta la opcion de arriba.
+    	
+    	
         if (this.sePuedeCrear()) {
         	propietario.gastaRecursos(coste);
             propietario.newFicha2(this);

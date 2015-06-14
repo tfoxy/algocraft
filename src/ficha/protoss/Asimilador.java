@@ -20,6 +20,7 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
         estoyVacio = false;
 
         tipoDeFuenteDeRecursos = "Volcan";
+        tipoDeFuenteDeRecursosQueNecesito = "Volcan";
     }
 
     @Override

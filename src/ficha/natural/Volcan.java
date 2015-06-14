@@ -32,11 +32,5 @@ public class Volcan extends FuenteDeRecurso {
         return new Recursos(0, cantidadDeRecursos);
     }
     
-    public boolean sePuedeCrear() throws NoSePuedeCrearFicha { //es esto o dos cath. Igual hay que revisar mas adelante que pasa si tenes la cantidad exatcta de recurssos.
-        if (!(tablero.hayEspacio(coordenada2))) {
-            throw new FichaSobreOtraFichaException();
-        }
-        return true;
-    }
 }
 
