@@ -1,6 +1,10 @@
 package ficha;
 
+import error.FichaNoLista;
 import error.FichaSobreOtraFichaException;
+import error.FueraDeRangoException;
+import error.JuegoException;
+import error.MovimientoInsuficienteException;
 import error.NoSePuedeCrearFicha;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
@@ -23,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class Ficha {
+public abstract class Ficha implements Cloneable /*agregar en unidades que quiera clonar, osea solo las Protos.*/{
 
     protected Jugador propietario; //despues cualquier cosa refactorisamos... pero sino es absurdo tener tantos Gets
     protected Tablero tablero;
@@ -65,7 +69,6 @@ public abstract class Ficha {
     protected Ataque ataqueAire = new Ataque(0, -1);
 
     protected int vision = 0;
-    protected int tiempoDeConstruccion = 0;
 
 
     //gets
@@ -162,7 +165,8 @@ public abstract class Ficha {
     public void setBasico (Jugador jugador, Tablero mapa, Coordenada lugar) {
         propietario = jugador;
         tablero = mapa;
-        coordenada = lugar;
+        coordenada = lugar; //puede que en un rebuild esta linea se balla. o toda la funcion.
+        coordenada2 = new Coordenada3d(coordenada, 1);
     }
 
     public void enConstruccion() {
@@ -184,27 +188,12 @@ public abstract class Ficha {
 
     //Y la magia de la Extrategia
     public void muerete() {
-        //y por la magia del polimorfismos el metodo save como matar a todos los tipos de unidades.
-        estrategia.matar(this);
+        propietario.perderPoblacionActual(coste.poblacion());
+        propietario.perderFicha(this);
+        tablero.eliminarFicha(coordenada2);
     }
 
 
-    public void pasarTurno() {
-        estrategia = estrategia.pasarTurno(this);
-    }
-
-    public void serAtacado(int danio) {
-        //en si esto solo se utalisaria para text. Ataca no lo utiliza.
-        estrategia.serAtacado(danio, this);
-    }
-
-    public boolean atacar(Ficha defensor) {
-        return estrategia.atacar(this, defensor);
-    }
-
-    public boolean intentarMovimiento(Direccion dirrecion) {
-        return estrategia.intentarMovimiento(this, dirrecion);
-    }
 
     public void tablero(Tablero tablero) {
         this.tablero = tablero;
@@ -217,9 +206,45 @@ public abstract class Ficha {
     public void recuperarPuntosDeMovimiento() {
         movimiento = movimientoMaximo;
     }
+    
+ // atacar y defender
+    
+    public void serAtacado(int danio) {
+        barras.sufrirDanio(danio, this);
+    }
 
+
+    public void realizarAtaque( Ficha defensor) {
+        final Ataque ataque = defensor.tipoDeAtaqueRecibido(this);
+
+        if (!this.puedoAtacar(defensor, ataque.rango())) {
+            throw new FueraDeRangoException();
+        }
+
+        defensor.serAtacado(ataque.danio());
+    }
+
+
+    public boolean atacar(Ficha defensor) {
+        try {
+            this.realizarAtaque(defensor);
+            return true;
+        } catch (FueraDeRangoException e) {
+            return false;
+        }
+    }
+
+
+    private boolean puedoAtacar( Ficha defensor, int rango) {
+        Coordenada posicionAgresor = coordenada;
+        Coordenada posicionDefensor = defensor.coordenada();
+
+        return rango >= posicionAgresor.distanciaAObjetivo(posicionDefensor);
+    }
+    
     public abstract Ataque tipoDeAtaqueRecibido(Ficha atacante);
-
+// atacar y defender
+    
     public boolean esNatural() {
         return esNatural;
     }
@@ -244,7 +269,8 @@ public abstract class Ficha {
     	Ficha clone = this.clone();
 
     	clone.barras = this.barras.expectro();
-    	clone.ataqueAire=clone.ataqueTierra= new Ataque(0,-1);
+    	clone.ataqueAire = new Ataque(0,ataqueAire.rango());
+    	clone.ataqueTierra = new Ataque(0,ataqueTierra.rango());
     	
         return this;
     }
@@ -255,7 +281,7 @@ public abstract class Ficha {
         propietario = jugador;
         tablero = mapa;
         coordenada2 = lugar;
-    }
+    }// una idea hacer que el SetBasico use el setBasico2 pero que medienta plimorfismo se fije si es una ficha terrestre o area.
 
     
     //el viejo
@@ -299,4 +325,52 @@ public abstract class Ficha {
 
     //poner En juego
    
+    //mover
+    public boolean intentarMovimiento(Direccion direccion) {
+        try {
+            this.mover(direccion);
+            return true;
+        } catch (JuegoException e) {
+            return false;
+        }
+    }
+
+    public void mover( Direccion direccion) {
+    	/*if (!esToyConstruido){
+    		throw new FichaNoLista();
+    	}*/
+        Tablero mapa = tablero;
+        Coordenada3d ubicacion = coordenada2;
+        Coordenada3d nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
+
+        if (movimiento <= 0) {
+            throw new MovimientoInsuficienteException();
+        }
+
+        mapa.insertar(nuevaUbicacion, this);
+        mapa.eliminarFicha(ubicacion);
+        this.disminuirMovimiento();
+    }
+    //mover
+    
+    
+    //pasarTurnos
+    
+    public void pasarTurno() {
+        turnosParaCrear = turnosParaCrear - 1; //cualqueier cosa que se pase de largo
+        barras.pasarTurno();
+        this.revisarEventos();
+    }
+
+    public void revisarEventos() {
+    	if(turnosParaCrear == 0)	{
+    		this.construir();
+    	}
+    }
+    
+    public void construir(){
+     	   esToyConstruido = true; // esta funcion crece en otras claces.
+         }
+    
+    //pasarTurnos
 }

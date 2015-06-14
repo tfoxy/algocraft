@@ -34,6 +34,7 @@ public class ModuloConstruccionOP {
             nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
             nueva.propietario().newFicha2(nueva);
             nueva.tablero().insertar(nueva.coordenada(), nueva);
+            nueva.construir();
         }
     }
 
@@ -44,6 +45,7 @@ public class ModuloConstruccionOP {
             nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
             nueva.propietario().newFicha2(nueva);
             nueva.tablero().insertar(nueva.coordenada(), nueva);
+            nueva.construir();
         }
     }
     // UnidadArrea.
@@ -53,6 +55,7 @@ public class ModuloConstruccionOP {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
             nueva.tablero().insertar(nueva.coordenada(), nueva);
+            nueva.construir();
         }
     }
     //recursoTerrestre
@@ -77,6 +80,7 @@ public class ModuloConstruccionOP {
 
             nueva.fuenteDeRecursos(fuenteDeRecursos);
             nueva.tablero().insertar(nueva.coordenada(), nueva);
+            nueva.construir();
 
         }
     }

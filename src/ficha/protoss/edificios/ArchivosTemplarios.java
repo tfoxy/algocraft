@@ -11,22 +11,13 @@ public class ArchivosTemplarios extends EdificioTerrestre {
     public ArchivosTemplarios() {
         nombre = "ArchivosTemplarios";
         coste = new Recursos(150, 200);
-        tiempoDeConstruccion = 9;
+        turnosParaCrear = 9;
         barras = new BarrasEscudoVidaEnergia(500, 500);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasQueDa.add(Tecnologia.ARCHIVOS_TEMPLARIOS);
         estoyVacio = false;
     }
 
-    @Override
-    public void PonerEnJuego() {
-        estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
-        estrategia.PonerEnJuego(this);
-    }
 
-    @Override
-    public void muerete() {
-        estrategia.matar(this);
-    }
 
 }

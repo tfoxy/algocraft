@@ -11,22 +11,13 @@ public class Acceso extends EdificioTerrestre {
     public Acceso() {
         nombre = "Acceso";
         coste = new Recursos(150, 0);
-        tiempoDeConstruccion = 8;
+        turnosParaCrear = 8;
         barras = new BarrasEscudoVidaEnergia(500, 500);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasQueDa.add(Tecnologia.ACCESO);
         estoyVacio = false;
     }
 
-    @Override
-    public void PonerEnJuego() {
-        estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
-        estrategia.PonerEnJuego(this);
-    }
 
-    @Override
-    public void muerete() {
-        estrategia.matar(this);
-    }
 
 }

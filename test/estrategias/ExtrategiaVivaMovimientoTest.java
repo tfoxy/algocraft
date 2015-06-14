@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tablero.Coordenada;
+import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.Tablero;
 import error.NoSePuedeCrearFicha;
@@ -37,12 +38,11 @@ public class ExtrategiaVivaMovimientoTest {
         otraUnidad = new Zealot(); 
         unidad = new Zealot();
 
-        int tamanioDeMapa = unidad.movimientoMaximo() * 4;
         mapa = new Tablero(20, 20);
-        lugar = new Coordenada(3, 3);
+        lugar = new Coordenada (3, 3);
         
         unidad.setBasico(jugador, mapa, lugar);
-        moduloAux.PonerEnJuego((FichaTerrestre)unidad);
+        moduloAux.PonerEnJuego((FichaTerrestre)unidad); //no tiene sentido rebuildar aun algo que se usa solo para los test.
     }
 
 

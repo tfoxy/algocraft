@@ -11,23 +11,14 @@ public class PuertoEstelar extends EdificioTerrestre {
     public PuertoEstelar() {
         nombre = "PuertoEstelar";
         coste = new Recursos(150, 150);
-        tiempoDeConstruccion = 10;
+        turnosParaCrear = 10;
         barras = new BarrasEscudoVidaEnergia(600, 600);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasQueDa.add(Tecnologia.PUERTO_ESTELAR);
         estoyVacio = false;
     }
 
-    @Override
-    public void PonerEnJuego() {
-        estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
-        estrategia.PonerEnJuego(this);
-    }
 
-    @Override
-    public void muerete() {
-        estrategia.matar(this);
-    }
 
 
 }

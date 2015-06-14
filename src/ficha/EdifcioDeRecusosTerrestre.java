@@ -30,7 +30,7 @@ public abstract class EdifcioDeRecusosTerrestre extends EdificioTerrestre {
     public boolean sePuedeCrear() throws NoSePuedeCrearFicha {
         try {
             super.sePuedeCrear();
-            return false;
+            throw new EdificioDeRecursosNecesitaFichaRecursoException();
         	
         } catch (FichaSobreOtraFichaException e) {
             if (!(tablero.getFicha(coordenada2).tipoDeFuentaDeRecursos() == tipoDeFuenteDeRecursosQueNecesito)) {
@@ -38,5 +38,10 @@ public abstract class EdifcioDeRecusosTerrestre extends EdificioTerrestre {
             }
             return true;
         }
+    }
+    
+    public void  muerete() {
+    	super.muerete();
+    	fuenteDeRecursos.ponerEnJuego();
     }
 }

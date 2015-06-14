@@ -14,7 +14,7 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
     public Asimilador() {
         nombre = "Asimilador";
         coste = new Recursos(100, 0);
-        tiempoDeConstruccion = 6;
+        turnosParaCrear = 6;
         barras = new BarrasEscudoVidaEnergia(450, 450);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         estoyVacio = false;
@@ -28,16 +28,5 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
         int cantidadExtraida = fuenteDeRecursos.extraer(10);
 
         return new Recursos(0, cantidadExtraida);
-    }
-
-    @Override
-    public void PonerEnJuego() {
-        estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
-        estrategia.PonerEnJuego(this);
-    }
-
-    @Override
-    public void muerete() {
-        estrategia.matar(this);
     }
 }
