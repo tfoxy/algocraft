@@ -23,10 +23,10 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
         tipoDeFuenteDeRecursosQueNecesito = "Volcan";
     }
 
-    @Override
-    public Recursos extraer() { //esto jode al polimorfismo. Seria emjor que pida que recursos extrear.
-        int cantidadExtraida = fuenteDeRecursos.extraer(10);
+	@Override
+	public Recursos extraer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-        return new Recursos(0, cantidadExtraida);
-    }
 }

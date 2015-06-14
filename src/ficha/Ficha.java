@@ -15,6 +15,7 @@ import estrategia.ficha.EstrategiaFichaViva;
 import estrategia.ficha.moduloDeEstrategias.ModuloEfectosDeTurno;
 import juego.Recursos;
 import juego.Jugador;
+import juego.RecursosDeJugador;
 import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
 import stats.Transportacion;
@@ -49,7 +50,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     protected int turnosParaCrear = 0;
 
     protected FuenteDeRecurso fuenteDeRecursos = null;
-    protected Recursos recursosVirgenes = null;
+    protected RecursosDeJugador recursosVirgenes = null;
     protected Recursos recursosExtraidosPorTurno = null;
     protected int poblacionQueDa = 0;
     
@@ -128,7 +129,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         return recursosExtraidosPorTurno;
     }
 
-    public Recursos recursosVirgenes() {
+    public RecursosDeJugador recursosVirgenes() {
         return recursosVirgenes;
     }
 

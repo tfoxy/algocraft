@@ -11,18 +11,21 @@ public class NodoMineral extends FuenteDeRecurso {
 
     public NodoMineral() {
         this(MINERALES_POR_DEFECTO);
+        tipoDeFuenteDeRecursos = "Mineral";
+        coste = new Recursos(0, 0, 0);
     }
 
     public NodoMineral(int mineral) {
-        super(mineral);
+        super(mineral, 0);
 
         tipoDeFuenteDeRecursos = "Mineral";
+        coste = new Recursos(0, 0, 0);
     }
 
-    @Override
-    public Recursos recursosVirgenes() {
-        return new Recursos(cantidadDeRecursos, 0);
-    };
+    public NodoMineral(int mineral, int gas) {
+        super(mineral, gas);
 
-
+        tipoDeFuenteDeRecursos = "Mineral";
+        coste = new Recursos(0, 0, 0);
+    }
 }

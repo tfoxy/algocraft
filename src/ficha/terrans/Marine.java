@@ -17,9 +17,9 @@ public class Marine extends UnidadTerrestre {
         coste = new Recursos(50, 0, 1);
         ataqueTierra = ataqueAire = new Ataque(6, 4);
         vision = 7;
+        turnosParaCrear = 3;
         movimiento = movimientoMaximo = 3;
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         ocupacionEnTransporte = 1;
-        turnosParaCrear = 3;
     }
 }
