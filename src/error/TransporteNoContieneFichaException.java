@@ -1,6 +1,6 @@
 package error;
 
-public class TransporteNoContieneFichaException extends JuegoException {
+public class TransporteNoContieneFichaException extends TransporteException {
     public TransporteNoContieneFichaException() {
     }
 

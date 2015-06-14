@@ -1,4 +1,4 @@
 package error;
 
-public class CapacidadInsuficienteException extends JuegoException {
+public class CapacidadInsuficienteException extends TransporteException {
 }
