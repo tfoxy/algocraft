@@ -25,8 +25,4 @@ public class Pilon extends CasaTerrestre {
         estrategia.PonerEnJuego(this);
     }*/
 
-    @Override
-    public void muerete() {
-        estrategia.matar(this);
-    }
 }

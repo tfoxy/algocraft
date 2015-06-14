@@ -7,6 +7,7 @@ import error.RecursosInsuficientesException;
 import juego.Gaia;
 import juego.Jugador;
 import juego.Raza;
+import juego.Tecnologia;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,6 +34,7 @@ public class EstratregiaContruccionTest {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 500, 200);
         pachaMama = new Gaia();
         mapa = new Tablero(20, 20);
+        protoss.agregarTecnologia(Tecnologia.ACCESO);
     }
 
     //fichaTerrestre/casa
@@ -114,9 +116,8 @@ public class EstratregiaContruccionTest {
     @Test(expected = NoSePuedeCrearFicha.class)
     public void fallaLugarIncorrectoEdifcioDeRecusosTerrestre() {
         Ficha nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        nuevoEdificio.PonerEnJuego();
-
+        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
     }
 
     // EdifcioDeRecusosTerrestre
@@ -145,8 +146,8 @@ public class EstratregiaContruccionTest {
     @Test
     public void muereCasaEnConstruccionNoPasaNada() {
         Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        nuevoEdificio.PonerEnJuego();
+        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
         protoss.agregarPoblacionTotal(10); //para que se agrege la poblacion tiene que pasar los turnos de la consturccion
 
         nuevoEdificio.muerete();
@@ -157,8 +158,8 @@ public class EstratregiaContruccionTest {
     @Test
     public void muereTerrestreSeLiberaElEspacio() {
         Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        nuevoEdificio.PonerEnJuego();
+        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
 
         nuevoEdificio.muerete();
 
@@ -170,8 +171,8 @@ public class EstratregiaContruccionTest {
     public void muereUnidadPierdesPoblacionaActual() {
         Ficha nuevaUnidad = new Zealot();
         protoss.agregarPoblacionTotal(10);
-        nuevaUnidad.setBasico(protoss, mapa, new Coordenada (1, 1));
-        nuevaUnidad.PonerEnJuego();
+        nuevaUnidad.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevaUnidad.ponerEnJuego();
 
         nuevaUnidad.muerete();
 
@@ -182,16 +183,17 @@ public class EstratregiaContruccionTest {
     @Test
     public void muereFuenteDeRecursoDejaElRecurso() {
         Ficha nuevoRecurso = new Volcan();
-        Coordenada coordenada = new Coordenada(1, 1);
-        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
-        nuevoRecurso.PonerEnJuego();
+        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.ponerEnJuego();
 
         Ficha nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico(protoss, mapa, coordenada);
-        nuevoEdificio.PonerEnJuego();
+        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.ponerEnJuego();
 
+       
         nuevoEdificio.muerete();
-        assertEquals(pachaMama, mapa.getFichaTerrestre(coordenada).propietario());
+       
+        assertEquals(nuevoRecurso, mapa.getFicha(new Coordenada3d(1, 1, 1)));
     }
 
     // TODO test que pruebe TecnologiasInsuficientesException

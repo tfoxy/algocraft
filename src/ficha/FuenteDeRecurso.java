@@ -2,6 +2,7 @@ package ficha;
 
 import error.FichaSobreOtraFichaException;
 import error.NoSePuedeCrearFicha;
+import estrategia.ficha.moduloDeEstrategias.ModuloConstruccion;
 import juego.Juego;
 import juego.Recursos;
 

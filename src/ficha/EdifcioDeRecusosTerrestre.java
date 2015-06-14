@@ -39,4 +39,9 @@ public abstract class EdifcioDeRecusosTerrestre extends EdificioTerrestre {
             return true;
         }
     }
+    
+    public void  muerete() {
+    	super.muerete();
+    	fuenteDeRecursos.ponerEnJuego();
+    }
 }
