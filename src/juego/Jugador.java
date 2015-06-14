@@ -154,4 +154,8 @@ public class Jugador {
     public void agregarTecnologia(Tecnologia tecnologia) {
         tecnologias.add(tecnologia);
     }
+    
+    public void agregarRecursos2(Recursos coste) {//no se por que el otro fallos. Y ahora no tengoa ganas ver que pasa si los cambio.
+    	recursos.agregar(coste);
+    }
 }

@@ -19,8 +19,9 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         estoyVacio = false;
 
-        tipoDeFuenteDeRecursos = "Volcan";
+        tipoDeFuenteDeRecursos = "Volcan";// esto se puede ir a futuro.
         tipoDeFuenteDeRecursosQueNecesito = "Volcan";
+        recursosExtraidosPorTurno = new Recursos (0,10);
     }
 
 	@Override
