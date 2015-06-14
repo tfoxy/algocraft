@@ -26,8 +26,5 @@ public class Zealot extends UnidadTerrestre {
     }
 
 
-    
-    public boolean intentarMovimiento(Direccion dirrecion) {
-        return estrategia.intentarMovimiento(this, dirrecion);
-    }
+
 }

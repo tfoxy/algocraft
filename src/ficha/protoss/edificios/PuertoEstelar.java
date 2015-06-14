@@ -11,7 +11,7 @@ public class PuertoEstelar extends EdificioTerrestre {
     public PuertoEstelar() {
         nombre = "PuertoEstelar";
         coste = new Recursos(150, 150);
-        tiempoDeConstruccion = 10;
+        turnosParaCrear = 10;
         barras = new BarrasEscudoVidaEnergia(600, 600);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasQueDa.add(Tecnologia.PUERTO_ESTELAR);

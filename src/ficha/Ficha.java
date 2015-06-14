@@ -1,5 +1,6 @@
 package ficha;
 
+import error.FichaNoLista;
 import error.FichaSobreOtraFichaException;
 import error.FueraDeRangoException;
 import error.JuegoException;
@@ -69,7 +70,6 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     protected Ataque ataqueAire = new Ataque(0, -1);
 
     protected int vision = 0;
-    protected int tiempoDeConstruccion = 0;
 
 
     //gets
@@ -195,9 +195,6 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
 
 
-    public void pasarTurno() {
-        estrategia = estrategia.pasarTurno(this);
-    }
 
     public void tablero(Tablero tablero) {
         this.tablero = tablero;
@@ -336,6 +333,9 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
 
     public void mover( Direccion direccion) {
+    	/*if (!esToyConstruido){
+    		throw new FichaNoLista();
+    	}*/
         Tablero mapa = tablero;
         Coordenada3d ubicacion = coordenada2;
         Coordenada3d nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
@@ -349,4 +349,25 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         this.disminuirMovimiento();
     }
     //mover
+    
+    
+    //pasarTurnos
+    
+    public void pasarTurno() {
+        turnosParaCrear = turnosParaCrear - 1; //cualqueier cosa que se pase de largo
+        barras.pasarTurno();
+        this.revisarEventos();
+    }
+
+    public void revisarEventos() {
+    	if(turnosParaCrear == 0)	{
+    		this.construir();
+    	}
+    }
+    
+    public void construir(){
+     	   esToyConstruido = true; // esta funcion crece en otras claces.
+         }
+    
+    //pasarTurnos
 }

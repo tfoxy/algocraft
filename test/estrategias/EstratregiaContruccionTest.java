@@ -135,7 +135,8 @@ public class EstratregiaContruccionTest {
         nuevoEdificio.pasarTurno();
         nuevoEdificio.pasarTurno();
         nuevoEdificio.pasarTurno();
-
+        
+        assertEquals(0, nuevoEdificio.turnosParaCrear());
         assertEquals(5, protoss.poblacionPosible());
 
     }

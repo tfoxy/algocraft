@@ -26,8 +26,4 @@ public class Scout extends UnidadAerea {
     }
 
     
-    public boolean intentarMovimiento(Direccion dirrecion) {
-        return estrategia.intentarMovimiento(this, dirrecion);
-    }
-
 }

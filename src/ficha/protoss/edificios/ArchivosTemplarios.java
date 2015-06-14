@@ -11,7 +11,7 @@ public class ArchivosTemplarios extends EdificioTerrestre {
     public ArchivosTemplarios() {
         nombre = "ArchivosTemplarios";
         coste = new Recursos(150, 200);
-        tiempoDeConstruccion = 9;
+        turnosParaCrear = 9;
         barras = new BarrasEscudoVidaEnergia(500, 500);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasQueDa.add(Tecnologia.ARCHIVOS_TEMPLARIOS);

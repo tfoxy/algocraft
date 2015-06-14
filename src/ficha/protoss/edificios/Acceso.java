@@ -11,7 +11,7 @@ public class Acceso extends EdificioTerrestre {
     public Acceso() {
         nombre = "Acceso";
         coste = new Recursos(150, 0);
-        tiempoDeConstruccion = 8;
+        turnosParaCrear = 8;
         barras = new BarrasEscudoVidaEnergia(500, 500);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasQueDa.add(Tecnologia.ACCESO);
