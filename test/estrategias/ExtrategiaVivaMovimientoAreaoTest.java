@@ -36,7 +36,6 @@ public class ExtrategiaVivaMovimientoAreaoTest {
         otraUnidad = new Scout(); 
         unidad = new Scout();
 
-        int tamanioDeMapa = unidad.movimientoMaximo() * 4;
         mapa = new Tablero(20, 20);
         lugar = new Coordenada(3, 3);
         

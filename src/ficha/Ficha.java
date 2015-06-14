@@ -1,6 +1,9 @@
 package ficha;
 
 import error.FichaSobreOtraFichaException;
+import error.FueraDeRangoException;
+import error.JuegoException;
+import error.MovimientoInsuficienteException;
 import error.NoSePuedeCrearFicha;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
@@ -163,7 +166,8 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     public void setBasico (Jugador jugador, Tablero mapa, Coordenada lugar) {
         propietario = jugador;
         tablero = mapa;
-        coordenada = lugar;
+        coordenada = lugar; //puede que en un rebuild esta linea se balla. o toda la funcion.
+        coordenada2 = new Coordenada3d(coordenada, 1);
     }
 
     public void enConstruccion() {
@@ -195,19 +199,6 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         estrategia = estrategia.pasarTurno(this);
     }
 
-    public void serAtacado(int danio) {
-        //se utiliza para poderes.
-        estrategia.serAtacado(danio, this);
-    }
-
-    public boolean atacar(Ficha defensor) {
-        return estrategia.atacar(this, defensor);
-    }
-
-    public boolean intentarMovimiento(Direccion dirrecion) {
-        return estrategia.intentarMovimiento(this, dirrecion);
-    }
-
     public void tablero(Tablero tablero) {
         this.tablero = tablero;
     }
@@ -219,9 +210,45 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     public void recuperarPuntosDeMovimiento() {
         movimiento = movimientoMaximo;
     }
+    
+ // atacar y defender
+    
+    public void serAtacado(int danio) {
+        barras.sufrirDanio(danio, this);
+    }
 
+
+    public void realizarAtaque( Ficha defensor) {
+        final Ataque ataque = defensor.tipoDeAtaqueRecibido(this);
+
+        if (!this.puedoAtacar(defensor, ataque.rango())) {
+            throw new FueraDeRangoException();
+        }
+
+        defensor.serAtacado(ataque.danio());
+    }
+
+
+    public boolean atacar(Ficha defensor) {
+        try {
+            this.realizarAtaque(defensor);
+            return true;
+        } catch (FueraDeRangoException e) {
+            return false;
+        }
+    }
+
+
+    private boolean puedoAtacar( Ficha defensor, int rango) {
+        Coordenada posicionAgresor = coordenada;
+        Coordenada posicionDefensor = defensor.coordenada();
+
+        return rango >= posicionAgresor.distanciaAObjetivo(posicionDefensor);
+    }
+    
     public abstract Ataque tipoDeAtaqueRecibido(Ficha atacante);
-
+// atacar y defender
+    
     public boolean esNatural() {
         return esNatural;
     }
@@ -298,4 +325,28 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     
     //poner En juego
    
+    //mover
+    public boolean intentarMovimiento(Direccion direccion) {
+        try {
+            this.mover(direccion);
+            return true;
+        } catch (JuegoException e) {
+            return false;
+        }
+    }
+
+    public void mover( Direccion direccion) {
+        Tablero mapa = tablero;
+        Coordenada3d ubicacion = coordenada2;
+        Coordenada3d nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
+
+        if (movimiento <= 0) {
+            throw new MovimientoInsuficienteException();
+        }
+
+        mapa.insertar(nuevaUbicacion, this);
+        mapa.eliminarFicha(ubicacion);
+        this.disminuirMovimiento();
+    }
+    //mover
 }
