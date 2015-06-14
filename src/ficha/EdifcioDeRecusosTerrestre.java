@@ -44,4 +44,23 @@ public abstract class EdifcioDeRecusosTerrestre extends EdificioTerrestre {
     	super.muerete();
     	fuenteDeRecursos.ponerEnJuego();
     }
+    
+    public void pasarTurno() {
+
+    	super.pasarTurno();
+        if (this.sePuedeEstrear()) {
+            propietario.agregarRecursos(recursosExtraidosPorTurno);
+            fuenteDeRecursos.recursosVirgenes().gastar(recursosExtraidosPorTurno);
+        }
+        else{
+            propietario.agregarRecursos(fuenteDeRecursos.recursosVirgenes().DameRecursosLineales());
+        }
+    }
+
+    private boolean sePuedeEstrear() {
+        if (fuenteDeRecursos.recursosVirgenes().haySuficienteRecursos(recursosExtraidosPorTurno))
+            return true;
+
+        return false;
+    }
 }

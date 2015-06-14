@@ -7,6 +7,7 @@ import error.TecnologiasInsuficientesException;
 import estrategia.ficha.EstrategiaConsturccion;
 import ficha.FuenteDeRecurso;
 import juego.Recursos;
+import juego.RecursosDeJugador;
 import tablero.Coordenada;
 import tablero.Tablero;
 
@@ -20,16 +21,18 @@ public class Volcan extends FuenteDeRecurso {
         coste = new Recursos(0, 0, 0);
     }
 
-    public Volcan(int gas) {
-        super(gas);
+    public Volcan(int cristal, int gas) {
+        super(cristal, gas);
 
         tipoDeFuenteDeRecursos = "Volcan";
         coste = new Recursos(0, 0, 0);
     }
+    
+    public Volcan(int gas) {
+        super(0, gas);
 
-    @Override
-    public Recursos recursosVirgenes() {
-        return new Recursos(0, cantidadDeRecursos);
+        tipoDeFuenteDeRecursos = "Volcan";
+        coste = new Recursos(0, 0, 0);
     }
     
 }
