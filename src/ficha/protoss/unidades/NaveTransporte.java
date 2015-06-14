@@ -1,5 +1,6 @@
 package ficha.protoss.unidades;
 
+import ficha.TransporteAereo;
 import juego.Recursos;
 import juego.Tecnologia;
 import stats.Ataque;
@@ -7,10 +8,12 @@ import stats.BarrasEscudoVidaEnergia;
 import estrategia.ficha.EstrategiaConsturccion;
 import ficha.UnidadAerea;
 
-public class NaveTransporte extends UnidadAerea {
+public class NaveTransporte extends TransporteAereo {
 
     public NaveTransporte() {
-        nombre = "NaveTransporte";
+        super(8);
+
+        nombre = "Nave Transporte";
         vision = 8;
         coste = new Recursos(200, 0, 2);
         turnosParaCrear = 8;

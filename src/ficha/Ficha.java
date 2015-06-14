@@ -1,6 +1,6 @@
 package ficha;
 
-import error.FichaNoLista;
+import error.CapacidadInsuficienteException;
 import error.FichaSobreOtraFichaException;
 import error.FueraDeRangoException;
 import error.JuegoException;
@@ -8,6 +8,7 @@ import error.MovimientoInsuficienteException;
 import error.NoSePuedeCrearFicha;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
+import error.TransporteNoContieneFichaException;
 import estrategia.ficha.EstrategiaConsturccion;
 import estrategia.ficha.EstrategiaFicha;
 import estrategia.ficha.EstrategiaFichaViva;
@@ -60,7 +61,6 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
 
 
     protected Transportacion transportacion = Transportacion.VACIA;
-    protected int transporteMaximo = 0;
     protected int ocupacionEnTransporte = 0;
 
     // TODO agregar magias: List<Magia>
@@ -200,6 +200,10 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
 
     public void disminuirMovimiento() {
+        if (movimiento <= 0) {
+            throw new MovimientoInsuficienteException();
+        }
+
         movimiento -= 1;
     }
 
@@ -321,6 +325,15 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
 
     public int ocupacionEnTransporte() {
         return ocupacionEnTransporte;
+    }
+
+
+    public void descargar(Ficha ficha) {
+        throw new TransporteNoContieneFichaException();
+    }
+
+    public void cargar(Ficha ficha) throws CapacidadInsuficienteException {
+        throw new CapacidadInsuficienteException();
     }
 
     //poner En juego
