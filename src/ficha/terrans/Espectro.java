@@ -15,7 +15,6 @@ public class Espectro extends UnidadAerea {
         movimiento = movimientoMaximo = 3;
         ataqueTierra = new Ataque(8, 5);
         ataqueAire = new Ataque(20, 5);
-        // TODO transporte
         vision = 7;
         turnosParaCrear = 8;
         tecnologiasNecesarias.add(Tecnologia.TERRAN);

@@ -12,13 +12,14 @@ public class Marine extends UnidadTerrestre {
             new BarrasEscudoVidaEnergia.Builder().vida(40);
 
     public Marine() {
+        nombre = "Marine";
         barras = BARRAS_BUILDER.build();
         coste = new Recursos(50, 0, 1);
         ataqueTierra = ataqueAire = new Ataque(6, 4);
-        // TODO transporte: 1
         vision = 7;
         turnosParaCrear = 3;
         movimiento = movimientoMaximo = 3;
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
+        ocupacionEnTransporte = 1;
     }
 }

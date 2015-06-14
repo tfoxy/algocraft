@@ -1,6 +1,6 @@
 package ficha;
 
-import error.FichaNoLista;
+import error.CapacidadInsuficienteException;
 import error.FichaSobreOtraFichaException;
 import error.FueraDeRangoException;
 import error.JuegoException;
@@ -8,6 +8,7 @@ import error.MovimientoInsuficienteException;
 import error.NoSePuedeCrearFicha;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
+import error.TransporteNoContieneFichaException;
 import estrategia.ficha.EstrategiaConsturccion;
 import estrategia.ficha.EstrategiaFicha;
 import estrategia.ficha.EstrategiaFichaViva;
@@ -17,6 +18,7 @@ import juego.Jugador;
 import juego.RecursosDeJugador;
 import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
+import stats.Transportacion;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Direccion;
@@ -59,11 +61,8 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     protected int movimientoMaximo = 0;
 
 
-    /* TODO agregar transporte
-    protected List<Ficha> fichasTransportadas = null;
-    protected int transporteMaximo = 0;
+    protected Transportacion transportacion = Transportacion.VACIA;
     protected int ocupacionEnTransporte = 0;
-    */
 
     // TODO agregar magias: List<Magia>
 
@@ -202,6 +201,10 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
 
     public void disminuirMovimiento() {
+        if (movimiento <= 0) {
+            throw new MovimientoInsuficienteException();
+        }
+
         movimiento -= 1;
     }
 
@@ -320,7 +323,20 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         }
         return true;
     }
-    
+
+    public int ocupacionEnTransporte() {
+        return ocupacionEnTransporte;
+    }
+
+
+    public void descargar(Ficha ficha) {
+        throw new TransporteNoContieneFichaException();
+    }
+
+    public void cargar(Ficha ficha) throws CapacidadInsuficienteException {
+        throw new CapacidadInsuficienteException();
+    }
+
     //poner En juego
    
     //mover
