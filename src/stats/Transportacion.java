@@ -53,7 +53,7 @@ public class Transportacion {
     public void descargar(Ficha ficha) throws TransporteNoContieneFichaException {
         if (!fichasCargadas.remove(ficha)) {
             throw new TransporteNoContieneFichaException();
-        };
+        }
     }
 
     public List<Ficha> fichasCargadas() {

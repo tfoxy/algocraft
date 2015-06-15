@@ -9,7 +9,7 @@ public class CasaTerrestre extends EdificioTerrestre {
     public void muerete() {
     	super.muerete();
     	
-        if (esToyConstruido) {
+        if (estoyConstruido) {
             propietario.perderPoblacionTotal(poblacionQueDa);
         }
     }
@@ -28,7 +28,7 @@ public class CasaTerrestre extends EdificioTerrestre {
     }
     
     public void construir(){
-  	   esToyConstruido = true;
+  	   estoyConstruido = true;
   	   propietario.agregarPoblacionTotal(poblacionQueDa);
       }
 }

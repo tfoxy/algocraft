@@ -34,7 +34,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
 
     protected boolean estoyVacio = true;
     protected boolean esNatural = true;
-    protected boolean esToyConstruido = false;
+    protected boolean estoyConstruido = false;
     
     protected String nombre = null;
 
@@ -331,7 +331,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
 
     public void mover( Direccion direccion) {
-    	/*if (!esToyConstruido){
+    	/*if (!estoyConstruido){
     		throw new FichaNoLista();
     	}*/
         Tablero mapa = tablero;
@@ -365,7 +365,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
     
     public void construir(){
-     	   esToyConstruido = true; // esta funcion crece en otras claces.
+     	   estoyConstruido = true; // esta funcion crece en otras claces.
          }
     //pasarTurnos
     

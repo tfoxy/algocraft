@@ -9,7 +9,7 @@ public enum Raza {
 
     private List<Tecnologia> tecnologiasIniciales;
 
-    private Raza(Tecnologia... tecnologiasIniciales) {
+    Raza(Tecnologia... tecnologiasIniciales) {
         this.tecnologiasIniciales = Arrays.asList(tecnologiasIniciales);
     }
 
