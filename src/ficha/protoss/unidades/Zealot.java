@@ -1,7 +1,6 @@
-package ficha.protoss;
+package ficha.protoss.unidades;
 
 
-import estrategia.ficha.EstrategiaConsturccion;
 import ficha.UnidadTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;

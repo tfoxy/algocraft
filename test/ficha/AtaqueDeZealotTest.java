@@ -2,9 +2,8 @@ package ficha;
 
 import estrategia.ficha.ExtrategiaConstrucccionOP;
 import error.FueraDeRangoException;
-import estrategia.ficha.moduloDeEstrategias.ModuloAtacarYSerAtacado;
 import estrategia.ficha.moduloDeEstrategias.ModuloConstruccionOP;
-import ficha.protoss.Zealot;
+import ficha.protoss.unidades.Zealot;
 import ficha.terrans.Espectro;
 import ficha.terrans.Marine;
 import juego.Jugador;
@@ -16,8 +15,9 @@ import tablero.Coordenada;
 import tablero.Tablero;
 
 public class AtaqueDeZealotTest {
-
-    private ModuloAtacarYSerAtacado estrategia;
+/*
+ * Todas estas pruevan estan en la version nuva en Extrategia Viva Ataque Test.
+ * 
     private ExtrategiaConstrucccionOP moduloAux;
     private Tablero mapa;
     private FichaTerrestre unidad;
@@ -29,7 +29,6 @@ public class AtaqueDeZealotTest {
 
     @Before
     public void initialize() {
-        estrategia = new ModuloAtacarYSerAtacado();
         moduloAux = new ExtrategiaConstrucccionOP();
         
         int tamanioDeMapa = 40;
@@ -86,5 +85,5 @@ public class AtaqueDeZealotTest {
 
 
     // TODO hacer mas tests
-
+*/
 }

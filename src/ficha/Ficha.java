@@ -9,10 +9,6 @@ import error.NoSePuedeCrearFicha;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
 import error.TransporteNoContieneFichaException;
-import estrategia.ficha.EstrategiaConsturccion;
-import estrategia.ficha.EstrategiaFicha;
-import estrategia.ficha.EstrategiaFichaViva;
-import estrategia.ficha.moduloDeEstrategias.ModuloEfectosDeTurno;
 import juego.Recursos;
 import juego.Jugador;
 import juego.RecursosDeJugador;
@@ -40,7 +36,6 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     protected boolean esNatural = true;
     protected boolean esToyConstruido = false;
     
-    protected EstrategiaFicha estrategia = new EstrategiaFichaViva();
     protected String nombre = null;
 
     protected Recursos coste = null;
@@ -170,10 +165,6 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         coordenada2 = new Coordenada3d(coordenada, 1);
     }
 
-    public void enConstruccion() {
-        estrategia = new EstrategiaConsturccion();
-    }
-
     public void coordenada(Coordenada nuevaUbicacion) {
         coordenada = nuevaUbicacion;
     }
@@ -287,12 +278,6 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         tablero = mapa;
         coordenada2 = lugar;
     }// una idea hacer que el SetBasico use el setBasico2 pero que medienta plimorfismo se fije si es una ficha terrestre o area.
-
-    
-    //el viejo
-    public void PonerEnJuego() {
-        estrategia.PonerEnJuego(this);
-    }
     
     //el nuevo
     public void ponerEnJuego() {

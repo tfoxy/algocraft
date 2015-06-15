@@ -5,7 +5,7 @@ import juego.Raza;
 import org.junit.Before;
 import org.junit.Test;
 
-import ficha.protoss.Pilon;
+import ficha.protoss.edificios.Pilon;
 
 import static org.junit.Assert.assertEquals;
 

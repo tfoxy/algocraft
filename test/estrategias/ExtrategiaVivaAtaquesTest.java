@@ -10,16 +10,14 @@ import org.junit.Test;
 import tablero.Coordenada;
 import tablero.Tablero;
 import estrategia.ficha.ExtrategiaConstrucccionOP;
-import estrategia.ficha.moduloDeEstrategias.ModuloAtacarYSerAtacado;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
-import ficha.protoss.Zealot;
+import ficha.protoss.unidades.Zealot;
 import ficha.terrans.Espectro;
 import ficha.terrans.Marine;
 
 public class ExtrategiaVivaAtaquesTest {
 
-    private ModuloAtacarYSerAtacado estrategia;
     private ExtrategiaConstrucccionOP moduloAux;
     private Tablero mapa;
     private FichaTerrestre unidad;

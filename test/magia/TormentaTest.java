@@ -15,10 +15,10 @@ import error.EnergiaInsuficienteException;
 import estrategia.ficha.ExtrategiaConstrucccionOP;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
-import ficha.protoss.Zealot;
 import ficha.protoss.unidades.AltoTemplario;
 import ficha.protoss.unidades.NaveTransporte;
 import ficha.protoss.unidades.Scout;
+import ficha.protoss.unidades.Zealot;
 
 public class TormentaTest {
 	

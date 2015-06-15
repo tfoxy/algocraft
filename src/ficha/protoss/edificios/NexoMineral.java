@@ -1,4 +1,4 @@
-package ficha.protoss;
+package ficha.protoss.edificios;
 
 
 import ficha.EdifcioDeRecusosTerrestre;

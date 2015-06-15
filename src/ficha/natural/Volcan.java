@@ -4,7 +4,6 @@ import error.FichaSobreOtraFichaException;
 import error.NoSePuedeCrearFicha;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
-import estrategia.ficha.EstrategiaConsturccion;
 import ficha.FuenteDeRecurso;
 import juego.Recursos;
 import juego.RecursosDeJugador;

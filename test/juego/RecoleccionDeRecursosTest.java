@@ -3,8 +3,8 @@ package juego;
 import static org.junit.Assert.assertEquals;
 
 import ficha.*;
-import ficha.protoss.Asimilador;
-import ficha.protoss.NexoMineral;
+import ficha.protoss.edificios.Asimilador;
+import ficha.protoss.edificios.NexoMineral;
 
 import org.junit.Before;
 import org.junit.Test;

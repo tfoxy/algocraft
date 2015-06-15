@@ -16,8 +16,8 @@ import ficha.Ficha;
 import ficha.FichaAerea;
 import ficha.UnidadAerea;
 import ficha.UnidadTerrestre;
-import ficha.protoss.Zealot;
 import ficha.protoss.unidades.Scout;
+import ficha.protoss.unidades.Zealot;
 
 public class ExtrategiaVivaMovimientoAreaoTest {
 

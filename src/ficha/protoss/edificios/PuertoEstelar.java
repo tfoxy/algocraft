@@ -3,7 +3,6 @@ package ficha.protoss.edificios;
 import juego.Recursos;
 import juego.Tecnologia;
 import stats.BarrasEscudoVidaEnergia;
-import estrategia.ficha.EstrategiaConsturccion;
 import ficha.EdificioTerrestre;
 
 public class PuertoEstelar extends EdificioTerrestre {

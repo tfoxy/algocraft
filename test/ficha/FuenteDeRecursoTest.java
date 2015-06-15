@@ -6,7 +6,7 @@ import juego.Raza;
 import juego.Tecnologia;
 import estrategia.ficha.moduloDeEstrategias.ModuloConstruccionOP;
 import ficha.natural.Volcan;
-import ficha.protoss.Asimilador;
+import ficha.protoss.edificios.Asimilador;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -7,7 +7,7 @@ import ficha.Ficha;
 import ficha.FichaAerea;
 import ficha.FichaEspacial;
 import ficha.FichaTerrestre;
-import ficha.protoss.Zealot;
+import ficha.protoss.unidades.Zealot;
 import ficha.terrans.unidad.NaveCiencia;
 import juego.Gaia;
 import juego.Jugador;

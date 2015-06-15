@@ -1,7 +1,5 @@
-package ficha.protoss;
+package ficha.protoss.edificios;
 
-import estrategia.ficha.EstrategiaConsturccion;
-import estrategia.ficha.EstrategiaFichaViva;
 import ficha.CasaTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;

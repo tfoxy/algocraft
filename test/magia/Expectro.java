@@ -11,8 +11,8 @@ import org.junit.Test;
 import tablero.Tablero;
 import estrategia.ficha.ExtrategiaConstrucccionOP;
 import ficha.Ficha;
-import ficha.protoss.Pilon;
-import ficha.protoss.Zealot;
+import ficha.protoss.edificios.Pilon;
+import ficha.protoss.unidades.Zealot;
 
 public class Expectro {
 	

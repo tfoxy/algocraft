@@ -1,9 +1,7 @@
-package ficha.protoss;
+package ficha.protoss.edificios;
 
 
 import java.util.ArrayList;
-
-import estrategia.ficha.EstrategiaConsturccion;
 import ficha.EdifcioDeRecusosTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;

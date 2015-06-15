@@ -76,7 +76,7 @@ public class Jugador {
     public void construir(EdificioTerrestre edificio) {
         recursos.gastar(edificio.coste());
 
-        edificio.enConstruccion();
+        //edificio.enConstruccion();
 
         this.agregarFicha(edificio);
     }
