@@ -109,13 +109,13 @@ public class BarrasEscudoVidaEnergia {
         private int vidaPorTurno = 1;
         private int escudoPorTurno = 10;
         private int energiaPorTurno = 10;
-        
+
         public Builder vida(int vida) {
             this.vidaMaxima(vida);
             this.vidaActual(vida);
             return this;
         }
-        
+
         public Builder vidaMaxima(int vidaMaxima) {
             this.vidaMaxima = vidaMaxima;
             return this;
@@ -178,24 +178,24 @@ public class BarrasEscudoVidaEnergia {
         }
     }
 
-    public BarrasEscudoVidaEnergia expectro(){
-    	
-    	BarrasEscudoVidaEnergia clone = this.clone();
+    public BarrasEscudoVidaEnergia expectro() {
 
-    	clone.vidaActual = 0; //el morir dice que tiene que tener 0 vida y 0 escudo.
-    	clone.vidaPorTurno = 0; 
+        BarrasEscudoVidaEnergia clone = this.clone();
+
+        clone.vidaActual = 0; //el morir dice que tiene que tener 0 vida y 0 escudo.
+        clone.vidaPorTurno = 0;
         return clone;
     }
-    
+
     @Override
-    public BarrasEscudoVidaEnergia clone(){
-    	
-    	BarrasEscudoVidaEnergia clone = null;
-    	try {
-			clone = (BarrasEscudoVidaEnergia) super.clone();
-		} catch (CloneNotSupportedException e) {
-			// No debería ocurrir
-		} //cuando esten echos los Texy intentar quitar el (casteo)
+    public BarrasEscudoVidaEnergia clone() {
+
+        BarrasEscudoVidaEnergia clone = null;
+        try {
+            clone = (BarrasEscudoVidaEnergia) super.clone();
+        } catch (CloneNotSupportedException e) {
+            // No debería ocurrir
+        } //cuando esten echos los Texy intentar quitar el (casteo)
         return clone;
     }
 }

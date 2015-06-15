@@ -41,7 +41,7 @@ public class EstratregiaContruccionTest {
     @Test
     public void usarRecursosCorrectos() {
         Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
         nuevoEdificio.ponerEnJuego();
 
         assertEquals(200, protoss.cantidadGas());
@@ -52,7 +52,7 @@ public class EstratregiaContruccionTest {
     public void falloPorFaltaDeRecursos() {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 0, 0);
         Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
         nuevoEdificio.ponerEnJuego();
     }
 
@@ -63,11 +63,11 @@ public class EstratregiaContruccionTest {
         Coordenada coordenada = new Coordenada(1, 1);
 
 
-        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
 
         nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
     }
     //fichaTerrestre/casa
@@ -126,16 +126,16 @@ public class EstratregiaContruccionTest {
     @Test
     public void tiempoCorrecto() {
         Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico2 (protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
         nuevoEdificio.ponerEnJuego();
-        
+
 
         nuevoEdificio.pasarTurno();
         nuevoEdificio.pasarTurno();
         nuevoEdificio.pasarTurno();
         nuevoEdificio.pasarTurno();
         nuevoEdificio.pasarTurno();
-        
+
         assertEquals(0, nuevoEdificio.turnosParaCrear());
         assertEquals(5, protoss.poblacionPosible());
 
@@ -191,9 +191,9 @@ public class EstratregiaContruccionTest {
         nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
         nuevoEdificio.ponerEnJuego();
 
-       
+
         nuevoEdificio.muerete();
-       
+
         assertEquals(nuevoRecurso, mapa.getFicha(new Coordenada3d(1, 1, 1)));
     }
 

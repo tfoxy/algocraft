@@ -32,15 +32,15 @@ public class ExtrategiaVivaMovimientoAreaoTest {
     public void initialize() {
         moduloAux = new ExtrategiaConstrucccionOP();
         jugador = new Jugador("miNombre", Raza.PROTOSS);
-        
-        otraUnidad = new Scout(); 
+
+        otraUnidad = new Scout();
         unidad = new Scout();
 
         mapa = new Tablero(20, 20);
         lugar = new Coordenada(3, 3);
-        
+
         unidad.setBasico(jugador, mapa, lugar);
-        moduloAux.ponerEnJuego((FichaAerea)unidad);
+        moduloAux.ponerEnJuego(unidad);
     }
 
 
@@ -58,26 +58,25 @@ public class ExtrategiaVivaMovimientoAreaoTest {
 
     @Test
     public void puedeMoverseDondeNoHayNada() {
-       unidad.intentarMovimiento(Direccion.ARRIBA);
+        unidad.intentarMovimiento(Direccion.ARRIBA);
     }
 
     @Test
     public void noPuedeMoverseDondeNoHayOtraUnidad() {
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 4));
         moduloAux.ponerEnJuego(otraUnidad);
 
         Assert.assertFalse(unidad.intentarMovimiento(Direccion.ARRIBA));
     }
 
 
-
     @Test
     public void puedeInsertarseDondeHabiaOtraUnidadAntesDeMoverse() {
         unidad.intentarMovimiento(Direccion.ARRIBA);
-    	
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,3));
+
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 3));
         moduloAux.ponerEnJuego(otraUnidad);
     }
 
@@ -85,9 +84,9 @@ public class ExtrategiaVivaMovimientoAreaoTest {
     @Test(expected = NoSePuedeCrearFicha.class)
     public void noPuedeInsertarseDondeOtraUnidadSeMovio() {
         unidad.intentarMovimiento(Direccion.ARRIBA);
-    	
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
+
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 4));
         moduloAux.ponerEnJuego(otraUnidad);
     }
 
@@ -96,23 +95,23 @@ public class ExtrategiaVivaMovimientoAreaoTest {
     public void puedeMoverseDondeHabiaOtraUnidadAntesDeMoverse() {
         UnidadTerrestre otraUnidad = new Zealot();
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,2));
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 2));
 
 
         unidad.intentarMovimiento(Direccion.ARRIBA);
         otraUnidad.intentarMovimiento(Direccion.ARRIBA);
     }
 
-    
+
     @Test
     public void noPuedeMoverseDondeOtraUnidadSeMovio() {
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,5));
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 5));
         moduloAux.ponerEnJuego(otraUnidad);
 
 
         otraUnidad.intentarMovimiento(Direccion.ABAJO);
-        
+
         Assert.assertFalse(unidad.intentarMovimiento(Direccion.ARRIBA));
     }
 
@@ -126,5 +125,5 @@ public class ExtrategiaVivaMovimientoAreaoTest {
 
         Assert.assertEquals(movimientoOriginal - 1, unidad.movimiento());
     }
-	
+
 }

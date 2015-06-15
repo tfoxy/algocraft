@@ -18,12 +18,12 @@ public class FichaAerea extends Ficha {
     public int altura() {
         return Altura.AIRE;
     }
-    
+
     @Override
-    public void setBasico (Jugador jugador, Tablero mapa, Coordenada lugar) {
+    public void setBasico(Jugador jugador, Tablero mapa, Coordenada lugar) {
         propietario = jugador;
         tablero = mapa;
-        coordenada = lugar; 
+        coordenada = lugar;
         coordenada2 = new Coordenada3d(coordenada, 2);
     } //por alguna razon la solucion con super no funciona.
 }

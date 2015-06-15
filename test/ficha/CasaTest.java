@@ -65,8 +65,6 @@ public class CasaTest {
 
     @Test
     public void muereUnidadGanamosPoblacion() {
-        Tablero mapa = new Tablero(10, 10);
-        Coordenada lugar = new Coordenada(5, 5);
         Ficha nuevoEdificio = new Pilon();
 
         protoss.newFicha(nuevoEdificio);

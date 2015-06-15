@@ -30,7 +30,7 @@ public class ExtrategiaVivaAtaquesTest {
     @Before
     public void initialize() {
         moduloAux = new ExtrategiaConstrucccionOP();
-        
+
         int tamanioDeMapa = 40;
 
         mapa = new Tablero(tamanioDeMapa, tamanioDeMapa);
@@ -39,7 +39,7 @@ public class ExtrategiaVivaAtaquesTest {
         enemigo = new Jugador("miEnemigo", Raza.TERRAN);
 
         unidad = new Zealot();
-        unidad.setBasico(jugador, mapa, new Coordenada (3,3));
+        unidad.setBasico(jugador, mapa, new Coordenada(3, 3));
         moduloAux.ponerEnJuego(unidad);
 
         unidadEnemigaTerrestre = new Marine();
@@ -50,7 +50,7 @@ public class ExtrategiaVivaAtaquesTest {
 
     @Test
     public void puedeAtacarUnidadTerrestreAdyacente() {
-    	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,4));
+        unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3, 4));
         moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
 
         unidad.atacar(unidadEnemigaTerrestre);
@@ -59,7 +59,7 @@ public class ExtrategiaVivaAtaquesTest {
 
     @Test
     public void noPuedeAtacarUnidadAereaAdyacente() {
-    	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,4));
+        unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3, 4));
         moduloAux.ponerEnJuego(unidadEnemigaAerea);
 
         Assert.assertFalse(unidad.atacar(unidadEnemigaAerea));
@@ -68,7 +68,7 @@ public class ExtrategiaVivaAtaquesTest {
 
     @Test
     public void noPuedeAtacarUnidadAereaEnLaMismaPosicion() {
-    	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,3));
+        unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3, 3));
         moduloAux.ponerEnJuego(unidadEnemigaAerea);
 
         Assert.assertFalse(unidad.atacar(unidadEnemigaAerea));
@@ -77,12 +77,11 @@ public class ExtrategiaVivaAtaquesTest {
 
     @Test
     public void noPuedeAtacarUnidadTerrestreLejana() {
-    	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,5));
+        unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3, 5));
         moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
 
         Assert.assertFalse(unidad.atacar(unidadEnemigaTerrestre));
     }
 
 
-	
 }

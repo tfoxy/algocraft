@@ -18,55 +18,55 @@ public class ModuloConstruccionOP {
     }
 
 
-
     public void ponerEnJuego(Ficha nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
             nueva.tablero().insertar(nueva.coordenada2(), nueva);
             nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
             nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
-            nueva.construir();    
-        }
-    }
-/*
-    // UnidadTerrestre.
-
-    public void ponerEnJuego(UnidadTerrestre nueva) {
-        if (this.sePuedeCrear(nueva)) {
-            nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
-            nueva.propietario().newFicha2(nueva);
-            nueva.tablero().insertar(nueva.coordenada(), nueva);
             nueva.construir();
         }
     }
 
-    // UnidadArrea.
+    /*
+        // UnidadTerrestre.
 
-    public void ponerEnJuego(UnidadAerea nueva) {
-        if (this.sePuedeCrear(nueva)) {
-            nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
-            nueva.propietario().newFicha2(nueva);
-            nueva.tablero().insertar(nueva.coordenada(), nueva);
-            nueva.construir();
+        public void ponerEnJuego(UnidadTerrestre nueva) {
+            if (this.sePuedeCrear(nueva)) {
+                nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
+                nueva.propietario().newFicha2(nueva);
+                nueva.tablero().insertar(nueva.coordenada(), nueva);
+                nueva.construir();
+            }
         }
-    }
-    // UnidadArrea.
 
-    //recursoTerrestre
-    public void ponerEnJuego(FuenteDeRecurso nueva) {
-        if (this.sePuedeCrear(nueva)) {
-            nueva.propietario().newFicha2(nueva);
-            nueva.tablero().insertar(nueva.coordenada(), nueva);
-            nueva.construir();
+        // UnidadArrea.
+
+        public void ponerEnJuego(UnidadAerea nueva) {
+            if (this.sePuedeCrear(nueva)) {
+                nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
+                nueva.propietario().newFicha2(nueva);
+                nueva.tablero().insertar(nueva.coordenada(), nueva);
+                nueva.construir();
+            }
         }
-    }
-    //recursoTerrestre
-*/
+        // UnidadArrea.
+
+        //recursoTerrestre
+        public void ponerEnJuego(FuenteDeRecurso nueva) {
+            if (this.sePuedeCrear(nueva)) {
+                nueva.propietario().newFicha2(nueva);
+                nueva.tablero().insertar(nueva.coordenada(), nueva);
+                nueva.construir();
+            }
+        }
+        //recursoTerrestre
+    */
     //ExtrearRecursos
     public boolean sePuedeCrear(EdifcioDeRecusosTerrestre nueva) throws NoSePuedeCrearFicha {
         Ficha recurso = nueva.tablero().getFicha(nueva.coordenada());
 
-        if (!(recurso.tipoDeFuentaDeRecursos() == nueva.tipoDeFuentaDeRecursos())) {
+        if (!(recurso.tipoDeFuentaDeRecursos().equals(nueva.tipoDeFuentaDeRecursos()))) {
             throw new EdificioDeRecursosNecesitaFichaRecursoException();
         }
         return true;

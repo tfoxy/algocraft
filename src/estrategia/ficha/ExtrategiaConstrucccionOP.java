@@ -9,7 +9,6 @@ public class ExtrategiaConstrucccionOP {
     private ModuloConstruccionOP moduloConstruccion = new ModuloConstruccionOP();
 
 
-
     public void ponerEnJuego(Ficha nueva) {
         moduloConstruccion.ponerEnJuego(nueva);
     }

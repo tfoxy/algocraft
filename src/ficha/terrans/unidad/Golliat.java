@@ -6,7 +6,7 @@ import juego.Tecnologia;
 import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
 
-public class Golliat extends UnidadTerrestre{
+public class Golliat extends UnidadTerrestre {
 
     public Golliat() {
         barras = new BarrasEscudoVidaEnergia(200);

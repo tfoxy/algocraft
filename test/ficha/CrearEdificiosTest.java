@@ -63,7 +63,6 @@ public class CrearEdificiosTest {
         ficha.fuenteDeRecursos(new Volcan(2000));
 
 
-
         assertEquals(200, protoss.cantidadGas());
     }
 

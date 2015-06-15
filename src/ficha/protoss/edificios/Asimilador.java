@@ -18,13 +18,13 @@ public class Asimilador extends EdifcioDeRecusosTerrestre {
 
         tipoDeFuenteDeRecursos = "Volcan";// esto se puede ir a futuro.
         tipoDeFuenteDeRecursosQueNecesito = "Volcan";
-        recursosExtraidosPorTurno = new Recursos (0,10);
+        recursosExtraidosPorTurno = new Recursos(0, 10);
     }
 
-	@Override
-	public Recursos extraer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Recursos extraer() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

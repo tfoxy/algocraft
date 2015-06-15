@@ -16,10 +16,10 @@ public class NexoMineral extends EdifcioDeRecusosTerrestre {
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
     }
 
-	@Override
-	public Recursos extraer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Recursos extraer() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 }

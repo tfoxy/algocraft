@@ -54,7 +54,7 @@ public class TransportacionTest {
     @Test(expected = CapacidadInsuficienteException.class)
     public void noPuedeCargarFichaDeOcupacion2ConCapacidad1() {
         Ficha unidad = new Golliat();
-        Transportacion transportacion =  new Transportacion(1);
+        Transportacion transportacion = new Transportacion(1);
 
         transportacion.cargar(unidad);
     }
@@ -67,21 +67,21 @@ public class TransportacionTest {
                 return 0;
             }
         };
-        Transportacion transportacion =  new Transportacion(8);
+        Transportacion transportacion = new Transportacion(8);
 
         transportacion.cargar(unidad);
     }
 
     @Test
     public void puedeCargar1FichasDeOcupacion2ConCapacidad2() {
-        Transportacion transportacion =  new Transportacion(2);
+        Transportacion transportacion = new Transportacion(2);
 
         transportacion.cargar(new Golliat());
     }
 
     @Test
     public void puedeCargar2FichasDeOcupacion1ConCapacidad2() {
-        Transportacion transportacion =  new Transportacion(2);
+        Transportacion transportacion = new Transportacion(2);
 
         transportacion.cargar(new Marine());
         transportacion.cargar(new Marine());
@@ -89,7 +89,7 @@ public class TransportacionTest {
 
     @Test(expected = CapacidadInsuficienteException.class)
     public void noPuedeCargarFichaDeOcupacion2ConSolamente1EspacioLibre() {
-        Transportacion transportacion =  new Transportacion(2);
+        Transportacion transportacion = new Transportacion(2);
 
         transportacion.cargar(new Marine());
         transportacion.cargar(new Golliat());
@@ -97,13 +97,11 @@ public class TransportacionTest {
 
     @Test(expected = TransporteNoContieneFichaException.class)
     public void noPuedeDescargarUnidadQueNoTiene() {
-        Transportacion transportacion =  new Transportacion(8);
+        Transportacion transportacion = new Transportacion(8);
 
         transportacion.cargar(new Marine());
         transportacion.descargar(new Marine());
     }
-
-
 
 
 }

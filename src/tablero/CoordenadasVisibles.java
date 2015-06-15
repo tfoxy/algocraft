@@ -15,5 +15,5 @@ public class CoordenadasVisibles {
         return coordenadasVisibles.contains(coordenada);
     }
 
-	
+
 }

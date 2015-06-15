@@ -20,7 +20,7 @@ import ficha.protoss.unidades.Zealot;
 
 public class ExtrategiaVivaMovimientoTest {
 
-	//en si tiene qeu tener los Test de todos sus modulos. Asi que se le tiene que agregar test mientras se les agrega modulo.
+    //en si tiene qeu tener los Test de todos sus modulos. Asi que se le tiene que agregar test mientras se les agrega modulo.
     //private ModuloMover estrategiaMover;
     private Tablero mapa;
     private Ficha unidad;
@@ -33,15 +33,15 @@ public class ExtrategiaVivaMovimientoTest {
     public void initialize() {
         moduloAux = new ExtrategiaConstrucccionOP();
         jugador = new Jugador("miNombre", Raza.PROTOSS);
-        
-        otraUnidad = new Zealot(); 
+
+        otraUnidad = new Zealot();
         unidad = new Zealot();
 
         mapa = new Tablero(20, 20);
-        lugar = new Coordenada (3, 3);
-        
+        lugar = new Coordenada(3, 3);
+
         unidad.setBasico(jugador, mapa, lugar);
-        moduloAux.ponerEnJuego((FichaTerrestre)unidad); //no tiene sentido rebuildar aun algo que se usa solo para los test.
+        moduloAux.ponerEnJuego(unidad); //no tiene sentido rebuildar aun algo que se usa solo para los test.
     }
 
 
@@ -59,26 +59,25 @@ public class ExtrategiaVivaMovimientoTest {
 
     @Test
     public void puedeMoverseDondeNoHayNada() {
-       unidad.intentarMovimiento(Direccion.ARRIBA);
+        unidad.intentarMovimiento(Direccion.ARRIBA);
     }
 
     @Test
     public void noPuedeMoverseDondeNoHayOtraUnidad() {
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 4));
         moduloAux.ponerEnJuego(otraUnidad);
 
         Assert.assertFalse(unidad.intentarMovimiento(Direccion.ARRIBA));
     }
 
 
-
     @Test
     public void puedeInsertarseDondeHabiaOtraUnidadAntesDeMoverse() {
         unidad.intentarMovimiento(Direccion.ARRIBA);
-    	
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,3));
+
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 3));
         moduloAux.ponerEnJuego(otraUnidad);
     }
 
@@ -86,9 +85,9 @@ public class ExtrategiaVivaMovimientoTest {
     @Test(expected = NoSePuedeCrearFicha.class)
     public void noPuedeInsertarseDondeOtraUnidadSeMovio() {
         unidad.intentarMovimiento(Direccion.ARRIBA);
-    	
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
+
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 4));
         moduloAux.ponerEnJuego(otraUnidad);
     }
 
@@ -97,23 +96,23 @@ public class ExtrategiaVivaMovimientoTest {
     public void puedeMoverseDondeHabiaOtraUnidadAntesDeMoverse() {
         UnidadTerrestre otraUnidad = new Zealot();
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,2));
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 2));
 
 
         unidad.intentarMovimiento(Direccion.ARRIBA);
         otraUnidad.intentarMovimiento(Direccion.ARRIBA);
     }
 
-    
+
     @Test
     public void noPuedeMoverseDondeOtraUnidadSeMovio() {
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3,5));
+        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 5));
         moduloAux.ponerEnJuego(otraUnidad);
 
 
         otraUnidad.intentarMovimiento(Direccion.ABAJO);
-        
+
         Assert.assertFalse(unidad.intentarMovimiento(Direccion.ARRIBA));
     }
 
@@ -127,5 +126,5 @@ public class ExtrategiaVivaMovimientoTest {
 
         Assert.assertEquals(movimientoOriginal - 1, unidad.movimiento());
     }
-	
+
 }

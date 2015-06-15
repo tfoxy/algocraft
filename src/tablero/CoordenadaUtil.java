@@ -12,7 +12,7 @@ public final class CoordenadaUtil {
 
     public static Set<Coordenada> areaDeCoordenadas(Coordenada puntoMedio,
                                                     int rango) {
-        Set<Coordenada> set = new HashSet<Coordenada>();
+        Set<Coordenada> set = new HashSet<>();
 
         if (rango >= 0) {
             set.add(puntoMedio);
@@ -24,15 +24,15 @@ public final class CoordenadaUtil {
     }
 
     private static void recorrerEnAnchura(Set<Coordenada> set,
-                                              Coordenada puntoMedio,
-                                              int rango) {
+                                          Coordenada puntoMedio,
+                                          int rango) {
         ArrayList<Coordenada> coordenadas = new ArrayList<>();
         coordenadas.add(puntoMedio);
 
         while (rango > 0) {
             final ArrayList<Coordenada> siguientes = new ArrayList<>();
 
-            for (Coordenada coordenada: coordenadas) {
+            for (Coordenada coordenada : coordenadas) {
                 for (Direccion direccion : Direccion.values()) {
                     Coordenada nuevaCoordenada =
                             coordenada.dameCordenadaHacia(direccion);

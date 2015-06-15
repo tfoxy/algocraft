@@ -24,7 +24,7 @@ public class FuenteDeRecursoTest {
     private FuenteDeRecurso nuevoRecurso;
     private Ficha nuevoEdificio;
     private ModuloConstruccionOP moduloAux;
-	
+
     @Before
     public void initialize() {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 500, 200);
@@ -32,70 +32,70 @@ public class FuenteDeRecursoTest {
         mapa = new Tablero(20, 20);
         protoss.agregarTecnologia(Tecnologia.ACCESO);
         moduloAux = new ModuloConstruccionOP();
-        
-        }
-	
-	
+
+    }
+
+
     @Test
     public void ExtracionNormal() {
         nuevoRecurso = new Volcan();
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        moduloAux .ponerEnJuego(nuevoRecurso);
+        moduloAux.ponerEnJuego(nuevoRecurso);
 
         nuevoEdificio = new Asimilador();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        moduloAux .ponerEnJuego((EdifcioDeRecusosTerrestre)nuevoEdificio);
+        moduloAux.ponerEnJuego((EdifcioDeRecusosTerrestre) nuevoEdificio);
 
-    	protoss.pasarTurno();
-    	
-    	 assertEquals(4990, nuevoRecurso.cantidadDeGas());
-    	 assertEquals(210, protoss.cantidadGas());
+        protoss.pasarTurno();
+
+        assertEquals(4990, nuevoRecurso.cantidadDeGas());
+        assertEquals(210, protoss.cantidadGas());
     }
 
     @Test
     public void noExtraeRecursosSiNoTiene() {
         nuevoRecurso = new Volcan(0);
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        moduloAux .ponerEnJuego(nuevoRecurso);
+        moduloAux.ponerEnJuego(nuevoRecurso);
 
         nuevoEdificio = new Asimilador();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        moduloAux .ponerEnJuego((EdifcioDeRecusosTerrestre)nuevoEdificio);
+        moduloAux.ponerEnJuego((EdifcioDeRecusosTerrestre) nuevoEdificio);
 
-    	protoss.pasarTurno();
-    	
-    	 assertEquals(200, protoss.cantidadGas());
+        protoss.pasarTurno();
+
+        assertEquals(200, protoss.cantidadGas());
     }
 
     @Test
     public void extraeLoQueTieneSiSeQuiereExtraerDeMas() {
         nuevoRecurso = new Volcan(1);
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        moduloAux .ponerEnJuego(nuevoRecurso);
+        moduloAux.ponerEnJuego(nuevoRecurso);
 
         nuevoEdificio = new Asimilador();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        moduloAux .ponerEnJuego((EdifcioDeRecusosTerrestre)nuevoEdificio);
+        moduloAux.ponerEnJuego((EdifcioDeRecusosTerrestre) nuevoEdificio);
 
-    	protoss.pasarTurno();
-    	
-    	 assertEquals(201, protoss.cantidadGas());
+        protoss.pasarTurno();
+
+        assertEquals(201, protoss.cantidadGas());
     }
-    
+
     @Test
     public void noExtraSiNoEstaConsturido() {
         nuevoRecurso = new Volcan();
         nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        moduloAux .ponerEnJuego(nuevoRecurso);
+        moduloAux.ponerEnJuego(nuevoRecurso);
 
         nuevoEdificio = new Asimilador();
         nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
         nuevoEdificio.ponerEnJuego();
 
-    	protoss.pasarTurno();
-    	
-    	 assertEquals(200, protoss.cantidadGas());
-    	 assertEquals(5000, nuevoRecurso.cantidadDeGas());
+        protoss.pasarTurno();
+
+        assertEquals(200, protoss.cantidadGas());
+        assertEquals(5000, nuevoRecurso.cantidadDeGas());
     }
 
 }

@@ -7,11 +7,11 @@ import ficha.Ficha;
 import ficha.protoss.unidades.Zealot;
 
 public class Expectro {
-	
-	Ficha ficha;
-	Ficha cloneDeFicha;
-	Ficha espectroDeFicha;
-	
+
+    Ficha ficha;
+    Ficha cloneDeFicha;
+    Ficha espectroDeFicha;
+
     @Before
     public void initialize() {
         ficha = new Zealot();
@@ -22,7 +22,7 @@ public class Expectro {
     @Test
     public void QueSeCloneBien() {
 
-    	 //  assertEquals(ficha.ataqueTierra=cloneDeFicha.ataqueTierra); 
+        //  assertEquals(ficha.ataqueTierra=cloneDeFicha.ataqueTierra);
         // Abria que comparar sus ataques (que deverian ser iguals 
         //y sus barras de vidas que deverian ser distintas). pero ¿como hacerlo sin agregar tantos gets?
     }

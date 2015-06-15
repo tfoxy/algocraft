@@ -23,5 +23,5 @@ public class Scout extends UnidadAerea {
         // TODO transporte
     }
 
-    
+
 }

@@ -38,7 +38,7 @@ public class CasillaDeTablero implements Casilla {
 
     @Override
     public boolean hayEspacioArreo() { //new 6
-	    return fichaAerea.estoyVacio();
+        return fichaAerea.estoyVacio();
     }
 
     @Override

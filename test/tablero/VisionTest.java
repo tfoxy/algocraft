@@ -12,13 +12,13 @@ public class VisionTest {
 
     @Before
     public void initialize() {
-    tablero = new Tablero(12, 12);
+        tablero = new Tablero(12, 12);
     }
 
     @Test
     public void visionDistanciaMaxima() {
-    	
-    	CoordenadasVisibles vision = new CoordenadasVisibles();
+
+        CoordenadasVisibles vision = new CoordenadasVisibles();
 
         vision.verDesdeEstePunto(new Coordenada(5, 5), 5);
 

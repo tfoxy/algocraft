@@ -23,10 +23,10 @@ public class RadiacionMagiaTest {
 
     private static class NaveCienciaCargadaDummy extends NaveCiencia {
         private static BarrasEscudoVidaEnergia.Builder BARRAS_BUILDER =
-            new BarrasEscudoVidaEnergia.Builder()
-                    .vida(200)
-                    .energiaPorTurno(10)
-                    .energiaMaxima(200);
+                new BarrasEscudoVidaEnergia.Builder()
+                        .vida(200)
+                        .energiaPorTurno(10)
+                        .energiaMaxima(200);
 
         NaveCienciaCargadaDummy(int energiaActual) {
             this.barras = BARRAS_BUILDER.energiaActual(energiaActual).build();

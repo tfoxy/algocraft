@@ -24,5 +24,4 @@ public class Zealot extends UnidadTerrestre {
     }
 
 
-
 }

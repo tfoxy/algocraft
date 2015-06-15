@@ -19,13 +19,13 @@ public class Volcan extends FuenteDeRecurso {
         tipoDeFuenteDeRecursos = "Volcan";
         coste = new Recursos(0, 0, 0);
     }
-    
+
     public Volcan(int gas) {
         super(0, gas);
 
         tipoDeFuenteDeRecursos = "Volcan";
         coste = new Recursos(0, 0, 0);
     }
-    
+
 }
 
