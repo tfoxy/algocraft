@@ -187,6 +187,7 @@ public class BarrasEscudoVidaEnergia {
         return clone;
     }
     
+    @Override
     public BarrasEscudoVidaEnergia clone(){
     	
     	BarrasEscudoVidaEnergia clone = null;

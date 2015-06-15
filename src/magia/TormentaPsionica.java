@@ -12,7 +12,8 @@ public class TormentaPsionica extends FichaAerea {
     }
 	
 	
-    public void pasarTurno() {
+    @Override
+	public void pasarTurno() {
     	duracion = duracion - 1;
     	if (!tablero.hayEspacioArreo(coordenada)){
     	tablero.getFichaAerea(coordenada).serAtacado(100);

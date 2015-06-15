@@ -243,6 +243,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
 
     public abstract int altura();
     
+    @Override
     public Ficha clone(){
     	
     	Ficha clone = null;

@@ -14,6 +14,7 @@ public class TormentaPsionicaMagia extends Magia {
         super(75, 5);
     }
 
+    @Override
     public void realizar(Ficha ficha, Coordenada3d objetivo) {
         super.realizar(ficha, objetivo);
         TormentaPsionica poder = new TormentaPsionica();

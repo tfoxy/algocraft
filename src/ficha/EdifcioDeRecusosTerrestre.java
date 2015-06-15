@@ -10,6 +10,7 @@ public abstract class EdifcioDeRecusosTerrestre extends EdificioTerrestre {
     public abstract Recursos extraer();
 
 
+    @Override
     public void ponerEnJuego() {
         if (this.sePuedeCrear()) {
             propietario.gastaRecursos(coste);
@@ -24,6 +25,7 @@ public abstract class EdifcioDeRecusosTerrestre extends EdificioTerrestre {
         }
     }
 
+    @Override
     public boolean sePuedeCrear() throws NoSePuedeCrearFicha {
         try {
             super.sePuedeCrear();
@@ -37,11 +39,13 @@ public abstract class EdifcioDeRecusosTerrestre extends EdificioTerrestre {
         }
     }
 
+    @Override
     public void muerete() {
         super.muerete();
         fuenteDeRecursos.ponerEnJuego();
     }
 
+    @Override
     public void pasarTurno() {
         super.pasarTurno();
 
