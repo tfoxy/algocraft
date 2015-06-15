@@ -42,7 +42,7 @@ public class ExtrategiaVivaMovimientoTest {
         lugar = new Coordenada (3, 3);
         
         unidad.setBasico(jugador, mapa, lugar);
-        moduloAux.PonerEnJuego((FichaTerrestre)unidad); //no tiene sentido rebuildar aun algo que se usa solo para los test.
+        moduloAux.ponerEnJuego((FichaTerrestre)unidad); //no tiene sentido rebuildar aun algo que se usa solo para los test.
     }
 
 
@@ -67,7 +67,7 @@ public class ExtrategiaVivaMovimientoTest {
     public void noPuedeMoverseDondeNoHayOtraUnidad() {
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
-        moduloAux.PonerEnJuego(otraUnidad);
+        moduloAux.ponerEnJuego(otraUnidad);
 
         Assert.assertFalse(unidad.intentarMovimiento(Direccion.ARRIBA));
     }
@@ -80,7 +80,7 @@ public class ExtrategiaVivaMovimientoTest {
     	
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,3));
-        moduloAux.PonerEnJuego(otraUnidad);
+        moduloAux.ponerEnJuego(otraUnidad);
     }
 
 
@@ -90,7 +90,7 @@ public class ExtrategiaVivaMovimientoTest {
     	
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
-        moduloAux.PonerEnJuego(otraUnidad);
+        moduloAux.ponerEnJuego(otraUnidad);
     }
 
 
@@ -110,7 +110,7 @@ public class ExtrategiaVivaMovimientoTest {
     public void noPuedeMoverseDondeOtraUnidadSeMovio() {
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,5));
-        moduloAux.PonerEnJuego(otraUnidad);
+        moduloAux.ponerEnJuego(otraUnidad);
 
 
         otraUnidad.intentarMovimiento(Direccion.ABAJO);

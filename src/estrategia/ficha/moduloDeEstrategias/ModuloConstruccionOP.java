@@ -17,16 +17,18 @@ public class ModuloConstruccionOP {
         return true;
     }
 
-    // Fichaterrestre.
+
 
     public void ponerEnJuego(Ficha nueva) {
         if (this.sePuedeCrear(nueva)) {
             nueva.propietario().newFicha2(nueva);
-            nueva.tablero().insertar(nueva.coordenada(), nueva);
+            nueva.tablero().insertar(nueva.coordenada2(), nueva);
+            nueva.propietario().recursos().poblacion().aumentarActualForzadamente(nueva.coste().poblacion());
+            nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
+            nueva.construir();    
         }
     }
-    // Fichaterrestre.
-
+/*
     // UnidadTerrestre.
 
     public void ponerEnJuego(UnidadTerrestre nueva) {
@@ -59,7 +61,7 @@ public class ModuloConstruccionOP {
         }
     }
     //recursoTerrestre
-
+*/
     //ExtrearRecursos
     public boolean sePuedeCrear(EdifcioDeRecusosTerrestre nueva) throws NoSePuedeCrearFicha {
         Ficha recurso = nueva.tablero().getFicha(nueva.coordenada());

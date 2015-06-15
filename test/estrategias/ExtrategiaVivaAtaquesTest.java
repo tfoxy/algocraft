@@ -40,7 +40,7 @@ public class ExtrategiaVivaAtaquesTest {
 
         unidad = new Zealot();
         unidad.setBasico(jugador, mapa, new Coordenada (3,3));
-        moduloAux.PonerEnJuego(unidad);
+        moduloAux.ponerEnJuego(unidad);
 
         unidadEnemigaTerrestre = new Marine();
         unidadEnemigaAerea = new Espectro();
@@ -51,7 +51,7 @@ public class ExtrategiaVivaAtaquesTest {
     @Test
     public void puedeAtacarUnidadTerrestreAdyacente() {
     	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,4));
-        moduloAux.PonerEnJuego(unidadEnemigaTerrestre);
+        moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
 
         unidad.atacar(unidadEnemigaTerrestre);
     }
@@ -60,7 +60,7 @@ public class ExtrategiaVivaAtaquesTest {
     @Test
     public void noPuedeAtacarUnidadAereaAdyacente() {
     	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,4));
-        moduloAux.PonerEnJuego(unidadEnemigaAerea);
+        moduloAux.ponerEnJuego(unidadEnemigaAerea);
 
         Assert.assertFalse(unidad.atacar(unidadEnemigaAerea));
     }
@@ -69,7 +69,7 @@ public class ExtrategiaVivaAtaquesTest {
     @Test
     public void noPuedeAtacarUnidadAereaEnLaMismaPosicion() {
     	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,3));
-        moduloAux.PonerEnJuego(unidadEnemigaAerea);
+        moduloAux.ponerEnJuego(unidadEnemigaAerea);
 
         Assert.assertFalse(unidad.atacar(unidadEnemigaAerea));
     }
@@ -78,7 +78,7 @@ public class ExtrategiaVivaAtaquesTest {
     @Test
     public void noPuedeAtacarUnidadTerrestreLejana() {
     	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,5));
-        moduloAux.PonerEnJuego(unidadEnemigaTerrestre);
+        moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
 
         Assert.assertFalse(unidad.atacar(unidadEnemigaTerrestre));
     }

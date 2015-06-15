@@ -174,7 +174,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
 
 
-    //Y la magia de la Extrategia
+    //muerete
     public void muerete() {
         propietario.perderPoblacionActual(coste.poblacion());
         propietario.perderFicha(this);
@@ -367,6 +367,14 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     public void construir(){
      	   esToyConstruido = true; // esta funcion crece en otras claces.
          }
-    
     //pasarTurnos
+    
+    //temporal
+	public Coordenada coordenada2() {
+		return this.coordenada2;
+	}
+    
+
+   
+    
 }

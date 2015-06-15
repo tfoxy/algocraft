@@ -40,7 +40,7 @@ public class ExtrategiaVivaMovimientoAreaoTest {
         lugar = new Coordenada(3, 3);
         
         unidad.setBasico(jugador, mapa, lugar);
-        moduloAux.PonerEnJuego((FichaAerea)unidad);
+        moduloAux.ponerEnJuego((FichaAerea)unidad);
     }
 
 
@@ -65,7 +65,7 @@ public class ExtrategiaVivaMovimientoAreaoTest {
     public void noPuedeMoverseDondeNoHayOtraUnidad() {
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
-        moduloAux.PonerEnJuego(otraUnidad);
+        moduloAux.ponerEnJuego(otraUnidad);
 
         Assert.assertFalse(unidad.intentarMovimiento(Direccion.ARRIBA));
     }
@@ -78,7 +78,7 @@ public class ExtrategiaVivaMovimientoAreaoTest {
     	
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,3));
-        moduloAux.PonerEnJuego(otraUnidad);
+        moduloAux.ponerEnJuego(otraUnidad);
     }
 
 
@@ -88,7 +88,7 @@ public class ExtrategiaVivaMovimientoAreaoTest {
     	
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,4));
-        moduloAux.PonerEnJuego(otraUnidad);
+        moduloAux.ponerEnJuego(otraUnidad);
     }
 
 
@@ -108,7 +108,7 @@ public class ExtrategiaVivaMovimientoAreaoTest {
     public void noPuedeMoverseDondeOtraUnidadSeMovio() {
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3,5));
-        moduloAux.PonerEnJuego(otraUnidad);
+        moduloAux.ponerEnJuego(otraUnidad);
 
 
         otraUnidad.intentarMovimiento(Direccion.ABAJO);
