@@ -6,6 +6,9 @@ package stats;
  * Los objetos son inmutables.
  */
 public class Ataque {
+
+    public static final Ataque NULO = new Ataque(0, -1);
+
     private final int danio;
     private final int rango;
 

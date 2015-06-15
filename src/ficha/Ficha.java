@@ -38,7 +38,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     
     protected String nombre = null;
 
-    protected Recursos coste = null;
+    protected Recursos coste = Recursos.SIN_COSTE;
     protected BarrasEscudoVidaEnergia barras = null;
     protected List<Tecnologia> tecnologiasNecesarias = new ArrayList<>();
     protected List<Tecnologia> tecnologiasQueDa = new ArrayList<>();
@@ -61,8 +61,8 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
 
     // TODO agregar magias: List<Magia>
 
-    protected Ataque ataqueTierra = new Ataque(0, -1);
-    protected Ataque ataqueAire = new Ataque(0, -1);
+    protected Ataque ataqueTierra = Ataque.NULO;
+    protected Ataque ataqueAire = Ataque.NULO;
 
     protected int vision = 0;
 

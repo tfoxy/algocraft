@@ -2,6 +2,8 @@ package juego;
 
 public class Recursos {
 
+    public static final Recursos SIN_COSTE = new Recursos(0, 0);
+
     private final int mineral;
     private final int gas;
     private final int poblacion;
