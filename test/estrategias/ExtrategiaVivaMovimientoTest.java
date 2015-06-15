@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tablero.Coordenada;
-import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.Tablero;
 import error.NoSePuedeCrearFicha;

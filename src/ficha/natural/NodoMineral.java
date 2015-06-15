@@ -2,8 +2,6 @@ package ficha.natural;
 
 import ficha.FuenteDeRecurso;
 import juego.Recursos;
-import tablero.Coordenada;
-import tablero.Tablero;
 
 public class NodoMineral extends FuenteDeRecurso {
 

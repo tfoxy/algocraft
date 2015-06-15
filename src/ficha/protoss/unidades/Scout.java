@@ -4,7 +4,6 @@ import juego.Recursos;
 import juego.Tecnologia;
 import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
-import tablero.Direccion;
 import ficha.UnidadAerea;
 
 public class Scout extends UnidadAerea {

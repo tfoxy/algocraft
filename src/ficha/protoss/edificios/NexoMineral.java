@@ -2,7 +2,6 @@ package ficha.protoss.edificios;
 
 
 import ficha.EdifcioDeRecusosTerrestre;
-import ficha.EdificioTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;
 import stats.BarrasEscudoVidaEnergia;

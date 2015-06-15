@@ -3,9 +3,6 @@ package ficha;
 import juego.Jugador;
 import juego.Raza;
 import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class CrearUnidadesTest {
 

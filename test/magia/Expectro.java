@@ -1,17 +1,9 @@
 package magia;
 
-import static org.junit.Assert.assertEquals;
-import juego.Gaia;
-import juego.Jugador;
-import juego.Raza;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import tablero.Tablero;
-import estrategia.ficha.ExtrategiaConstrucccionOP;
 import ficha.Ficha;
-import ficha.protoss.edificios.Pilon;
 import ficha.protoss.unidades.Zealot;
 
 public class Expectro {

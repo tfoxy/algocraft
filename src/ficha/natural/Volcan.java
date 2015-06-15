@@ -1,14 +1,7 @@
 package ficha.natural;
 
-import error.FichaSobreOtraFichaException;
-import error.NoSePuedeCrearFicha;
-import error.RecursosInsuficientesException;
-import error.TecnologiasInsuficientesException;
 import ficha.FuenteDeRecurso;
 import juego.Recursos;
-import juego.RecursosDeJugador;
-import tablero.Coordenada;
-import tablero.Tablero;
 
 public class Volcan extends FuenteDeRecurso {
 

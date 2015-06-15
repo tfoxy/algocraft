@@ -5,7 +5,6 @@ import java.util.*;
 import error.TecnologiasInsuficientesException;
 import ficha.EdificioTerrestre;
 import ficha.Ficha;
-import tablero.Coordenada;
 
 
 public class Jugador {

@@ -6,7 +6,6 @@ import juego.Recursos;
 import juego.Tecnologia;
 import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
-import tablero.Direccion;
 
 public class Zealot extends UnidadTerrestre {
 

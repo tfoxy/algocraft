@@ -1,14 +1,12 @@
 package stats;
 
 import error.*;
-import ficha.EdificioTerrestre;
 import ficha.Ficha;
 import ficha.UnidadTerrestre;
 import ficha.protoss.edificios.Pilon;
 import ficha.terrans.Marine;
 import ficha.terrans.unidad.Golliat;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class TransportacionTest {

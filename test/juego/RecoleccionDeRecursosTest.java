@@ -9,9 +9,6 @@ import ficha.protoss.edificios.NexoMineral;
 import org.junit.Before;
 import org.junit.Test;
 
-import tablero.Coordenada;
-import tablero.Tablero;
-
 
 public class RecoleccionDeRecursosTest {
 

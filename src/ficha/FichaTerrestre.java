@@ -1,6 +1,5 @@
 package ficha;
 
-import juego.Juego;
 import stats.Ataque;
 import tablero.Altura;
 

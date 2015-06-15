@@ -1,7 +1,5 @@
 package ficha;
 
-import java.util.EnumSet;
-
 public enum TipoDeFicha {
     VACIA,
     TERRENO,

@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tablero.Coordenada;
-import tablero.Coordenada3d;
 import tablero.Tablero;
 
 import static org.junit.Assert.assertEquals;

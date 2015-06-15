@@ -2,7 +2,6 @@ package ficha.protoss.unidades;
 
 import juego.Recursos;
 import juego.Tecnologia;
-import stats.Ataque;
 import stats.BarrasEscudoVidaEnergia;
 import ficha.UnidadTerrestre;
 

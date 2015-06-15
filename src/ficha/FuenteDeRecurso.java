@@ -2,7 +2,6 @@ package ficha;
 
 import error.FichaSobreOtraFichaException;
 import error.NoSePuedeCrearFicha;
-import juego.Juego;
 import juego.Recursos;
 import juego.RecursosDeJugador;
 

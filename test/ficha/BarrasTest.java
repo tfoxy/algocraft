@@ -2,14 +2,10 @@ package ficha;
 
 import static org.junit.Assert.assertEquals;
 
-import juego.Jugador;
-
-import juego.Raza;
 import org.junit.Before;
 import org.junit.Test;
 
 import stats.BarrasEscudoVidaEnergia;
-import juego.Tecnologia;
 
 public class BarrasTest {
 

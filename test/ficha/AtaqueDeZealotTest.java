@@ -1,19 +1,5 @@
 package ficha;
 
-import estrategia.ficha.ExtrategiaConstrucccionOP;
-import error.FueraDeRangoException;
-import estrategia.ficha.moduloDeEstrategias.ModuloConstruccionOP;
-import ficha.protoss.unidades.Zealot;
-import ficha.terrans.Espectro;
-import ficha.terrans.Marine;
-import juego.Jugador;
-import juego.Raza;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import tablero.Coordenada;
-import tablero.Tablero;
-
 public class AtaqueDeZealotTest {
 /*
  * Todas estas pruevan estan en la version nuva en Extrategia Viva Ataque Test.
