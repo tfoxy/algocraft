@@ -28,17 +28,17 @@ public class CasillaDeTablero implements Casilla {
     }
 
     public boolean estaVacia() {
-        return (fichaTerreste.estaVacia() && fichaAerea.estaVacia());
+        return (fichaTerreste.estoyVacio() && fichaAerea.estoyVacio());
     }
 
     @Override
     public boolean hayEspacioTerreste() {
-        return fichaTerreste.estaVacia();
+        return fichaTerreste.estoyVacio();
     }
 
     @Override
     public boolean hayEspacioArreo() { //new 6
-	    return fichaAerea.estaVacia();
+	    return fichaAerea.estoyVacio();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class CasillaDeTablero implements Casilla {
 
     @Override
     public void insertar(FichaTerrestre ficha) {
-        if (!fichaTerreste.estaVacia()) {
+        if (!fichaTerreste.estoyVacio()) {
             throw new FichaSobreOtraFichaException();
         } else {
             fichaTerreste = ficha;
@@ -62,7 +62,7 @@ public class CasillaDeTablero implements Casilla {
 
     @Override
     public void insertar(FichaAerea ficha) {
-        if (!fichaAerea.estaVacia()) {
+        if (!fichaAerea.estoyVacio()) {
             throw new FichaSobreOtraFichaException();
         } else {
             fichaAerea = ficha;

@@ -86,12 +86,12 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
 
     public Recursos coste() {
         return coste;
-    }
-
+    }//estas pueden ser inutiles si se les agrega construccion op a las fichas.
+/*
     public FuenteDeRecurso fuenteDeRecursos() {
         return fuenteDeRecursos;
     }
-
+*/
     public List<Tecnologia> tecnologiasNecesarias() {
         return tecnologiasNecesarias;
     }
@@ -103,7 +103,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     public BarrasEscudoVidaEnergia barras() {
         return barras;
     }
-
+/*
     public int rangoDeAtaqueTierra() {
         return ataqueTierra.rango();
     }
@@ -123,7 +123,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     public Recursos recursosExtraidosPorTurno() {
         return recursosExtraidosPorTurno;
     }
-
+*/
     public RecursosDeJugador recursosVirgenes() {
         return recursosVirgenes;
     }
@@ -136,10 +136,6 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         return estoyVacio;
     }
 
-    public boolean estaVacia() {
-        return estoyVacio();
-    }
-
     public int movimiento() {
         return movimiento;
     }
@@ -147,12 +143,12 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     public int movimientoMaximo() {
         return movimientoMaximo;
     }
-
+/*
     public boolean puedoReemplazarFicha(Ficha ficha) {
         // TODO puedoReemplazarFicha
         return false;
     }
-
+*/
     public Jugador propietario(Jugador jugador) {
         return propietario = jugador;
     }
@@ -358,6 +354,7 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     public void pasarTurno() {
         turnosParaCrear = turnosParaCrear - 1; //cualqueier cosa que se pase de largo
         barras.pasarTurno();
+        this.recuperarPuntosDeMovimiento();
         this.revisarEventos();
     }
 

@@ -24,7 +24,7 @@ public class CasillaTest {
     public void noTieneFichaTerrestreAlCrearse() {
         Ficha ficha = casilla.getFichaTerrestre();
 
-        Assert.assertTrue(ficha.estaVacia());
+        Assert.assertTrue(ficha.estoyVacio());
     }
 
 
@@ -38,7 +38,7 @@ public class CasillaTest {
     public void noTieneFichaAereaAlCrearse() {
         Ficha ficha = casilla.getFichaAerea();
 
-        Assert.assertTrue(ficha.estaVacia());
+        Assert.assertTrue(ficha.estoyVacio());
     }
 
 
@@ -166,7 +166,7 @@ public class CasillaTest {
 
         Ficha ficha = casilla.getFichaTerrestre();
 
-        Assert.assertTrue(ficha.estaVacia());
+        Assert.assertTrue(ficha.estoyVacio());
     }
 
 
