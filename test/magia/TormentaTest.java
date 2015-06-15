@@ -1,6 +1,5 @@
 package magia;
 
-import juego.Gaia;
 import juego.Jugador;
 import juego.Raza;
 import junit.framework.Assert;
@@ -11,12 +10,10 @@ import org.junit.Test;
 import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.Tablero;
-import error.EnergiaInsuficienteException;
 import estrategia.ficha.ExtrategiaConstrucccionOP;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
 import ficha.protoss.unidades.AltoTemplario;
-import ficha.protoss.unidades.NaveTransporte;
 import ficha.protoss.unidades.Scout;
 import ficha.protoss.unidades.Zealot;
 
@@ -46,7 +43,7 @@ public class TormentaTest {
         victima.setBasico(jugadorEnemigo, mapa, new Coordenada3d(2,2,0));
         victimaVoladora.setBasico(jugadorEnemigo, mapa, new Coordenada3d(2,2,1));
         
-        moduloAux.PonerEnJuego(Caster);
+        moduloAux.ponerEnJuego(Caster);
         
         jugador.pasarTurno();
         jugador.pasarTurno();
@@ -62,8 +59,8 @@ public class TormentaTest {
     
     @Test
     public void dañoDosUnidadesEnUnTurno() {
-    	moduloAux.PonerEnJuego(victima);
-    	moduloAux.PonerEnJuego(victimaVoladora);
+    	moduloAux.ponerEnJuego(victima);
+    	moduloAux.ponerEnJuego(victimaVoladora);
     	magia.realizar(Caster, new Coordenada3d(2,2,0));
     	jugador.pasarTurno();
     	
@@ -74,8 +71,8 @@ public class TormentaTest {
     
     @Test
     public void dañoDosUnidadesEnDosTurno() {
-    	moduloAux.PonerEnJuego(victima);
-    	moduloAux.PonerEnJuego(victimaVoladora);
+    	moduloAux.ponerEnJuego(victima);
+    	moduloAux.ponerEnJuego(victimaVoladora);
     	magia.realizar(Caster, new Coordenada3d(2,2,0));
     	jugador.pasarTurno();
     	jugador.pasarTurno();
@@ -86,7 +83,7 @@ public class TormentaTest {
     
     @Test
     public void dañoUnaUnidadesEnUnTurno() {
-    	moduloAux.PonerEnJuego(victima);
+    	moduloAux.ponerEnJuego(victima);
     	magia.realizar(Caster, new Coordenada3d(2,2,0));
     	jugador.pasarTurno();
     	
@@ -95,7 +92,7 @@ public class TormentaTest {
     
     @Test //por alguna razon esta y la siguente si estan las dos a la ves fallan. Pero si se qutia una no fallan. Tira un error de algo de los test.
     public void dañoDosUnidadesEnUnTurnoPeroEsquiva() {
-    	moduloAux.PonerEnJuego(victima);
+    	moduloAux.ponerEnJuego(victima);
     	magia.realizar(Caster, new Coordenada3d(2,2,0));
     	jugador.pasarTurno();
     	victima.intentarMovimiento(Direccion.ABAJO);
@@ -106,7 +103,7 @@ public class TormentaTest {
     
     @Test
     public void dañoDosUnidadesEnUnTurnoPeroFallaElPrimero() {
-    	moduloAux.PonerEnJuego(victima);
+    	moduloAux.ponerEnJuego(victima);
     	magia.realizar(Caster, new Coordenada3d(2,1,0));
     	jugador.pasarTurno();
     	victima.intentarMovimiento(Direccion.ABAJO);

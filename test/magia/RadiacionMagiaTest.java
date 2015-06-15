@@ -57,13 +57,13 @@ public class RadiacionMagiaTest {
     private void ponerNaveCiencia(int energiaInicial) {
         naveCiencia = new NaveCienciaCargadaDummy(energiaInicial);
         naveCiencia.setBasico(jugador, mapa, coordenada);
-        moduloAux.PonerEnJuego(naveCiencia);
+        moduloAux.ponerEnJuego(naveCiencia);
     }
 
     private Ficha ponerUnidadEnemiga() {
         FichaTerrestre fichaEnemiga = new Zealot();
         fichaEnemiga.setBasico(jugadorEnemigo, mapa, coordenada);
-        moduloAux.PonerEnJuego(fichaEnemiga);
+        moduloAux.ponerEnJuego(fichaEnemiga);
         return fichaEnemiga;
     }
 
@@ -72,7 +72,7 @@ public class RadiacionMagiaTest {
     public void noSePuedeAplicarAFichaEspacial() {
         FichaEspacial espacio = new FichaEspacial();
         espacio.setBasico(gaia, mapa, coordenada);
-        moduloAux.PonerEnJuego(espacio);
+        moduloAux.ponerEnJuego(espacio);
 
         ponerNaveCiencia(200);
 

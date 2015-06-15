@@ -40,7 +40,7 @@ public class AtaqueDeZealotTest {
 
         unidad = new Zealot();
         unidad.setBasico(jugador, mapa, new Coordenada (3,3));
-        moduloAux.PonerEnJuego(unidad);
+        moduloAux.ponerEnJuego(unidad);
 
         unidadEnemigaTerrestre = new Marine();
         unidadEnemigaAerea = new Espectro();
@@ -51,7 +51,7 @@ public class AtaqueDeZealotTest {
     @Test
     public void puedeAtacarUnidadTerrestreAdyacente() {
     	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,4));
-        moduloAux.PonerEnJuego(unidadEnemigaTerrestre);
+        moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
 
         estrategia.realizarAtaque(unidad, unidadEnemigaTerrestre);
     }
@@ -60,7 +60,7 @@ public class AtaqueDeZealotTest {
     @Test(expected = FueraDeRangoException.class)
     public void noPuedeAtacarUnidadAereaAdyacente() {
     	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,4));
-        moduloAux.PonerEnJuego(unidadEnemigaAerea);
+        moduloAux.ponerEnJuego(unidadEnemigaAerea);
 
         estrategia.realizarAtaque(unidad, unidadEnemigaAerea);
     }
@@ -69,7 +69,7 @@ public class AtaqueDeZealotTest {
     @Test(expected = FueraDeRangoException.class)
     public void noPuedeAtacarUnidadAereaEnLaMismaPosicion() {
     	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,3));
-        moduloAux.PonerEnJuego(unidadEnemigaAerea);
+        moduloAux.ponerEnJuego(unidadEnemigaAerea);
 
         estrategia.realizarAtaque(unidad, unidadEnemigaAerea);
     }
@@ -78,7 +78,7 @@ public class AtaqueDeZealotTest {
     @Test(expected = FueraDeRangoException.class)
     public void noPuedeAtacarUnidadTerrestreLejana() {
     	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,5));
-        moduloAux.PonerEnJuego(unidadEnemigaTerrestre);
+        moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
 
         estrategia.realizarAtaque(unidad, unidadEnemigaTerrestre);
     }

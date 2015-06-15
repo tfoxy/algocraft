@@ -18,9 +18,9 @@ public class Pilon extends CasaTerrestre {
     }
 
   /*  @Override
-    public void PonerEnJuego() {
+    public void ponerEnJuego() {
         estrategia = new EstrategiaConsturccion(); //para que te gusta que este viva por defecto.
-        estrategia.PonerEnJuego(this);
+        estrategia.ponerEnJuego(this);
     }*/
 
 }

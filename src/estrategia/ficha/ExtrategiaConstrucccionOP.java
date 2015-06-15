@@ -14,32 +14,32 @@ public class ExtrategiaConstrucccionOP {
         moduloConstruccion.ponerEnJuego(nueva);
     }
 /*
-    public void PonerEnJuego(FichaTerrestre nueva) {
+    public void ponerEnJuego(FichaTerrestre nueva) {
         moduloConstruccion.ponerEnJuego(nueva);
         nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
     }
 
-    public void PonerEnJuego(FichaAerea nueva) {
+    public void ponerEnJuego(FichaAerea nueva) {
         moduloConstruccion.ponerEnJuego(nueva);
         nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
     }
 
-    public void PonerEnJuego(FuenteDeRecurso nueva) {
+    public void ponerEnJuego(FuenteDeRecurso nueva) {
         moduloConstruccion.ponerEnJuego(nueva);
         nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
     }*/
 
-    public void PonerEnJuego(EdifcioDeRecusosTerrestre nueva) {
+    public void ponerEnJuego(EdifcioDeRecusosTerrestre nueva) {
         moduloConstruccion.ponerEnJuego(nueva);
         nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
     }
 /*
-    public void PonerEnJuego(UnidadTerrestre nueva) {
+    public void ponerEnJuego(UnidadTerrestre nueva) {
         moduloConstruccion.ponerEnJuego(nueva);
         nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
     }
 
-    public void PonerEnJuego(UnidadAerea nueva) {
+    public void ponerEnJuego(UnidadAerea nueva) {
         moduloConstruccion.ponerEnJuego(nueva);
         nueva.propietario().agregarPoblacionTotal(nueva.poblacionQueDa());
     }
