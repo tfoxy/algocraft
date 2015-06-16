@@ -30,7 +30,6 @@ public class VentanaRecursos extends JFrame implements Observer{
 		
 		//armado de la ventana
 		frameTemp = new Frame("Recursos"); //creamos el marco
-		frameTemp.add("North", new Label("recursos"));  //agregamos un titulo
 		frameTemp.add("Center", textoRecursos); //agregamos el texto que muestra la temperatura
 		frameTemp.setSize(300,100);  //seteamos las dimensiones del marco
 		frameTemp.setVisible(true);  //mostramos el marco
