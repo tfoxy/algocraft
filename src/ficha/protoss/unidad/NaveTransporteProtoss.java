@@ -15,7 +15,7 @@ public class NaveTransporteProtoss extends TransporteAereo {
         coste = new Recursos(200, 0, 2);
         turnosParaCrear = 8;
         barras = new BarrasEscudoVidaEnergia(80, 60);
-        movimiento = movimientoMaximo = 6;
+        movimientoMaximo = 6;
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
     }

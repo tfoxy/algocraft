@@ -305,6 +305,7 @@ public abstract class Ficha implements Cloneable {
 
         public void crear() {
             propietario.agregarPoblacionTotal(poblacionQueDa);
+            recuperarPuntosDeMovimiento();
         }
 
         public void pasarTurno() {

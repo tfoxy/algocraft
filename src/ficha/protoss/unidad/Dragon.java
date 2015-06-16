@@ -14,7 +14,7 @@ public class Dragon extends UnidadTerrestre {
         coste = new Recursos(125, 50, 2);
         turnosParaCrear = 6;
         barras = new BarrasEscudoVidaEnergia(100, 80);
-        movimiento = movimientoMaximo = 3;
+        movimientoMaximo = 3;
         ataqueTierra = ataqueAire = new Ataque(20, 4);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ACCESO);

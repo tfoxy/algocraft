@@ -89,6 +89,7 @@ public class ExtrategiaVivaMovimientoAereoTest {
         UnidadTerrestre otraUnidad = new Zealot();
 
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 2));
+        otraUnidad.ponerEnJuego();
 
         unidad.intentarMovimiento(Direccion.ARRIBA);
         Assert.assertTrue(otraUnidad.intentarMovimiento(Direccion.ARRIBA));

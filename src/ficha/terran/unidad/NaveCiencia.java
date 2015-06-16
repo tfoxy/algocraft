@@ -22,7 +22,7 @@ public class NaveCiencia extends UnidadAerea {
         barras = BARRAS_BUILDER.build();
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
-        movimiento = movimientoMaximo = 6;
+        movimientoMaximo = 6;
     }
 
 }

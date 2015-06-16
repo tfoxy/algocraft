@@ -11,10 +11,15 @@ import org.junit.Test;
 
 public class TransportacionTest {
 
+    private <T extends Ficha> T conMovimiento(T ficha) {
+        ficha.recuperarPuntosDeMovimiento();
+        return ficha;
+    }
+
     @Test(expected = CapacidadInsuficienteException.class)
     public void noPuedeCargarAlTener0DeCapacidad() {
         Transportacion transportacion = Transportacion.VACIA;
-        Ficha unidad = new Marine();
+        Ficha unidad = conMovimiento(new Marine());
 
         transportacion.cargar(unidad);
     }
@@ -24,17 +29,13 @@ public class TransportacionTest {
         Transportacion transportacion = new Transportacion(8);
         Ficha unidad = new Marine();
 
-        for (int i = 0; i < unidad.movimientoMaximo(); i++) {
-            unidad.disminuirMovimiento();
-        }
-
         transportacion.cargar(unidad);
     }
 
     @Test
     public void cargarGastaUnMovimientoDeLaUnidad() {
         Transportacion transportacion = new Transportacion(8);
-        Ficha unidad = new Marine();
+        Ficha unidad = conMovimiento(new Marine());
 
         int movimientoActual = unidad.movimiento();
 
@@ -45,7 +46,7 @@ public class TransportacionTest {
 
     @Test(expected = TransporteException.class)
     public void noPuedeCargarFichasInmovibles() {
-        Ficha edificio = new Pilon();
+        Ficha edificio = conMovimiento(new Pilon());
         Transportacion transportacion = new Transportacion(8);
 
         transportacion.cargar(edificio);
@@ -53,7 +54,7 @@ public class TransportacionTest {
 
     @Test(expected = CapacidadInsuficienteException.class)
     public void noPuedeCargarFichaDeOcupacion2ConCapacidad1() {
-        Ficha unidad = new Golliat();
+        Ficha unidad = conMovimiento(new Golliat());
         Transportacion transportacion = new Transportacion(1);
 
         transportacion.cargar(unidad);
@@ -67,6 +68,7 @@ public class TransportacionTest {
                 return 0;
             }
         };
+        unidad.recuperarPuntosDeMovimiento();
         Transportacion transportacion = new Transportacion(8);
 
         transportacion.cargar(unidad);
@@ -76,31 +78,31 @@ public class TransportacionTest {
     public void puedeCargar1FichasDeOcupacion2ConCapacidad2() {
         Transportacion transportacion = new Transportacion(2);
 
-        transportacion.cargar(new Golliat());
+        transportacion.cargar(conMovimiento(new Golliat()));
     }
 
     @Test
     public void puedeCargar2FichasDeOcupacion1ConCapacidad2() {
         Transportacion transportacion = new Transportacion(2);
 
-        transportacion.cargar(new Marine());
-        transportacion.cargar(new Marine());
+        transportacion.cargar(conMovimiento(new Marine()));
+        transportacion.cargar(conMovimiento(new Marine()));
     }
 
     @Test(expected = CapacidadInsuficienteException.class)
     public void noPuedeCargarFichaDeOcupacion2ConSolamente1EspacioLibre() {
         Transportacion transportacion = new Transportacion(2);
 
-        transportacion.cargar(new Marine());
-        transportacion.cargar(new Golliat());
+        transportacion.cargar(conMovimiento(new Marine()));
+        transportacion.cargar(conMovimiento(new Golliat()));
     }
 
     @Test(expected = TransporteNoContieneFichaException.class)
     public void noPuedeDescargarUnidadQueNoTiene() {
         Transportacion transportacion = new Transportacion(8);
 
-        transportacion.cargar(new Marine());
-        transportacion.descargar(new Marine());
+        transportacion.cargar(conMovimiento(new Marine()));
+        transportacion.descargar(conMovimiento(new Marine()));
     }
 
 

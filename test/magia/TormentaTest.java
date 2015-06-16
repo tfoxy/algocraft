@@ -110,8 +110,8 @@ public class TormentaTest {
 
         jugador.pasarTurno();
 
-        victima.intentarMovimiento(Direccion.ABAJO);
-        victima.intentarMovimiento(Direccion.ABAJO);
+        victima.mover(Direccion.ABAJO);
+        victima.mover(Direccion.ABAJO);
 
         jugador.pasarTurno();
 
@@ -124,7 +124,7 @@ public class TormentaTest {
         victima.ponerEnJuego();
         magia.realizar(caster, coordenadaEnemigos);
         jugador.pasarTurno();
-        victima.intentarMovimiento(Direccion.ABAJO);
+        victima.mover(Direccion.ABAJO);
         jugador.pasarTurno();
         Assert.assertEquals(0, victima.barras().escudoActual());
     }

@@ -87,6 +87,7 @@ public class ExtrategiaVivaMovimientoTest {
     @Test
     public void puedeMoverseDondeHabiaOtraUnidadAntesDeMoverse() {
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 2));
+        otraUnidad.ponerEnJuego();
 
         unidad.intentarMovimiento(Direccion.ARRIBA);
         Assert.assertTrue(otraUnidad.intentarMovimiento(Direccion.ARRIBA));

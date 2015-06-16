@@ -16,7 +16,7 @@ public class Scout extends UnidadAerea {
         barras = new BarrasEscudoVidaEnergia(150, 100);
         ataqueTierra = new Ataque(8, 4);
         ataqueAire = new Ataque(14, 4);
-        movimiento = movimientoMaximo = 3;
+        movimientoMaximo = 3;
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
     }

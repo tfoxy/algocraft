@@ -14,7 +14,7 @@ public class Golliat extends UnidadTerrestre {
         ataqueTierra = new Ataque(12, 6);
         ataqueAire = new Ataque(10, 5);
         vision = 8;
-        movimiento = movimientoMaximo = 4;
+        movimientoMaximo = 4;
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         // TODO tecnologiasNecesarias
         // TODO

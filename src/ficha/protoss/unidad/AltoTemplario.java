@@ -10,6 +10,7 @@ public class AltoTemplario extends UnidadTerrestre {
     public AltoTemplario() {
         nombre = "Alto Templario";
         vision = 7;
+        movimientoMaximo = 4;
         coste = new Recursos(50, 150, 2);
         turnosParaCrear = 7;
         barras = new BarrasEscudoVidaEnergia(40, 40, 200, 50, 15);

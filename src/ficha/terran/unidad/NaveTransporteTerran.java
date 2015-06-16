@@ -12,7 +12,7 @@ public class NaveTransporteTerran extends TransporteAereo {
 
         nombre = "Nave Transporte";
         vision = 8;
-        movimiento = movimientoMaximo = 6;
+        movimientoMaximo = 6;
         coste = new Recursos(100, 100, 2);
         turnosParaCrear = 7;
         barras = new BarrasEscudoVidaEnergia(200);

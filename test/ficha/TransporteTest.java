@@ -34,7 +34,7 @@ public class TransporteTest {
         Jugador otroJugador = new Jugador("SoyOtro", Raza.TERRAN);
         Ficha unidad = new Marine();
         unidad.setBasico(otroJugador, mapa, coordenada);
-        mapa.insertar(unidad);
+        unidad.ponerEnJuego();
 
         transporte.cargar(unidad);
     }
@@ -67,7 +67,7 @@ public class TransporteTest {
     public void puedeDescargarDondeHayEspacioTerrestre() {
         Ficha unidad = new Marine();
         unidad.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(unidad);
+        unidad.ponerEnJuego();
 
         transporte.cargar(unidad);
         transporte.descargar(unidad);
@@ -77,7 +77,7 @@ public class TransporteTest {
     public void puedeInsertarseOtraUnidadDondeEstabaLaUnidadACargar() {
         Ficha unidad = new Marine();
         unidad.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(unidad);
+        unidad.ponerEnJuego();
 
         transporte.cargar(unidad);
 
@@ -90,7 +90,7 @@ public class TransporteTest {
     public void noPuedeDescargarDondeHayTerrenoEspacial() {
         Ficha unidad = new Marine();
         unidad.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(unidad);
+        unidad.ponerEnJuego();
 
         transporte.cargar(unidad);
 

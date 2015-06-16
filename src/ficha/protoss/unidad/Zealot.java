@@ -16,7 +16,7 @@ public class Zealot extends UnidadTerrestre {
         turnosParaCrear = 4;
         barras = new BarrasEscudoVidaEnergia(100, 60);
         ataqueTierra = new Ataque(8, 1);
-        movimiento = movimientoMaximo = 3;
+        movimientoMaximo = 3;
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ACCESO);
         ocupacionEnTransporte = 2;
