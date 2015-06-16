@@ -2,8 +2,9 @@ package ficha;
 
 import error.FichaACargarDebeEstarDebajoDeTransporte;
 import error.FichaSobreOtraFichaException;
-import ficha.terrans.Marine;
-import ficha.terrans.unidad.NaveTransporteTerran;
+import ficha.natural.terreno.TerrenoEspacial;
+import ficha.terran.unidad.Marine;
+import ficha.terran.unidad.NaveTransporteTerran;
 import juego.Jugador;
 import juego.Raza;
 import org.junit.Before;
@@ -25,7 +26,7 @@ public class TransporteTest {
         coordenada = new Coordenada(5, 5);
         transporte = new NaveTransporteTerran();
         transporte.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(coordenada, transporte);
+        mapa.insertar(transporte);
     }
 
     @Test // TODO noPuedeCargarFichaDeOtroJugador (tirar Exception)
@@ -33,7 +34,7 @@ public class TransporteTest {
         Jugador otroJugador = new Jugador("SoyOtro", Raza.TERRAN);
         Ficha unidad = new Marine();
         unidad.setBasico(otroJugador, mapa, coordenada);
-        mapa.insertar(coordenada, unidad);
+        mapa.insertar(unidad);
 
         transporte.cargar(unidad);
     }
@@ -42,7 +43,7 @@ public class TransporteTest {
     public void noPuedeCargarFichaQueNoEsteDebajoSuyo() {
         Ficha unidad = new Marine();
         unidad.setBasico(jugador, mapa, new Coordenada(4, 5));
-        mapa.insertar(coordenada, unidad);
+        mapa.insertar(unidad);
 
         transporte.cargar(unidad);
     }
@@ -66,7 +67,7 @@ public class TransporteTest {
     public void puedeDescargarDondeHayEspacioTerrestre() {
         Ficha unidad = new Marine();
         unidad.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(coordenada, unidad);
+        mapa.insertar(unidad);
 
         transporte.cargar(unidad);
         transporte.descargar(unidad);
@@ -76,26 +77,26 @@ public class TransporteTest {
     public void puedeInsertarseOtraUnidadDondeEstabaLaUnidadACargar() {
         Ficha unidad = new Marine();
         unidad.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(coordenada, unidad);
+        mapa.insertar(unidad);
 
         transporte.cargar(unidad);
 
         Ficha otraUnidad = new Marine();
         otraUnidad.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(coordenada, otraUnidad);
+        mapa.insertar(otraUnidad);
     }
 
     @Test(expected = FichaSobreOtraFichaException.class)
     public void noPuedeDescargarDondeHayTerrenoEspacial() {
         Ficha unidad = new Marine();
         unidad.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(coordenada, unidad);
+        mapa.insertar(unidad);
 
         transporte.cargar(unidad);
 
-        Ficha terrenoEspacial = new FichaEspacial();
+        Ficha terrenoEspacial = new TerrenoEspacial();
         terrenoEspacial.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(coordenada, terrenoEspacial);
+        mapa.insertar(terrenoEspacial);
 
         transporte.descargar(unidad);
     }
@@ -104,13 +105,13 @@ public class TransporteTest {
     public void noPuedeDescargarDondeHayOtraUnidad() {
         Ficha unidad = new Marine();
         unidad.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(coordenada, unidad);
+        unidad.ponerEnJuego();
 
         transporte.cargar(unidad);
 
         Ficha otraUnidad = new Marine();
         otraUnidad.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(coordenada, otraUnidad);
+        unidad.ponerEnJuego();
 
         transporte.descargar(unidad);
     }

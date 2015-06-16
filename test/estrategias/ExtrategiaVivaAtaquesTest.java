@@ -1,5 +1,6 @@
 package estrategias;
 
+import error.FueraDeRangoException;
 import juego.Jugador;
 import juego.Raza;
 import org.junit.Assert;
@@ -9,16 +10,14 @@ import org.junit.Test;
 
 import tablero.Coordenada;
 import tablero.Tablero;
-import estrategia.ficha.ExtrategiaConstrucccionOP;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
-import ficha.protoss.unidades.Zealot;
-import ficha.terrans.Espectro;
-import ficha.terrans.Marine;
+import ficha.protoss.unidad.Zealot;
+import ficha.terran.unidad.Espectro;
+import ficha.terran.unidad.Marine;
 
 public class ExtrategiaVivaAtaquesTest {
 
-    private ExtrategiaConstrucccionOP moduloAux;
     private Tablero mapa;
     private FichaTerrestre unidad;
     private FichaTerrestre unidadEnemigaTerrestre;
@@ -29,8 +28,6 @@ public class ExtrategiaVivaAtaquesTest {
 
     @Before
     public void initialize() {
-        moduloAux = new ExtrategiaConstrucccionOP();
-
         int tamanioDeMapa = 40;
 
         mapa = new Tablero(tamanioDeMapa, tamanioDeMapa);
@@ -40,7 +37,7 @@ public class ExtrategiaVivaAtaquesTest {
 
         unidad = new Zealot();
         unidad.setBasico(jugador, mapa, new Coordenada(3, 3));
-        moduloAux.ponerEnJuego(unidad);
+        unidad.ponerEnJuego();
 
         unidadEnemigaTerrestre = new Marine();
         unidadEnemigaAerea = new Espectro();
@@ -51,36 +48,36 @@ public class ExtrategiaVivaAtaquesTest {
     @Test
     public void puedeAtacarUnidadTerrestreAdyacente() {
         unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3, 4));
-        moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
+        unidadEnemigaTerrestre.ponerEnJuego();
 
         unidad.atacar(unidadEnemigaTerrestre);
     }
 
 
-    @Test
+    @Test(expected = FueraDeRangoException.class)
     public void noPuedeAtacarUnidadAereaAdyacente() {
         unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3, 4));
-        moduloAux.ponerEnJuego(unidadEnemigaAerea);
+        unidadEnemigaAerea.ponerEnJuego();
 
-        Assert.assertFalse(unidad.atacar(unidadEnemigaAerea));
+        unidad.atacar(unidadEnemigaAerea);
     }
 
 
-    @Test
+    @Test(expected = FueraDeRangoException.class)
     public void noPuedeAtacarUnidadAereaEnLaMismaPosicion() {
         unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3, 3));
-        moduloAux.ponerEnJuego(unidadEnemigaAerea);
+        unidadEnemigaAerea.ponerEnJuego();
 
-        Assert.assertFalse(unidad.atacar(unidadEnemigaAerea));
+        unidad.atacar(unidadEnemigaAerea);
     }
 
 
-    @Test
+    @Test(expected = FueraDeRangoException.class)
     public void noPuedeAtacarUnidadTerrestreLejana() {
         unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3, 5));
-        moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
+        unidadEnemigaTerrestre.ponerEnJuego();
 
-        Assert.assertFalse(unidad.atacar(unidadEnemigaTerrestre));
+        unidad.atacar(unidadEnemigaTerrestre);
     }
 
 

@@ -1,9 +1,11 @@
 package ficha;
 
 import error.FichaACargarDebeEstarDebajoDeTransporte;
+import error.FichaSobreOtraFichaException;
 import error.MovimientoInsuficienteException;
 import error.TransporteNoContieneFichaException;
 import stats.Transportacion;
+import tablero.Coordenada3d;
 
 public class TransporteAereo extends UnidadAerea {
 
@@ -17,17 +19,16 @@ public class TransporteAereo extends UnidadAerea {
 
     @Override
     public void cargar(Ficha ficha) {
-        if (!coordenada2.proyeccion().equals(ficha.coordenada2.proyeccion())) {
+        if (!coordenada.proyeccion().equals(ficha.coordenada.proyeccion())) {
             throw new FichaACargarDebeEstarDebajoDeTransporte();
         }
 
         transportacion.cargar(ficha);
 
-        tablero.eliminarFicha(ficha.coordenada2);
+        tablero.eliminarFichaEn(ficha.coordenada);
     }
 
-    @Override
-    public void descargar(Ficha ficha) {
+    private void validarDescarga(Ficha ficha) {
         if (!transportacion.contieneFicha(ficha)) {
             throw new TransporteNoContieneFichaException();
         }
@@ -36,7 +37,18 @@ public class TransporteAereo extends UnidadAerea {
             throw new MovimientoInsuficienteException();
         }
 
-        tablero.insertar(coordenada, ficha);
+        Coordenada3d nuevaCoordenada = new Coordenada3d(coordenada, ficha.altura());
+
+        this.verificarCoordenada(nuevaCoordenada);
+    }
+
+    @Override
+    public void descargar(Ficha ficha) {
+        this.validarDescarga(ficha);
+
+        ficha.coordenada(coordenada.proyeccion());
+
+        tablero.insertar(ficha);
 
         transportacion.descargar(ficha);
     }

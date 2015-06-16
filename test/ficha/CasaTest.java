@@ -3,13 +3,12 @@ package ficha;
 import juego.Jugador;
 import juego.Raza;
 import juego.RecursosDeJugador.Poblacion;
-import juego.Tecnologia;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ficha.protoss.edificios.Pilon;
-import ficha.protoss.unidades.Zealot;
+import ficha.protoss.edificio.Pilon;
+import ficha.protoss.unidad.Zealot;
 import tablero.Coordenada;
 import tablero.Tablero;
 
@@ -18,18 +17,23 @@ import static org.junit.Assert.assertEquals;
 public class CasaTest {
 
     private Jugador protoss;
+    private Tablero mapa;
+    private Coordenada coordenada;
 
     @Before
     public void initialize() {
         protoss = new Jugador("Poroto", Raza.PROTOSS);
+        mapa = new Tablero(3, 3);
+        coordenada = new Coordenada(1, 1);
     }
 
     @Test
     public void crearCasaYQueDePoblacion() {
-        Ficha ficha = new Pilon();
         Poblacion poblacion = protoss.recursos().poblacion();
 
-        protoss.asignar(ficha);
+        Ficha ficha = new Pilon();
+        ficha.setBasico(protoss, mapa, coordenada);
+        ficha.ponerEnJuego();
 
         Assert.assertEquals(5, poblacion.posible());
     }
@@ -37,10 +41,11 @@ public class CasaTest {
 
     @Test
     public void muereCasaPerdemosPoblacion() {
-        Ficha ficha = new Pilon();
         Poblacion poblacion = protoss.recursos().poblacion();
 
-        protoss.asignar(ficha);
+        Ficha ficha = new Pilon();
+        ficha.setBasico(protoss, mapa, coordenada);
+        ficha.ponerEnJuego();
 
         protoss.pasarTurno();
 
@@ -53,11 +58,12 @@ public class CasaTest {
     @Test
     public void creamosUnidadPerdemosPoblacion() {
         Ficha nuevoEdificio = new Pilon();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
+        nuevoEdificio.ponerEnJuego();
 
-        protoss.agregarTecnologia(Tecnologia.ACCESO);
-        protoss.newFicha(nuevoEdificio);
-
-        protoss.newFicha(new Zealot());
+        Ficha nuevaUnidad = new Zealot();
+        nuevaUnidad.setBasico(protoss, mapa, new Coordenada(2, 2));
+        nuevaUnidad.ponerEnJuego();
 
         assertEquals(2, protoss.poblcacionActual());
     }
@@ -66,12 +72,13 @@ public class CasaTest {
     @Test
     public void muereUnidadGanamosPoblacion() {
         Ficha nuevoEdificio = new Pilon();
-
-        protoss.newFicha(nuevoEdificio);
-        protoss.agregarTecnologia(Tecnologia.ACCESO);
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
+        nuevoEdificio.ponerEnJuego();
 
         Ficha nuevaUnidad = new Zealot();
-        protoss.newFicha(nuevaUnidad);
+        nuevaUnidad.setBasico(protoss, mapa, new Coordenada(2, 2));
+        nuevaUnidad.ponerEnJuego();
+
         nuevaUnidad.muerete();
 
         assertEquals(0, protoss.poblcacionActual());

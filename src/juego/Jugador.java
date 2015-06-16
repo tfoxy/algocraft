@@ -14,6 +14,8 @@ public class Jugador {
     private final Raza raza;
     private final RecursosDeJugador recursos;
     private final List<Tecnologia> tecnologias;
+    private boolean pasandoTurno;
+    private List<Ficha> fichasAEliminar;
 
 
     public Jugador(String nombre, Raza raza) {
@@ -34,6 +36,9 @@ public class Jugador {
         tecnologias.addAll(raza.tecnologiasIniciales());
 
         recursos = new RecursosDeJugador(cristalInicial, gasInicial);
+
+        pasandoTurno = false;
+        fichasAEliminar = new ArrayList<>();
     }
 
 
@@ -53,42 +58,29 @@ public class Jugador {
 
 
     public void pasarTurno() {
-        for (Ficha ficha : fichas) {
+        pasandoTurno = true;
+
+        for (Ficha ficha: fichas) {
             ficha.pasarTurno();
         }
+
+        pasandoTurno = false;
+        eliminarFichas();
     }
 
 
-    public void asignar(Ficha ficha) {
-        if (!tecnologias.containsAll(ficha.tecnologiasNecesarias())) {
-            throw new TecnologiasInsuficientesException();
-        }
-
-        int aumentoDePoblacion = ficha.coste().poblacion();
-
-        recursos.poblacion().aumentarActualForzadamente(aumentoDePoblacion);
-
-        this.agregarFicha(ficha);
-    }
-
-
-    public void construir(EdificioTerrestre edificio) {
-        recursos.gastar(edificio.coste());
-
-        //edificio.enConstruccion();
-
-        this.agregarFicha(edificio);
+    private void eliminarFichas() {
+        fichas.removeAll(fichasAEliminar);
+        fichasAEliminar = new ArrayList<>();
     }
 
 
     public void perder(Ficha ficha) {
-        fichas.remove(ficha);
-    }
-
-
-    private void agregarFicha(Ficha ficha) {
-        this.fichas.add(ficha);
-        ficha.propietario(this);
+        if (pasandoTurno) {
+            fichasAEliminar.add(ficha);
+        } else {
+            fichas.remove(ficha);
+        }
     }
 
 
@@ -97,11 +89,7 @@ public class Jugador {
     }
 
     public void newFicha(Ficha ficha) {
-        asignar(ficha);
-    }
-
-    public void newFicha2(Ficha ficha) {
-        this.fichas.add(ficha); //cual es el punto de tener una extrategia Construccion. Si separas las Consturccion entre todas las demas claces del prgorama?
+        this.fichas.add(ficha);
     }
 
     public boolean tengoSuficientesRecursos(Recursos coste) {
@@ -131,6 +119,7 @@ public class Jugador {
     }
 
     public void perderFicha(Ficha ficha) {
+        perderPoblacionActual(ficha.coste().poblacion());
         this.perder(ficha);
     }
 
@@ -152,9 +141,5 @@ public class Jugador {
 
     public void agregarTecnologia(Tecnologia tecnologia) {
         tecnologias.add(tecnologia);
-    }
-
-    public void agregarRecursos2(Recursos coste) {//no se por que el otro fallos. Y ahora no tengoa ganas ver que pasa si los cambio.
-        recursos.agregar(coste);
     }
 }

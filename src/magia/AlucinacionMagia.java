@@ -40,12 +40,12 @@ public class AlucinacionMagia extends Magia {
     }
 
     public void insertarEspectro(Ficha objetivo, Coordenada lugar) {
-        Ficha alucinacion = fichacopiar.expectro();
+        Ficha alucinacion = fichacopiar.espectro();
         alucinacion.setBasico(alucinacion.propietario(), alucinacion.tablero(), lugar);
 
         //tengo que pensar algo mas proligo despues. Aunque este es un exepcion a la regla.
-        alucinacion.propietario().newFicha2(alucinacion);
-        alucinacion.tablero().insertar(lugar, alucinacion);
+        alucinacion.propietario().newFicha(alucinacion);
+        alucinacion.tablero().insertar(alucinacion);
     }
     
     /*pero falta ver si el usario elige el lugar o sale alado de la ficha.

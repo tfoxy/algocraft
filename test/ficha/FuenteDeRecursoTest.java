@@ -4,9 +4,8 @@ import juego.Gaia;
 import juego.Jugador;
 import juego.Raza;
 import juego.Tecnologia;
-import estrategia.ficha.moduloDeEstrategias.ModuloConstruccionOP;
-import ficha.natural.Volcan;
-import ficha.protoss.edificios.Asimilador;
+import ficha.natural.recurso.Volcan;
+import ficha.protoss.edificio.Asimilador;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,30 +20,29 @@ public class FuenteDeRecursoTest {
     private Jugador protoss;
     private Jugador pachaMama; //vende patria
     private Tablero mapa;
-    private FuenteDeRecurso nuevoRecurso;
     private Ficha nuevoEdificio;
-    private ModuloConstruccionOP moduloAux;
+    private Coordenada coordenada;
 
     @Before
     public void initialize() {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 500, 200);
         pachaMama = new Gaia();
         mapa = new Tablero(20, 20);
+        coordenada = new Coordenada(1, 1);
         protoss.agregarTecnologia(Tecnologia.ACCESO);
-        moduloAux = new ModuloConstruccionOP();
+        nuevoEdificio = new Asimilador();
 
     }
 
 
     @Test
-    public void ExtracionNormal() {
-        nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        moduloAux.ponerEnJuego(nuevoRecurso);
+    public void extracionNormal() {
+        FuenteDeRecurso nuevoRecurso = new Volcan();
+        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
+        nuevoRecurso.ponerEnJuego();
 
-        nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        moduloAux.ponerEnJuego((EdifcioDeRecusosTerrestre) nuevoEdificio);
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
+        nuevoEdificio.ponerEnJuego();
 
         protoss.pasarTurno();
 
@@ -54,13 +52,12 @@ public class FuenteDeRecursoTest {
 
     @Test
     public void noExtraeRecursosSiNoTiene() {
-        nuevoRecurso = new Volcan(0);
-        nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        moduloAux.ponerEnJuego(nuevoRecurso);
+        FuenteDeRecurso nuevoRecurso = new Volcan(0);
+        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
+        nuevoRecurso.ponerEnJuego();
 
-        nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        moduloAux.ponerEnJuego((EdifcioDeRecusosTerrestre) nuevoEdificio);
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
+        nuevoEdificio.ponerEnJuego();
 
         protoss.pasarTurno();
 
@@ -69,13 +66,12 @@ public class FuenteDeRecursoTest {
 
     @Test
     public void extraeLoQueTieneSiSeQuiereExtraerDeMas() {
-        nuevoRecurso = new Volcan(1);
-        nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        moduloAux.ponerEnJuego(nuevoRecurso);
+        FuenteDeRecurso nuevoRecurso = new Volcan(1);
+        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
+        nuevoRecurso.ponerEnJuego();
 
-        nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
-        moduloAux.ponerEnJuego((EdifcioDeRecusosTerrestre) nuevoEdificio);
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
+        nuevoEdificio.ponerEnJuego();
 
         protoss.pasarTurno();
 
@@ -84,12 +80,12 @@ public class FuenteDeRecursoTest {
 
     @Test
     public void noExtraSiNoEstaConsturido() {
-        nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico(pachaMama, mapa, new Coordenada(1, 1));
-        moduloAux.ponerEnJuego(nuevoRecurso);
+        FuenteDeRecurso nuevoRecurso = new Volcan();
+        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
+        nuevoRecurso.ponerEnJuego();
 
-        nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico(protoss, mapa, new Coordenada(1, 1));
+        nuevoEdificio.enConstruccion();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
 
         protoss.pasarTurno();

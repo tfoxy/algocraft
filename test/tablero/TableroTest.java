@@ -1,7 +1,7 @@
 package tablero;
 
 import error.PosicionFueraDeLimiteException;
-import ficha.natural.NodoMineral;
+import ficha.natural.recurso.NodoMineral;
 import ficha.FuenteDeRecurso;
 import org.junit.Assert;
 import org.junit.Before;
@@ -59,7 +59,8 @@ public class TableroTest {
         FuenteDeRecurso recurso = new NodoMineral();
         Coordenada lugar = new Coordenada(7, 5);
 
-        tablero.insertar(lugar, recurso);
+        recurso.setBasico(null, tablero, lugar);
+        tablero.insertar(recurso);
     }
 
 

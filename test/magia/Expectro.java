@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ficha.Ficha;
-import ficha.protoss.unidades.Zealot;
+import ficha.protoss.unidad.Zealot;
 
 public class Expectro {
 
@@ -16,7 +16,7 @@ public class Expectro {
     public void initialize() {
         ficha = new Zealot();
         cloneDeFicha = ficha.clone();
-        espectroDeFicha = ficha.expectro();
+        espectroDeFicha = ficha.espectro();
     }
 
     @Test

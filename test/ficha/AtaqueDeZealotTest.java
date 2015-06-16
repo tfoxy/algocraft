@@ -39,7 +39,7 @@ public class AtaqueDeZealotTest {
     	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,4));
         moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
 
-        estrategia.realizarAtaque(unidad, unidadEnemigaTerrestre);
+        estrategia.atacar(unidad, unidadEnemigaTerrestre);
     }
 
 
@@ -48,7 +48,7 @@ public class AtaqueDeZealotTest {
     	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,4));
         moduloAux.ponerEnJuego(unidadEnemigaAerea);
 
-        estrategia.realizarAtaque(unidad, unidadEnemigaAerea);
+        estrategia.atacar(unidad, unidadEnemigaAerea);
     }
 
 
@@ -57,7 +57,7 @@ public class AtaqueDeZealotTest {
     	unidadEnemigaAerea.setBasico(enemigo, mapa, new Coordenada(3,3));
         moduloAux.ponerEnJuego(unidadEnemigaAerea);
 
-        estrategia.realizarAtaque(unidad, unidadEnemigaAerea);
+        estrategia.atacar(unidad, unidadEnemigaAerea);
     }
 
 
@@ -66,7 +66,7 @@ public class AtaqueDeZealotTest {
     	unidadEnemigaTerrestre.setBasico(enemigo, mapa, new Coordenada(3,5));
         moduloAux.ponerEnJuego(unidadEnemigaTerrestre);
 
-        estrategia.realizarAtaque(unidad, unidadEnemigaTerrestre);
+        estrategia.atacar(unidad, unidadEnemigaTerrestre);
     }
 
 

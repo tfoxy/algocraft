@@ -2,13 +2,13 @@ package magia;
 
 import error.EnergiaInsuficienteException;
 import error.UnicamenteObjetivoNoNaturalException;
-import estrategia.ficha.ExtrategiaConstrucccionOP;
+import error.UnicamenteObjetivoUnidadException;
 import ficha.Ficha;
 import ficha.FichaAerea;
-import ficha.FichaEspacial;
+import ficha.natural.terreno.TerrenoEspacial;
 import ficha.FichaTerrestre;
-import ficha.protoss.unidades.Zealot;
-import ficha.terrans.unidad.NaveCiencia;
+import ficha.protoss.unidad.Zealot;
+import ficha.terran.unidad.NaveCiencia;
 import juego.Gaia;
 import juego.Jugador;
 import juego.Raza;
@@ -22,7 +22,7 @@ import tablero.Tablero;
 public class RadiacionMagiaTest {
 
     private static class NaveCienciaCargadaDummy extends NaveCiencia {
-        private static BarrasEscudoVidaEnergia.Builder BARRAS_BUILDER =
+        private static final BarrasEscudoVidaEnergia.Builder BARRAS_BUILDER =
                 new BarrasEscudoVidaEnergia.Builder()
                         .vida(200)
                         .energiaPorTurno(10)
@@ -41,12 +41,10 @@ public class RadiacionMagiaTest {
     private Coordenada coordenada = new Coordenada(3, 3);
     private Coordenada3d coordenadaTerrestre = new Coordenada3d(3, 3, 1);
     private Coordenada3d coordenadaAerea = new Coordenada3d(3, 3, 2);
-    private ExtrategiaConstrucccionOP moduloAux;
     private FichaAerea naveCiencia;
 
     @Before
     public void initialize() {
-        moduloAux = new ExtrategiaConstrucccionOP();
         magia = new RadiacionMagia();
         mapa = new Tablero(10, 10);
         gaia = new Gaia();
@@ -57,22 +55,22 @@ public class RadiacionMagiaTest {
     private void ponerNaveCiencia(int energiaInicial) {
         naveCiencia = new NaveCienciaCargadaDummy(energiaInicial);
         naveCiencia.setBasico(jugador, mapa, coordenada);
-        moduloAux.ponerEnJuego(naveCiencia);
+        naveCiencia.ponerEnJuego();
     }
 
     private Ficha ponerUnidadEnemiga() {
         FichaTerrestre fichaEnemiga = new Zealot();
         fichaEnemiga.setBasico(jugadorEnemigo, mapa, coordenada);
-        moduloAux.ponerEnJuego(fichaEnemiga);
+        fichaEnemiga.ponerEnJuego();
         return fichaEnemiga;
     }
 
 
-    @Test(expected = UnicamenteObjetivoNoNaturalException.class)
+    @Test(expected = UnicamenteObjetivoUnidadException.class)
     public void noSePuedeAplicarAFichaEspacial() {
-        FichaEspacial espacio = new FichaEspacial();
+        TerrenoEspacial espacio = new TerrenoEspacial();
         espacio.setBasico(gaia, mapa, coordenada);
-        moduloAux.ponerEnJuego(espacio);
+        espacio.ponerEnJuego();
 
         ponerNaveCiencia(200);
 

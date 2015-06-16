@@ -104,12 +104,7 @@ public class RecursosDeJugador {
         gas = gas - coste.gas();
     }
 
-    public void agregar(Recursos coste) {//no agregapoblacion
-        mineral = mineral + coste.mineral();
-        gas = gas + coste.gas();
-    }
-
-    public Recursos DameRecursosLineales() {//no agregapoblacion
+    public Recursos dameRecursosLineales() {
         return new Recursos(mineral, gas);
     }
 

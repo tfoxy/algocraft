@@ -19,6 +19,6 @@ public class TormentaPsionicaMagia extends Magia {
         super.realizar(ficha, objetivo);
         TormentaPsionica poder = new TormentaPsionica();
         poder.setBasico(ficha.propietario(), ficha.tablero(), objetivo.proyeccion());
-        ficha.propietario().newFicha2(poder);
+        ficha.propietario().newFicha(poder);
     }
 }

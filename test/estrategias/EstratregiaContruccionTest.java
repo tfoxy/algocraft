@@ -14,34 +14,34 @@ import org.junit.Before;
 import org.junit.Test;
 
 import tablero.Coordenada;
-import tablero.Coordenada3d;
 import tablero.Tablero;
 import error.NoSePuedeCrearFicha;
 import ficha.Ficha;
-import ficha.natural.Volcan;
-import ficha.protoss.edificios.Asimilador;
-import ficha.protoss.edificios.Pilon;
-import ficha.protoss.unidades.Zealot;
+import ficha.natural.recurso.Volcan;
+import ficha.protoss.edificio.Asimilador;
+import ficha.protoss.edificio.Pilon;
+import ficha.protoss.unidad.Zealot;
 
 public class EstratregiaContruccionTest {
 
     private Jugador protoss;
     private Jugador pachaMama; //vende patria
     private Tablero mapa;
+    private Coordenada coordenada;
 
     @Before
     public void initialize() {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 500, 200);
         pachaMama = new Gaia();
         mapa = new Tablero(20, 20);
-        protoss.agregarTecnologia(Tecnologia.ACCESO);
+        coordenada = new Coordenada(1, 1);
     }
 
     //fichaTerrestre/casa
     @Test
     public void usarRecursosCorrectos() {
-        Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        Ficha nuevoEdificio = new Pilon().enConstruccion();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
 
         assertEquals(200, protoss.cantidadGas());
@@ -51,62 +51,56 @@ public class EstratregiaContruccionTest {
     @Test(expected = RecursosInsuficientesException.class)
     public void falloPorFaltaDeRecursos() {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 0, 0);
-        Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        Ficha nuevoEdificio = new Pilon().enConstruccion();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
     }
 
 
     @Test(expected = FichaSobreOtraFichaException.class)
     public void falloPorSobreposicion() {
-        Ficha nuevoEdificio = new Pilon();
-        Coordenada coordenada = new Coordenada(1, 1);
-
+        Ficha nuevoEdificio = new Pilon().enConstruccion();
 
         nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
 
-        nuevoEdificio = new Pilon();
+        nuevoEdificio = new Pilon().enConstruccion();
         nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
     }
-    //fichaTerrestre/casa
-
-
-    //recursoTerrestre
 
     @Test
     public void crearseEnLugarCorrectoFuenteDeRecursos() {
         Ficha nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
         nuevoRecurso.ponerEnJuego();
 
-        Assert.assertFalse(mapa.hayEspacioTerreste(new Coordenada(1, 1)));
+        Assert.assertFalse(mapa.hayEspacioTerreste(coordenada));
     }
 
     @Test(expected = NoSePuedeCrearFicha.class)
     public void fallaLugarIncorrectoFuenteDeRecursos() {
         Ficha nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
         nuevoRecurso.ponerEnJuego();
 
         nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
         nuevoRecurso.ponerEnJuego();
     }
 
     //recursoTerrestre
 
-    // EdifcioDeRecusosTerrestre
+    // EdifcioDeRecursosTerrestre
 
     @Test
     public void crearseEnLugarCorrectoEdifcioDeRecusosTerrestre() {
         Ficha nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
         nuevoRecurso.ponerEnJuego();
 
-        Ficha nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        Ficha nuevoEdificio = new Asimilador().enConstruccion();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
 
         assertEquals(200, protoss.cantidadGas());
@@ -115,30 +109,28 @@ public class EstratregiaContruccionTest {
 
     @Test(expected = NoSePuedeCrearFicha.class)
     public void fallaLugarIncorrectoEdifcioDeRecusosTerrestre() {
-        Ficha nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        Ficha nuevoEdificio = new Asimilador().enConstruccion();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
     }
 
-    // EdifcioDeRecusosTerrestre
+    // EdifcioDeRecursosTerrestre
 
     //turnos
     @Test
     public void tiempoCorrecto() {
-        Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        Ficha nuevoEdificio = new Pilon().enConstruccion();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
 
+        final int turnosParaCrear = nuevoEdificio.turnosParaCrear();
 
-        nuevoEdificio.pasarTurno();
-        nuevoEdificio.pasarTurno();
-        nuevoEdificio.pasarTurno();
-        nuevoEdificio.pasarTurno();
-        nuevoEdificio.pasarTurno();
+        for (int i = 0; i < turnosParaCrear; i++) {
+            assertEquals(0, protoss.poblacionPosible());
+            nuevoEdificio.pasarTurno();
+        }
 
-        assertEquals(0, nuevoEdificio.turnosParaCrear());
         assertEquals(5, protoss.poblacionPosible());
-
     }
 
 
@@ -146,8 +138,8 @@ public class EstratregiaContruccionTest {
 
     @Test
     public void muereCasaEnConstruccionNoPasaNada() {
-        Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        Ficha nuevoEdificio = new Pilon().enConstruccion();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
         protoss.agregarPoblacionTotal(10); //para que se agrege la poblacion tiene que pasar los turnos de la consturccion
 
@@ -158,43 +150,43 @@ public class EstratregiaContruccionTest {
 
     @Test
     public void muereTerrestreSeLiberaElEspacio() {
-        Ficha nuevoEdificio = new Pilon();
-        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        Ficha nuevoEdificio = new Pilon().enConstruccion();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
 
         nuevoEdificio.muerete();
 
-        Assert.assertTrue(mapa.hayEspacioTerreste(new Coordenada(1, 1)));
+        Assert.assertTrue(mapa.hayEspacioTerreste(coordenada));
     }
 
 
     @Test
     public void muereUnidadPierdesPoblacionaActual() {
-        Ficha nuevaUnidad = new Zealot();
+        protoss.agregarTecnologia(Tecnologia.ACCESO);
+
+        Ficha nuevaUnidad = new Zealot().enConstruccion();
         protoss.agregarPoblacionTotal(10);
-        nuevaUnidad.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        nuevaUnidad.setBasico(protoss, mapa, coordenada);
         nuevaUnidad.ponerEnJuego();
 
         nuevaUnidad.muerete();
 
-        assertEquals(400, protoss.cantidadMineral());
         assertEquals(0, protoss.poblcacionActual());
     }
 
     @Test
     public void muereFuenteDeRecursoDejaElRecurso() {
         Ficha nuevoRecurso = new Volcan();
-        nuevoRecurso.setBasico2(pachaMama, mapa, new Coordenada3d(1, 1, 1));
+        nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
         nuevoRecurso.ponerEnJuego();
 
-        Ficha nuevoEdificio = new Asimilador();
-        nuevoEdificio.setBasico2(protoss, mapa, new Coordenada3d(1, 1, 1));
+        Ficha nuevoEdificio = new Asimilador().enConstruccion();
+        nuevoEdificio.setBasico(protoss, mapa, coordenada);
         nuevoEdificio.ponerEnJuego();
-
 
         nuevoEdificio.muerete();
 
-        assertEquals(nuevoRecurso, mapa.getFicha(new Coordenada3d(1, 1, 1)));
+        assertEquals(nuevoRecurso, mapa.getFichaTerrestre(coordenada));
     }
 
     // TODO test que pruebe TecnologiasInsuficientesException

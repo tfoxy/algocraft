@@ -9,5 +9,6 @@ public enum TipoDeFicha {
     VOLCAN,
     MINERAL,
     TERRESTRE,
-    AEREA
+    AEREA,
+    NATURAL
 }

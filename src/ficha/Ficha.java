@@ -5,7 +5,6 @@ import error.FichaSobreOtraFichaException;
 import error.FueraDeRangoException;
 import error.JuegoException;
 import error.MovimientoInsuficienteException;
-import error.NoSePuedeCrearFicha;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
 import error.TransporteNoContieneFichaException;
@@ -13,7 +12,8 @@ import juego.Recursos;
 import juego.Jugador;
 import juego.RecursosDeJugador;
 import stats.Ataque;
-import stats.BarrasEscudoVidaEnergia;
+import stats.BarrasInvencible;
+import stats.IBarras;
 import stats.Transportacion;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
@@ -22,24 +22,25 @@ import tablero.Tablero;
 import juego.Tecnologia;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 
-public abstract class Ficha implements Cloneable /*agregar en unidades que quiera clonar, osea solo las Protos.*/ {
+public abstract class Ficha implements Cloneable {
+    /* agregar Cloneable en unidades que quiera clonar, o sea solo las Protoss.*/
 
-    protected Jugador propietario; //despues cualquier cosa refactorisamos... pero sino es absurdo tener tantos Gets
+    protected Jugador propietario;
     protected Tablero tablero;
-    protected Coordenada coordenada;
-    protected Coordenada3d coordenada2; //la idea es implemetar las funciones con esta cordenada asta tener todas implementadas y borrar la cordenada anterior
+    protected Coordenada3d coordenada;
 
-    protected boolean estoyVacio = true;
-    protected boolean esNatural = true;
-    protected boolean estoyConstruido = false;
+    protected Set<TipoDeFicha> tipoDeFicha = EnumSet.noneOf(TipoDeFicha.class);
+    protected TipoDeFicha tipoDeFichaNecesaria = TipoDeFicha.VACIA;
 
     protected String nombre = null;
 
     protected Recursos coste = Recursos.SIN_COSTE;
-    protected BarrasEscudoVidaEnergia barras = null;
+    protected IBarras barras = BarrasInvencible.INSTANCE;
     protected List<Tecnologia> tecnologiasNecesarias = new ArrayList<>();
     protected List<Tecnologia> tecnologiasQueDa = new ArrayList<>();
     protected int turnosParaCrear = 0;
@@ -49,9 +50,6 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     protected Recursos recursosExtraidosPorTurno = null;
     protected int poblacionQueDa = 0;
 
-    protected String tipoDeFuenteDeRecursos = null;
-    protected String tipoDeFuenteDeRecursosQueNecesito = null; //sino puede construir sobre otro edificio XD.
-
     protected int movimiento = 0;
     protected int movimientoMaximo = 0;
 
@@ -59,12 +57,12 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     protected Transportacion transportacion = Transportacion.VACIA;
     protected int ocupacionEnTransporte = 0;
 
-    // TODO agregar magias: List<Magia>
-
     protected Ataque ataqueTierra = Ataque.NULO;
     protected Ataque ataqueAire = Ataque.NULO;
 
     protected int vision = 0;
+
+    protected FichaStrategy estrategia = new FichaStrategy();
 
 
     //gets
@@ -81,18 +79,13 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
 
     public Coordenada3d coordenada() {
-        return new Coordenada3d(coordenada, altura());
+        return coordenada;
     }
 
     public Recursos coste() {
         return coste;
-    }//estas pueden ser inutiles si se les agrega construccion op a las fichas.
+    }
 
-    /*
-        public FuenteDeRecurso fuenteDeRecursos() {
-            return fuenteDeRecursos;
-        }
-    */
     public List<Tecnologia> tecnologiasNecesarias() {
         return tecnologiasNecesarias;
     }
@@ -101,41 +94,16 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         return turnosParaCrear;
     }
 
-    public BarrasEscudoVidaEnergia barras() {
+    public IBarras barras() {
         return barras;
     }
 
-    /*
-        public int rangoDeAtaqueTierra() {
-            return ataqueTierra.rango();
-        }
-
-        public int ataqueTierra() {
-            return ataqueTierra.danio();
-        }
-
-        public int rangoDeAtaqueAire() {
-            return ataqueTierra.rango();
-        }
-
-        public int ataqueAire() {
-            return ataqueTierra.danio();
-        }
-
-        public Recursos recursosExtraidosPorTurno() {
-            return recursosExtraidosPorTurno;
-        }
-    */
     public RecursosDeJugador recursosVirgenes() {
         return recursosVirgenes;
     }
 
-    public String tipoDeFuentaDeRecursos() {
-        return tipoDeFuenteDeRecursos;
-    }
-
     public boolean estoyVacio() {
-        return estoyVacio;
+        return tipoDeFicha.contains(TipoDeFicha.VACIA);
     }
 
     public int movimiento() {
@@ -146,47 +114,21 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         return movimientoMaximo;
     }
 
-    /*
-        public boolean puedoReemplazarFicha(Ficha ficha) {
-            // TODO puedoReemplazarFicha
-            return false;
-        }
-    */
-    public Jugador propietario(Jugador jugador) {
-        return propietario = jugador;
+    protected void coordenada(Coordenada lugar) {
+        coordenada = new Coordenada3d(lugar, altura());
     }
 
-    //si me olvido de comenetar. Se agrega esto. Puede que despues se cambie por un build.
     public void setBasico(Jugador jugador, Tablero mapa, Coordenada lugar) {
         propietario = jugador;
         tablero = mapa;
-        coordenada = lugar; //puede que en un rebuild esta linea se balla. o toda la funcion.
-        coordenada2 = new Coordenada3d(coordenada, 1);
-    }
-
-    public void coordenada(Coordenada nuevaUbicacion) {
-        coordenada = nuevaUbicacion;
-    }
-
-    public void fuenteDeRecursos(FuenteDeRecurso recurso) {
-        fuenteDeRecursos = recurso;
-    }
-
-    public void turnosParaCrear(int turnosParaCrear) {
-        this.turnosParaCrear = turnosParaCrear;
+        coordenada(lugar);
     }
 
 
-    //muerete
     public void muerete() {
-        propietario.perderPoblacionActual(coste.poblacion());
+        estrategia.muerete();
         propietario.perderFicha(this);
-        tablero.eliminarFicha(coordenada2);
-    }
-
-
-    public void tablero(Tablero tablero) {
-        this.tablero = tablero;
+        tablero.eliminarFichaEn(coordenada);
     }
 
     public void disminuirMovimiento() {
@@ -203,31 +145,32 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
 
     // atacar y defender
 
-    public void serAtacado(int danio) {
-        barras.sufrirDanio(danio, this);
+    public void sufrirDanio(int danio) {
+        barras.sufrirDanio(danio);
+
+        if (barras.estaMuerto()) {
+            this.muerete();
+        }
     }
 
-
-    public void realizarAtaque(Ficha defensor) {
+    public void atacar(Ficha defensor) {
         final Ataque ataque = defensor.tipoDeAtaqueRecibido(this);
 
         if (!this.puedoAtacar(defensor, ataque.rango())) {
             throw new FueraDeRangoException();
         }
 
-        defensor.serAtacado(ataque.danio());
+        defensor.sufrirDanio(ataque.danio());
     }
 
-
-    public boolean atacar(Ficha defensor) {
+    public boolean intentarAtaque(Ficha defensor) {
         try {
-            this.realizarAtaque(defensor);
+            this.atacar(defensor);
             return true;
         } catch (FueraDeRangoException e) {
             return false;
         }
     }
-
 
     private boolean puedoAtacar(Ficha defensor, int rango) {
         Coordenada posicionAgresor = coordenada;
@@ -237,17 +180,11 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
 
     public abstract Ataque tipoDeAtaqueRecibido(Ficha atacante);
-// atacar y defender
-
-    public boolean esNatural() {
-        return esNatural;
-    }
 
     public abstract int altura();
 
     @Override
     public Ficha clone() {
-
         Ficha clone = null;
         try {
             clone = (Ficha) super.clone();
@@ -257,73 +194,48 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
         } //cuando esten echos los Texy intentar quitar el (casteo)
 
         clone.barras = this.barras.clone();
+        clone.transportacion = new Transportacion(transportacion.capacidad());
 
         return this;
     }
 
-    public Ficha expectro() {
-
+    public Ficha espectro() {
         Ficha clone = this.clone();
 
-        clone.barras = this.barras.expectro();
+        clone.barras = this.barras.espectro();
         clone.ataqueAire = new Ataque(0, ataqueAire.rango());
         clone.ataqueTierra = new Ataque(0, ataqueTierra.rango());
+        clone.transportacion = Transportacion.VACIA;
 
         return this;
     }
 
-    //poner En juego
 
-    public void setBasico2(Jugador jugador, Tablero mapa, Coordenada3d lugar) {
-        propietario = jugador;
-        tablero = mapa;
-        coordenada2 = lugar;
-    }// una idea hacer que el SetBasico use el setBasico2 pero que medienta plimorfismo se fije si es una ficha terrestre o area.
-
-    //el nuevo
     public void ponerEnJuego() {
-        /*this.sePuedeCrear();
-        propietario.gastaRecursos(coste);
-        propietario.newFicha2(this);
-        tablero.insertar(coordenada2, this);
-    	*/
-        // tener en cuenta la opcion de arriba.
-
-
-        if (this.sePuedeCrear()) {
-            propietario.gastaRecursos(coste);
-            propietario.newFicha2(this);
-            tablero.insertar(coordenada2, this);
-        }
+        estrategia.validarCreacion();
+        estrategia.gastarRecursos();
+        estrategia.crear();
+        propietario.newFicha(this);
+        tablero.insertar(this);
     }
 
-    public boolean sePuedeCrear() throws NoSePuedeCrearFicha {
-        if (!(propietario.tengoSuficientesRecursos(coste))) {
-            throw new RecursosInsuficientesException();
-        }
-        if (!(tablero.hayEspacio(coordenada2))) {
-            throw new FichaSobreOtraFichaException();
-        }
-        if (!(propietario.tienesLasTecnologias(tecnologiasNecesarias()))) {
-            throw new TecnologiasInsuficientesException();
-        }
-        return true;
+    public Ficha enConstruccion() {
+        estrategia = new ConstruccionStrategy();
+        return this;
     }
+
 
     public int ocupacionEnTransporte() {
         return ocupacionEnTransporte;
     }
 
-
-    public void descargar(Ficha ficha) {
+    public void descargar(Ficha ficha) throws TransporteNoContieneFichaException {
         throw new TransporteNoContieneFichaException();
     }
 
     public void cargar(Ficha ficha) throws CapacidadInsuficienteException {
         throw new CapacidadInsuficienteException();
     }
-
-    //poner En juego
 
     //mover
     public boolean intentarMovimiento(Direccion direccion) {
@@ -336,47 +248,117 @@ public abstract class Ficha implements Cloneable /*agregar en unidades que quier
     }
 
     public void mover(Direccion direccion) {
-    	/*if (!estoyConstruido){
-    		throw new FichaNoLista();
-    	}*/
-        Tablero mapa = tablero;
-        Coordenada3d ubicacion = coordenada2;
+        Coordenada3d ubicacion = coordenada;
         Coordenada3d nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
 
         if (movimiento <= 0) {
             throw new MovimientoInsuficienteException();
         }
 
-        mapa.insertar(nuevaUbicacion, this);
-        mapa.eliminarFicha(ubicacion);
+        verificarCoordenada(nuevaUbicacion);
+
+        coordenada = nuevaUbicacion;
+
+        tablero.insertar(this);
+        tablero.eliminarFichaEn(ubicacion);
         this.disminuirMovimiento();
     }
-    //mover
-
-
-    //pasarTurnos
 
     public void pasarTurno() {
-        turnosParaCrear = turnosParaCrear - 1; //cualqueier cosa que se pase de largo
-        barras.pasarTurno();
-        this.recuperarPuntosDeMovimiento();
-        this.revisarEventos();
+        estrategia.pasarTurno();
     }
 
-    public void revisarEventos() {
-        if (turnosParaCrear == 0) {
-            this.construir();
+    public boolean es(TipoDeFicha tipoDeFicha) {
+        return this.tipoDeFicha.contains(tipoDeFicha);
+    }
+
+    public void propietario(Jugador propietario) {
+        this.propietario = propietario;
+    }
+
+    protected boolean puedoReemplazarFichaEnTablero() {
+        return puedoReemplazarFichaEnTablero(coordenada);
+    }
+
+    protected boolean puedoReemplazarFichaEnTablero(Coordenada3d nuevaCoordenada) {
+        return tablero.getFicha(nuevaCoordenada).tipoDeFicha.contains(tipoDeFichaNecesaria);
+    }
+
+    protected void verificarCoordenada(Coordenada3d nuevaCoordenada) {
+        if (!puedoReemplazarFichaEnTablero(nuevaCoordenada)) {
+            throw new FichaSobreOtraFichaException();
         }
     }
 
-    public void construir() {
-        estoyConstruido = true; // esta funcion crece en otras claces.
-    }
-    //pasarTurnos
 
-    //temporal
-    public Coordenada coordenada2() {
-        return this.coordenada2;
+    protected class FichaStrategy {
+
+        public void validarCreacion() {
+            if (!puedoReemplazarFichaEnTablero()) {
+                throw new FichaSobreOtraFichaException();
+            }
+        }
+
+        public void gastarRecursos() {
+            propietario.recursos().poblacion().aumentarActualForzadamente(coste.poblacion());
+        }
+
+        public void crear() {
+            propietario.agregarPoblacionTotal(poblacionQueDa);
+        }
+
+        public void pasarTurno() {
+            barras.pasarTurno();
+            recuperarPuntosDeMovimiento();
+        }
+
+        public void muerete() {
+            propietario.perderPoblacionTotal(poblacionQueDa);
+        }
+    }
+
+
+    private class ConstruccionStrategy extends FichaStrategy {
+        private int turnosFaltantes = turnosParaCrear;
+        private FichaStrategy estrategiaAnterior = estrategia;
+
+        @Override
+        public void validarCreacion() {
+            if (!(propietario.tengoSuficientesRecursos(coste))) {
+                throw new RecursosInsuficientesException();
+            }
+            if (!(propietario.tienesLasTecnologias(tecnologiasNecesarias()))) {
+                throw new TecnologiasInsuficientesException();
+            }
+            super.validarCreacion();
+        }
+
+        @Override
+        public void gastarRecursos() {
+            propietario.gastaRecursos(coste);
+        }
+
+        @Override
+        public void crear() {
+            // noop
+        }
+
+        @Override
+        public void pasarTurno() {
+            turnosFaltantes -= 1;
+
+            // TODO a medida que se vaya construyendo, ir aumentando la vida
+
+            if (turnosFaltantes <= 0) {
+                estrategia = estrategiaAnterior;
+                estrategia.crear();
+            }
+        }
+
+        @Override
+        public void muerete() {
+            // noop
+        }
     }
 
 

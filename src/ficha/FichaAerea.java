@@ -9,6 +9,10 @@ import tablero.Tablero;
 
 public class FichaAerea extends Ficha {
 
+    public FichaAerea() {
+        tipoDeFicha.add(TipoDeFicha.AEREA);
+    }
+
     @Override
     public Ataque tipoDeAtaqueRecibido(Ficha atacante) {
         return atacante.ataqueAire;
@@ -18,12 +22,4 @@ public class FichaAerea extends Ficha {
     public int altura() {
         return Altura.AIRE;
     }
-
-    @Override
-    public void setBasico(Jugador jugador, Tablero mapa, Coordenada lugar) {
-        propietario = jugador;
-        tablero = mapa;
-        coordenada = lugar;
-        coordenada2 = new Coordenada3d(coordenada, 2);
-    } //por alguna razon la solucion con super no funciona.
 }

@@ -5,7 +5,7 @@ import juego.Raza;
 import org.junit.Before;
 import org.junit.Test;
 
-import ficha.protoss.edificios.Pilon;
+import ficha.protoss.edificio.Pilon;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,9 +20,9 @@ public class ConstruccionTest {
 
     @Test
     public void queTardeElTiempoCorrecto() {
-        Pilon pilon = new Pilon();
+        Ficha pilon = new Pilon().enConstruccion();
 
-        protoss.construir(pilon);
+        pilon.propietario(protoss);
 
         // TODO usar getter para tiempo de pilon y usar for
         pilon.pasarTurno();

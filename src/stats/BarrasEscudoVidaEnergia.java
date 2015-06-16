@@ -3,7 +3,7 @@ package stats;
 import ficha.Ficha;
 
 //new 6
-public class BarrasEscudoVidaEnergia {
+public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
     private static final Builder EMPTY_BUILDER = new Builder();
 
     private int vidaMaxima;
@@ -58,6 +58,7 @@ public class BarrasEscudoVidaEnergia {
         this.energiaPorTurno = energiaPorTurno;
     }
 
+    @Override
     public void sufrirDanio(int danio) {
         if (0 > escudoActual - danio) {
             vidaActual = vidaActual + (escudoActual - danio);
@@ -67,31 +68,29 @@ public class BarrasEscudoVidaEnergia {
         }
     }
 
-    public void sufrirDanio(int danio, Ficha ficha) {
-        sufrirDanio(danio);
-        if (this.estaMuerto()) {
-            ficha.muerete();
-        }
-    }
-
+    @Override
     public void pasarTurno() {
         vidaActual = Math.min(vidaActual + vidaPorTurno, vidaMaxima);
         escudoActual = Math.min(escudoActual + escudoPorTurno, escudoMaximo);
         energiaActual = Math.min(energiaActual + energiaPorTurno, energiaMaxima);
     }
 
+    @Override
     public boolean estaMuerto() {
         return vidaActual <= 0 && escudoActual <= 0;
     }
 
+    @Override
     public int vidaActual() {
         return vidaActual;
     }
 
+    @Override
     public int escudoActual() {
         return escudoActual;
     }
 
+    @Override
     public int energiaActual() {
         return energiaActual;
     }
@@ -178,12 +177,14 @@ public class BarrasEscudoVidaEnergia {
         }
     }
 
-    public BarrasEscudoVidaEnergia expectro() {
-
+    @Override
+    public IBarras espectro() {
         BarrasEscudoVidaEnergia clone = this.clone();
 
         clone.vidaActual = 0; //el morir dice que tiene que tener 0 vida y 0 escudo.
+        clone.vidaMaxima = 0;
         clone.vidaPorTurno = 0;
+
         return clone;
     }
 

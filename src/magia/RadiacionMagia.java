@@ -1,7 +1,9 @@
 package magia;
 
 import error.UnicamenteObjetivoNoNaturalException;
+import error.UnicamenteObjetivoUnidadException;
 import ficha.Ficha;
+import ficha.TipoDeFicha;
 import tablero.Coordenada3d;
 import tablero.Tablero;
 
@@ -22,8 +24,8 @@ public class RadiacionMagia extends Magia {
         Tablero mapa = ficha.tablero();
         Ficha fichaObjetivo = mapa.getFicha(objetivo);
 
-        if (fichaObjetivo.esNatural()) {
-            throw new UnicamenteObjetivoNoNaturalException();
+        if (!fichaObjetivo.es(TipoDeFicha.UNIDAD)) {
+            throw new UnicamenteObjetivoUnidadException();
         }
     }
 

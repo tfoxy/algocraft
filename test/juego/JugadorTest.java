@@ -19,7 +19,7 @@ public class JugadorTest {
     public void noPasaElTurnoDeLaFichaSiLaPerdio() {
         Ficha unidad = Mockito.spy(new UnidadTerrestreDummy());
 
-        jugador.asignar(unidad);
+        jugador.newFicha(unidad);
 
         jugador.perder(unidad);
 
@@ -33,8 +33,8 @@ public class JugadorTest {
         Ficha primerUnidad = Mockito.spy(new UnidadTerrestreDummy());
         Ficha segundaUnidad = Mockito.spy(new UnidadTerrestreDummy());
 
-        jugador.asignar(primerUnidad);
-        jugador.asignar(segundaUnidad);
+        jugador.newFicha(primerUnidad);
+        jugador.newFicha(segundaUnidad);
 
         jugador.perder(segundaUnidad);
 

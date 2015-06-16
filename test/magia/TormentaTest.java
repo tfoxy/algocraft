@@ -7,61 +7,74 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import stats.BarrasEscudoVidaEnergia;
+import tablero.Altura;
+import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.Tablero;
-import estrategia.ficha.ExtrategiaConstrucccionOP;
 import ficha.FichaAerea;
 import ficha.FichaTerrestre;
-import ficha.protoss.unidades.AltoTemplario;
-import ficha.protoss.unidades.Scout;
-import ficha.protoss.unidades.Zealot;
+import ficha.protoss.unidad.AltoTemplario;
+import ficha.protoss.unidad.Scout;
+import ficha.protoss.unidad.Zealot;
 
 public class TormentaTest {
 
-    private ExtrategiaConstrucccionOP moduloAux;
-    private FichaTerrestre Caster;
+    private static class Caster extends AltoTemplario {
+        private static final BarrasEscudoVidaEnergia.Builder BARRAS_BUILDER =
+                new BarrasEscudoVidaEnergia.Builder()
+                        .vida(40).escudo(40)
+                        .energiaPorTurno(15)
+                        .energia(200);
+
+        Caster() {
+            this.barras = BARRAS_BUILDER.build();
+        }
+    }
+
+    private FichaTerrestre caster;
     private FichaTerrestre victima;
     private FichaAerea victimaVoladora;
     private Tablero mapa;
     private Jugador jugador;
     private Jugador jugadorEnemigo;
     private TormentaPsionicaMagia magia;
+    private Coordenada coordenada;
+    private Coordenada3d coordenadaEnemigos;
 
     @Before
     public void initialize() {
-        moduloAux = new ExtrategiaConstrucccionOP();
         magia = new TormentaPsionicaMagia();
         mapa = new Tablero(10, 10);
-        Caster = new AltoTemplario();
+        caster = new Caster();
         victima = new Zealot();
         victimaVoladora = new Scout();
         jugador = new Jugador("aliado", Raza.PROTOSS);
         jugadorEnemigo = new Jugador("enemigo", Raza.PROTOSS);
 
-        Caster.setBasico(jugador, mapa, new Coordenada3d(1, 1, 0));
-        victima.setBasico(jugadorEnemigo, mapa, new Coordenada3d(2, 2, 0));
-        victimaVoladora.setBasico(jugadorEnemigo, mapa, new Coordenada3d(2, 2, 1));
+        coordenada = new Coordenada(3, 3);
+        coordenadaEnemigos = new Coordenada3d(5, 5, Altura.TIERRA);
 
-        moduloAux.ponerEnJuego(Caster);
+        caster.setBasico(jugador, mapa, coordenada);
+        victima.setBasico(jugadorEnemigo, mapa, coordenadaEnemigos);
+        victimaVoladora.setBasico(jugadorEnemigo, mapa, coordenadaEnemigos);
 
-        jugador.pasarTurno();
-        jugador.pasarTurno();
-        jugador.pasarTurno();
+        caster.ponerEnJuego();
     }
 
     @Test
     public void noHacerNadaSiFalla() {
-        magia.realizar(Caster, new Coordenada3d(2, 2, 0));
+        magia.realizar(caster, coordenadaEnemigos);
         jugador.pasarTurno();
     }
 
 
     @Test
-    public void dañoDosUnidadesEnUnTurno() {
-        moduloAux.ponerEnJuego(victima);
-        moduloAux.ponerEnJuego(victimaVoladora);
-        magia.realizar(Caster, new Coordenada3d(2, 2, 0));
+    public void danioDosUnidadesEnUnTurno() {
+        victima.ponerEnJuego();
+        victimaVoladora.ponerEnJuego();
+        magia.realizar(caster, coordenadaEnemigos);
         jugador.pasarTurno();
 
         Assert.assertEquals(0, victima.barras().escudoActual());
@@ -70,10 +83,10 @@ public class TormentaTest {
 
 
     @Test
-    public void dañoDosUnidadesEnDosTurno() {
-        moduloAux.ponerEnJuego(victima);
-        moduloAux.ponerEnJuego(victimaVoladora);
-        magia.realizar(Caster, new Coordenada3d(2, 2, 0));
+    public void danioDosUnidadesEnDosTurno() {
+        victima.ponerEnJuego();
+        victimaVoladora.ponerEnJuego();
+        magia.realizar(caster, coordenadaEnemigos);
         jugador.pasarTurno();
         jugador.pasarTurno();
 
@@ -82,30 +95,34 @@ public class TormentaTest {
     }
 
     @Test
-    public void dañoUnaUnidadesEnUnTurno() {
-        moduloAux.ponerEnJuego(victima);
-        magia.realizar(Caster, new Coordenada3d(2, 2, 0));
+    public void danioUnaUnidadesEnUnTurno() {
+        victima.ponerEnJuego();
+        magia.realizar(caster, coordenadaEnemigos);
         jugador.pasarTurno();
 
         Assert.assertEquals(0, victima.barras().escudoActual());
     }
 
     @Test
-    //por alguna razon esta y la siguente si estan las dos a la ves fallan. Pero si se qutia una no fallan. Tira un error de algo de los test.
-    public void dañoDosUnidadesEnUnTurnoPeroEsquiva() {
-        moduloAux.ponerEnJuego(victima);
-        magia.realizar(Caster, new Coordenada3d(2, 2, 0));
+    public void danioDosUnidadesEnUnTurnoPeroEsquiva() {
+        victima.ponerEnJuego();
+        magia.realizar(caster, coordenadaEnemigos);
+
         jugador.pasarTurno();
+
         victima.intentarMovimiento(Direccion.ABAJO);
+        victima.intentarMovimiento(Direccion.ABAJO);
+
         jugador.pasarTurno();
+
         Assert.assertEquals(0, victima.barras().escudoActual());
         Assert.assertFalse(victima.barras().estaMuerto());
     }
 
     @Test
-    public void dañoDosUnidadesEnUnTurnoPeroFallaElPrimero() {
-        moduloAux.ponerEnJuego(victima);
-        magia.realizar(Caster, new Coordenada3d(2, 1, 0));
+    public void danioDosUnidadesEnUnTurnoPeroFallaElPrimero() {
+        victima.ponerEnJuego();
+        magia.realizar(caster, coordenadaEnemigos);
         jugador.pasarTurno();
         victima.intentarMovimiento(Direccion.ABAJO);
         jugador.pasarTurno();

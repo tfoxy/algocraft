@@ -3,11 +3,10 @@ package tablero;
 import java.util.HashMap;
 import java.util.Map;
 
-import error.FichaSobreOtraFichaException;
 import error.PosicionFueraDeLimiteException;
 import ficha.Ficha;
-import ficha.FichaAerea;
-import ficha.FichaTerrestre;
+import ficha.natural.terreno.TerrenoAire;
+import ficha.natural.terreno.TerrenoTierra;
 
 public class Tablero {
 
@@ -15,8 +14,8 @@ public class Tablero {
 
     static {
         FICHAS_VACIAS = new HashMap<>();
-        FICHAS_VACIAS.put(Altura.TIERRA, new FichaTerrestre());
-        FICHAS_VACIAS.put(Altura.AIRE, new FichaAerea());
+        FICHAS_VACIAS.put(Altura.TIERRA, new TerrenoTierra());
+        FICHAS_VACIAS.put(Altura.AIRE, new TerrenoAire());
     }
 
 
@@ -76,43 +75,20 @@ public class Tablero {
         return hayEspacio(new Coordenada3d(lugar, Altura.TIERRA));
     }
 
-    public boolean hayEspacioArreo(Coordenada lugar) { //new 6
+    public boolean hayEspacioAereo(Coordenada lugar) { //new 6
         return hayEspacio(new Coordenada3d(lugar, Altura.AIRE));
     }
 
 
-    public void insertar(Coordenada lugar, Ficha ficha) {
-        Coordenada3d coord3d = new Coordenada3d(lugar, ficha.altura());
-        Ficha fichaEnLugar = getFicha(coord3d);
+    public void insertar(Ficha ficha) {
+        verificar(ficha.coordenada());
 
-        if (!fichaEnLugar.estoyVacio()) {
-            throw new FichaSobreOtraFichaException();
-        }
-
-        fichas.put(coord3d, ficha);
-
-        ficha.coordenada(lugar);
-        ficha.tablero(this);
+        fichas.put(ficha.coordenada(), ficha);
     }
 
 
-    public void eliminarFicha(Coordenada3d lugar) {
+    public void eliminarFichaEn(Coordenada3d lugar) {
         fichas.remove(lugar);
-    }
-
-
-    public void eliminarFichaTerrestre(Coordenada lugar) {
-        eliminarFicha(new Coordenada3d(lugar, Altura.TIERRA));
-    }
-
-
-    public void eliminarFichaAerea(Coordenada lugar) {
-        eliminarFicha(new Coordenada3d(lugar, Altura.AIRE));
-    }
-
-
-    public Casilla getCasilla() {
-        return null;
     }
 
 

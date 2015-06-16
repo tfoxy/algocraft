@@ -3,9 +3,9 @@ package stats;
 import error.*;
 import ficha.Ficha;
 import ficha.UnidadTerrestre;
-import ficha.protoss.edificios.Pilon;
-import ficha.terrans.Marine;
-import ficha.terrans.unidad.Golliat;
+import ficha.protoss.edificio.Pilon;
+import ficha.terran.unidad.Marine;
+import ficha.terran.unidad.Golliat;
 import org.junit.Assert;
 import org.junit.Test;
 
