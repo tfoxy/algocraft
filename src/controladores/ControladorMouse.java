@@ -1,20 +1,21 @@
 package controladores;
 
-//esto aun falta
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import vista.VistaModeloDato;
 
-import modelo.Modelo;
+import auxiliares.ModeloObservable;
+
+
 
 public class ControladorMouse extends MouseAdapter {
 
-	Modelo modelo;
+    ModeloObservable modelo;
 
     VistaModeloDato vista;
 
-    public ControladorMouse(Modelo modelo, VistaModeloDato vista) {
+    public ControladorMouse(ModeloObservable modelo, VistaModeloDato vista) {
         this.modelo = modelo;
         this.vista = vista;
     }
@@ -25,6 +26,6 @@ public class ControladorMouse extends MouseAdapter {
         // El manejo de las coordenadas del mouse debe ser encapsulado por la clase Posicion
         // modelo.inicializarModeloDato(new Posicion(mouseEvent.getX(), mouseEvent.getY()));
 
-        modelo.inicializarModeloDato(vista.coordenada);
+        modelo.inicializarModeloDato(vista.posicion);
     }
 }

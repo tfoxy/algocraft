@@ -11,7 +11,7 @@ public class Jugador {
 
     private final Set<Ficha> fichas;
     private final String nombre;
-    private final Raza raza;
+    public final Raza raza;
     private final RecursosDeJugador recursos;
     private final List<Tecnologia> tecnologias;
     private boolean pasandoTurno;

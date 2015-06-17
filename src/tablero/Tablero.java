@@ -30,13 +30,13 @@ public class Tablero {
     }
 
 
-    private void verificar(Coordenada3d lugar) {
+    private void verificar(Coordenada3d lugar) {//se inicia a contar por 0
         int x = lugar.getX();
         int y = lugar.getY();
         int z = lugar.getZ();
 
-        if (x < 1 || x > longitudX
-                || y < 1 || y > longitudY
+        if (x < 0 || x > longitudX
+                || y < 0 || y > longitudY
                 || z < Altura.TIERRA || z > Altura.AIRE) {
             throw new PosicionFueraDeLimiteException();
         }

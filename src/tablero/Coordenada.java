@@ -2,8 +2,8 @@ package tablero;
 
 public class Coordenada {
 
-    protected final int x;
-    private final int y;
+    public final int x;
+    public final int y;
 
     public Coordenada(int x, int y) {
         this.x = x;

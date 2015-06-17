@@ -19,8 +19,10 @@ import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.Tablero;
+import vista.ConstanteColores;
 import juego.Tecnologia;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
@@ -362,5 +364,15 @@ public abstract class Ficha implements Cloneable {
         }
     }
 
+    //Hauxiliar mientras se acrea capa grafica
+    
+    public Color miColor(){
+    	switch(propietario.raza){
+    	case TERRAN:return ConstanteColores.amarilloSol;
+    	case PROTOSS:return ConstanteColores.azulMarino;
+    }
+		return Color.white;
+    }
+    
 
 }
