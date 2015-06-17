@@ -41,7 +41,7 @@ public class Coordenada3d extends Coordenada {
 
     @Override
     public String toString() {
-        return "Coordenada3d{" + getX() + ", " + getY() + ", " + z + '}';
+        return "{" + x + ',' + y + ',' + z + '}';
     }
 
     @Override

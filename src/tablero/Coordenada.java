@@ -39,7 +39,7 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return "Coordenada{" + x + ", " + y + '}';
+        return "" + '{' + x + ',' + y + '}';
     }
 
 

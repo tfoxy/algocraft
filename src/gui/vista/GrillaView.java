@@ -4,7 +4,6 @@ import gui.modelo.TableroObservable;
 import tablero.Coordenada;
 
 import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 import java.awt.Container;
 import java.awt.GridLayout;
 
