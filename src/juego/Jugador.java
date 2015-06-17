@@ -57,6 +57,11 @@ public class Jugador {
     }
 
 
+    public Raza raza() {
+        return raza;
+    }
+
+
     public void pasarTurno() {
         pasandoTurno = true;
 

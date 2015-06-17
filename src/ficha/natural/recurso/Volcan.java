@@ -14,6 +14,7 @@ public class Volcan extends FuenteDeRecurso {
     public Volcan(int gas) {
         super(0, gas);
 
+        nombre = "Volcán";
         this.tipoDeFicha.add(TipoDeFicha.VOLCAN);
     }
 

@@ -292,6 +292,10 @@ public abstract class Ficha implements Cloneable {
         }
     }
 
+    public String nombre() {
+        return nombre;
+    }
+
 
     protected class FichaStrategy {
 
