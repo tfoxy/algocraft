@@ -8,6 +8,7 @@ import error.MovimientoInsuficienteException;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
 import error.TransporteNoContieneFichaException;
+import juego.Gaia;
 import juego.Recursos;
 import juego.Jugador;
 import juego.RecursosDeJugador;
@@ -370,14 +371,20 @@ public abstract class Ficha implements Cloneable {
     }
 
     //Hauxiliar mientras se acrea capa grafica
-    
-    public Color miColor(){
-    	switch(propietario.raza){
-    	case TERRAN:return ConstanteColores.amarilloSol;
-    	case PROTOSS:return ConstanteColores.azulMarino;
+    public Color miColor() {
+        if (propietario.nombre().equals(new Gaia().nombre())) {
+            return Color.white;
+        }
+
+        switch (propietario.raza()) {
+            case TERRAN:
+                return ConstanteColores.amarilloSol;
+            case PROTOSS:
+                return ConstanteColores.azulMarino;
+            default:
+                return Color.white;
+        }
     }
-		return Color.white;
-    }
-    
+
 
 }

@@ -1,9 +1,11 @@
 package juego;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Set;
 
-import error.TecnologiasInsuficientesException;
-import ficha.EdificioTerrestre;
 import ficha.Ficha;
 
 
@@ -11,7 +13,7 @@ public class Jugador {
 
     private final Set<Ficha> fichas;
     private final String nombre;
-    public final Raza raza;
+    private final Raza raza;
     private final RecursosDeJugador recursos;
     private final List<Tecnologia> tecnologias;
     private boolean pasandoTurno;

@@ -14,7 +14,7 @@ public class Juego {
     private ITablero tablero;
 
     private Juego(Builder builder) {
-        gaia = new Gaia();
+        gaia = builder.gaia;
         jugadores = builder.jugadores;
         tablero = builder.tablero;
     }
@@ -41,9 +41,15 @@ public class Juego {
     public static class Builder {
         private static final int POBLACION_MAXIMA = 200;
 
-        private List<Jugador> jugadores = new ArrayList<>();
+        private final Gaia gaia = new Gaia();
+        private final List<Jugador> jugadores = new ArrayList<>();
         private ITablero tablero = null;
         private int poblacionMaxima = POBLACION_MAXIMA;
+
+
+        public Gaia gaia() {
+            return gaia;
+        }
 
 
         public Builder agregarJugador(Jugador jugador) {

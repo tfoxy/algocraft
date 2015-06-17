@@ -7,26 +7,36 @@ import error.PosicionFueraDeLimiteException;
 import ficha.Ficha;
 import ficha.natural.terreno.TerrenoAire;
 import ficha.natural.terreno.TerrenoTierra;
+import juego.Gaia;
 
 public class Tablero implements ITablero {
 
-    private static final Map<Integer, Ficha> FICHAS_VACIAS;
-
-    static {
-        FICHAS_VACIAS = new HashMap<>();
-        FICHAS_VACIAS.put(Altura.TIERRA, new TerrenoTierra());
-        FICHAS_VACIAS.put(Altura.AIRE, new TerrenoAire());
-    }
-
-
-    private int longitudX;
-    private int longitudY;
-    private Map<Coordenada3d, Ficha> fichas = new HashMap<>();
+    private final int longitudX;
+    private final int longitudY;
+    private final Map<Coordenada3d, Ficha> fichas = new HashMap<>();
+    private final Map<Integer, Ficha> fichasVacias = new HashMap<>();
 
 
     public Tablero(int x, int y) {
+        this(x, y, new Gaia());
+    }
+
+
+    public Tablero(int x, int y, Gaia gaia) {
         longitudX = x;
         longitudY = y;
+        inicializarFichasVacias(gaia);
+    }
+
+
+    private void inicializarFichasVacias(Gaia gaia) {
+        Ficha tierra = new TerrenoTierra();
+        tierra.propietario(gaia);
+        fichasVacias.put(Altura.TIERRA, tierra);
+
+        Ficha aire = new TerrenoAire();
+        aire.propietario(gaia);
+        fichasVacias.put(Altura.AIRE, aire);
     }
 
 
@@ -50,7 +60,7 @@ public class Tablero implements ITablero {
         Ficha ficha = fichas.get(lugar);
 
         if (ficha == null) {
-            ficha = FICHAS_VACIAS.get(lugar.getZ());
+            ficha = fichasVacias.get(lugar.getZ());
         }
 
         return ficha;

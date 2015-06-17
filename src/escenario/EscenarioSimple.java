@@ -4,7 +4,6 @@ package escenario;
 import ficha.Ficha;
 import ficha.natural.recurso.NodoMineral;
 import ficha.natural.recurso.Volcan;
-import gui.modelo.TableroObservable;
 import juego.Gaia;
 import juego.Juego;
 import juego.Jugador;
@@ -24,7 +23,7 @@ public class EscenarioSimple {
     private Jugador j2;
 
     public EscenarioSimple() {
-        mapa = new Tablero(W, H);
+        // noop
     }
 
     private static Coordenada c(int x, int y) {
@@ -61,6 +60,7 @@ public class EscenarioSimple {
     }
 
     public Juego cargarEn(Juego.Builder builder) {
+        mapa = new Tablero(W, H, builder.gaia());
         builder.tablero(mapa);
 
         Juego juego = builder.build();
