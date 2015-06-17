@@ -1,5 +1,6 @@
 package gui.vista;
 
+import controladores.ControladorMouse;
 import ficha.Ficha;
 import gui.modelo.TableroObservable;
 import tablero.Altura;
@@ -18,26 +19,6 @@ public class CasillaVista extends JPanel {
 
     private CasillaParaFicha tierra;
     private CasillaParaFicha aire;
-
-    private class CasillaParaFicha extends JPanel {
-        private Ficha ficha;
-
-        private CasillaParaFicha(Ficha ficha) {
-            this.ficha = ficha;
-        }
-
-        @Override
-        public void paintComponent(Graphics grafico) {
-            super.paintComponent(grafico);
-            grafico.setColor(ficha.miColor());
-
-            Dimension dimension = getSize();
-
-            grafico.fillRect(0, 0, dimension.width, dimension.height);
-
-            setToolTipText(ficha.nombre() + " " + ficha.coordenada().proyeccion().toString());
-        }
-    }
 
     public CasillaVista(Coordenada coordenada, TableroObservable mapa) {
         tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada));
