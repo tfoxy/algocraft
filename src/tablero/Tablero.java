@@ -14,8 +14,7 @@ public class Tablero implements ITablero {
     private final int longitudX;
     private final int longitudY;
     private final Map<Coordenada3d, Ficha> fichas = new HashMap<>();
-    private final Map<Integer, Ficha> fichasVacias = new HashMap<>();
-
+    private final Gaia gaia;
 
     public Tablero(int x, int y) {
         this(x, y, new Gaia());
@@ -25,18 +24,16 @@ public class Tablero implements ITablero {
     public Tablero(int x, int y, Gaia gaia) {
         longitudX = x;
         longitudY = y;
-        inicializarFichasVacias(gaia);
+        this.gaia = gaia;
     }
 
 
-    private void inicializarFichasVacias(Gaia gaia) {
-        Ficha tierra = new TerrenoTierra();
-        tierra.propietario(gaia);
-        fichasVacias.put(Altura.TIERRA, tierra);
-
-        Ficha aire = new TerrenoAire();
-        aire.propietario(gaia);
-        fichasVacias.put(Altura.AIRE, aire);
+    private Ficha getFichaVacia(Coordenada3d lugar) {
+        Ficha ficha = lugar.z == Altura.TIERRA
+                ? new TerrenoTierra()
+                : new TerrenoAire();
+        ficha.setBasico(gaia, this, lugar);
+        return ficha;
     }
 
 
@@ -60,7 +57,7 @@ public class Tablero implements ITablero {
         Ficha ficha = fichas.get(lugar);
 
         if (ficha == null) {
-            ficha = fichasVacias.get(lugar.getZ());
+            ficha = getFichaVacia(lugar);
         }
 
         return ficha;
