@@ -5,6 +5,7 @@ import error.UnicamenteObjetivoUnidadException;
 import ficha.Ficha;
 import ficha.TipoDeFicha;
 import tablero.Coordenada3d;
+import tablero.ITablero;
 import tablero.Tablero;
 
 /**
@@ -21,7 +22,7 @@ public class RadiacionMagia extends Magia {
 
     @Override
     protected void verificarObjetivo(Ficha ficha, Coordenada3d objetivo) {
-        Tablero mapa = ficha.tablero();
+        ITablero mapa = ficha.tablero();
         Ficha fichaObjetivo = mapa.getFicha(objetivo);
 
         if (!fichaObjetivo.es(TipoDeFicha.UNIDAD)) {

@@ -1,5 +1,7 @@
 package juego;
 
+import gui.modelo.TableroObservable;
+import tablero.ITablero;
 import tablero.Tablero;
 
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ public class Juego {
 
     private final Gaia gaia;
     private final List<Jugador> jugadores;
-    private final Tablero tablero;
+    private ITablero tablero;
 
     private Juego(Builder builder) {
         gaia = new Gaia();
@@ -21,7 +23,7 @@ public class Juego {
         return gaia;
     }
 
-    public Tablero tablero() {
+    public ITablero tablero() {
         return tablero;
     }
 
@@ -29,12 +31,18 @@ public class Juego {
         return jugadores;
     }
 
+    public TableroObservable hacerTableroObservable() {
+        TableroObservable tableroObservable = new TableroObservable(tablero);
+        this.tablero = tableroObservable;
+        return tableroObservable;
+    }
+
 
     public static class Builder {
         private static final int POBLACION_MAXIMA = 200;
 
         private List<Jugador> jugadores = new ArrayList<>();
-        private Tablero tablero = null;
+        private ITablero tablero = null;
         private int poblacionMaxima = POBLACION_MAXIMA;
 
 
@@ -44,7 +52,7 @@ public class Juego {
         }
 
 
-        public Builder tablero(Tablero tablero) {
+        public Builder tablero(ITablero tablero) {
             if (tablero == null) {
                 throw new NullPointerException();
             }

@@ -18,6 +18,7 @@ import stats.Transportacion;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Direccion;
+import tablero.ITablero;
 import tablero.Tablero;
 import vista.ConstanteColores;
 import juego.Tecnologia;
@@ -33,7 +34,7 @@ public abstract class Ficha implements Cloneable {
     /* agregar Cloneable en unidades que quiera clonar, o sea solo las Protoss.*/
 
     protected Jugador propietario;
-    protected Tablero tablero;
+    protected ITablero tablero;
     protected Coordenada3d coordenada;
 
     protected Set<TipoDeFicha> tipoDeFicha = EnumSet.noneOf(TipoDeFicha.class);
@@ -76,7 +77,7 @@ public abstract class Ficha implements Cloneable {
         return poblacionQueDa;
     }
 
-    public Tablero tablero() {
+    public ITablero tablero() {
         return tablero;
     }
 
@@ -120,7 +121,7 @@ public abstract class Ficha implements Cloneable {
         coordenada = new Coordenada3d(lugar, altura());
     }
 
-    public void setBasico(Jugador jugador, Tablero mapa, Coordenada lugar) {
+    public void setBasico(Jugador jugador, ITablero mapa, Coordenada lugar) {
         propietario = jugador;
         tablero = mapa;
         coordenada(lugar);

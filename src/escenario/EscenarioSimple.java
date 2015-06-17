@@ -4,10 +4,12 @@ package escenario;
 import ficha.Ficha;
 import ficha.natural.recurso.NodoMineral;
 import ficha.natural.recurso.Volcan;
+import gui.modelo.TableroObservable;
 import juego.Gaia;
 import juego.Juego;
 import juego.Jugador;
 import tablero.Coordenada;
+import tablero.ITablero;
 import tablero.Tablero;
 
 public class EscenarioSimple {
@@ -16,7 +18,7 @@ public class EscenarioSimple {
     private static final int H = 15;
     private static final Coordenada PUNTO_MEDIO = new Coordenada((W + 1) / 2, (H + 1) / 2);
 
-    private Tablero mapa;
+    private ITablero mapa;
     private Gaia gaia;
     private Jugador j1;
     private Jugador j2;

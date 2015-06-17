@@ -4,6 +4,7 @@ import error.UnicamenteObjetivoAliadoException;
 import ficha.Ficha;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
+import tablero.ITablero;
 import tablero.Tablero;
 
 /**
@@ -24,7 +25,7 @@ public class AlucinacionMagia extends Magia {
 
     @Override
     protected void verificarObjetivo(Ficha ficha, Coordenada3d objetivo) {
-        Tablero mapa = ficha.tablero();
+        ITablero mapa = ficha.tablero();
         Ficha fichaObjetivo = mapa.getFicha(objetivo);
 
         if (!fichaObjetivo.propietario().equals(ficha.propietario())) {

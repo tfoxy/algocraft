@@ -8,7 +8,7 @@ import ficha.Ficha;
 import ficha.natural.terreno.TerrenoAire;
 import ficha.natural.terreno.TerrenoTierra;
 
-public class Tablero {
+public class Tablero implements ITablero {
 
     private static final Map<Integer, Ficha> FICHAS_VACIAS;
 
@@ -30,7 +30,7 @@ public class Tablero {
     }
 
 
-    private void verificar(Coordenada3d lugar) {//se inicia a contar por 0
+    private void verificar(Coordenada3d lugar) { //se inicia a contar por 0
         int x = lugar.getX();
         int y = lugar.getY();
         int z = lugar.getZ();
@@ -43,6 +43,7 @@ public class Tablero {
     }
 
 
+    @Override
     public Ficha getFicha(Coordenada3d lugar) {
         verificar(lugar);
 
@@ -56,30 +57,36 @@ public class Tablero {
     }
 
 
+    @Override
     public Ficha getFichaTerrestre(Coordenada lugar) {
         return getFicha(new Coordenada3d(lugar, Altura.TIERRA));
     }
 
 
+    @Override
     public Ficha getFichaAerea(Coordenada lugar) {
         return getFicha(new Coordenada3d(lugar, Altura.AIRE));
     }
 
 
+    @Override
     public boolean hayEspacio(Coordenada3d coordenada) {
         return getFicha(coordenada).estoyVacio();
     }
 
 
+    @Override
     public boolean hayEspacioTerreste(Coordenada lugar) {
         return hayEspacio(new Coordenada3d(lugar, Altura.TIERRA));
     }
 
+    @Override
     public boolean hayEspacioAereo(Coordenada lugar) { //new 6
         return hayEspacio(new Coordenada3d(lugar, Altura.AIRE));
     }
 
 
+    @Override
     public void insertar(Ficha ficha) {
         verificar(ficha.coordenada());
 
@@ -87,16 +94,19 @@ public class Tablero {
     }
 
 
+    @Override
     public void eliminarFichaEn(Coordenada3d lugar) {
         fichas.remove(lugar);
     }
 
 
+    @Override
     public int getLongitudX() {
         return longitudX;
     }
 
 
+    @Override
     public int getLongitudY() {
         return longitudY;
     }

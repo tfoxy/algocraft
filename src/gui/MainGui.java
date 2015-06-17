@@ -1,9 +1,12 @@
 package gui;
 
 import escenario.EscenarioSimple;
+import gui.vista.VentanaPrincipal;
 import juego.Juego;
 import juego.Jugador;
 import juego.Raza;
+
+import javax.swing.*;
 
 public final class MainGui {
 
@@ -20,7 +23,7 @@ public final class MainGui {
 
         Juego juego = escenario.cargarEn(builder);
 
-        // TODO cargar interfaz y comenzar juego
+        JFrame ventanaPrincipal = new VentanaPrincipal(juego);
     }
 
 }
