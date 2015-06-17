@@ -11,7 +11,7 @@ public class Juego {
 
     private final Gaia gaia;
     private final List<Jugador> jugadores;
-    private ITablero tablero;
+    private final ITablero tablero;
 
     private Juego(Builder builder) {
         gaia = builder.gaia;
@@ -29,12 +29,6 @@ public class Juego {
 
     public List<Jugador> jugadores() {
         return jugadores;
-    }
-
-    public TableroObservable hacerTableroObservable() {
-        TableroObservable tableroObservable = new TableroObservable(tablero);
-        this.tablero = tableroObservable;
-        return tableroObservable;
     }
 
 
@@ -65,6 +59,13 @@ public class Juego {
 
             this.tablero = tablero;
             return this;
+        }
+
+
+        public TableroObservable hacerTableroObservable() {
+            TableroObservable tableroObservable = new TableroObservable(tablero);
+            this.tablero = tableroObservable;
+            return tableroObservable;
         }
 
 

@@ -8,8 +8,8 @@ public class Posicion {
     int y;
 
     public Posicion(int coordenadaX, int coordenadaY) {
-        this.x = coordenadaX;
-        this.y = coordenadaY;
+        this.x = coordenadaX + 1;
+        this.y = coordenadaY + 1;
     }
 
     @Override

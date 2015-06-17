@@ -10,12 +10,10 @@ import java.awt.Container;
 import java.awt.GridLayout;
 
 public class VentanaPrincipal extends JFrame {
-    public VentanaPrincipal(Juego juego) {
-        TableroObservable mapa = juego.hacerTableroObservable();
-
+    public VentanaPrincipal(Juego juego, TableroObservable mapa) {
         setTitle("AlgoCraft");
 
-        setSize(500, 400);
+        setSize(700, 500);
 
         setLocation(8, 0);
 
