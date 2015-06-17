@@ -1,7 +1,8 @@
 package gui.vista;
 
-import controladores.ControladorMouse;
 import ficha.Ficha;
+import gui.controlador.ControladorMouseParaCasilla;
+import gui.modelo.ObservableElement;
 
 import javax.swing.JPanel;
 import java.awt.Dimension;
@@ -11,9 +12,9 @@ public class CasillaParaFicha extends JPanel {
     Ficha ficha;
 
     // Solo debe ser creado por CasillaVista
-    CasillaParaFicha(Ficha ficha) {
+    CasillaParaFicha(Ficha ficha, ObservableElement<Ficha> fichaSeleccionada) {
         this.ficha = ficha;
-        addMouseListener(new ControladorMouse(this));
+        addMouseListener(new ControladorMouseParaCasilla(this, fichaSeleccionada));
     }
 
     public Ficha ficha() {

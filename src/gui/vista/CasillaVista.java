@@ -2,6 +2,7 @@ package gui.vista;
 
 import controladores.ControladorMouse;
 import ficha.Ficha;
+import gui.modelo.ObservableElement;
 import gui.modelo.TableroObservable;
 import tablero.Altura;
 import tablero.Coordenada;
@@ -20,9 +21,9 @@ public class CasillaVista extends JPanel {
     private CasillaParaFicha tierra;
     private CasillaParaFicha aire;
 
-    public CasillaVista(Coordenada coordenada, TableroObservable mapa) {
-        tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada));
-        aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada));
+    public CasillaVista(Coordenada coordenada, TableroObservable mapa, ObservableElement fichaSeleccionada) {
+        tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), fichaSeleccionada);
+        aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), fichaSeleccionada);
 
         Observer observer = crearObserver(coordenada);
         mapa.addObserver(observer);
