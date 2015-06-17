@@ -10,6 +10,10 @@ import juego.Raza;
 
 import javax.swing.JFrame;
 
+import tablero.Coordenada;
+import vista.VentanaFicha;
+import controladores.ControladorFicha;
+
 public final class MainGui {
 
     private MainGui() {
@@ -30,6 +34,10 @@ public final class MainGui {
         JFrame grilla = new GrillaView(mapa);
 
         new VentanaPrincipal(grilla).mostrar();
+       
+        
+		ControladorFicha controladorFicha = new ControladorFicha (juego.tablero().getFichaTerrestre(new Coordenada(2,6))); //creo controlador para la ficha
+		new VentanaFicha (juego.tablero().getFichaTerrestre(new Coordenada(2,6)), controladorFicha);//creo Ventana para la ficha
     }
 
 }

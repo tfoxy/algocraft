@@ -15,15 +15,6 @@ public class ControladorFicha {
 	public ControladorFicha(Ficha ficha) {
 		this.ficha = ficha;
 	}
-	private class EscuchaBotonOk implements ActionListener
-	{	public void actionPerformed(ActionEvent e)
-		{	
-		}
-	}
-	
-	public ActionListener getListenerBotonOk() {
-		return new EscuchaBotonOk();
-	}
 
 		//mover en todas las direcciones XD
 	private class EscuchaBotonAbajo implements ActionListener
@@ -45,7 +36,7 @@ public class ControladorFicha {
 	}
 	
 	public ActionListener getListenerBotonArriba() {
-		return new EscuchaBotonAbajo();
+		return new EscuchaBotonArriba();
 	}
 	
 	private class EscuchaBotonDerecha implements ActionListener
@@ -56,7 +47,7 @@ public class ControladorFicha {
 	}
 	
 	public ActionListener getListenerBotonDerecha() {
-		return new EscuchaBotonAbajo();
+		return new EscuchaBotonDerecha();
 	}
 	
 	private class EscuchaBotonIzquierda implements ActionListener
@@ -67,7 +58,7 @@ public class ControladorFicha {
 	}
 	
 	public ActionListener getListenerBotonIzquierda() {
-		return new EscuchaBotonAbajo();
+		return new EscuchaBotonIzquierda();
 	}
 	//mover en todas las direcciones XD
 }
