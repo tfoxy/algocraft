@@ -41,7 +41,7 @@ public abstract class Ficha implements Cloneable {
     protected Set<TipoDeFicha> tipoDeFicha = EnumSet.noneOf(TipoDeFicha.class);
     protected TipoDeFicha tipoDeFichaNecesaria = TipoDeFicha.VACIA;
 
-    protected String nombre = null;
+    protected String nombre = "";
 
     protected Recursos coste = Recursos.SIN_COSTE;
     protected IBarras barras = BarrasInvencible.INSTANCE;

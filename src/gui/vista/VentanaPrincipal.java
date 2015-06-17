@@ -23,12 +23,13 @@ public class VentanaPrincipal extends JFrame {
 
         Container contenedor = getContentPane();
 
-        contenedor.setLayout(new GridLayout(mapa.getLongitudX(), mapa.getLongitudY()));
+        contenedor.setLayout(new GridLayout(mapa.getLongitudY(), mapa.getLongitudX()));
 
-        for (int x = 0; x < mapa.getLongitudX(); x++) {
-            for (int y = 0; y < mapa.getLongitudY(); y++) {
 
-                contenedor.add(new CasillaVista(new Coordenada(x + 1, y + 1), mapa));
+        for (int y = mapa.getLongitudY(); y > 0; y--) {
+            for (int x = 1; x <= mapa.getLongitudX(); x++) {
+
+                contenedor.add(new CasillaVista(new Coordenada(x, y), mapa));
 
             }
         }
