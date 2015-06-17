@@ -25,8 +25,12 @@ public class Juego {
         return tablero;
     }
 
+    public List<Jugador> jugadores() {
+        return jugadores;
+    }
 
-    public class Builder {
+
+    public static class Builder {
         private static final int POBLACION_MAXIMA = 200;
 
         private List<Jugador> jugadores = new ArrayList<>();

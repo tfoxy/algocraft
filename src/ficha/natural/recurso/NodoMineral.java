@@ -15,6 +15,7 @@ public class NodoMineral extends FuenteDeRecurso {
     public NodoMineral(int mineral) {
         super(mineral, 0);
 
+        nombre = "Nodo Mineral";
         this.tipoDeFicha.add(TipoDeFicha.MINERAL);
     }
 }
