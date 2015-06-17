@@ -4,8 +4,10 @@ import modelo.Modelo;
 import tablero.Coordenada;
 import tablero.Tablero;
 
+import vista.VentanaCasilla;
 import vista.VentanaRecursos;
 
+import controladores.ControladorCasilla;
 import controladores.ControladorRecursos;
 import ficha.Ficha;
 import ficha.protoss.unidad.Zealot;
@@ -28,17 +30,29 @@ public class Aplicacion {//probando cosas
 		//poner 1 zelot y todo eso//
 		Ficha unidad = new Zealot();
 		Jugador jugador = new Jugador("miNombre", Raza.PROTOSS);
-        unidad.setBasico(jugador, juego.tablero, new Coordenada(4, 4));
+        unidad.setBasico(jugador, modelo.tablero, new Coordenada(4, 4));
         unidad.ponerEnJuego();
         
-        juego.iniciar();
-		
-
-        
-		ControladorRecursos controladorRecursos = new ControladorRecursos(modelo);
-
+      /*  juego.iniciar(); */
+		ControladorRecursos controladorRecursos = new ControladorRecursos(modelo);//aca dentro esta el truco.
 		new VentanaRecursos (modelo);
+		
+		//Seguimos Practicando.
+		Coordenada casilla = new Coordenada (4,4);
+		ControladorCasilla controladorCasilla = new ControladorCasilla (modelo.tablero, casilla);
+		new VentanaCasilla (modelo.tablero, casilla, controladorCasilla);
+		
+		
+		
+		
+		
+		
+		
 		modelo.ActualizarObservadores();
+		
+		
+		
+		
     }
 
 }
