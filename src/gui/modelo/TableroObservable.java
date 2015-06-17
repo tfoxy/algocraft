@@ -48,11 +48,17 @@ public class TableroObservable extends Observable implements ITablero {
     @Override
     public void insertar(Ficha ficha) {
         tablero.insertar(ficha);
+
+        setChanged();
+        this.notifyObservers(ficha);
     }
 
     @Override
     public void eliminarFichaEn(Coordenada3d lugar) {
         tablero.eliminarFichaEn(lugar);
+
+        setChanged();
+        this.notifyObservers(tablero.getFicha(lugar));
     }
 
     @Override
