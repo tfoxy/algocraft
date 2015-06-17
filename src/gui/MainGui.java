@@ -2,17 +2,18 @@ package gui;
 
 import escenario.EscenarioSimple;
 import gui.modelo.TableroObservable;
+import gui.vista.GrillaView;
 import gui.vista.VentanaPrincipal;
 import juego.Juego;
 import juego.Jugador;
 import juego.Raza;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 public final class MainGui {
 
     private MainGui() {
-
+        // noop
     }
 
     public static void main(String[] args) {
@@ -26,7 +27,9 @@ public final class MainGui {
 
         Juego juego = escenario.construir();
 
-        JFrame ventanaPrincipal = new VentanaPrincipal(juego, mapa);
+        JFrame grilla = new GrillaView(mapa);
+
+        new VentanaPrincipal(grilla).mostrar();
     }
 
 }

@@ -2,7 +2,6 @@ package juego;
 
 import gui.modelo.TableroObservable;
 import tablero.ITablero;
-import tablero.Tablero;
 
 import java.util.ArrayList;
 import java.util.List;
