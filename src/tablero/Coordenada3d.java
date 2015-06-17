@@ -5,7 +5,7 @@ package tablero;
 
 public class Coordenada3d extends Coordenada {
 
-    private final int z;
+    public final int z;
 
     public Coordenada3d(int x, int y, int z) {
         super(x, y);
