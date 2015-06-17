@@ -34,7 +34,7 @@ public class Aplicacion {//probando cosas
         unidad.ponerEnJuego();
         
       /*  juego.iniciar(); */
-		ControladorRecursos controladorRecursos = new ControladorRecursos(modelo);//aca dentro esta el truco.
+		ControladorRecursos controladorRecursos = new ControladorRecursos(modelo);//aca de
 		new VentanaRecursos (modelo);
 		
 		//Seguimos Practicando.

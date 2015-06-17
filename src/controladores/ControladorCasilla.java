@@ -41,6 +41,6 @@ public class ControladorCasilla {
 	}
 	
 	public ActionListener getListenerBotonTierra() {
-		return new EscuchaBotonAire();
+		return new EscucharBotonTierra();
 	}
 }

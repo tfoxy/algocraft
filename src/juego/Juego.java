@@ -5,8 +5,9 @@ import tablero.ITablero;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public class Juego {
+public class Juego extends Observable{
 
     private final Gaia gaia;
     private final List<Jugador> jugadores;
