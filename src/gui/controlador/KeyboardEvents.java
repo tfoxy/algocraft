@@ -6,13 +6,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 
-public class KeyboardListener {
+public class KeyboardEvents {
 
     private final HashMap<Integer, KeyListener> keyPressedListeners;
     private final HashMap<Integer, KeyListener> keyTypedListeners;
     private final HashMap<Integer, KeyListener> keyReleasedListeners;
 
-    public KeyboardListener() {
+    public KeyboardEvents() {
         keyPressedListeners = new HashMap<>();
         keyTypedListeners = new HashMap<>();
         keyReleasedListeners = new HashMap<>();

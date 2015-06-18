@@ -2,8 +2,7 @@ package gui;
 
 import escenario.EscenarioSimple;
 import ficha.Ficha;
-import gui.controlador.KeyboardListener;
-import gui.modelo.ElementObservable;
+import gui.controlador.KeyboardEvents;
 import gui.modelo.TableroObservable;
 import gui.vista.GrillaView;
 import gui.vista.VentanaPrincipal;
@@ -40,9 +39,9 @@ public final class MainGui {
 
 
         // Controladores
-        KeyboardListener keyboardListener = new KeyboardListener();
+        KeyboardEvents keyboardEvents = new KeyboardEvents();
         ControladorFicha controladorFicha = new ControladorFicha(ficha);
-        controladorFicha.listenKeyboard(keyboardListener);
+        controladorFicha.listenKeyboard(keyboardEvents);
 
         // Vistas
         JPanel grilla = new GrillaView(mapa, controladorFicha);

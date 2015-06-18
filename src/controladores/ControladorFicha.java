@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 
 import error.JuegoException;
 import gui.controlador.AnyEventListener;
-import gui.controlador.KeyboardListener;
+import gui.controlador.KeyboardEvents;
 import gui.modelo.ElementObservable;
 import gui.modelo.ElementObserver;
 import tablero.Coordenada3d;
@@ -40,7 +40,7 @@ public class ControladorFicha {
         movimientoObservable.addObserver(o);
     }
 
-    public void listenKeyboard(KeyboardListener keyboard) {
+    public void listenKeyboard(KeyboardEvents keyboard) {
         final int ev = KeyEvent.KEY_PRESSED;
 
         keyboard.addListener(ev, KeyEvent.VK_UP, new MovimientoListener(Direccion.ARRIBA));
