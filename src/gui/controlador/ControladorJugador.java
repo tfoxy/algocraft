@@ -5,6 +5,8 @@ import gui.modelo.ElementObserver;
 import juego.Juego;
 import juego.Jugador;
 
+import java.awt.AWTEvent;
+
 public class ControladorJugador {
 
     private Juego juego;
@@ -26,6 +28,22 @@ public class ControladorJugador {
 
     public void observarCambioDeJugador(ElementObserver<Jugador> o) {
         cambioDeJugadorObservable.addObserver(o);
+    }
+
+    private class TerminarTurnoListener extends AnyEventListener {
+
+        private TerminarTurnoListener() {
+            // noop
+        }
+
+        @Override
+        public void eventOcurred(AWTEvent e) {
+            terminarTurno();
+        }
+    }
+
+    public AnyEventListener getTerminarTurnoListener() {
+        return new TerminarTurnoListener();
     }
 
 }

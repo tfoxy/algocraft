@@ -6,6 +6,7 @@ import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardEvents;
 import gui.modelo.TableroObservable;
 import gui.vista.GrillaView;
+import gui.vista.JugadorView;
 import gui.vista.VentanaPrincipal;
 import juego.Juego;
 import juego.Jugador;
@@ -48,6 +49,7 @@ public final class MainGui {
         // Vistas
         JPanel grilla = new GrillaView(mapa, controladorFicha);
         JPanel fichaView = new FichaView(controladorFicha);
+        JPanel jugadorView = new JugadorView(controladorJugador);
 
         JFrame ventana = new VentanaPrincipal(grilla, fichaView);
         ventana.setVisible(true);
