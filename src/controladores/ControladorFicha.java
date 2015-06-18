@@ -5,14 +5,18 @@ import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import error.JuegoException;
+import gui.controlador.ObservableEvent;
 import gui.modelo.ObservableElement;
 import tablero.Direccion;
 
 import ficha.Ficha;
 
-public class ControladorFicha extends Observable {
+public class ControladorFicha {
 
     private ObservableElement<Ficha> ficha;
+    private Observable cambioDeFichaObservable = new ObservableEvent();
+    private Observable movimientoObservable = new ObservableEvent();
 
     public ControladorFicha(ObservableElement<Ficha> ficha) {
         this.ficha = ficha;
@@ -20,59 +24,46 @@ public class ControladorFicha extends Observable {
         ficha.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
-                actualizarObservadores();
+                cambioDeFichaObservable.notifyObservers();
             }
         });
-    }
-
-    private void actualizarObservadores() {
-        setChanged();
-        notifyObservers(ficha());
     }
 
     public Ficha ficha() {
         return ficha.get();
     }
 
+
+    public void observarCambioDeFicha(Observer o) {
+        cambioDeFichaObservable.addObserver(o);
+    }
+
+    public void observarMovimiento(Observer o) {
+        movimientoObservable.addObserver(o);
+    }
+
+
     //mover en todas las direcciones XD
-    private class EscuchaBotonAbajo implements ActionListener {
+    private class EscuchaBoton implements ActionListener {
+
+        private Direccion direccion;
+
+        private EscuchaBoton(Direccion direccion) {
+            this.direccion = direccion;
+        }
+
+        @Override
         public void actionPerformed(ActionEvent e) {
-            ficha().intentarMovimiento(Direccion.ABAJO);
+            try {
+                ficha().mover(direccion);
+                movimientoObservable.notifyObservers();
+            } catch (JuegoException exc) {
+                // TODO avisar que no se pudo mover
+            }
         }
     }
 
-    public ActionListener getListenerBotonAbajo() {
-        return new EscuchaBotonAbajo();
+    public ActionListener getListenerMovimiento(Direccion direccion) {
+        return new EscuchaBoton(direccion);
     }
-
-    private class EscuchaBotonArriba implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            ficha().intentarMovimiento(Direccion.ARRIBA);
-        }
-    }
-
-    public ActionListener getListenerBotonArriba() {
-        return new EscuchaBotonArriba();
-    }
-
-    private class EscuchaBotonDerecha implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            ficha().intentarMovimiento(Direccion.DERECHA);
-        }
-    }
-
-    public ActionListener getListenerBotonDerecha() {
-        return new EscuchaBotonDerecha();
-    }
-
-    private class EscuchaBotonIzquierda implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            ficha().intentarMovimiento(Direccion.IZQUIERDA);
-        }
-    }
-
-    public ActionListener getListenerBotonIzquierda() {
-        return new EscuchaBotonIzquierda();
-    }
-    //mover en todas las direcciones XD
 }

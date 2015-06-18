@@ -1,5 +1,7 @@
 package vista;
 
+import java.awt.Container;
+import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
@@ -7,12 +9,21 @@ import java.util.Observer;
 
 import controladores.ControladorFicha;
 import ficha.Ficha;
+import gui.modelo.TableroObservable;
+import tablero.Direccion;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class VentanaFicha extends JFrame {
+
+    private Ficha ficha;
+
+    private JLabel movimientoLabel = new JLabel();
+    private JLabel movimientoMaximoLabel = new JLabel();
 
     private JButton botonArriba = new JButton("Arriba");
     private JButton botonAbajo = new JButton("Abajo");
@@ -20,42 +31,66 @@ public class VentanaFicha extends JFrame {
     private JButton botonDerecha = new JButton("Derecha");
 
 
-    public VentanaFicha(ControladorFicha control) {
+    public VentanaFicha(final ControladorFicha control) {
+        Container contenedor = getContentPane();
+
+        contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
+
+        JPanel panelStats = new JPanel();
+        panelStats.add(new JLabel("Movimiento:"));
+        panelStats.add(movimientoLabel);
+        panelStats.add(new JLabel("/"));
+        panelStats.add(movimientoMaximoLabel);
+        contenedor.add(panelStats);
+
         JPanel panelBotones = new JPanel();
-        panelBotones.add(botonAbajo);
         panelBotones.add(botonArriba);
+        panelBotones.add(botonAbajo);
         panelBotones.add(botonDerecha);
         panelBotones.add(botonIzquierda);
 
-        add("Center", panelBotones);
+        contenedor.add(panelBotones);
 
-
-        setSize(300, 100);
+        setSize(400, 100);
         setLocation(0, 500);
         setVisible(true);
 
         addWindowListener(new CloseListener());
 
 
-        botonAbajo.addActionListener(control.getListenerBotonAbajo());
-        botonArriba.addActionListener(control.getListenerBotonArriba());
-        botonDerecha.addActionListener(control.getListenerBotonDerecha());
-        botonIzquierda.addActionListener(control.getListenerBotonIzquierda());
+        botonAbajo.addActionListener(control.getListenerMovimiento(Direccion.ABAJO));
+        botonArriba.addActionListener(control.getListenerMovimiento(Direccion.ARRIBA));
+        botonDerecha.addActionListener(control.getListenerMovimiento(Direccion.DERECHA));
+        botonIzquierda.addActionListener(control.getListenerMovimiento(Direccion.IZQUIERDA));
         // Conectamos esta vista con el modelo
 
         cambiarFicha(control.ficha());
 
-        control.addObserver(new Observer() {
+        control.observarCambioDeFicha(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
-                cambiarFicha((Ficha) arg);
+                cambiarFicha(control.ficha());
+            }
+        });
+
+        control.observarMovimiento(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                actulizarFicha();
             }
         });
     }
 
 
     private void cambiarFicha(Ficha ficha) {
+        this.ficha = ficha;
+        actulizarFicha();
+    }
+
+    private void actulizarFicha() {
         setTitle(ficha.nombre());
+        movimientoLabel.setText(ficha.movimiento() + "");
+        movimientoMaximoLabel.setText(ficha.movimientoMaximo() + "");
     }
 
 
