@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public class Juego extends Observable{
+public class Juego extends Observable {
 
     private final Gaia gaia;
     private final List<Jugador> jugadores;
     private final ITablero tablero;
+    private int jugadorActualIndex = 0;
 
     private Juego(Builder builder) {
         gaia = builder.gaia;
@@ -29,6 +30,18 @@ public class Juego extends Observable{
 
     public List<Jugador> jugadores() {
         return jugadores;
+    }
+
+    public Jugador jugadorActual() {
+        return jugadores.get(jugadorActualIndex);
+    }
+
+    public void pasarJugador() {
+        jugadorActual().pasarTurno();
+
+        jugadorActualIndex++;
+        if (jugadorActualIndex >= jugadores.size())
+            jugadorActualIndex = 0;
     }
 
 
