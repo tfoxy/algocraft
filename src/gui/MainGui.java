@@ -2,6 +2,7 @@ package gui;
 
 import escenario.EscenarioSimple;
 import ficha.Ficha;
+import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardEvents;
 import gui.modelo.TableroObservable;
 import gui.vista.GrillaView;
@@ -40,6 +41,7 @@ public final class MainGui {
 
         // Controladores
         KeyboardEvents keyboardEvents = new KeyboardEvents();
+        ControladorJugador controladorJugador = new ControladorJugador(juego);
         ControladorFicha controladorFicha = new ControladorFicha(ficha);
         controladorFicha.listenKeyboard(keyboardEvents);
 
