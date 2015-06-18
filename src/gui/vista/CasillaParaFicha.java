@@ -5,9 +5,10 @@ import ficha.Ficha;
 import gui.controlador.ControladorMouseParaCasilla;
 import gui.modelo.ElementObservable;
 import gui.modelo.ElementObserver;
+import gui.modelo.FichaObjetivo;
 import tablero.Coordenada3d;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
@@ -17,11 +18,11 @@ public class CasillaParaFicha extends JPanel {
     Ficha ficha;
 
     // Solo debe ser creado por CasillaVista
-    CasillaParaFicha(Ficha ficha, ControladorFicha control) {
+    CasillaParaFicha(Ficha ficha, FichaObjetivo fichaObjetivo, ControladorFicha control) {
         this.ficha = ficha;
-        addMouseListener(new ControladorMouseParaCasilla(this, control));
+        addMouseListener(new ControladorMouseParaCasilla(this, fichaObjetivo));
 
-        control.observarCambioDeFicha(new FichaObserver());
+        fichaObjetivo.escucharCambioDeFichaObjetivo(new FichaObserver());
         control.observarMovimiento(new MovimientoObserver());
     }
 
@@ -67,6 +68,8 @@ public class CasillaParaFicha extends JPanel {
         } else {
             grafico.fillRect(0, 0, dimension.width, dimension.height);
         }
+
+
 
         setToolTipText(ficha.nombre() + " " + ficha.coordenada().proyeccion().toString());
     }

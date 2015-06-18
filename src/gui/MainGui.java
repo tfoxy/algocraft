@@ -4,6 +4,7 @@ import escenario.EscenarioSimple;
 import ficha.Ficha;
 import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardEvents;
+import gui.modelo.FichaObjetivo;
 import gui.modelo.TableroObservable;
 import gui.vista.GrillaView;
 import gui.vista.JugadorView;
@@ -37,6 +38,8 @@ public final class MainGui {
 
         Juego juego = escenario.construir();
 
+        FichaObjetivo fichaObjetivo = new FichaObjetivo();
+
 
         // Controladores
         KeyboardEvents keyboardEvents = new KeyboardEvents();
@@ -44,11 +47,11 @@ public final class MainGui {
         ControladorJugador controladorJugador = new ControladorJugador(juego);
         controladorJugador.listenKeyboard(keyboardEvents);
 
-        ControladorFicha controladorFicha = new ControladorFicha(mapa, controladorJugador);
+        ControladorFicha controladorFicha = new ControladorFicha(mapa, controladorJugador, fichaObjetivo);
         controladorFicha.listenKeyboard(keyboardEvents);
 
         // Vistas
-        JPanel grilla = new GrillaView(mapa, controladorFicha);
+        JPanel grilla = new GrillaView(mapa, fichaObjetivo, controladorFicha);
         JPanel fichaView = new FichaView(controladorFicha);
         JPanel jugadorView = new JugadorView(controladorJugador);
 

@@ -3,6 +3,7 @@ package gui.vista;
 import controladores.ControladorFicha;
 import ficha.Ficha;
 import gui.modelo.ElementObservable;
+import gui.modelo.FichaObjetivo;
 import gui.modelo.TableroObservable;
 import tablero.Altura;
 import tablero.Coordenada;
@@ -17,9 +18,10 @@ public class CasillaVista extends JPanel {
     private CasillaParaFicha tierra;
     private CasillaParaFicha aire;
 
-    public CasillaVista(Coordenada coordenada, TableroObservable mapa, ControladorFicha control) {
-        tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), control);
-        aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), control);
+    public CasillaVista(Coordenada coordenada, TableroObservable mapa,
+                        FichaObjetivo fichaObjetivo, ControladorFicha control) {
+        tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), fichaObjetivo, control);
+        aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), fichaObjetivo, control);
 
         Observer observer = crearObserver(coordenada);
         mapa.addObserver(observer);

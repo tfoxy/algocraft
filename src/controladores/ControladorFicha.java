@@ -10,8 +10,10 @@ import error.JuegoException;
 import gui.controlador.AnyEventListener;
 import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardEvents;
+import gui.modelo.AccionEnGrilla;
 import gui.modelo.ElementObservable;
 import gui.modelo.ElementObserver;
+import gui.modelo.FichaObjetivo;
 import juego.Jugador;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
@@ -27,12 +29,17 @@ public class ControladorFicha {
     private final ControladorJugador controladorJugador;
     private final ElementObservable<Ficha> cambioDeFichaObservable;
     private final ElementObservable<Coordenada3d> movimientoObservable;
+    private final ElementObservable<Ficha> ataqueObservable;
+    private final FichaObjetivo fichaObjetivo;
 
-    public ControladorFicha(ITablero mapa, ControladorJugador controladorJugador) {
+    public ControladorFicha(ITablero mapa, ControladorJugador controladorJugador,
+                            final FichaObjetivo fichaObjetivo) {
         this.mapa = mapa;
         this.controladorJugador = controladorJugador;
         this.cambioDeFichaObservable = new ElementObservable<>(elegirNuevaFicha());
         this.movimientoObservable = new ElementObservable<>(ficha().coordenada());
+        ataqueObservable = new ElementObservable<>(null);
+        this.fichaObjetivo = fichaObjetivo;
 
         controladorJugador.observarCambioDeJugador(new ElementObserver<Jugador>() {
             @Override
@@ -40,6 +47,34 @@ public class ControladorFicha {
                 seleccionar(elegirNuevaFicha());
             }
         });
+
+        fichaObjetivo.escucharCambioDeFichaObjetivo(new ElementObserver<Ficha>() {
+            @Override
+            public void update(ElementObservable<Ficha> o, Ficha prevElement) {
+                Ficha objetivo = o.get();
+                switch(fichaObjetivo.accion()) {
+                    case SELECCIONAR:
+                        seleccionar(objetivo);
+                        return;
+                    case ATACAR:
+                        atacar(objetivo);
+                        return;
+                }
+            }
+        });
+    }
+
+    public void modoAtaque() {
+        fichaObjetivo.cambiarAccion(AccionEnGrilla.ATACAR);
+    }
+
+    private void atacar(Ficha objetivo) {
+        try {
+            ficha().atacar(objetivo);
+            ataqueObservable.setAndNotify(objetivo);
+        } catch (JuegoException exc) {
+            // TODO mostrar error
+        }
     }
 
     private Ficha elegirNuevaFicha() {
@@ -80,6 +115,10 @@ public class ControladorFicha {
         keyboard.addListener(ev, KeyEvent.VK_LEFT, new MovimientoListener(Direccion.IZQUIERDA));
     }
 
+    public void observarAtaque(ElementObserver<Ficha> elementObserver) {
+        ataqueObservable.addObserver(elementObserver);
+    }
+
 
     //mover en todas las direcciones XD
     private class MovimientoListener extends AnyEventListener {
@@ -107,5 +146,14 @@ public class ControladorFicha {
 
     public AnyEventListener getMovimientoListener(Direccion direccion) {
         return new MovimientoListener(direccion);
+    }
+
+    public AnyEventListener getAtaqueListener() {
+        return new AnyEventListener() {
+            @Override
+            public void eventOcurred(AWTEvent e) {
+                modoAtaque();
+            }
+        };
     }
 }
