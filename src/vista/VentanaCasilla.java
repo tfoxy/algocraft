@@ -44,10 +44,10 @@ public class VentanaCasilla extends JFrame {//esto no observa. Se usa una ves y 
 		//agregamos el listener del evento de cerrado de la ventana		
 		frameTemp.addWindowListener(new CloseListener());
 		
-		
+		/*
 		botonAire.addActionListener(control.getListenerBotonAire());
 		botonTierra.addActionListener(control.getListenerBotonTierra());		
-
+		*/
 		// Conectamos esta vista con el modelo
  
 		

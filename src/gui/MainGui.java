@@ -1,6 +1,8 @@
 package gui;
 
 import escenario.EscenarioSimple;
+import ficha.Ficha;
+import gui.modelo.ObservableElement;
 import gui.modelo.TableroObservable;
 import gui.vista.GrillaView;
 import gui.vista.VentanaPrincipal;
@@ -14,6 +16,9 @@ import tablero.Coordenada;
 import vista.VentanaFicha;
 import controladores.ControladorFicha;
 
+import java.util.Observable;
+import java.util.Observer;
+
 public final class MainGui {
 
     private MainGui() {
@@ -21,6 +26,7 @@ public final class MainGui {
     }
 
     public static void main(String[] args) {
+        // Modelo
         Juego.Builder builder = new Juego.Builder();
         EscenarioSimple escenario = new EscenarioSimple(builder);
 
@@ -31,13 +37,17 @@ public final class MainGui {
 
         Juego juego = escenario.construir();
 
-        JFrame grilla = new GrillaView(mapa);
+        ObservableElement<Ficha> fichaSeleccionada =
+                new ObservableElement<>(mapa.getFichaTerrestre(new Coordenada(1, 1)));
+
+        // Controladores
+        ControladorFicha controladorFicha = new ControladorFicha(fichaSeleccionada);
+
+        // Vistas
+        JFrame grilla = new GrillaView(mapa, fichaSeleccionada);
+        new VentanaFicha(controladorFicha);
 
         new VentanaPrincipal(grilla).mostrar();
-       
-        
-		ControladorFicha controladorFicha = new ControladorFicha (juego.tablero().getFichaTerrestre(new Coordenada(2,6))); //creo controlador para la ficha
-		new VentanaFicha (juego.tablero().getFichaTerrestre(new Coordenada(2,6)), controladorFicha);//creo Ventana para la ficha
     }
 
 }

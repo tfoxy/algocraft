@@ -20,6 +20,7 @@ public class ControladorCasilla {
 		fichaTierra = tablero.getFichaTerrestre(casilla);
 	}
 
+	/*
 	private class EscuchaBotonAire implements ActionListener
 	{	public void actionPerformed(ActionEvent e)
 		{	
@@ -39,8 +40,8 @@ public class ControladorCasilla {
 		new VentanaFicha (fichaTierra, controladorFicha);
 		}
 	}
-	
+
 	public ActionListener getListenerBotonTierra() {
 		return new EscucharBotonTierra();
-	}
+	}*/
 }

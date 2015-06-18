@@ -11,11 +11,7 @@ import java.awt.GridLayout;
 
 public class GrillaView extends JFrame {
 
-    private ObservableElement<Ficha> fichaSeleccionada;
-
-    public GrillaView(TableroObservable mapa) {
-        fichaSeleccionada = new ObservableElement<Ficha>(mapa.getFichaTerrestre(new Coordenada(1, 1)));
-
+    public GrillaView(TableroObservable mapa, ObservableElement<Ficha> fichaSeleccionada) {
         Container contenedor = getContentPane();
 
         contenedor.setLayout(new GridLayout(mapa.getLongitudY(), mapa.getLongitudX()));
@@ -28,10 +24,6 @@ public class GrillaView extends JFrame {
 
             }
         }
-    }
-
-    public ObservableElement<Ficha> fichaSeleccionada() {
-        return fichaSeleccionada;
     }
 
 }
