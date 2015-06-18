@@ -4,8 +4,10 @@ import gui.modelo.ElementObservable;
 import gui.modelo.ElementObserver;
 import juego.Juego;
 import juego.Jugador;
+import tablero.Direccion;
 
 import java.awt.AWTEvent;
+import java.awt.event.KeyEvent;
 
 public class ControladorJugador {
 
@@ -44,6 +46,12 @@ public class ControladorJugador {
 
     public AnyEventListener getTerminarTurnoListener() {
         return new TerminarTurnoListener();
+    }
+
+    public void listenKeyboard(KeyboardEvents keyboard) {
+        final int ev = KeyEvent.KEY_PRESSED;
+
+        keyboard.addListener(ev, KeyEvent.VK_SPACE, new TerminarTurnoListener());
     }
 
 }

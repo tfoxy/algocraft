@@ -12,7 +12,6 @@ public class GrillaView extends JPanel {
     public GrillaView(TableroObservable mapa, ControladorFicha control) {
         setLayout(new GridLayout(mapa.getLongitudY(), mapa.getLongitudX()));
 
-
         for (int y = mapa.getLongitudY(); y > 0; y--) {
             for (int x = 1; x <= mapa.getLongitudX(); x++) {
 
@@ -20,6 +19,8 @@ public class GrillaView extends JPanel {
 
             }
         }
+
+        setFocusable(true);
     }
 
 }

@@ -34,6 +34,8 @@ public class VentanaPrincipal extends JFrame {
         gbc.gridwidth = 1;
         container.add(jugadorView, gbc);
 
+        grilla.requestFocus();
+
         setPropiedadesDeVentana();
     }
 

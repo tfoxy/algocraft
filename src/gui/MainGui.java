@@ -40,7 +40,10 @@ public final class MainGui {
 
         // Controladores
         KeyboardEvents keyboardEvents = new KeyboardEvents();
+
         ControladorJugador controladorJugador = new ControladorJugador(juego);
+        controladorJugador.listenKeyboard(keyboardEvents);
+
         ControladorFicha controladorFicha = new ControladorFicha(mapa, controladorJugador);
         controladorFicha.listenKeyboard(keyboardEvents);
 
