@@ -1,48 +1,40 @@
 package vista;
 
-import java.awt.Button;
-import java.awt.Frame;
-import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
 
-import tablero.Coordenada;
-import tablero.Tablero;
-import vista.VentanaCasilla.CloseListener;
-import controladores.ControladorCasilla;
 import controladores.ControladorFicha;
 import ficha.Ficha;
 
-public class VentanaFicha {
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-    private Frame frameTemp;
-    private Button botonArriba = new Button("Arriba");
-    private Button botonAbajo = new Button("Abajo");
-    private Button botonIzquierda = new Button("Izquierda");
-    private Button botonDerecha = new Button("Derecha");
+public class VentanaFicha extends JFrame {
+
+    private JButton botonArriba = new JButton("Arriba");
+    private JButton botonAbajo = new JButton("Abajo");
+    private JButton botonIzquierda = new JButton("Izquierda");
+    private JButton botonDerecha = new JButton("Derecha");
 
 
     public VentanaFicha(ControladorFicha control) {
-        frameTemp = new Frame();
-
-        Panel panelBotones = new Panel();
+        JPanel panelBotones = new JPanel();
         panelBotones.add(botonAbajo);
         panelBotones.add(botonArriba);
         panelBotones.add(botonDerecha);
         panelBotones.add(botonIzquierda);
 
-        frameTemp.add("Center", panelBotones);
+        add("Center", panelBotones);
 
 
-        frameTemp.setSize(300, 100);
-        frameTemp.setLocation(0, 500);
-        frameTemp.setVisible(true);
+        setSize(300, 100);
+        setLocation(0, 500);
+        setVisible(true);
 
-        frameTemp.addWindowListener(new CloseListener());
+        addWindowListener(new CloseListener());
 
 
         botonAbajo.addActionListener(control.getListenerBotonAbajo());
@@ -63,7 +55,7 @@ public class VentanaFicha {
 
 
     private void cambiarFicha(Ficha ficha) {
-        frameTemp.setTitle(ficha.nombre());
+        setTitle(ficha.nombre());
     }
 
 
