@@ -1,11 +1,13 @@
 package controladores;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.AWTEvent;
+import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
 
 import error.JuegoException;
+import gui.controlador.AnyEventListener;
+import gui.controlador.KeyboardListener;
 import gui.controlador.ObservableEvent;
 import gui.modelo.ObservableElement;
 import tablero.Direccion;
@@ -42,18 +44,27 @@ public class ControladorFicha {
         movimientoObservable.addObserver(o);
     }
 
+    public void listenKeyboard(KeyboardListener keyboard) {
+        final int ev = KeyEvent.KEY_PRESSED;
+
+        keyboard.addListener(ev, KeyEvent.VK_UP, new MovimientoListener(Direccion.ARRIBA));
+        keyboard.addListener(ev, KeyEvent.VK_DOWN, new MovimientoListener(Direccion.ABAJO));
+        keyboard.addListener(ev, KeyEvent.VK_RIGHT, new MovimientoListener(Direccion.DERECHA));
+        keyboard.addListener(ev, KeyEvent.VK_LEFT, new MovimientoListener(Direccion.IZQUIERDA));
+    }
+
 
     //mover en todas las direcciones XD
-    private class EscuchaBoton implements ActionListener {
+    private class MovimientoListener extends AnyEventListener {
 
         private Direccion direccion;
 
-        private EscuchaBoton(Direccion direccion) {
+        private MovimientoListener(Direccion direccion) {
             this.direccion = direccion;
         }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void eventOcurred(AWTEvent e) {
             try {
                 ficha().mover(direccion);
                 movimientoObservable.notifyObservers();
@@ -63,7 +74,7 @@ public class ControladorFicha {
         }
     }
 
-    public ActionListener getListenerMovimiento(Direccion direccion) {
-        return new EscuchaBoton(direccion);
+    public AnyEventListener getMovimientoListener(Direccion direccion) {
+        return new MovimientoListener(direccion);
     }
 }

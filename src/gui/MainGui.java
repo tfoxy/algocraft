@@ -2,6 +2,7 @@ package gui;
 
 import escenario.EscenarioSimple;
 import ficha.Ficha;
+import gui.controlador.KeyboardListener;
 import gui.modelo.ObservableElement;
 import gui.modelo.TableroObservable;
 import gui.vista.GrillaView;
@@ -39,7 +40,9 @@ public final class MainGui {
                 new ObservableElement<>(mapa.getFichaTerrestre(new Coordenada(1, 1)));
 
         // Controladores
+        KeyboardListener keyboardListener = new KeyboardListener();
         ControladorFicha controladorFicha = new ControladorFicha(fichaSeleccionada);
+        controladorFicha.listenKeyboard(keyboardListener);
 
         // Vistas
         JPanel grilla = new GrillaView(mapa, fichaSeleccionada);

@@ -1,15 +1,10 @@
 package vista;
 
-import java.awt.Container;
-import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.Observable;
 import java.util.Observer;
 
 import controladores.ControladorFicha;
 import ficha.Ficha;
-import gui.modelo.TableroObservable;
 import tablero.Direccion;
 
 import javax.swing.BoxLayout;
@@ -50,15 +45,10 @@ public class FichaView extends JPanel {
 
         add(panelBotones);
 
-        setSize(400, 100);
-        setLocation(0, 500);
-        setVisible(true);
-
-
-        botonAbajo.addActionListener(control.getListenerMovimiento(Direccion.ABAJO));
-        botonArriba.addActionListener(control.getListenerMovimiento(Direccion.ARRIBA));
-        botonDerecha.addActionListener(control.getListenerMovimiento(Direccion.DERECHA));
-        botonIzquierda.addActionListener(control.getListenerMovimiento(Direccion.IZQUIERDA));
+        botonAbajo.addActionListener(control.getMovimientoListener(Direccion.ABAJO));
+        botonArriba.addActionListener(control.getMovimientoListener(Direccion.ARRIBA));
+        botonDerecha.addActionListener(control.getMovimientoListener(Direccion.DERECHA));
+        botonIzquierda.addActionListener(control.getMovimientoListener(Direccion.IZQUIERDA));
         // Conectamos esta vista con el modelo
 
         cambiarFicha(control.ficha());

@@ -54,7 +54,7 @@ public class KeyboardListener {
         }
     }
 
-    public void addKeyListener(int keyEvent, int keyCode, KeyListener listener) {
+    public void addListener(int keyEvent, int keyCode, KeyListener listener) {
         HashMap<Integer, KeyListener> listeners = getListeners(keyEvent);
         listeners.put(keyCode, listener);
     }
