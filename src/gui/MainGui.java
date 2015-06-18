@@ -37,13 +37,11 @@ public final class MainGui {
 
         Juego juego = escenario.construir();
 
-        Ficha ficha = mapa.getFichaTerrestre(new Coordenada(1, 1));
-
 
         // Controladores
         KeyboardEvents keyboardEvents = new KeyboardEvents();
         ControladorJugador controladorJugador = new ControladorJugador(juego);
-        ControladorFicha controladorFicha = new ControladorFicha(ficha);
+        ControladorFicha controladorFicha = new ControladorFicha(mapa, controladorJugador);
         controladorFicha.listenKeyboard(keyboardEvents);
 
         // Vistas
@@ -51,7 +49,7 @@ public final class MainGui {
         JPanel fichaView = new FichaView(controladorFicha);
         JPanel jugadorView = new JugadorView(controladorJugador);
 
-        JFrame ventana = new VentanaPrincipal(grilla, fichaView);
+        JFrame ventana = new VentanaPrincipal(grilla, fichaView, jugadorView);
         ventana.setVisible(true);
     }
 

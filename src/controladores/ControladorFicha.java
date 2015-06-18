@@ -2,25 +2,56 @@ package controladores;
 
 import java.awt.AWTEvent;
 import java.awt.event.KeyEvent;
+import java.util.Collection;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 import error.JuegoException;
 import gui.controlador.AnyEventListener;
+import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardEvents;
 import gui.modelo.ElementObservable;
 import gui.modelo.ElementObserver;
+import juego.Jugador;
+import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Direccion;
 
 import ficha.Ficha;
+import tablero.ITablero;
+import tablero.Tablero;
 
 public class ControladorFicha {
 
-    private ElementObservable<Ficha> cambioDeFichaObservable;
-    private ElementObservable<Coordenada3d> movimientoObservable;
+    private final ITablero mapa;
+    private final ControladorJugador controladorJugador;
+    private final ElementObservable<Ficha> cambioDeFichaObservable;
+    private final ElementObservable<Coordenada3d> movimientoObservable;
 
-    public ControladorFicha(Ficha ficha) {
-        this.cambioDeFichaObservable = new ElementObservable<>(ficha);
-        this.movimientoObservable = new ElementObservable<>(ficha.coordenada());
+    public ControladorFicha(ITablero mapa, ControladorJugador controladorJugador) {
+        this.mapa = mapa;
+        this.controladorJugador = controladorJugador;
+        this.cambioDeFichaObservable = new ElementObservable<>(elegirNuevaFicha());
+        this.movimientoObservable = new ElementObservable<>(ficha().coordenada());
+
+        controladorJugador.observarCambioDeJugador(new ElementObserver<Jugador>() {
+            @Override
+            public void update(ElementObservable<Jugador> o, Jugador prevElement) {
+                seleccionar(elegirNuevaFicha());
+            }
+        });
+    }
+
+    private Ficha elegirNuevaFicha() {
+        Collection<Ficha> fichas = controladorJugador.jugador().fichas();
+        Ficha ficha;
+        try {
+            ficha = fichas.iterator().next();
+        } catch (NoSuchElementException exception) {
+            ficha = mapa.getFichaTerrestre(new Coordenada(1, 1));
+        }
+
+        return ficha;
     }
 
     public Ficha ficha() {
@@ -61,6 +92,10 @@ public class ControladorFicha {
 
         @Override
         public void eventOcurred(AWTEvent e) {
+            // No se puede mover fichas de otro jugador
+            if (!ficha().propietario().equals(controladorJugador.jugador()))
+                return;
+
             try {
                 ficha().mover(direccion);
                 movimientoObservable.setAndNotify(ficha().coordenada());

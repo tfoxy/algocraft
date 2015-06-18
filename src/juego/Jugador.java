@@ -149,4 +149,8 @@ public class Jugador {
     public void agregarTecnologia(Tecnologia tecnologia) {
         tecnologias.add(tecnologia);
     }
+
+    public Set<Ficha> fichas() {
+        return Collections.unmodifiableSet(fichas);
+    }
 }

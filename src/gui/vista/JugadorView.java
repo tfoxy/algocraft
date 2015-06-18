@@ -20,9 +20,12 @@ public class JugadorView extends JPanel {
     public JugadorView(ControladorJugador control) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
+        add(nombreLabel);
         add(botonTerminarTurno);
 
         botonTerminarTurno.addActionListener(control.getTerminarTurnoListener());
+
+        cambiarJugador(control.jugador());
 
         control.observarCambioDeJugador(new ElementObserver<Jugador>() {
             @Override
