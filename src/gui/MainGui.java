@@ -11,13 +11,11 @@ import juego.Jugador;
 import juego.Raza;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import tablero.Coordenada;
-import vista.VentanaFicha;
+import vista.FichaView;
 import controladores.ControladorFicha;
-
-import java.util.Observable;
-import java.util.Observer;
 
 public final class MainGui {
 
@@ -44,10 +42,11 @@ public final class MainGui {
         ControladorFicha controladorFicha = new ControladorFicha(fichaSeleccionada);
 
         // Vistas
-        JFrame grilla = new GrillaView(mapa, fichaSeleccionada);
-        new VentanaFicha(controladorFicha);
+        JPanel grilla = new GrillaView(mapa, fichaSeleccionada);
+        JPanel fichaView = new FichaView(controladorFicha);
 
-        new VentanaPrincipal(grilla).mostrar();
+        JFrame ventana = new VentanaPrincipal(grilla, fichaView);
+        ventana.setVisible(true);
     }
 
 }

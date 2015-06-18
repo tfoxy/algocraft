@@ -1,27 +1,42 @@
 package gui.vista;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.ToolTipManager;
 import javax.swing.WindowConstants;
+import java.awt.Container;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
-public class VentanaPrincipal {
+public class VentanaPrincipal extends JFrame {
 
-    private JFrame frame;
+    public VentanaPrincipal(JPanel grilla, JPanel fichaView) {
+        Container container = getContentPane();
+        container.setLayout(new GridBagLayout());
 
-    public VentanaPrincipal(JFrame frame) {
-        this.frame = frame;
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        frame.setTitle("AlgoCraft");
-        frame.setSize(700, 500);
-        frame.setLocation(8, 0);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        container.add(grilla, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        container.add(fichaView, gbc);
+
+        setPropiedadesDeVentana();
+    }
+
+    private void setPropiedadesDeVentana() {
+        setTitle("AlgoCraft");
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
 
         // Mostrar Tooltips inmediatamente (sin delay)
         ToolTipManager.sharedInstance().setInitialDelay(0);
-    }
-
-    public void mostrar() {
-        frame.setVisible(true);
     }
 
 }

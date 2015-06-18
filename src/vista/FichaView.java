@@ -14,14 +14,14 @@ import tablero.Direccion;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class VentanaFicha extends JFrame {
+public class FichaView extends JPanel {
 
     private Ficha ficha;
 
+    private JLabel nombreLabel = new JLabel();
     private JLabel movimientoLabel = new JLabel();
     private JLabel movimientoMaximoLabel = new JLabel();
 
@@ -31,17 +31,16 @@ public class VentanaFicha extends JFrame {
     private JButton botonDerecha = new JButton("Derecha");
 
 
-    public VentanaFicha(final ControladorFicha control) {
-        Container contenedor = getContentPane();
-
-        contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
+    public FichaView(final ControladorFicha control) {
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         JPanel panelStats = new JPanel();
-        panelStats.add(new JLabel("Movimiento:"));
+        panelStats.add(nombreLabel);
+        panelStats.add(new JLabel(" "));
         panelStats.add(movimientoLabel);
         panelStats.add(new JLabel("/"));
         panelStats.add(movimientoMaximoLabel);
-        contenedor.add(panelStats);
+        add(panelStats);
 
         JPanel panelBotones = new JPanel();
         panelBotones.add(botonArriba);
@@ -49,13 +48,11 @@ public class VentanaFicha extends JFrame {
         panelBotones.add(botonDerecha);
         panelBotones.add(botonIzquierda);
 
-        contenedor.add(panelBotones);
+        add(panelBotones);
 
         setSize(400, 100);
         setLocation(0, 500);
         setVisible(true);
-
-        addWindowListener(new CloseListener());
 
 
         botonAbajo.addActionListener(control.getListenerMovimiento(Direccion.ABAJO));
@@ -88,16 +85,8 @@ public class VentanaFicha extends JFrame {
     }
 
     private void actulizarFicha() {
-        setTitle(ficha.nombre());
+        nombreLabel.setText(ficha.nombre());
         movimientoLabel.setText(ficha.movimiento() + "");
         movimientoMaximoLabel.setText(ficha.movimientoMaximo() + "");
-    }
-
-
-    public static class CloseListener extends WindowAdapter {
-        public void windowClosing(WindowEvent e) {
-            e.getWindow().setVisible(false);
-            System.exit(0);
-        }
     }
 }
