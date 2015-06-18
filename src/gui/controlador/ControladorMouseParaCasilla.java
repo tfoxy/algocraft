@@ -1,7 +1,6 @@
 package gui.controlador;
 
-import ficha.Ficha;
-import gui.modelo.ObservableElement;
+import controladores.ControladorFicha;
 import gui.vista.CasillaParaFicha;
 
 import java.awt.event.MouseAdapter;
@@ -10,16 +9,16 @@ import java.awt.event.MouseEvent;
 public class ControladorMouseParaCasilla extends MouseAdapter {
 
     private final CasillaParaFicha vista;
-    private final ObservableElement<Ficha> observable;
+    private final ControladorFicha control;
 
-    public ControladorMouseParaCasilla(CasillaParaFicha vista, ObservableElement<Ficha> observable) {
+    public ControladorMouseParaCasilla(CasillaParaFicha vista, ControladorFicha control) {
         this.vista = vista;
-        this.observable = observable;
+        this.control = control;
     }
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
-        observable.set(vista.ficha());
+        control.seleccionar(vista.ficha());
     }
 
 }

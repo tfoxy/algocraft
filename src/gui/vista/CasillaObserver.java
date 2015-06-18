@@ -24,7 +24,6 @@ public abstract class CasillaObserver implements Observer {
 
     public CasillaObserver(Coordenada coordenada) {
         this.coordenada = coordenada;
-        //addMouseListener(new ControladorMouse(mapa, this));
 
     }
 

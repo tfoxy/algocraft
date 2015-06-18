@@ -2,45 +2,41 @@ package controladores;
 
 import java.awt.AWTEvent;
 import java.awt.event.KeyEvent;
-import java.util.Observable;
-import java.util.Observer;
 
 import error.JuegoException;
 import gui.controlador.AnyEventListener;
 import gui.controlador.KeyboardListener;
-import gui.controlador.ObservableEvent;
-import gui.modelo.ObservableElement;
+import gui.modelo.ElementObservable;
+import gui.modelo.ElementObserver;
+import tablero.Coordenada3d;
 import tablero.Direccion;
 
 import ficha.Ficha;
 
 public class ControladorFicha {
 
-    private ObservableElement<Ficha> ficha;
-    private Observable cambioDeFichaObservable = new ObservableEvent();
-    private Observable movimientoObservable = new ObservableEvent();
+    private ElementObservable<Ficha> cambioDeFichaObservable;
+    private ElementObservable<Coordenada3d> movimientoObservable;
 
-    public ControladorFicha(ObservableElement<Ficha> ficha) {
-        this.ficha = ficha;
-
-        ficha.addObserver(new Observer() {
-            @Override
-            public void update(Observable o, Object arg) {
-                cambioDeFichaObservable.notifyObservers();
-            }
-        });
+    public ControladorFicha(Ficha ficha) {
+        this.cambioDeFichaObservable = new ElementObservable<>(ficha);
+        this.movimientoObservable = new ElementObservable<>(ficha.coordenada());
     }
 
     public Ficha ficha() {
-        return ficha.get();
+        return cambioDeFichaObservable.get();
     }
 
+    public void seleccionar(Ficha ficha) {
+        cambioDeFichaObservable.setAndNotify(ficha);
+        movimientoObservable.set(ficha.coordenada());
+    }
 
-    public void observarCambioDeFicha(Observer o) {
+    public void observarCambioDeFicha(ElementObserver<Ficha> o) {
         cambioDeFichaObservable.addObserver(o);
     }
 
-    public void observarMovimiento(Observer o) {
+    public void observarMovimiento(ElementObserver<Coordenada3d> o) {
         movimientoObservable.addObserver(o);
     }
 
@@ -67,7 +63,7 @@ public class ControladorFicha {
         public void eventOcurred(AWTEvent e) {
             try {
                 ficha().mover(direccion);
-                movimientoObservable.notifyObservers();
+                movimientoObservable.setAndNotify(ficha().coordenada());
             } catch (JuegoException exc) {
                 // TODO avisar que no se pudo mover
             }

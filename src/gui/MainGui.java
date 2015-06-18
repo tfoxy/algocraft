@@ -3,7 +3,7 @@ package gui;
 import escenario.EscenarioSimple;
 import ficha.Ficha;
 import gui.controlador.KeyboardListener;
-import gui.modelo.ObservableElement;
+import gui.modelo.ElementObservable;
 import gui.modelo.TableroObservable;
 import gui.vista.GrillaView;
 import gui.vista.VentanaPrincipal;
@@ -36,16 +36,16 @@ public final class MainGui {
 
         Juego juego = escenario.construir();
 
-        ObservableElement<Ficha> fichaSeleccionada =
-                new ObservableElement<>(mapa.getFichaTerrestre(new Coordenada(1, 1)));
+        Ficha ficha = mapa.getFichaTerrestre(new Coordenada(1, 1));
+
 
         // Controladores
         KeyboardListener keyboardListener = new KeyboardListener();
-        ControladorFicha controladorFicha = new ControladorFicha(fichaSeleccionada);
+        ControladorFicha controladorFicha = new ControladorFicha(ficha);
         controladorFicha.listenKeyboard(keyboardListener);
 
         // Vistas
-        JPanel grilla = new GrillaView(mapa, fichaSeleccionada);
+        JPanel grilla = new GrillaView(mapa, controladorFicha);
         JPanel fichaView = new FichaView(controladorFicha);
 
         JFrame ventana = new VentanaPrincipal(grilla, fichaView);

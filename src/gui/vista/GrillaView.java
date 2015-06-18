@@ -1,7 +1,6 @@
 package gui.vista;
 
-import ficha.Ficha;
-import gui.modelo.ObservableElement;
+import controladores.ControladorFicha;
 import gui.modelo.TableroObservable;
 import tablero.Coordenada;
 
@@ -10,14 +9,14 @@ import java.awt.GridLayout;
 
 public class GrillaView extends JPanel {
 
-    public GrillaView(TableroObservable mapa, ObservableElement<Ficha> fichaSeleccionada) {
+    public GrillaView(TableroObservable mapa, ControladorFicha control) {
         setLayout(new GridLayout(mapa.getLongitudY(), mapa.getLongitudX()));
 
 
         for (int y = mapa.getLongitudY(); y > 0; y--) {
             for (int x = 1; x <= mapa.getLongitudX(); x++) {
 
-                add(new CasillaVista(new Coordenada(x, y), mapa, fichaSeleccionada));
+                add(new CasillaVista(new Coordenada(x, y), mapa, control));
 
             }
         }

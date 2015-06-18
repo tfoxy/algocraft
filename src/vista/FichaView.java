@@ -1,10 +1,10 @@
 package vista;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import controladores.ControladorFicha;
 import ficha.Ficha;
+import gui.modelo.ElementObservable;
+import gui.modelo.ElementObserver;
+import tablero.Coordenada3d;
 import tablero.Direccion;
 
 import javax.swing.BoxLayout;
@@ -26,7 +26,7 @@ public class FichaView extends JPanel {
     private JButton botonDerecha = new JButton("Derecha");
 
 
-    public FichaView(final ControladorFicha control) {
+    public FichaView(ControladorFicha control) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         JPanel panelStats = new JPanel();
@@ -53,16 +53,16 @@ public class FichaView extends JPanel {
 
         cambiarFicha(control.ficha());
 
-        control.observarCambioDeFicha(new Observer() {
+        control.observarCambioDeFicha(new ElementObserver<Ficha>() {
             @Override
-            public void update(Observable o, Object arg) {
-                cambiarFicha(control.ficha());
+            public void update(ElementObservable<Ficha> o, Ficha prevFicha) {
+                cambiarFicha(o.get());
             }
         });
 
-        control.observarMovimiento(new Observer() {
+        control.observarMovimiento(new ElementObserver<Coordenada3d>() {
             @Override
-            public void update(Observable o, Object arg) {
+            public void update(ElementObservable<Coordenada3d> o, Coordenada3d prevPos) {
                 actulizarFicha();
             }
         });

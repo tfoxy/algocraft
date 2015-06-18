@@ -1,18 +1,14 @@
 package gui.vista;
 
-import controladores.ControladorMouse;
+import controladores.ControladorFicha;
 import ficha.Ficha;
-import gui.modelo.ObservableElement;
+import gui.modelo.ElementObservable;
 import gui.modelo.TableroObservable;
 import tablero.Altura;
 import tablero.Coordenada;
-import tablero.Coordenada3d;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.Observer;
 
@@ -21,9 +17,9 @@ public class CasillaVista extends JPanel {
     private CasillaParaFicha tierra;
     private CasillaParaFicha aire;
 
-    public CasillaVista(Coordenada coordenada, TableroObservable mapa, ObservableElement fichaSeleccionada) {
-        tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), fichaSeleccionada);
-        aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), fichaSeleccionada);
+    public CasillaVista(Coordenada coordenada, TableroObservable mapa, ControladorFicha control) {
+        tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), control);
+        aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), control);
 
         Observer observer = crearObserver(coordenada);
         mapa.addObserver(observer);
