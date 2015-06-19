@@ -3,7 +3,7 @@ package error;
 public class JuegoException extends RuntimeException {
 
     public JuegoException() {
-
+        super("No es posible realizar acción en el juego");
     }
 
 
