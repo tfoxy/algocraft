@@ -5,10 +5,12 @@ import ficha.Ficha;
 import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardEvents;
 import gui.modelo.FichaObjetivo;
+import gui.modelo.JuegoLogger;
 import gui.modelo.JugadorDeTurno;
 import gui.modelo.TableroObservable;
 import gui.vista.GrillaView;
 import gui.vista.JugadorView;
+import gui.vista.LoggerView;
 import gui.vista.VentanaPrincipal;
 import juego.Juego;
 import juego.Jugador;
@@ -41,6 +43,7 @@ public final class MainGui {
 
         FichaObjetivo fichaObjetivo = new FichaObjetivo();
         JugadorDeTurno jugadorDeTurno = new JugadorDeTurno(juego, fichaObjetivo);
+        JuegoLogger juegoLogger = new JuegoLogger();
 
 
         // Controladores
@@ -60,8 +63,9 @@ public final class MainGui {
         JPanel grillaView = new GrillaView(mapa, fichaObjetivo);
         JPanel fichaView = new FichaView(controladorFicha);
         JPanel jugadorView = new JugadorView(controladorJugador);
+        JPanel loggerView = new LoggerView(juegoLogger);
 
-        JFrame ventana = new VentanaPrincipal(grillaView, fichaView, jugadorView);
+        JFrame ventana = new VentanaPrincipal(grillaView, fichaView, jugadorView, loggerView);
         ventana.setVisible(true);
     }
 

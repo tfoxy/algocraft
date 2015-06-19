@@ -10,23 +10,34 @@ import java.awt.GridBagLayout;
 
 public class VentanaPrincipal extends JFrame {
 
-    public VentanaPrincipal(JPanel grilla, JPanel fichaView, JPanel jugadorView) {
+    public VentanaPrincipal(JPanel grilla, JPanel fichaView, JPanel jugadorView, JPanel loggerView) {
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
 
+        gbc.gridy = 0;
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 0;
+        container.add(loggerView, gbc);
+
+        gbc.gridy++;
+
         gbc.fill = GridBagConstraints.BOTH;
         gbc.gridx = 0;
-        gbc.gridy = 0;
         gbc.gridwidth = 2;
         gbc.weightx = 1;
         gbc.weighty = 1;
         container.add(grilla, gbc);
 
+        gbc.gridy++;
+
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
-        gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.weightx = 0;
         gbc.weighty = 0;
@@ -35,7 +46,6 @@ public class VentanaPrincipal extends JFrame {
 
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 1;
-        gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.weightx = 0;
         gbc.weighty = 0;
@@ -59,7 +69,7 @@ public class VentanaPrincipal extends JFrame {
         ToolTipManager.sharedInstance().setInitialDelay(0);
 
         // enable anti-aliased text:
-        System.setProperty("awt.useSystemAAFontSettings","on");
+        System.setProperty("awt.useSystemAAFontSettings", "on");
         System.setProperty("swing.aatext", "true");
     }
 

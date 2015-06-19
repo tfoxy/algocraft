@@ -4,28 +4,36 @@ import gui.modelo.JuegoLogger;
 import gui.modelo.Observable;
 import gui.modelo.Observer;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoggerView extends JPanel {
 
-    private static final int TIME = 2000;
+    private static final int TIME = 3000;
 
 
-    private final JLabel label = new JLabel();
+    private final JLabel label = new JLabel("TEST");
     private final ActionListener listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            label.setText("");
+            label.setText(" ");
             label.repaint();
         }
     };
     private final Timer timer = new Timer(TIME, listener);
 
     public LoggerView(JuegoLogger logger) {
+        super(new BorderLayout());
+
+        setearPropiedades();
+
+        add(label); timer.start();
 
         logger.addObserver(new Observer<String>() {
             @Override
@@ -35,8 +43,15 @@ public class LoggerView extends JPanel {
         });
     }
 
-    private void actualizar(String msg) {
-        label.setText(msg);
+    private void setearPropiedades() {
+        setBorder(BorderFactory.createEmptyBorder(2, 10, 2, 10));
+
+        Font newFont = label.getFont().deriveFont(10f);
+        label.setFont(newFont);
+    }
+
+    public void actualizar(String msg) {
+        label.setText("ERROR: " + msg);
         timer.restart();
     }
 }
