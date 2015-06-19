@@ -1,16 +1,14 @@
 package gui.vista;
 
-import controladores.ControladorFicha;
 import ficha.Ficha;
 import gui.controlador.ControladorMouseParaCasilla;
-import gui.modelo.ElementObservable;
-import gui.modelo.ElementObserver;
+import gui.modelo.AccionEnGrilla;
 import gui.modelo.FichaObjetivo;
-import tablero.Coordenada3d;
+import gui.modelo.Observable;
+import gui.modelo.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -19,10 +17,10 @@ public class CasillaParaFicha extends JPanel {
 
     private final JLabel label = new JLabel();
     private boolean selected = false;
-    Ficha ficha;
+    private Ficha ficha;
 
     // Solo debe ser creado por CasillaVista
-    CasillaParaFicha(Ficha ficha, FichaObjetivo fichaObjetivo, ControladorFicha control) {
+    CasillaParaFicha(Ficha ficha, FichaObjetivo fichaObjetivo) {
         this.ficha = ficha;
 
         label.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 8));
@@ -32,35 +30,29 @@ public class CasillaParaFicha extends JPanel {
 
         addMouseListener(new ControladorMouseParaCasilla(this, fichaObjetivo));
 
-        fichaObjetivo.escucharCambioDeFichaObjetivo(new FichaObserver());
-        control.observarMovimiento(new MovimientoObserver());
+        fichaObjetivo.fichaObservables().on(AccionEnGrilla.SELECCION, new FichaObserver());
+    }
+
+    // Solo debe ser usado por CasillaVista
+    void cambiarFicha(Ficha ficha) {
+        this.ficha = ficha;
+        selected = false;
+
+        this.repaint();
     }
 
     public Ficha ficha() {
         return ficha;
     }
 
-    private class FichaObserver implements ElementObserver<Ficha> {
+    private class FichaObserver implements Observer<FichaObjetivo> {
         @Override
-        public void update(ElementObservable<Ficha> o, Ficha prevElement) {
-            if (ficha.equals(prevElement)) {
-                selected = false;
-                repaint();
-            } else if (ficha.equals(o.get())) {
+        public void update(Observable<FichaObjetivo> o, FichaObjetivo data) {
+            if (ficha.equals(data.ficha())) {
                 selected = true;
                 repaint();
-            }
-        }
-    }
-
-    private class MovimientoObserver implements ElementObserver<Coordenada3d> {
-        @Override
-        public void update(ElementObservable<Coordenada3d> o, Coordenada3d prevElement) {
-            if (ficha.coordenada().equals(prevElement)) {
+            } else if (ficha.equals(data.fichaPrevia())) {
                 selected = false;
-                repaint();
-            } else if (ficha.coordenada().equals(o.get())) {
-                selected = true;
                 repaint();
             }
         }

@@ -5,6 +5,7 @@ import ficha.Ficha;
 import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardEvents;
 import gui.modelo.FichaObjetivo;
+import gui.modelo.JugadorDeTurno;
 import gui.modelo.TableroObservable;
 import gui.vista.GrillaView;
 import gui.vista.JugadorView;
@@ -39,23 +40,26 @@ public final class MainGui {
         Juego juego = escenario.construir();
 
         FichaObjetivo fichaObjetivo = new FichaObjetivo();
+        JugadorDeTurno jugadorDeTurno = new JugadorDeTurno(juego, fichaObjetivo);
 
 
         // Controladores
         KeyboardEvents keyboardEvents = new KeyboardEvents();
 
-        ControladorJugador controladorJugador = new ControladorJugador(juego);
+        ControladorJugador controladorJugador = new ControladorJugador(jugadorDeTurno);
         controladorJugador.listenKeyboard(keyboardEvents);
 
-        ControladorFicha controladorFicha = new ControladorFicha(mapa, controladorJugador, fichaObjetivo);
+        ControladorFicha controladorFicha = new ControladorFicha(fichaObjetivo, jugadorDeTurno);
         controladorFicha.listenKeyboard(keyboardEvents);
 
+        jugadorDeTurno.comenzarTurno();
+
         // Vistas
-        JPanel grilla = new GrillaView(mapa, fichaObjetivo, controladorFicha);
+        JPanel grillaView = new GrillaView(mapa, fichaObjetivo);
         JPanel fichaView = new FichaView(controladorFicha);
         JPanel jugadorView = new JugadorView(controladorJugador);
 
-        JFrame ventana = new VentanaPrincipal(grilla, fichaView, jugadorView);
+        JFrame ventana = new VentanaPrincipal(grillaView, fichaView, jugadorView);
         ventana.setVisible(true);
     }
 

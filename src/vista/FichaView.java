@@ -2,9 +2,8 @@ package vista;
 
 import controladores.ControladorFicha;
 import ficha.Ficha;
-import gui.modelo.ElementObservable;
-import gui.modelo.ElementObserver;
-import tablero.Coordenada3d;
+import gui.modelo.Observable;
+import gui.modelo.Observer;
 import tablero.Direccion;
 
 import javax.swing.BoxLayout;
@@ -60,23 +59,16 @@ public class FichaView extends JPanel {
 
         cambiarFicha(control.ficha());
 
-        control.observarCambioDeFicha(new ElementObserver<Ficha>() {
+        control.cambioDeFichaObservable().addObserver(new Observer<Ficha>() {
             @Override
-            public void update(ElementObservable<Ficha> o, Ficha prevFicha) {
-                cambiarFicha(o.get());
+            public void update(Observable<Ficha> o, Ficha ficha) {
+                cambiarFicha(ficha);
             }
         });
 
-        control.observarMovimiento(new ElementObserver<Coordenada3d>() {
+        control.accionObservables().observe(new Observer<ControladorFicha>() {
             @Override
-            public void update(ElementObservable<Coordenada3d> o, Coordenada3d prevPos) {
-                actulizarFicha();
-            }
-        });
-
-        control.observarAtaque(new ElementObserver<Ficha>() {
-            @Override
-            public void update(ElementObservable<Ficha> o, Ficha prevPos) {
+            public void update(Observable<ControladorFicha> o, ControladorFicha control) {
                 actulizarFicha();
             }
         });

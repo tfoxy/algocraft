@@ -1,8 +1,9 @@
 package gui.vista;
 
 import gui.controlador.ControladorJugador;
-import gui.modelo.ElementObservable;
-import gui.modelo.ElementObserver;
+import gui.modelo.JugadorDeTurno;
+import gui.modelo.Observable;
+import gui.modelo.Observer;
 import juego.Jugador;
 
 import javax.swing.BoxLayout;
@@ -25,14 +26,17 @@ public class JugadorView extends JPanel {
 
         botonTerminarTurno.addActionListener(control.getTerminarTurnoListener());
 
-        cambiarJugador(control.jugador());
+        cambiarJugador(control.jugadorDeTurno().jugador());
 
-        control.observarCambioDeJugador(new ElementObserver<Jugador>() {
-            @Override
-            public void update(ElementObservable<Jugador> o, Jugador prevElement) {
-                cambiarJugador(o.get());
-            }
-        });
+        control.jugadorDeTurno().comenzarTurnoObservable().addObserver(new ComenzarTurnoObserver());
+    }
+
+
+    private class ComenzarTurnoObserver implements Observer<JugadorDeTurno> {
+        @Override
+        public void update(Observable<JugadorDeTurno> o, JugadorDeTurno jugadorDeTurno) {
+            cambiarJugador(jugadorDeTurno.jugador());
+        }
     }
 
 

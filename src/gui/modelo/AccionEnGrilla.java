@@ -1,8 +1,8 @@
 package gui.modelo;
 
 public enum AccionEnGrilla {
-    SELECCIONAR,
-    ATACAR,
-    HACER_MAGIA,
-    CONSTRUIR
+    SELECCION,
+    ATAQUE,
+    EMISION_DE_MAGIA,
+    CONSTRUCCION
 }

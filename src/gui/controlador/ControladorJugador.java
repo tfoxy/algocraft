@@ -1,35 +1,27 @@
 package gui.controlador;
 
-import gui.modelo.ElementObservable;
-import gui.modelo.ElementObserver;
+import ficha.Ficha;
+import gui.modelo.AccionEnGrilla;
+import gui.modelo.FichaObjetivo;
+import gui.modelo.JugadorDeTurno;
 import juego.Juego;
 import juego.Jugador;
-import tablero.Direccion;
+import tablero.Coordenada;
 
 import java.awt.AWTEvent;
 import java.awt.event.KeyEvent;
+import java.util.NoSuchElementException;
 
 public class ControladorJugador {
 
-    private Juego juego;
-    private ElementObservable<Jugador> cambioDeJugadorObservable;
+    private final JugadorDeTurno jugadorDeTurno;
 
-    public ControladorJugador(Juego juego) {
-        this.juego = juego;
-        cambioDeJugadorObservable = new ElementObservable<>(juego.jugadorActual());
+    public ControladorJugador(JugadorDeTurno jugadorDeTurno) {
+        this.jugadorDeTurno = jugadorDeTurno;
     }
 
-    public void terminarTurno() {
-        this.juego.pasarJugador();
-        cambioDeJugadorObservable.setAndNotify(this.juego.jugadorActual());
-    }
-
-    public Jugador jugador() {
-        return cambioDeJugadorObservable.get();
-    }
-
-    public void observarCambioDeJugador(ElementObserver<Jugador> o) {
-        cambioDeJugadorObservable.addObserver(o);
+    public JugadorDeTurno jugadorDeTurno() {
+        return this.jugadorDeTurno;
     }
 
     private class TerminarTurnoListener extends AnyEventListener {
@@ -40,7 +32,7 @@ public class ControladorJugador {
 
         @Override
         public void eventOcurred(AWTEvent e) {
-            terminarTurno();
+            jugadorDeTurno.terminarTurno();
         }
     }
 

@@ -19,9 +19,9 @@ public class CasillaVista extends JPanel {
     private CasillaParaFicha aire;
 
     public CasillaVista(Coordenada coordenada, TableroObservable mapa,
-                        FichaObjetivo fichaObjetivo, ControladorFicha control) {
-        tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), fichaObjetivo, control);
-        aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), fichaObjetivo, control);
+                        FichaObjetivo fichaObjetivo) {
+        tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), fichaObjetivo);
+        aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), fichaObjetivo);
 
         Observer observer = crearObserver(coordenada);
         mapa.addObserver(observer);
@@ -41,8 +41,7 @@ public class CasillaVista extends JPanel {
         else
             casillaParaFicha = aire;
 
-        casillaParaFicha.ficha = ficha;
-        casillaParaFicha.repaint();
+        casillaParaFicha.cambiarFicha(ficha);
     }
 
     private Observer crearObserver(Coordenada coordenada) {

@@ -4,7 +4,7 @@ import ficha.Ficha;
 
 public class FichaObjetivo {
 
-    private static final AccionEnGrilla ACCION_POR_DEFECTO = AccionEnGrilla.CONSTRUIR;
+    private static final AccionEnGrilla ACCION_POR_DEFECTO = AccionEnGrilla.SELECCION;
 
     private AccionEnGrilla accion;
     private AccionEnGrilla accionPrevia;
@@ -49,6 +49,9 @@ public class FichaObjetivo {
     }
 
     public void cambiarAccion(AccionEnGrilla accion) {
+        if (this.accion.equals(accion))
+            return;
+
         this.accion = accion;
         this.accionObservable.notifyObservers(this);
         this.accionPrevia = accion;
@@ -58,6 +61,10 @@ public class FichaObjetivo {
         this.ficha = ficha;
         this.fichaObservables.notify(accion, this);
         this.fichaPrevia = ficha;
+        retornarAccionPorDefecto();
+    }
+
+    public void retornarAccionPorDefecto() {
         cambiarAccion(ACCION_POR_DEFECTO);
     }
 }
