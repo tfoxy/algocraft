@@ -19,6 +19,8 @@ public class FichaView extends JPanel {
     private final JLabel movimientoLabel = new JLabel();
     private final JLabel movimientoMaximoLabel = new JLabel();
     private final JLabel vidaLabel = new JLabel();
+    private final JLabel escudoLabel = new JLabel();
+    private final JLabel energiaLabel = new JLabel();
 
     private final JButton botonArriba = new JButton("Arriba");
     private final JButton botonAbajo = new JButton("Abajo");
@@ -38,6 +40,10 @@ public class FichaView extends JPanel {
         panelStats.add(movimientoMaximoLabel);
         panelStats.add(new JLabel(" V"));
         panelStats.add(vidaLabel);
+        panelStats.add(new JLabel(" E"));
+        panelStats.add(escudoLabel);
+        panelStats.add(new JLabel(" M"));
+        panelStats.add(energiaLabel);
         add(panelStats);
 
         JPanel panelBotonesMovimiento = new JPanel();
@@ -85,5 +91,7 @@ public class FichaView extends JPanel {
         movimientoLabel.setText(ficha.movimiento() + "");
         movimientoMaximoLabel.setText(ficha.movimientoMaximo() + "");
         vidaLabel.setText(ficha.barras().vidaActual() + "");
+        escudoLabel.setText(ficha.barras().escudoActual() + "");
+        energiaLabel.setText(ficha.barras().energiaActual() + "");
     }
 }
