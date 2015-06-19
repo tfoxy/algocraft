@@ -5,9 +5,7 @@ import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.ITablero;
 
-import java.util.Observable;
-
-public class TableroObservable extends Observable implements ITablero {
+public class TableroObservable extends Observable<Ficha> implements ITablero {
 
     private final ITablero tablero;
 
@@ -49,7 +47,6 @@ public class TableroObservable extends Observable implements ITablero {
     public void insertar(Ficha ficha) {
         tablero.insertar(ficha);
 
-        setChanged();
         this.notifyObservers(ficha);
     }
 
@@ -57,7 +54,6 @@ public class TableroObservable extends Observable implements ITablero {
     public void eliminarFichaEn(Coordenada3d lugar) {
         tablero.eliminarFichaEn(lugar);
 
-        setChanged();
         this.notifyObservers(tablero.getFicha(lugar));
     }
 

@@ -23,8 +23,7 @@ public class CasillaVista extends JPanel {
         tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), fichaObjetivo);
         aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), fichaObjetivo);
 
-        Observer observer = crearObserver(coordenada);
-        mapa.addObserver(observer);
+        mapa.addObserver(new JCasillaObserver(coordenada));
 
         setLayout(new GridLayout(2, 1));
         setBorder(BorderFactory.createRaisedSoftBevelBorder());
@@ -44,13 +43,15 @@ public class CasillaVista extends JPanel {
         casillaParaFicha.cambiarFicha(ficha);
     }
 
-    private Observer crearObserver(Coordenada coordenada) {
-        return new CasillaObserver(coordenada) {
-            @Override
-            protected void updateVista(Ficha fichaNueva) {
-                repaintWith(fichaNueva);
-            }
-        };
+    private class JCasillaObserver extends CasillaObserver {
+        public JCasillaObserver(Coordenada coordenada) {
+            super(coordenada);
+        }
+
+        @Override
+        protected void updateVista(Ficha fichaNueva) {
+            repaintWith(fichaNueva);
+        }
     }
 
 }

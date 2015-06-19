@@ -1,23 +1,16 @@
 package gui.vista;
 
 import ficha.Ficha;
-import gui.modelo.TableroObservable;
+import gui.modelo.Observable;
+import gui.modelo.Observer;
 import tablero.Coordenada;
-import tablero.Coordenada3d;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public abstract class CasillaObserver implements Observer {
-
-    private static final long serialVersionUID = -973667959098244571L;
+public abstract class CasillaObserver implements Observer<Ficha> {
 
     private Coordenada coordenada;
 
     @Override
-    public void update(Observable o, Object arg) {
-        Ficha ficha = (Ficha) arg;
-
+    public void update(Observable o, Ficha ficha) {
         if (ficha.coordenada().proyeccion().equals(coordenada))
             updateVista(ficha);
     }
