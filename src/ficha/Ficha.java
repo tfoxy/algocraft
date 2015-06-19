@@ -164,6 +164,8 @@ public abstract class Ficha implements Cloneable {
             throw new FueraDeRangoException();
         }
 
+        disminuirMovimiento();
+
         defensor.sufrirDanio(ataque.danio());
     }
 

@@ -5,23 +5,34 @@ import ficha.Ficha;
 import gui.controlador.ControladorMouseParaCasilla;
 import gui.modelo.ElementObservable;
 import gui.modelo.ElementObserver;
+import gui.modelo.FichaObjetivo;
 import tablero.Coordenada3d;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class CasillaParaFicha extends JPanel {
 
-    private boolean selected;
+    private final JLabel label = new JLabel();
+    private boolean selected = false;
     Ficha ficha;
 
     // Solo debe ser creado por CasillaVista
-    CasillaParaFicha(Ficha ficha, ControladorFicha control) {
+    CasillaParaFicha(Ficha ficha, FichaObjetivo fichaObjetivo, ControladorFicha control) {
         this.ficha = ficha;
-        addMouseListener(new ControladorMouseParaCasilla(this, control));
 
-        control.observarCambioDeFicha(new FichaObserver());
+        label.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 8));
+        add("Center", label);
+
+        setBorder(null);
+
+        addMouseListener(new ControladorMouseParaCasilla(this, fichaObjetivo));
+
+        fichaObjetivo.escucharCambioDeFichaObjetivo(new FichaObserver());
         control.observarMovimiento(new MovimientoObserver());
     }
 
@@ -68,6 +79,8 @@ public class CasillaParaFicha extends JPanel {
             grafico.fillRect(0, 0, dimension.width, dimension.height);
         }
 
-        setToolTipText(ficha.nombre() + " " + ficha.coordenada().proyeccion().toString());
+        label.setText(ficha.nombre().length() > 0 ? ficha.nombre().substring(0, 1) : "");
+
+        setToolTipText(ficha.nombre() + " " + ficha.coordenada().toString());
     }
 }

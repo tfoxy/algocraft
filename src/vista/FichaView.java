@@ -16,14 +16,16 @@ public class FichaView extends JPanel {
 
     private Ficha ficha;
 
-    private JLabel nombreLabel = new JLabel();
-    private JLabel movimientoLabel = new JLabel();
-    private JLabel movimientoMaximoLabel = new JLabel();
+    private final JLabel nombreLabel = new JLabel();
+    private final JLabel movimientoLabel = new JLabel();
+    private final JLabel movimientoMaximoLabel = new JLabel();
+    private final JLabel vidaLabel = new JLabel();
 
-    private JButton botonArriba = new JButton("Arriba");
-    private JButton botonAbajo = new JButton("Abajo");
-    private JButton botonIzquierda = new JButton("Izquierda");
-    private JButton botonDerecha = new JButton("Derecha");
+    private final JButton botonArriba = new JButton("Arriba");
+    private final JButton botonAbajo = new JButton("Abajo");
+    private final JButton botonIzquierda = new JButton("Izquierda");
+    private final JButton botonDerecha = new JButton("Derecha");
+    private final JButton botonAtaque = new JButton("Ataque");
 
 
     public FichaView(ControladorFicha control) {
@@ -35,21 +37,26 @@ public class FichaView extends JPanel {
         panelStats.add(movimientoLabel);
         panelStats.add(new JLabel("/"));
         panelStats.add(movimientoMaximoLabel);
+        panelStats.add(new JLabel(" V"));
+        panelStats.add(vidaLabel);
         add(panelStats);
 
-        JPanel panelBotones = new JPanel();
-        panelBotones.add(botonArriba);
-        panelBotones.add(botonAbajo);
-        panelBotones.add(botonDerecha);
-        panelBotones.add(botonIzquierda);
+        JPanel panelBotonesMovimiento = new JPanel();
+        panelBotonesMovimiento.add(botonArriba);
+        panelBotonesMovimiento.add(botonAbajo);
+        panelBotonesMovimiento.add(botonDerecha);
+        panelBotonesMovimiento.add(botonIzquierda);
+        add(panelBotonesMovimiento);
 
-        add(panelBotones);
+        JPanel panelBotonesDeAccion = new JPanel();
+        panelBotonesDeAccion.add(botonAtaque);
+        add(panelBotonesDeAccion);
 
         botonAbajo.addActionListener(control.getMovimientoListener(Direccion.ABAJO));
         botonArriba.addActionListener(control.getMovimientoListener(Direccion.ARRIBA));
         botonDerecha.addActionListener(control.getMovimientoListener(Direccion.DERECHA));
         botonIzquierda.addActionListener(control.getMovimientoListener(Direccion.IZQUIERDA));
-        // Conectamos esta vista con el modelo
+        botonAtaque.addActionListener(control.getAtaqueListener());
 
         cambiarFicha(control.ficha());
 
@@ -66,6 +73,13 @@ public class FichaView extends JPanel {
                 actulizarFicha();
             }
         });
+
+        control.observarAtaque(new ElementObserver<Ficha>() {
+            @Override
+            public void update(ElementObservable<Ficha> o, Ficha prevPos) {
+                actulizarFicha();
+            }
+        });
     }
 
 
@@ -78,5 +92,6 @@ public class FichaView extends JPanel {
         nombreLabel.setText(ficha.nombre());
         movimientoLabel.setText(ficha.movimiento() + "");
         movimientoMaximoLabel.setText(ficha.movimientoMaximo() + "");
+        vidaLabel.setText(ficha.barras().vidaActual() + "");
     }
 }

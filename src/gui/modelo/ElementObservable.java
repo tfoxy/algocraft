@@ -26,6 +26,10 @@ public class ElementObservable<E> {
         if (this.e == e)
             return;
 
+        this.updateAndNotify(e);
+    }
+
+    public void updateAndNotify(E e) {
         E prevElement = this.e;
         this.e = e;
 

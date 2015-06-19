@@ -5,7 +5,7 @@ import modelo.Modelo;
 
 import org.junit.Assert;
 import org.junit.Test;
-
+/*
 import tablero.Tablero;
 import vista.VentanaMapa;
 import vista.VentanaRecursos;
@@ -27,3 +27,4 @@ public class TextMain {//usado para resterar errores
 
 
 }
+*/
