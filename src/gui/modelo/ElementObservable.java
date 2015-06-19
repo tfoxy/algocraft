@@ -1,57 +1,32 @@
 package gui.modelo;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Observer;
+public class ElementObservable<ObservedType> extends Observable<ObservedType> {
 
-public class ElementObservable<E> {
+    private ObservedType observedType;
 
-    private E e;
-
-    private List<ElementObserver<E>> observers = new LinkedList<>();
-
-    public ElementObservable(E e) {
-        this.e = e;
+    public ElementObservable(ObservedType observedType) {
+        this.observedType = observedType;
     }
 
-    public E get() {
-        return e;
+    public ObservedType get() {
+        return observedType;
     }
 
-    public void set(E e) {
-        this.e = e;
+    public void set(ObservedType observedType) {
+        this.observedType = observedType;
     }
 
-    public void setAndNotify(E e) {
-        if (this.e == e)
+    public void setAndNotify(ObservedType observedType) {
+        if (this.observedType == observedType)
             return;
 
-        this.updateAndNotify(e);
+        this.updateAndNotify(observedType);
     }
 
-    public void updateAndNotify(E e) {
-        E prevElement = this.e;
-        this.e = e;
+    public void updateAndNotify(ObservedType observedType) {
+        ObservedType prevElement = this.observedType;
+        this.observedType = observedType;
 
         this.notifyObservers(prevElement);
-    }
-
-    public void addObserver(ElementObserver<E> o) {
-        if (o == null) {
-            throw new NullPointerException();
-        }
-        if (!observers.contains(o)) {
-            observers.add(o);
-        }
-    }
-
-    public synchronized void deleteObserver(Observer o) {
-        observers.remove(o);
-    }
-
-    private void notifyObservers(E e) {
-        for (ElementObserver<E> o: observers) {
-            o.update(this, e);
-        }
     }
 }
