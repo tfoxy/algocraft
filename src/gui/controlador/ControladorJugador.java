@@ -1,16 +1,9 @@
 package gui.controlador;
 
-import ficha.Ficha;
-import gui.modelo.AccionEnGrilla;
-import gui.modelo.FichaObjetivo;
 import gui.modelo.JugadorDeTurno;
-import juego.Juego;
-import juego.Jugador;
-import tablero.Coordenada;
 
 import java.awt.AWTEvent;
 import java.awt.event.KeyEvent;
-import java.util.NoSuchElementException;
 
 public class ControladorJugador {
 
