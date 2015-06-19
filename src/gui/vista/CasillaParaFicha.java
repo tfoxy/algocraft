@@ -16,7 +16,7 @@ import java.awt.Graphics;
 
 public class CasillaParaFicha extends JPanel {
 
-    private final JLabel label = new JLabel();
+    private final JLabel label = new ResizableLabel();
     private boolean selected = false;
     private Ficha ficha;
 
