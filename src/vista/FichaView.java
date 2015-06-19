@@ -2,14 +2,19 @@ package vista;
 
 import controladores.ControladorFicha;
 import ficha.Ficha;
+import gui.controlador.KeyboardMap;
 import gui.modelo.Observable;
 import gui.modelo.Observer;
 import tablero.Direccion;
 
+import javax.swing.ActionMap;
 import javax.swing.BoxLayout;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.event.KeyEvent;
 
 public class FichaView extends JPanel {
 
@@ -49,19 +54,17 @@ public class FichaView extends JPanel {
         JPanel panelBotonesMovimiento = new JPanel();
         panelBotonesMovimiento.add(botonArriba);
         panelBotonesMovimiento.add(botonAbajo);
-        panelBotonesMovimiento.add(botonDerecha);
         panelBotonesMovimiento.add(botonIzquierda);
+        panelBotonesMovimiento.add(botonDerecha);
         add(panelBotonesMovimiento);
 
         JPanel panelBotonesDeAccion = new JPanel();
         panelBotonesDeAccion.add(botonAtaque);
         add(panelBotonesDeAccion);
 
-        botonAbajo.addActionListener(control.getMovimientoListener(Direccion.ABAJO));
-        botonArriba.addActionListener(control.getMovimientoListener(Direccion.ARRIBA));
-        botonDerecha.addActionListener(control.getMovimientoListener(Direccion.DERECHA));
-        botonIzquierda.addActionListener(control.getMovimientoListener(Direccion.IZQUIERDA));
-        botonAtaque.addActionListener(control.getAtaqueListener());
+        addActionListeners(control);
+
+        botonAtaque.setMnemonic(KeyEvent.VK_A);
 
         cambiarFicha(control.ficha());
 
@@ -78,6 +81,22 @@ public class FichaView extends JPanel {
                 actulizarFicha();
             }
         });
+    }
+
+
+    private void addActionListeners(final ControladorFicha control) {
+        botonAbajo.addActionListener(control.getMovimientoListener(Direccion.ABAJO));
+        botonArriba.addActionListener(control.getMovimientoListener(Direccion.ARRIBA));
+        botonDerecha.addActionListener(control.getMovimientoListener(Direccion.DERECHA));
+        botonIzquierda.addActionListener(control.getMovimientoListener(Direccion.IZQUIERDA));
+
+        botonAtaque.addActionListener(control.getAtaqueListener());
+
+        KeyboardMap keyboardMap = new KeyboardMap(this);
+        keyboardMap.put("UP", control.getMovimientoListener(Direccion.ARRIBA));
+        keyboardMap.put("DOWN", control.getMovimientoListener(Direccion.ABAJO));
+        keyboardMap.put("LEFT", control.getMovimientoListener(Direccion.IZQUIERDA));
+        keyboardMap.put("RIGHT", control.getMovimientoListener(Direccion.DERECHA));
     }
 
 

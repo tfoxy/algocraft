@@ -1,12 +1,13 @@
 package gui.controlador;
 
+import javax.swing.AbstractAction;
 import java.awt.AWTEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public abstract class AnyEventListener implements ActionListener, KeyListener {
+public abstract class AnyEventListener extends AbstractAction implements ActionListener, KeyListener {
     public abstract void eventOcurred(AWTEvent e);
 
     @Override

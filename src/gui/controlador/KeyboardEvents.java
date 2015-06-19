@@ -1,5 +1,6 @@
 package gui.controlador;
 
+import javax.swing.KeyStroke;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
@@ -57,5 +58,10 @@ public class KeyboardEvents {
     public void addListener(int keyEvent, int keyCode, KeyListener listener) {
         HashMap<Integer, KeyListener> listeners = getListeners(keyEvent);
         listeners.put(keyCode, listener);
+    }
+
+    public void addListener(KeyStroke keyStroke, KeyListener listener) {
+        HashMap<Integer, KeyListener> listeners = getListeners(keyStroke.getKeyEventType());
+        listeners.put(keyStroke.getKeyCode(), listener);
     }
 }

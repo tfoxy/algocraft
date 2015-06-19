@@ -86,11 +86,11 @@ public class ControladorFicha {
 
     public void listenKeyboard(KeyboardEvents keyboard) {
         final int ev = KeyEvent.KEY_PRESSED;
-
+        /* Movido a FichaView
         keyboard.addListener(ev, KeyEvent.VK_UP, new MovimientoListener(Direccion.ARRIBA));
         keyboard.addListener(ev, KeyEvent.VK_DOWN, new MovimientoListener(Direccion.ABAJO));
         keyboard.addListener(ev, KeyEvent.VK_RIGHT, new MovimientoListener(Direccion.DERECHA));
-        keyboard.addListener(ev, KeyEvent.VK_LEFT, new MovimientoListener(Direccion.IZQUIERDA));
+        keyboard.addListener(ev, KeyEvent.VK_LEFT, new MovimientoListener(Direccion.IZQUIERDA));*/
     }
 
     public void setJuegoLogger(JuegoLogger juegoLogger) {
