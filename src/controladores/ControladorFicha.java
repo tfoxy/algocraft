@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.NoSuchElementException;
 
 import error.JuegoException;
+import error.UnicamenteObjetivoAliadoException;
 import gui.controlador.AnyEventListener;
 import gui.controlador.KeyboardEvents;
 import gui.modelo.AccionDeFicha;
@@ -110,8 +111,12 @@ public class ControladorFicha {
         @Override
         public void eventOcurred(AWTEvent e) {
             // No se puede mover fichas de otro jugador
-            if (!ficha().propietario().equals(jugadorDeTurno.jugador()))
+            if (!ficha().propietario().equals(jugadorDeTurno.jugador())) {
+                String msg = "Solamente se pueden mover unidades aliadas";
+                logger.log(new UnicamenteObjetivoAliadoException(msg));
                 return;
+            }
+
 
             try {
                 ficha().mover(direccion);
