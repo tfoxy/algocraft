@@ -4,36 +4,60 @@ import ficha.Ficha;
 
 public class FichaObjetivo {
 
-    private final ElementObservable<AccionEnGrilla> cambioDeAccion;
-    private final ElementObservable<Ficha> cambioDeFichaObjetivo;
+    private static final AccionEnGrilla ACCION_POR_DEFECTO = AccionEnGrilla.CONSTRUIR;
+
+    private AccionEnGrilla accion;
+    private AccionEnGrilla accionPrevia;
+    private Ficha ficha;
+    private Ficha fichaPrevia;
+
+    private final Observable<FichaObjetivo> accionObservable;
+    private final ObservableActions<AccionEnGrilla, FichaObjetivo> fichaObservables;
 
     public FichaObjetivo() {
-        cambioDeAccion = new ElementObservable<>(AccionEnGrilla.SELECCIONAR);
-        cambioDeFichaObjetivo = new ElementObservable<>(null);
+        accion = ACCION_POR_DEFECTO;
+        accionPrevia = accion;
+        ficha = null;
+        fichaPrevia = null;
+
+        accionObservable = new Observable<>();
+        fichaObservables = new ObservableEnumActions<>(AccionEnGrilla.class);
     }
 
-    public void escucharCambioDeAccion(ElementObserver<AccionEnGrilla> o) {
-        cambioDeAccion.addObserver(o);
+    public Observable<FichaObjetivo> accionObservable() {
+        return accionObservable;
     }
 
-    public void cambiarAccion(AccionEnGrilla accionEnGrilla) {
-        cambioDeAccion.setAndNotify(accionEnGrilla);
-    }
-
-    public void escucharCambioDeFichaObjetivo(ElementObserver<Ficha> o) {
-        cambioDeFichaObjetivo.addObserver(o);
-    }
-
-    public void cambiarFichaObjetivo(Ficha ficha) {
-        cambioDeFichaObjetivo.updateAndNotify(ficha);
-        cambioDeAccion.set(AccionEnGrilla.SELECCIONAR);
+    public ObservableActions<AccionEnGrilla, FichaObjetivo> fichaObservables() {
+        return fichaObservables;
     }
 
     public AccionEnGrilla accion() {
-        return cambioDeAccion.get();
+        return accion;
     }
 
     public Ficha ficha() {
-        return cambioDeFichaObjetivo.get();
+        return ficha;
+    }
+
+    public AccionEnGrilla accionPrevia() {
+        return accionPrevia;
+    }
+
+    public Ficha fichaPrevia() {
+        return fichaPrevia;
+    }
+
+    public void cambiarAccion(AccionEnGrilla accion) {
+        this.accion = accion;
+        this.accionObservable.notifyObservers(this);
+        this.accionPrevia = accion;
+    }
+
+    public void cambiarFicha(Ficha ficha) {
+        this.ficha = ficha;
+        this.fichaObservables.notify(accion, this);
+        this.fichaPrevia = ficha;
+        cambiarAccion(ACCION_POR_DEFECTO);
     }
 }
