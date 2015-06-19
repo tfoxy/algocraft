@@ -54,6 +54,7 @@ public final class MainGui {
 
         ControladorFicha controladorFicha = new ControladorFicha(fichaObjetivo, jugadorDeTurno);
         controladorFicha.listenKeyboard(keyboardEvents);
+        controladorFicha.setJuegoLogger(juegoLogger);
 
         jugadorDeTurno.comenzarTurno();
 

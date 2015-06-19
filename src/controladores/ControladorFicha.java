@@ -11,6 +11,7 @@ import gui.controlador.KeyboardEvents;
 import gui.modelo.AccionDeFicha;
 import gui.modelo.AccionEnGrilla;
 import gui.modelo.FichaObjetivo;
+import gui.modelo.JuegoLogger;
 import gui.modelo.JugadorDeTurno;
 import gui.modelo.Observable;
 import gui.modelo.ObservableActions;
@@ -27,6 +28,7 @@ public class ControladorFicha {
     private final JugadorDeTurno jugadorDeTurno;
     private final Observable<Ficha> cambioDeFichaObservable;
     private final ObservableActions<AccionDeFicha, ControladorFicha> accionObservables;
+    private JuegoLogger logger = JuegoLogger.EMPTY;
 
     private Ficha ficha;
 
@@ -65,7 +67,7 @@ public class ControladorFicha {
             ficha().atacar(objetivo);
             accionObservables.notify(AccionDeFicha.ATAQUE, this);
         } catch (JuegoException exc) {
-            // TODO mostrar error
+            logger.log(exc);
         }
     }
 
@@ -91,6 +93,10 @@ public class ControladorFicha {
         keyboard.addListener(ev, KeyEvent.VK_LEFT, new MovimientoListener(Direccion.IZQUIERDA));
     }
 
+    public void setJuegoLogger(JuegoLogger juegoLogger) {
+        this.logger = juegoLogger;
+    }
+
 
     //mover en todas las direcciones XD
     private class MovimientoListener extends AnyEventListener {
@@ -113,7 +119,7 @@ public class ControladorFicha {
                 fichaObjetivo.cambiarFicha(ficha());
                 accionObservables.notify(AccionDeFicha.MOVIMIENTO, ControladorFicha.this);
             } catch (JuegoException exc) {
-                // TODO avisar que no se pudo mover
+                logger.log(exc);
             }
         }
     }

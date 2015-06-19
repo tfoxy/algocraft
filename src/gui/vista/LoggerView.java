@@ -15,10 +15,10 @@ import java.awt.event.ActionListener;
 
 public class LoggerView extends JPanel {
 
-    private static final int TIME = 3000;
+    private static final int TIME = 4000;
 
 
-    private final JLabel label = new JLabel("TEST");
+    private final JLabel label = new JLabel(" ");
     private final ActionListener listener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -31,9 +31,11 @@ public class LoggerView extends JPanel {
     public LoggerView(JuegoLogger logger) {
         super(new BorderLayout());
 
-        setearPropiedades();
+        setearPropiedadesGraficas();
 
-        add(label); timer.start();
+        timer.setRepeats(false);
+
+        add(label);
 
         logger.addObserver(new Observer<String>() {
             @Override
@@ -43,7 +45,7 @@ public class LoggerView extends JPanel {
         });
     }
 
-    private void setearPropiedades() {
+    private void setearPropiedadesGraficas() {
         setBorder(BorderFactory.createEmptyBorder(2, 10, 2, 10));
 
         Font newFont = label.getFont().deriveFont(10f);
@@ -51,7 +53,7 @@ public class LoggerView extends JPanel {
     }
 
     public void actualizar(String msg) {
-        label.setText("ERROR: " + msg);
+        label.setText(msg);
         timer.restart();
     }
 }
