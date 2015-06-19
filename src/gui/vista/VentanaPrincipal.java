@@ -52,9 +52,15 @@ public class VentanaPrincipal extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
+    }
 
+    public static void iniciarPropiedadesGlobales() {
         // Mostrar Tooltips inmediatamente (sin delay)
         ToolTipManager.sharedInstance().setInitialDelay(0);
+
+        // enable anti-aliased text:
+        System.setProperty("awt.useSystemAAFontSettings","on");
+        System.setProperty("swing.aatext", "true");
     }
 
 }

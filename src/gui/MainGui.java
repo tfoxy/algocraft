@@ -55,6 +55,8 @@ public final class MainGui {
         jugadorDeTurno.comenzarTurno();
 
         // Vistas
+        VentanaPrincipal.iniciarPropiedadesGlobales();
+
         JPanel grillaView = new GrillaView(mapa, fichaObjetivo);
         JPanel fichaView = new FichaView(controladorFicha);
         JPanel jugadorView = new JugadorView(controladorJugador);

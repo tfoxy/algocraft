@@ -9,6 +9,7 @@ import gui.modelo.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -23,14 +24,24 @@ public class CasillaParaFicha extends JPanel {
     CasillaParaFicha(Ficha ficha, FichaObjetivo fichaObjetivo) {
         this.ficha = ficha;
 
-        label.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 8));
-        add("Center", label);
-
-        setBorder(null);
+        inicializarInterfaz();
 
         addMouseListener(new ControladorMouseParaCasilla(this, fichaObjetivo));
 
         fichaObjetivo.fichaObservables().on(AccionEnGrilla.SELECCION, new FichaObserver());
+    }
+
+    private void inicializarInterfaz() {
+        Dimension dimension = getPreferredSize();
+
+        setLayout(new BorderLayout());
+
+        label.setFont(new Font(Font.MONOSPACED, Font.BOLD, 8));
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
+        add(label, BorderLayout.CENTER);
+
+        setPreferredSize(dimension);
     }
 
     // Solo debe ser usado por CasillaVista
