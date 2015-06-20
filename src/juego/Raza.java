@@ -60,16 +60,6 @@ public enum Raza {
     }
 
 
-    private Ficha newInstance(Ficha ficha) {
-        try {
-            return ficha.getClass().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getMessage(), e.getCause());
-        }
-    }
-
-
     public List<Tecnologia> tecnologiasIniciales() {
         return tecnologiasIniciales;
     }
@@ -79,10 +69,10 @@ public enum Raza {
     }
 
     public Ficha nuevaUnidadBasica() {
-        return newInstance(unidadBasica);
+        return Fichas.newInstance(unidadBasica);
     }
 
     public Ficha nuevaCasa() {
-        return newInstance(casa);
+        return Fichas.newInstance(casa);
     }
 }

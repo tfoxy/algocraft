@@ -94,4 +94,12 @@ public final class Fichas {
     }
 
 
+    public static Ficha newInstance(Ficha ficha) {
+        try {
+            return ficha.getClass().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e.getCause());
+        }
+    }
 }
