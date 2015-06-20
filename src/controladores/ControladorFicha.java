@@ -2,11 +2,9 @@ package controladores;
 
 import java.awt.AWTEvent;
 import java.awt.event.KeyEvent;
-import java.util.Collection;
-import java.util.NoSuchElementException;
 
 import error.JuegoException;
-import error.UnicamenteObjetivoAliadoException;
+import error.UnicamenteObjetivoPropioException;
 import gui.controlador.AnyEventListener;
 import gui.controlador.KeyboardEvents;
 import gui.modelo.AccionDeFicha;
@@ -18,7 +16,6 @@ import gui.modelo.Observable;
 import gui.modelo.ObservableActions;
 import gui.modelo.ObservableEnumActions;
 import gui.modelo.Observer;
-import tablero.Coordenada;
 import tablero.Direccion;
 
 import ficha.Ficha;
@@ -142,7 +139,7 @@ public class ControladorFicha {
 
     private void validarPropietario(String errorMsg) {
         if (!ficha().propietario().equals(jugadorDeTurno.jugador())) {
-            throw new UnicamenteObjetivoAliadoException(errorMsg);
+            throw new UnicamenteObjetivoPropioException(errorMsg);
         }
     }
 }

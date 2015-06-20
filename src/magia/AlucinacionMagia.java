@@ -3,14 +3,12 @@ package magia;
 import java.util.HashSet;
 import java.util.Set;
 
-import error.UnicamenteObjetivoAliadoException;
+import error.UnicamenteObjetivoPropioException;
 import ficha.Ficha;
-import tablero.Casilla;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.ITablero;
-import tablero.Tablero;
 
 /**
  * Es capaz de crear 2 copias de una propia unidad que son
@@ -37,14 +35,14 @@ public class AlucinacionMagia extends Magia {
         
         if (!fichaObjetivo.propietario().equals(ficha.propietario())) {
             // TODO test para probar que solamente se puede aplicar a ficha del mismo jugador
-            throw new UnicamenteObjetivoAliadoException();
+            throw new UnicamenteObjetivoPropioException();
         }
     }
 
     //hay que pensar como seria esto en la ineterfas.. Pero deveria ser 2 funciones.
    
     @Override
-    public void realizar(Ficha ficha, Coordenada3d objetivo) { //lansa throw new UnicamenteObjetivoAliadoException();
+    public void realizar(Ficha ficha, Coordenada3d objetivo) { //lansa throw new UnicamenteObjetivoPropioException();
         super.realizar(ficha, objetivo);
         verificarObjetivo(ficha, objetivo);
         selccionarEspectro(ficha);

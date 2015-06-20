@@ -1,7 +1,7 @@
 package stats;
 
 import error.CapacidadInsuficienteException;
-import error.NoSePuedeCargarUnidadConOcupacionCeroException;
+import error.NoSePuedeCargarEntidadConOcupacionCeroException;
 import error.TransporteNoContieneFichaException;
 import ficha.Ficha;
 
@@ -31,7 +31,7 @@ public class Transportacion {
 
     public void cargar(Ficha ficha) throws CapacidadInsuficienteException {
         if (ficha.ocupacionEnTransporte() == 0) {
-            throw new NoSePuedeCargarUnidadConOcupacionCeroException();
+            throw new NoSePuedeCargarEntidadConOcupacionCeroException();
         }
 
         int nuevoEspacioUtilizado = espacioUtilizado + ficha.ocupacionEnTransporte();

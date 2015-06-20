@@ -8,6 +8,7 @@ import error.MovimientoInsuficienteException;
 import error.RecursosInsuficientesException;
 import error.TecnologiasInsuficientesException;
 import error.TransporteNoContieneFichaException;
+import error.UnicamenteObjetivoPropioException;
 import juego.Gaia;
 import juego.Recursos;
 import juego.Jugador;
@@ -20,12 +21,12 @@ import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.ITablero;
-import tablero.Tablero;
 import vista.ConstanteColores;
 import juego.Tecnologia;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
@@ -74,10 +75,6 @@ public abstract class Ficha implements Cloneable {
         return propietario;
     }
 
-    public int poblacionQueDa() {
-        return poblacionQueDa;
-    }
-
     public ITablero tablero() {
         return tablero;
     }
@@ -91,7 +88,7 @@ public abstract class Ficha implements Cloneable {
     }
 
     public List<Tecnologia> tecnologiasNecesarias() {
-        return tecnologiasNecesarias;
+        return Collections.unmodifiableList(tecnologiasNecesarias);
     }
 
     public int turnosParaCrear() {
@@ -132,7 +129,12 @@ public abstract class Ficha implements Cloneable {
     public void muerete() {
         estrategia.muerete();
         propietario.perderFicha(this);
+
         tablero.eliminarFichaEn(coordenada);
+
+        for (Ficha ficha: transportacion.fichasCargadas()) {
+            ficha.muerete();
+        }
     }
 
     public void disminuirMovimiento() {
@@ -235,12 +237,46 @@ public abstract class Ficha implements Cloneable {
         return ocupacionEnTransporte;
     }
 
-    public void descargar(Ficha ficha) throws TransporteNoContieneFichaException {
-        throw new TransporteNoContieneFichaException();
+    public int capacidadEnTransporte() {
+        return transportacion.capacidad();
     }
 
-    public void cargar(Ficha ficha) throws CapacidadInsuficienteException {
-        throw new CapacidadInsuficienteException();
+    private void validarDescarga(Ficha ficha) {
+        if (!transportacion.contieneFicha(ficha)) {
+            throw new TransporteNoContieneFichaException();
+        }
+
+        if (ficha.movimiento <= 0) {
+            throw new MovimientoInsuficienteException();
+        }
+
+        Coordenada3d nuevaCoordenada = new Coordenada3d(coordenada, ficha.altura());
+
+        this.verificarCoordenada(nuevaCoordenada);
+    }
+
+    public void descargar(Ficha ficha) {
+        this.validarDescarga(ficha);
+
+        ficha.coordenada(coordenada.proyeccion());
+
+        tablero.insertar(ficha);
+
+        transportacion.descargar(ficha);
+    }
+
+    public void cargar() throws CapacidadInsuficienteException {
+        Ficha fichaACargar = tablero.getFichaTerrestre(coordenada.proyeccion());
+
+        if (!fichaACargar.propietario.equals(propietario)) {
+            throw new UnicamenteObjetivoPropioException();
+        }
+
+        transportacion.cargar(fichaACargar);
+
+        tablero.eliminarFichaEn(fichaACargar.coordenada);
+
+        fichaACargar.coordenada = coordenada;
     }
 
     //mover
@@ -268,6 +304,10 @@ public abstract class Ficha implements Cloneable {
         tablero.insertar(this);
         tablero.eliminarFichaEn(ubicacion);
         this.disminuirMovimiento();
+
+        for (Ficha ficha: transportacion.fichasCargadas()) {
+            ficha.coordenada = coordenada;
+        }
     }
 
     public void pasarTurno() {

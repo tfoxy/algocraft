@@ -2,15 +2,21 @@ package ficha;
 
 import error.FichaACargarDebeEstarDebajoDeTransporte;
 import error.FichaSobreOtraFichaException;
+import error.TransporteException;
+import error.UnicamenteObjetivoPropioException;
 import ficha.natural.terreno.TerrenoEspacial;
 import ficha.terran.unidad.Marine;
 import ficha.terran.unidad.NaveTransporteTerran;
 import juego.Jugador;
 import juego.Raza;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import tablero.Coordenada;
+import tablero.Direccion;
 import tablero.Tablero;
+
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 
 public class TransporteTest {
 
@@ -26,41 +32,50 @@ public class TransporteTest {
         coordenada = new Coordenada(5, 5);
         transporte = new NaveTransporteTerran();
         transporte.setBasico(jugador, mapa, coordenada);
-        mapa.insertar(transporte);
+        transporte.ponerEnJuego();
     }
 
-    @Test // TODO noPuedeCargarFichaDeOtroJugador (tirar Exception)
+    @Test(expected = UnicamenteObjetivoPropioException.class)
     public void noPuedeCargarFichaDeOtroJugador() {
         Jugador otroJugador = new Jugador("SoyOtro", Raza.TERRAN);
         Ficha unidad = new Marine();
         unidad.setBasico(otroJugador, mapa, coordenada);
         unidad.ponerEnJuego();
 
-        transporte.cargar(unidad);
+        transporte.cargar();
     }
 
-    @Test(expected = FichaACargarDebeEstarDebajoDeTransporte.class)
+    @Test(expected = UnicamenteObjetivoPropioException.class)
     public void noPuedeCargarFichaQueNoEsteDebajoSuyo() {
         Ficha unidad = new Marine();
         unidad.setBasico(jugador, mapa, new Coordenada(4, 5));
-        mapa.insertar(unidad);
+        unidad.ponerEnJuego();
 
-        transporte.cargar(unidad);
+        transporte.cargar();
     }
 
     @Test
     public void unidadesMuerenAlMorirTransporte() {
-        // TODO unidadesMuerenAlMorirTransporte
+        Ficha unidad = new Marine();
+        unidad.setBasico(jugador, mapa, coordenada);
+        unidad.ponerEnJuego();
+
+        transporte.cargar();
+        transporte.muerete();
+
+        Assert.assertThat(jugador.fichas(), hasSize(0));
     }
 
     @Test
     public void unidadesTransportadasSeMuevenJuntoAlTransporte() {
-        // TODO unidadesTransportadasSeMuevenJuntoAlTransporte
-    }
+        Ficha unidad = new Marine();
+        unidad.setBasico(jugador, mapa, coordenada);
+        unidad.ponerEnJuego();
 
-    @Test
-    public void unidadDebajoDeTransporteCargadoNoMuereAlMorirTransporte() {
-        // TODO unidadDebajoDeTransporteCargadoNoMuereAlMorirTransporte
+        transporte.cargar();
+        transporte.mover(Direccion.ARRIBA);
+
+        Assert.assertEquals(transporte.coordenada(), unidad.coordenada());
     }
 
     @Test
@@ -69,7 +84,7 @@ public class TransporteTest {
         unidad.setBasico(jugador, mapa, coordenada);
         unidad.ponerEnJuego();
 
-        transporte.cargar(unidad);
+        transporte.cargar();
         transporte.descargar(unidad);
     }
 
@@ -79,11 +94,28 @@ public class TransporteTest {
         unidad.setBasico(jugador, mapa, coordenada);
         unidad.ponerEnJuego();
 
-        transporte.cargar(unidad);
+        transporte.cargar();
 
         Ficha otraUnidad = new Marine();
         otraUnidad.setBasico(jugador, mapa, coordenada);
         mapa.insertar(otraUnidad);
+    }
+
+    @Test
+    public void unidadDebajoDeTransporteCargadoNoMuereAlMorirTransporte() {
+        Ficha unidad = new Marine();
+        unidad.setBasico(jugador, mapa, coordenada);
+        unidad.ponerEnJuego();
+
+        transporte.cargar();
+
+        Ficha otraUnidad = new Marine();
+        otraUnidad.setBasico(jugador, mapa, coordenada);
+        otraUnidad.ponerEnJuego();
+
+        transporte.muerete();
+
+        Assert.assertThat(jugador.fichas(), hasSize(1));
     }
 
     @Test(expected = FichaSobreOtraFichaException.class)
@@ -92,7 +124,7 @@ public class TransporteTest {
         unidad.setBasico(jugador, mapa, coordenada);
         unidad.ponerEnJuego();
 
-        transporte.cargar(unidad);
+        transporte.cargar();
 
         Ficha terrenoEspacial = new TerrenoEspacial();
         terrenoEspacial.setBasico(jugador, mapa, coordenada);
@@ -107,12 +139,43 @@ public class TransporteTest {
         unidad.setBasico(jugador, mapa, coordenada);
         unidad.ponerEnJuego();
 
-        transporte.cargar(unidad);
+        transporte.cargar();
 
         Ficha otraUnidad = new Marine();
         otraUnidad.setBasico(jugador, mapa, coordenada);
         unidad.ponerEnJuego();
 
         transporte.descargar(unidad);
+    }
+
+    @Test
+    public void mueveUnidadAlTransporteAlSerCargada() {
+        Ficha unidad = new Marine();
+        unidad.setBasico(jugador, mapa, coordenada);
+        unidad.ponerEnJuego();
+
+        transporte.cargar();
+
+        Assert.assertEquals(transporte.coordenada(), unidad.coordenada());
+    }
+
+    @Test
+    public void noMueveLaUnidadSiNoPudoSerDescargada() {
+        Ficha unidad = new Marine();
+        unidad.setBasico(jugador, mapa, coordenada);
+        unidad.ponerEnJuego();
+
+        transporte.cargar();
+
+        Ficha otraUnidad = new Marine();
+        otraUnidad.setBasico(jugador, mapa, coordenada);
+        otraUnidad.ponerEnJuego();
+
+        try {
+            transporte.descargar(unidad);
+            Assert.fail();
+        } catch (FichaSobreOtraFichaException e) {
+            Assert.assertEquals(transporte.coordenada(), unidad.coordenada());
+        }
     }
 }

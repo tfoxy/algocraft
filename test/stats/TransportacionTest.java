@@ -60,7 +60,7 @@ public class TransportacionTest {
         transportacion.cargar(unidad);
     }
 
-    @Test(expected = NoSePuedeCargarUnidadConOcupacionCeroException.class)
+    @Test(expected = NoSePuedeCargarEntidadConOcupacionCeroException.class)
     public void noPuedeCargarFichaDeOcupacion0() {
         Ficha unidad = new UnidadTerrestre() {
             @Override
