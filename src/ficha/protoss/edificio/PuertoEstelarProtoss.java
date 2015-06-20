@@ -5,10 +5,10 @@ import juego.Tecnologia;
 import stats.BarrasEscudoVidaEnergia;
 import ficha.EdificioTerrestre;
 
-public class PuertoEstelar extends EdificioTerrestre {
+public class PuertoEstelarProtoss extends EdificioTerrestre {
 
-    public PuertoEstelar() {
-        nombre = "PuertoEstelar";
+    public PuertoEstelarProtoss() {
+        nombre = "Puerto Estelar";
         coste = new Recursos(150, 150);
         turnosParaCrear = 10;
         barras = new BarrasEscudoVidaEnergia(600, 600);
