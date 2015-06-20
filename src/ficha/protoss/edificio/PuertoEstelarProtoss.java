@@ -13,6 +13,7 @@ public class PuertoEstelarProtoss extends EdificioTerrestre {
         turnosParaCrear = 10;
         barras = new BarrasEscudoVidaEnergia(600, 600);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        tecnologiasNecesarias.add(Tecnologia.ACCESO);
         tecnologiasQueDa.add(Tecnologia.PUERTO_ESTELAR);
     }
 
