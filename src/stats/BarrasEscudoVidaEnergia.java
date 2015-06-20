@@ -135,7 +135,7 @@ public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
         private int energiaActual = 0;
 
         private int vidaPorTurno = 1;
-        private int escudoPorTurno = 10;
+        private int escudoPorTurno = 4;
         private int energiaPorTurno = 10;
 
         public Builder vida(int vida) {
