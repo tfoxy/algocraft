@@ -15,10 +15,9 @@ public class TormentaPsionicaMagia extends Magia {
     }
 
     @Override
-    public void realizar(Ficha ficha, Coordenada3d objetivo) {
-        super.realizar(ficha, objetivo);
-        TormentaPsionica poder = new TormentaPsionica();
-        poder.setBasico(ficha.propietario(), ficha.tablero(), objetivo.proyeccion());
+    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
+        final TormentaPsionicaFicha poder = new TormentaPsionicaFicha();
+        poder.setBasico(ficha.propietario(), ficha.tablero(), objetivo);
         ficha.propietario().newFicha(poder);
     }
 }

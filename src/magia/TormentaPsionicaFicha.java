@@ -6,30 +6,31 @@ import tablero.CoordenadaUtil;
 
 import java.util.List;
 
-public class TormentaPsionica extends FichaAerea {
+public class TormentaPsionicaFicha extends FichaAerea {
 
     private static final int RANGO = 1;
     private static final int DANIO = 100;
+    private static final int DURACION = 2;
 
-    private int duracion;
+    private int duracionRestante;
 
 
-    public TormentaPsionica() {
-        duracion = 2;
+    public TormentaPsionicaFicha() {
+        duracionRestante = DURACION;
     }
 
 
     @Override
     public void pasarTurno() {
-        duracion -= 1;
-
         List<Ficha> fichas = CoordenadaUtil.fichasEnArea(tablero, coordenada, RANGO);
 
         for (Ficha ficha: fichas) {
             ficha.sufrirDanio(DANIO);
         }
 
-        if (duracion == 0) {
+        duracionRestante--;
+
+        if (duracionRestante <= 0) {
             propietario.perder(this);
         }
     }

@@ -10,5 +10,6 @@ public enum TipoDeFicha {
     MINERAL,
     TERRESTRE,
     AEREA,
+    ALUCINACION,
     NATURAL
 }

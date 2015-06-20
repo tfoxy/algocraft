@@ -1,5 +1,7 @@
 package stats;
 
+import error.EnergiaInsuficienteException;
+
 public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
     private static final Builder EMPTY_BUILDER = new Builder();
 
@@ -225,5 +227,14 @@ public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
             // No debería ocurrir
         } //cuando esten echos los Texy intentar quitar el (casteo)
         return clone;
+    }
+
+    @Override
+    public void quitarEnergia(int cantidad) {
+        if (energiaActual < cantidad) {
+            throw new EnergiaInsuficienteException();
+        }
+
+        energiaActual -= cantidad;
     }
 }

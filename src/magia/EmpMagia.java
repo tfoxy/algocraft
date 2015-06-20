@@ -1,5 +1,8 @@
 package magia;
 
+import ficha.Ficha;
+import tablero.Coordenada3d;
+
 /**
  * Tira un misil que al impactar en un radio, causa que las ​unidades enemigas
  * pierdan su energía (para las unidades mágicas)
@@ -13,4 +16,8 @@ public class EmpMagia extends Magia {
         super(100, 6);
     }
 
+    @Override
+    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
+        // TODO aplicar EmpMagia
+    }
 }

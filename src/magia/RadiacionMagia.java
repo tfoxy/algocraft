@@ -30,4 +30,9 @@ public class RadiacionMagia extends Magia {
         }
     }
 
+    @Override
+    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
+        // TODO aplicar RadiacionMagia
+    }
+
 }

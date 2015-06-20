@@ -1,5 +1,7 @@
 package stats;
 
+import error.EnergiaInsuficienteException;
+
 /**
  * Clase inmutable.
  */
@@ -79,5 +81,10 @@ public final class BarrasInvencible implements IBarras {
     @Override
     public BarrasInvencible clone() {
         return this;
+    }
+
+    @Override
+    public void quitarEnergia(int cantidad) {
+        throw new EnergiaInsuficienteException();
     }
 }

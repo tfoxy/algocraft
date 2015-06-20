@@ -28,4 +28,6 @@ public interface IBarras extends Cloneable {
     IBarras espectro();
 
     IBarras clone();
+
+    void quitarEnergia(int cantidad);
 }

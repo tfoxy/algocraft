@@ -217,6 +217,8 @@ public abstract class Ficha implements Cloneable {
         clone.ataqueAire = new Ataque(0, ataqueAire.rango());
         clone.ataqueTierra = new Ataque(0, ataqueTierra.rango());
         clone.transportacion = Transportacion.VACIA;
+        clone.magias = Collections.emptyList();
+        clone.tipoDeFicha.add(TipoDeFicha.ALUCINACION);
 
         return this;
     }
