@@ -1,5 +1,8 @@
 package stats;
 
+/**
+ * Clase inmutable.
+ */
 public final class BarrasInvencible implements IBarras {
 
     public static final BarrasInvencible INSTANCE = new BarrasInvencible();
