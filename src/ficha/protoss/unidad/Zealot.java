@@ -19,6 +19,7 @@ public class Zealot extends UnidadTerrestre {
         ataqueTierra = new Ataque(8, 1);
         movimientoMaximo = 3;
         tipoDeFicha.add(TipoDeFicha.PROTOSS);
+        tipoDeFicha.add(TipoDeFicha.BASICA);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ACCESO);
         ocupacionEnTransporte = 2;

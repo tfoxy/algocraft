@@ -21,6 +21,7 @@ public class Marine extends UnidadTerrestre {
         turnosParaCrear = 3;
         movimientoMaximo = 3;
         tipoDeFicha.add(TipoDeFicha.TERRAN);
+        tipoDeFicha.add(TipoDeFicha.BASICA);
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.BARRACA);
         ocupacionEnTransporte = 1;

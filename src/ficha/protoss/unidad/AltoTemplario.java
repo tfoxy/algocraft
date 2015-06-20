@@ -18,6 +18,7 @@ public class AltoTemplario extends UnidadTerrestre {
         turnosParaCrear = 7;
         barras = new BarrasEscudoVidaEnergia(40, 40, 200, 50, 15);
         tipoDeFicha.add(TipoDeFicha.PROTOSS);
+        tipoDeFicha.add(TipoDeFicha.MAGICA);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ARCHIVOS_TEMPLARIOS);
         ocupacionEnTransporte = 2;

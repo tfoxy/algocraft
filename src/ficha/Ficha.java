@@ -323,6 +323,10 @@ public abstract class Ficha implements Cloneable {
         return this.tipoDeFicha.contains(tipoDeFicha);
     }
 
+    public boolean es(Set<TipoDeFicha> tipoDeFicha) {
+        return this.tipoDeFicha.containsAll(tipoDeFicha);
+    }
+
     public void propietario(Jugador propietario) {
         this.propietario = propietario;
     }

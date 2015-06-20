@@ -1,6 +1,8 @@
 package juego;
 
 import ficha.Ficha;
+import ficha.Fichas;
+import ficha.TipoDeFicha;
 import ficha.protoss.edificio.Acceso;
 import ficha.protoss.edificio.ArchivosTemplarios;
 import ficha.protoss.edificio.Asimilador;
@@ -27,97 +29,60 @@ import ficha.terran.unidad.NaveTransporteTerran;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 public enum Raza {
-    TERRAN {
-        private final List<Tecnologia> techs = Collections.unmodifiableList(
-                Collections.singletonList(Tecnologia.TERRAN)
+    TERRAN(TipoDeFicha.TERRAN, Tecnologia.TERRAN),
+    PROTOSS(TipoDeFicha.PROTOSS, Tecnologia.PROTOSS);
+
+
+    private final TipoDeFicha tipoDeFicha;
+    private final List<Tecnologia> tecnologiasIniciales;
+    private final List<Ficha> listaDeFichas;
+    private final Ficha unidadBasica;
+    private final Ficha casa;
+
+
+    Raza(TipoDeFicha tipoDeFicha, Tecnologia tecnologia) {
+        this.tipoDeFicha = tipoDeFicha;
+
+        this.tecnologiasIniciales = Collections.unmodifiableList(
+                Collections.singletonList(tecnologia)
         );
 
-        private final List<Ficha> fichas = Collections.unmodifiableList(
-                new ArrayList<Ficha>(Arrays.asList(
-                        new CentroDeMineral(),
-                        new Refineria(),
-                        new DepositoSuministro(),
-                        new Barraca(),
-                        new Fabrica(),
-                        new PuertoEstelarTerran(),
-                        new Marine(),
-                        new Golliat(),
-                        new Espectro(),
-                        new NaveCiencia(),
-                        new NaveTransporteTerran()
-                ))
+        this.listaDeFichas = Collections.unmodifiableList(
+                Fichas.listaDe(tipoDeFicha)
         );
 
-        @Override
-        public List<Tecnologia> tecnologiasIniciales() {
-            return techs;
+        this.unidadBasica = Fichas.listaDe(listaDeFichas, TipoDeFicha.BASICA).get(0);
+        this.casa = Fichas.listaDe(listaDeFichas, TipoDeFicha.CASA).get(0);
+    }
+
+
+    private Ficha newInstance(Ficha ficha) {
+        try {
+            return ficha.getClass().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e.getCause());
         }
+    }
 
-        @Override
-        public List<Ficha> listaDeFichas() {
-            return fichas;
-        }
 
-        @Override
-        public Ficha nuevaUnidadBasica() {
-            return new Marine();
-        }
+    public List<Tecnologia> tecnologiasIniciales() {
+        return tecnologiasIniciales;
+    }
 
-        @Override
-        public Ficha nuevaCasa() {
-            return new DepositoSuministro();
-        }
-    },
-    PROTOSS {
-        private final List<Tecnologia> techs = Collections.unmodifiableList(
-                Collections.singletonList(Tecnologia.PROTOSS)
-        );
+    public List<Ficha> listaDeFichas() {
+        return listaDeFichas;
+    }
 
-        private final List<Ficha> fichas = Collections.unmodifiableList(
-                new ArrayList<Ficha>(Arrays.asList(
-                        new NexoMineral(),
-                        new Asimilador(),
-                        new Pilon(),
-                        new Acceso(),
-                        new PuertoEstelarProtoss(),
-                        new ArchivosTemplarios(),
-                        new Zealot(),
-                        new Dragon(),
-                        new Scout(),
-                        new AltoTemplario(),
-                        new NaveTransporteProtoss()
-                ))
-        );
+    public Ficha nuevaUnidadBasica() {
+        return newInstance(unidadBasica);
+    }
 
-        @Override
-        public List<Tecnologia> tecnologiasIniciales() {
-            return techs;
-        }
-
-        @Override
-        public List<Ficha> listaDeFichas() {
-            return fichas;
-        }
-
-        @Override
-        public Ficha nuevaUnidadBasica() {
-            return new Zealot();
-        }
-
-        @Override
-        public Ficha nuevaCasa() {
-            return new Pilon();
-        }
-    };
-
-    public abstract List<Tecnologia> tecnologiasIniciales();
-
-    public abstract Ficha nuevaUnidadBasica();
-
-    public abstract Ficha nuevaCasa();
-
-    public abstract List<Ficha> listaDeFichas();
+    public Ficha nuevaCasa() {
+        return newInstance(casa);
+    }
 }

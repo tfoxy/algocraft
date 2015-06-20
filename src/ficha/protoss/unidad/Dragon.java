@@ -18,6 +18,7 @@ public class Dragon extends UnidadTerrestre {
         movimientoMaximo = 3;
         ataqueTierra = ataqueAire = new Ataque(20, 4);
         tipoDeFicha.add(TipoDeFicha.PROTOSS);
+        tipoDeFicha.add(TipoDeFicha.AVANZADA);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ACCESO);
         ocupacionEnTransporte = 4;

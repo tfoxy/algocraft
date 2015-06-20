@@ -24,6 +24,7 @@ public class NaveCiencia extends UnidadAerea {
         turnosParaCrear = 10;
         barras = BARRAS_BUILDER.build();
         tipoDeFicha.add(TipoDeFicha.TERRAN);
+        tipoDeFicha.add(TipoDeFicha.MAGICA);
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
         movimientoMaximo = 6;

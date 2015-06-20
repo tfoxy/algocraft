@@ -15,6 +15,8 @@ public class TransporteAereo extends UnidadAerea {
         }
 
         transportacion = new Transportacion(capacidad);
+
+        tipoDeFicha.add(TipoDeFicha.TRANSPORTE);
     }
 
 }

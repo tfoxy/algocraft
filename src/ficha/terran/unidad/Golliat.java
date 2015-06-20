@@ -17,6 +17,7 @@ public class Golliat extends UnidadTerrestre {
         vision = 8;
         movimientoMaximo = 4;
         tipoDeFicha.add(TipoDeFicha.TERRAN);
+        tipoDeFicha.add(TipoDeFicha.AVANZADA);
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.FABRICA);
         ocupacionEnTransporte = 2;

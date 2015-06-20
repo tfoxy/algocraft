@@ -13,5 +13,10 @@ public enum TipoDeFicha {
     ALUCINACION,
     NATURAL,
     TERRAN,
-    PROTOSS
+    PROTOSS,
+    BASICA,
+    AVANZADA,
+    MAGICA,
+    TRANSPORTE,
+    CASA
 }
