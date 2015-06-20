@@ -13,6 +13,7 @@ import juego.Gaia;
 import juego.Recursos;
 import juego.Jugador;
 import juego.RecursosDeJugador;
+import magia.Magia;
 import stats.Ataque;
 import stats.BarrasInvencible;
 import stats.IBarras;
@@ -66,6 +67,8 @@ public abstract class Ficha implements Cloneable {
     protected Ataque ataqueAire = Ataque.NULO;
 
     protected int vision = 0;
+
+    protected List<Magia> magias = new ArrayList<>();
 
     protected FichaStrategy estrategia = new FichaStrategy();
 
@@ -378,6 +381,7 @@ public abstract class Ficha implements Cloneable {
         private Ataque ataqueTierraAnterior = ataqueTierra;
         private Ataque ataqueAireAnterior = ataqueAire;
         private int movimientoMaximoAnterior = movimientoMaximo;
+        private List<Magia> magiasAnteriores = magias;
 
         private void invalidarPropiedades() {
             transportacion = Transportacion.VACIA;
@@ -385,6 +389,7 @@ public abstract class Ficha implements Cloneable {
             ataqueTierra = Ataque.NULO;
             ataqueAire = Ataque.NULO;
             movimientoMaximo = 0;
+            magias = Collections.emptyList();
         }
 
         private void revalidarPropiedades() {
@@ -393,6 +398,7 @@ public abstract class Ficha implements Cloneable {
             ataqueTierra = ataqueTierraAnterior;
             ataqueAire = ataqueAireAnterior;
             movimientoMaximo = movimientoMaximoAnterior;
+            magias = magiasAnteriores;
         }
 
         @Override

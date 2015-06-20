@@ -2,6 +2,8 @@ package ficha.protoss.unidad;
 
 import juego.Recursos;
 import juego.Tecnologia;
+import magia.AlucinacionMagia;
+import magia.TormentaPsionicaMagia;
 import stats.BarrasEscudoVidaEnergia;
 import ficha.UnidadTerrestre;
 
@@ -17,6 +19,8 @@ public class AltoTemplario extends UnidadTerrestre {
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ARCHIVOS_TEMPLARIOS);
         ocupacionEnTransporte = 2;
+        magias.add(new TormentaPsionicaMagia());
+        magias.add(new AlucinacionMagia());
     }
 
 

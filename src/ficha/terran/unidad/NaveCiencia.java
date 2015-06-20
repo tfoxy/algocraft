@@ -3,6 +3,8 @@ package ficha.terran.unidad;
 import ficha.UnidadAerea;
 import juego.Recursos;
 import juego.Tecnologia;
+import magia.EmpMagia;
+import magia.RadiacionMagia;
 import stats.BarrasEscudoVidaEnergia;
 
 public class NaveCiencia extends UnidadAerea {
@@ -23,6 +25,8 @@ public class NaveCiencia extends UnidadAerea {
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
         movimientoMaximo = 6;
+        magias.add(new EmpMagia());
+        magias.add(new RadiacionMagia());
     }
 
 }
