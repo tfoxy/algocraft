@@ -11,5 +11,7 @@ public enum TipoDeFicha {
     TERRESTRE,
     AEREA,
     ALUCINACION,
-    NATURAL
+    NATURAL,
+    TERRAN,
+    PROTOSS
 }

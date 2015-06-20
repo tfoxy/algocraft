@@ -1,5 +1,6 @@
 package ficha.terran.unidad;
 
+import ficha.TipoDeFicha;
 import ficha.TransporteAereo;
 import juego.Recursos;
 import juego.Tecnologia;
@@ -16,6 +17,7 @@ public class NaveTransporteTerran extends TransporteAereo {
         coste = new Recursos(100, 100, 2);
         turnosParaCrear = 7;
         barras = new BarrasEscudoVidaEnergia(200);
+        tipoDeFicha.add(TipoDeFicha.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
     }

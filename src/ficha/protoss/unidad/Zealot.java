@@ -1,6 +1,7 @@
 package ficha.protoss.unidad;
 
 
+import ficha.TipoDeFicha;
 import ficha.UnidadTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;
@@ -17,6 +18,7 @@ public class Zealot extends UnidadTerrestre {
         barras = new BarrasEscudoVidaEnergia(100, 60);
         ataqueTierra = new Ataque(8, 1);
         movimientoMaximo = 3;
+        tipoDeFicha.add(TipoDeFicha.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ACCESO);
         ocupacionEnTransporte = 2;

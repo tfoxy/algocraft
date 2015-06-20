@@ -1,5 +1,6 @@
 package ficha.protoss.unidad;
 
+import ficha.TipoDeFicha;
 import juego.Recursos;
 import juego.Tecnologia;
 import stats.Ataque;
@@ -17,6 +18,7 @@ public class Scout extends UnidadAerea {
         ataqueTierra = new Ataque(8, 4);
         ataqueAire = new Ataque(14, 4);
         movimientoMaximo = 3;
+        tipoDeFicha.add(TipoDeFicha.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
     }

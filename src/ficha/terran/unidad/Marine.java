@@ -1,5 +1,6 @@
 package ficha.terran.unidad;
 
+import ficha.TipoDeFicha;
 import ficha.UnidadTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;
@@ -19,6 +20,7 @@ public class Marine extends UnidadTerrestre {
         vision = 7;
         turnosParaCrear = 3;
         movimientoMaximo = 3;
+        tipoDeFicha.add(TipoDeFicha.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.BARRACA);
         ocupacionEnTransporte = 1;

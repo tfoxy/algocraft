@@ -1,5 +1,6 @@
 package ficha.terran.unidad;
 
+import ficha.TipoDeFicha;
 import ficha.UnidadAerea;
 import juego.Recursos;
 import juego.Tecnologia;
@@ -22,6 +23,7 @@ public class NaveCiencia extends UnidadAerea {
         coste = new Recursos(200, 0, 2);
         turnosParaCrear = 10;
         barras = BARRAS_BUILDER.build();
+        tipoDeFicha.add(TipoDeFicha.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
         movimientoMaximo = 6;

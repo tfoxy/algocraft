@@ -12,7 +12,8 @@ public class CentroDeMineral extends EdifcioDeRecursosTerrestre {
         coste = new Recursos(50, 0);
         turnosParaCrear = 4;
         barras = new BarrasEscudoVidaEnergia(500);
-        tecnologiasNecesarias.add(Tecnologia.PROTOSS);
+        tipoDeFicha.add(TipoDeFicha.TERRAN);
+        tecnologiasNecesarias.add(Tecnologia.TERRAN);
 
         recursosExtraidosPorTurno = new Recursos(10, 0);
 

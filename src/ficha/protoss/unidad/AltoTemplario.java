@@ -1,5 +1,6 @@
 package ficha.protoss.unidad;
 
+import ficha.TipoDeFicha;
 import juego.Recursos;
 import juego.Tecnologia;
 import magia.AlucinacionMagia;
@@ -16,6 +17,7 @@ public class AltoTemplario extends UnidadTerrestre {
         coste = new Recursos(50, 150, 2);
         turnosParaCrear = 7;
         barras = new BarrasEscudoVidaEnergia(40, 40, 200, 50, 15);
+        tipoDeFicha.add(TipoDeFicha.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ARCHIVOS_TEMPLARIOS);
         ocupacionEnTransporte = 2;

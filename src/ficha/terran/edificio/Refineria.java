@@ -12,6 +12,7 @@ public class Refineria extends EdifcioDeRecursosTerrestre {
         coste = new Recursos(100, 0);
         turnosParaCrear = 6;
         barras = new BarrasEscudoVidaEnergia(750);
+        tipoDeFicha.add(TipoDeFicha.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
 
         recursosExtraidosPorTurno = new Recursos(0, 10);

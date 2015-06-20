@@ -1,5 +1,6 @@
 package ficha.terran.unidad;
 
+import ficha.TipoDeFicha;
 import ficha.UnidadTerrestre;
 import juego.Recursos;
 import juego.Tecnologia;
@@ -15,6 +16,7 @@ public class Golliat extends UnidadTerrestre {
         ataqueAire = new Ataque(10, 5);
         vision = 8;
         movimientoMaximo = 4;
+        tipoDeFicha.add(TipoDeFicha.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.FABRICA);
         ocupacionEnTransporte = 2;

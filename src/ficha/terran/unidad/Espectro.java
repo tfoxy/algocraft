@@ -1,5 +1,6 @@
 package ficha.terran.unidad;
 
+import ficha.TipoDeFicha;
 import ficha.UnidadAerea;
 import juego.Recursos;
 import juego.Tecnologia;
@@ -17,6 +18,7 @@ public class Espectro extends UnidadAerea {
         ataqueAire = new Ataque(20, 5);
         vision = 7;
         turnosParaCrear = 8;
+        tipoDeFicha.add(TipoDeFicha.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
     }

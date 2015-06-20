@@ -1,5 +1,6 @@
 package ficha.protoss.unidad;
 
+import ficha.TipoDeFicha;
 import ficha.TransporteAereo;
 import juego.Recursos;
 import juego.Tecnologia;
@@ -16,6 +17,7 @@ public class NaveTransporteProtoss extends TransporteAereo {
         turnosParaCrear = 8;
         barras = new BarrasEscudoVidaEnergia(80, 60);
         movimientoMaximo = 6;
+        tipoDeFicha.add(TipoDeFicha.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
     }

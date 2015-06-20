@@ -1,5 +1,6 @@
 package ficha.protoss.edificio;
 
+import ficha.TipoDeFicha;
 import juego.Recursos;
 import juego.Tecnologia;
 import stats.BarrasEscudoVidaEnergia;
@@ -12,6 +13,7 @@ public class ArchivosTemplarios extends EdificioTerrestre {
         coste = new Recursos(150, 200);
         turnosParaCrear = 9;
         barras = new BarrasEscudoVidaEnergia(500, 500);
+        tipoDeFicha.add(TipoDeFicha.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
         tecnologiasQueDa.add(Tecnologia.ARCHIVOS_TEMPLARIOS);

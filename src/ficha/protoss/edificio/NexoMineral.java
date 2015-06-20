@@ -14,6 +14,7 @@ public class NexoMineral extends EdifcioDeRecursosTerrestre {
         coste = new Recursos(50, 0);
         turnosParaCrear = 4;
         barras = new BarrasEscudoVidaEnergia(250, 250);
+        tipoDeFicha.add(TipoDeFicha.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
 
         recursosExtraidosPorTurno = new Recursos(10, 0);

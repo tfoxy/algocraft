@@ -1,5 +1,6 @@
 package ficha.protoss.unidad;
 
+import ficha.TipoDeFicha;
 import juego.Recursos;
 import juego.Tecnologia;
 import stats.Ataque;
@@ -16,6 +17,7 @@ public class Dragon extends UnidadTerrestre {
         barras = new BarrasEscudoVidaEnergia(100, 80);
         movimientoMaximo = 3;
         ataqueTierra = ataqueAire = new Ataque(20, 4);
+        tipoDeFicha.add(TipoDeFicha.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.ACCESO);
         ocupacionEnTransporte = 4;

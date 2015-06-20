@@ -1,6 +1,7 @@
 package ficha.protoss.edificio;
 
 import ficha.CasaTerrestre;
+import ficha.TipoDeFicha;
 import juego.Recursos;
 import juego.Tecnologia;
 import stats.BarrasEscudoVidaEnergia;
@@ -12,6 +13,7 @@ public class Pilon extends CasaTerrestre {
         coste = new Recursos(100, 0);
         turnosParaCrear = 5;
         barras = new BarrasEscudoVidaEnergia(300, 300);
+        tipoDeFicha.add(TipoDeFicha.PROTOSS);
         tecnologiasNecesarias.add(Tecnologia.PROTOSS);
         poblacionQueDa = 5;
     }
