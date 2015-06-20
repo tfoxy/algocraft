@@ -1,8 +1,5 @@
 package stats;
 
-import ficha.Ficha;
-
-//new 6
 public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
     private static final Builder EMPTY_BUILDER = new Builder();
 
@@ -93,6 +90,36 @@ public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
     @Override
     public int energiaActual() {
         return energiaActual;
+    }
+
+    @Override
+    public int vidaMaxima() {
+        return vidaMaxima;
+    }
+
+    @Override
+    public int escudoMaximo() {
+        return escudoMaximo;
+    }
+
+    @Override
+    public int energiaMaxima() {
+        return energiaMaxima;
+    }
+
+    @Override
+    public int vidaPorTurno() {
+        return vidaPorTurno;
+    }
+
+    @Override
+    public int escudoPorTurno() {
+        return escudoPorTurno;
+    }
+
+    @Override
+    public int energiaPorTurno() {
+        return energiaPorTurno;
     }
 
 
