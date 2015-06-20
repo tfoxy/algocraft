@@ -10,42 +10,48 @@ import java.util.Collections;
 import java.util.List;
 
 public enum Raza {
-    TERRAN,
-    PROTOSS;
+    TERRAN {
+        final List<Tecnologia> TECHS =
+                Collections.singletonList(Tecnologia.TERRAN);
 
-    static {
-        TERRAN.tecnologiasIniciales = Collections.singletonList(Tecnologia.TERRAN);
-        TERRAN.unidadBasicaClass = Marine.class;
-        TERRAN.casaClass = DepositoSuministro.class;
-
-        PROTOSS.tecnologiasIniciales = Collections.singletonList(Tecnologia.PROTOSS);
-        PROTOSS.unidadBasicaClass = Zealot.class;
-        PROTOSS.casaClass = Pilon.class;
-    }
-
-
-    private Class<? extends Ficha> unidadBasicaClass;
-    private Class<? extends Ficha> casaClass;
-    private List<Tecnologia> tecnologiasIniciales;
-
-    public List<Tecnologia> tecnologiasIniciales() {
-        return tecnologiasIniciales;
-    }
-
-    private Ficha newInstance(Class<? extends Ficha> c) {
-        try {
-            return c.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e.getMessage(), e.getCause());
+        @Override
+        public List<Tecnologia> tecnologiasIniciales() {
+            return TECHS;
         }
-    }
 
-    public Ficha nuevaUnidadBasica() {
-        return newInstance(unidadBasicaClass);
-    }
+        @Override
+        public Ficha nuevaUnidadBasica() {
+            return new Marine();
+        }
 
-    public Ficha nuevaCasa() {
-        return newInstance(casaClass);
-    }
+        @Override
+        public Ficha nuevaCasa() {
+            return new DepositoSuministro();
+        }
+    },
+    PROTOSS {
+        final List<Tecnologia> TECHS =
+                Collections.singletonList(Tecnologia.PROTOSS);
+
+        @Override
+        public List<Tecnologia> tecnologiasIniciales() {
+            return TECHS;
+        }
+
+        @Override
+        public Ficha nuevaUnidadBasica() {
+            return new Zealot();
+        }
+
+        @Override
+        public Ficha nuevaCasa() {
+            return new Pilon();
+        }
+    };
+
+    public abstract List<Tecnologia> tecnologiasIniciales();
+
+    public abstract Ficha nuevaUnidadBasica();
+
+    public abstract Ficha nuevaCasa();
 }
