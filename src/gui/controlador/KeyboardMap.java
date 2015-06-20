@@ -12,8 +12,16 @@ public class KeyboardMap {
     private final ActionMap actionMap;
 
     public KeyboardMap(JComponent jComponent) {
+        this(jComponent, JComponent.WHEN_IN_FOCUSED_WINDOW);
+    }
+
+    /**
+     * @param condition one of javax.swing.JComponent#WHEN_IN_FOCUSED_WINDOW,
+     *                  WHEN_FOCUSED, WHEN_ANCESTOR_OF_FOCUSED_COMPONENT
+     */
+    public KeyboardMap(JComponent jComponent, int condition) {
         this(
-                jComponent.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW),
+                jComponent.getInputMap(condition),
                 jComponent.getActionMap()
         );
     }
