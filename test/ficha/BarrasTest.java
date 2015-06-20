@@ -32,7 +32,7 @@ public class BarrasTest {
         barras.sufrirDanio(100);
         assertEquals(0, barras.escudoActual());
         barras.pasarTurno();
-        assertEquals(10, barras.escudoActual());
+        assertEquals(barras.escudoPorTurno(), barras.escudoActual());
     }
 
 }
