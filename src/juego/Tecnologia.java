@@ -6,5 +6,5 @@ public enum Tecnologia {
     ACCESO,
     PUERTO_ESTELAR,
     GAIA,
-    ARCHIVOS_TEMPLARIOS
+    BARRACA, ARCHIVOS_TEMPLARIOS
 }
