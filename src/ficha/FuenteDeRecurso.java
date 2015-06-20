@@ -26,10 +26,6 @@ public abstract class FuenteDeRecurso extends FichaTerrestre {
         cantidadDeRecursos.gastar(cantidad);
     }
 
-    public boolean haySuficienteRecursos(Recursos coste) {
-        return cantidadDeRecursos.haySuficienteRecursos(coste);
-    }
-
     @Override
     public RecursosDeJugador recursosVirgenes() {
         return cantidadDeRecursos;

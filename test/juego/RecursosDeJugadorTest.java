@@ -1,6 +1,7 @@
 package juego;
 
-import org.junit.Assert;
+import error.MineralInsuficienteException;
+import error.GasInsuficienteException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,28 +17,19 @@ public class RecursosDeJugadorTest {
     @Test
     public void tieneSuficientesRecursos() {
         Recursos coste = new Recursos(10, 20);
-        boolean hayRecursos =
-                recursosDeJugador.haySuficienteRecursos(coste);
-
-        Assert.assertTrue(hayRecursos);
+        recursosDeJugador.validarSuficientesRecursos(coste);
     }
 
-    @Test
+    @Test(expected = GasInsuficienteException.class)
     public void noTieneSuficientesRecursosPorFaltaDeGas() {
         Recursos coste = new Recursos(10, 100);
-        boolean hayRecursos =
-                recursosDeJugador.haySuficienteRecursos(coste);
-
-        Assert.assertFalse(hayRecursos);
+        recursosDeJugador.validarSuficientesRecursos(coste);
     }
 
-    @Test
+    @Test(expected = MineralInsuficienteException.class)
     public void noTieneSuficientesRecursosPorFaltaDeMineral() {
         Recursos coste = new Recursos(100, 10);
-        boolean hayRecursos =
-                recursosDeJugador.haySuficienteRecursos(coste);
-
-        Assert.assertFalse(hayRecursos);
+        recursosDeJugador.validarSuficientesRecursos(coste);
     }
 
 

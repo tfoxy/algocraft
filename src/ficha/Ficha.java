@@ -193,7 +193,7 @@ public abstract class Ficha implements Cloneable {
 
     @Override
     public Ficha clone() {
-        Ficha clone = null;
+        Ficha clone;
         try {
             clone = (Ficha) super.clone();
         } catch (CloneNotSupportedException e) {
@@ -355,6 +355,7 @@ public abstract class Ficha implements Cloneable {
 
         public void crear() {
             propietario.agregarPoblacionTotal(poblacionQueDa);
+            propietario.agregarTecnologias(tecnologiasQueDa);
             recuperarPuntosDeMovimiento();
         }
 
@@ -372,15 +373,32 @@ public abstract class Ficha implements Cloneable {
     private class ConstruccionStrategy extends FichaStrategy {
         private int turnosFaltantes = turnosParaCrear;
         private FichaStrategy estrategiaAnterior = estrategia;
+        private Transportacion transportacionAnterior = transportacion;
+        private int visionAnterior = vision;
+        private Ataque ataqueTierraAnterior = ataqueTierra;
+        private Ataque ataqueAireAnterior = ataqueAire;
+        private int movimientoMaximoAnterior = movimientoMaximo;
+
+        private void invalidarPropiedades() {
+            transportacion = Transportacion.VACIA;
+            vision = 0;
+            ataqueTierra = Ataque.NULO;
+            ataqueAire = Ataque.NULO;
+            movimientoMaximo = 0;
+        }
+
+        private void revalidarPropiedades() {
+            transportacion = transportacionAnterior;
+            vision = visionAnterior;
+            ataqueTierra = ataqueTierraAnterior;
+            ataqueAire = ataqueAireAnterior;
+            movimientoMaximo = movimientoMaximoAnterior;
+        }
 
         @Override
         public void validarCreacion() {
-            if (!(propietario.tengoSuficientesRecursos(coste))) {
-                throw new RecursosInsuficientesException();
-            }
-            if (!(propietario.tienesLasTecnologias(tecnologiasNecesarias()))) {
-                throw new TecnologiasInsuficientesException();
-            }
+            propietario.recursos().validarSuficientesRecursos(coste);
+            propietario.validarTecnologias(tecnologiasNecesarias);
             super.validarCreacion();
         }
 
@@ -391,7 +409,7 @@ public abstract class Ficha implements Cloneable {
 
         @Override
         public void crear() {
-            // noop
+            invalidarPropiedades();
         }
 
         @Override
@@ -399,9 +417,11 @@ public abstract class Ficha implements Cloneable {
             turnosFaltantes -= 1;
 
             // TODO a medida que se vaya construyendo, ir aumentando la vida
+            barras.pasarTurno();
 
             if (turnosFaltantes <= 0) {
                 estrategia = estrategiaAnterior;
+                revalidarPropiedades();
                 estrategia.crear();
             }
         }

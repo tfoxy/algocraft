@@ -34,4 +34,9 @@ public class Recursos {
         return poblacion;
     }
 
+    @Override
+    public String toString() {
+        return mineral + "M " + gas + "G " + poblacion + "P";
+    }
+
 }

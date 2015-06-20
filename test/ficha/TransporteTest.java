@@ -1,8 +1,7 @@
 package ficha;
 
-import error.FichaACargarDebeEstarDebajoDeTransporte;
+import error.CapacidadInsuficienteException;
 import error.FichaSobreOtraFichaException;
-import error.TransporteException;
 import error.UnicamenteObjetivoPropioException;
 import ficha.natural.terreno.TerrenoEspacial;
 import ficha.terran.unidad.Marine;
@@ -177,5 +176,21 @@ public class TransporteTest {
         } catch (FichaSobreOtraFichaException e) {
             Assert.assertEquals(transporte.coordenada(), unidad.coordenada());
         }
+    }
+
+    @Test(expected = CapacidadInsuficienteException.class)
+    public void noPuedeCargarSiEstaEnConstruccion() {
+        transporte.muerete();
+
+        transporte = new NaveTransporteTerran().enConstruccion();
+        transporte.setBasico(jugador, mapa, coordenada);
+        FichaTestUtil.cumplirCondicionesDelJugadorParaConstruccion(transporte);
+        transporte.ponerEnJuego();
+
+        Ficha unidad = new Marine();
+        unidad.setBasico(jugador, mapa, coordenada);
+        unidad.ponerEnJuego();
+
+        transporte.cargar();
     }
 }

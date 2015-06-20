@@ -1,5 +1,7 @@
 package ficha;
 
+import juego.RecursosDeJugador;
+
 public abstract class EdifcioDeRecursosTerrestre extends EdificioTerrestre {
 
     public EdifcioDeRecursosTerrestre() {
@@ -7,8 +9,12 @@ public abstract class EdifcioDeRecursosTerrestre extends EdificioTerrestre {
     }
 
     protected class EdifcioDeRecursosStrategy extends FichaStrategy {
+        private RecursosDeJugador recursosVirgenes() {
+            return fuenteDeRecursos.recursosVirgenes();
+        }
+
         private boolean sePuedeEstrear() {
-            return fuenteDeRecursos.recursosVirgenes().haySuficienteRecursos(recursosExtraidosPorTurno);
+            return recursosVirgenes().haySuficienteRecursos(recursosExtraidosPorTurno);
         }
 
         @Override
@@ -17,9 +23,9 @@ public abstract class EdifcioDeRecursosTerrestre extends EdificioTerrestre {
 
             if (this.sePuedeEstrear()) {
                 propietario.agregarRecursos(recursosExtraidosPorTurno);
-                fuenteDeRecursos.recursosVirgenes().gastar(recursosExtraidosPorTurno);
+                recursosVirgenes().gastar(recursosExtraidosPorTurno);
             } else {
-                propietario.agregarRecursos(fuenteDeRecursos.recursosVirgenes().dameRecursosLineales());
+                propietario.agregarRecursos(recursosVirgenes().dameRecursosLineales());
             }
         }
     }
@@ -27,9 +33,9 @@ public abstract class EdifcioDeRecursosTerrestre extends EdificioTerrestre {
 
     @Override
     public void ponerEnJuego() {
-        Ficha ficha = tablero.getFichaTerrestre(coordenada);
+        Ficha fichaAux = tablero.getFichaTerrestre(coordenada);
         super.ponerEnJuego();
-        fuenteDeRecursos = (FuenteDeRecurso) ficha;
+        fuenteDeRecursos = (FuenteDeRecurso) fichaAux;
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Set;
 
+import error.TecnologiasInsuficientesException;
 import ficha.Ficha;
 
 
@@ -55,7 +56,7 @@ public class Jugador {
 
 
     public List<Tecnologia> tecnologias() {
-        return tecnologias;
+        return Collections.unmodifiableList(tecnologias);
     }
 
 
@@ -72,11 +73,11 @@ public class Jugador {
         }
 
         pasandoTurno = false;
-        eliminarFichas();
+        eliminarFichasPendientes();
     }
 
 
-    private void eliminarFichas() {
+    private void eliminarFichasPendientes() {
         fichas.removeAll(fichasAEliminar);
         fichasAEliminar = new ArrayList<>();
     }
@@ -97,14 +98,6 @@ public class Jugador {
 
     public void newFicha(Ficha ficha) {
         this.fichas.add(ficha);
-    }
-
-    public boolean tengoSuficientesRecursos(Recursos coste) {
-        return recursos.haySuficienteRecursos(coste);
-    }
-
-    public boolean tienesLasTecnologias(List<Tecnologia> tecnologias) {
-        return this.tecnologias.containsAll(tecnologias);
     }
 
     public void agregarPoblacionTotal(int aumento) {
@@ -150,7 +143,19 @@ public class Jugador {
         tecnologias.add(tecnologia);
     }
 
+    public void agregarTecnologias(List<Tecnologia> tecnologias) {
+        for (Tecnologia tecnologia: tecnologias) {
+            agregarTecnologia(tecnologia);
+        }
+    }
+
     public Set<Ficha> fichas() {
         return Collections.unmodifiableSet(fichas);
+    }
+
+    public void validarTecnologias(List<Tecnologia> tecnologias) {
+        if (!this.tecnologias.containsAll(tecnologias)) {
+            throw new TecnologiasInsuficientesException();
+        }
     }
 }

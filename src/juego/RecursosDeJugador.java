@@ -1,6 +1,8 @@
 package juego;
 
-import error.RecursosInsuficientesException;
+import error.MineralInsuficienteException;
+import error.GasInsuficienteException;
+import error.PoblacionInsuficienteException;
 
 public class RecursosDeJugador {
 
@@ -10,10 +12,10 @@ public class RecursosDeJugador {
         private int actual = 0;
         private int posible = 0;
         private int contador = 0;
-        private int maxima = POBLACION_MAXIMA;
+        private final int maxima;
 
         public Poblacion() {
-
+            this(POBLACION_MAXIMA);
         }
 
         public Poblacion(int maxima) {
@@ -37,11 +39,7 @@ public class RecursosDeJugador {
         }
 
         public void cambiarActual(int cambio) {
-            if (cambio > 0) {
-                if (actual + cambio > posible) {
-                    throw new RecursosInsuficientesException("No hay población disponible");
-                }
-            }
+            validarSiHaySuficiente(cambio);
 
             actual += cambio;
         }
@@ -51,8 +49,19 @@ public class RecursosDeJugador {
             posible = Math.min(maxima, contador);
         }
 
+        public void validarSiHaySuficiente(int aumento) {
+            if (!haySuficiente(aumento)) {
+                throw new PoblacionInsuficienteException();
+            }
+        }
+
         public boolean haySuficiente(int aumento) {
             return actual + aumento <= posible || aumento <= 0;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%d/%d (%d|%d)", actual, posible, contador, maxima);
         }
     }
 
@@ -61,9 +70,7 @@ public class RecursosDeJugador {
     private final Poblacion poblacion;
 
     public RecursosDeJugador(int mineral, int gas) {
-        this.mineral = mineral;
-        this.gas = gas;
-        poblacion = new Poblacion();
+        this(mineral, gas, POBLACION_MAXIMA);
     }
 
     RecursosDeJugador(int mineral, int gas, int poblacionMaxima) {
@@ -84,6 +91,16 @@ public class RecursosDeJugador {
         return poblacion;
     }
 
+    public void validarSuficientesRecursos(Recursos coste) {
+        if (coste.mineral() > mineral) {
+            throw new MineralInsuficienteException();
+        }
+        if (coste.gas() > gas) {
+            throw new GasInsuficienteException();
+        }
+        poblacion.validarSiHaySuficiente(coste.poblacion());
+    }
+
     public boolean haySuficienteRecursos(Recursos coste) {
         return coste.mineral() <= mineral
                 && coste.gas() < gas
@@ -91,17 +108,12 @@ public class RecursosDeJugador {
     }
 
     public void gastar(Recursos coste) {
-        if (coste.mineral() > mineral) {
-            throw new RecursosInsuficientesException("Cristal insuficiente");
-        }
-        if (coste.gas() > gas) {
-            throw new RecursosInsuficientesException("Gas insuficiente");
-        }
+        validarSuficientesRecursos(coste);
 
         poblacion.cambiarActual(coste.poblacion());
 
-        mineral = mineral - coste.mineral();
-        gas = gas - coste.gas();
+        mineral -= coste.mineral();
+        gas -= coste.gas();
     }
 
     public Recursos dameRecursosLineales() {
@@ -116,5 +128,8 @@ public class RecursosDeJugador {
         this.gas += gas;
     }
 
-
+    @Override
+    public String toString() {
+        return mineral + "M " + gas + "G & Pob " + poblacion.toString();
+    }
 }
