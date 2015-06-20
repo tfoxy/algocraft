@@ -65,6 +65,7 @@ public class ControladorFicha {
 
     private void atacar(Ficha objetivo) {
         try {
+            validarPropietario("Solamente se puede atacar con unidades propias");
             ficha().atacar(objetivo);
             accionObservables.notify(AccionDeFicha.ATAQUE, this);
         } catch (JuegoException exc) {
@@ -110,15 +111,8 @@ public class ControladorFicha {
 
         @Override
         public void eventOcurred(AWTEvent e) {
-            // No se puede mover fichas de otro jugador
-            if (!ficha().propietario().equals(jugadorDeTurno.jugador())) {
-                String msg = "Solamente se pueden mover unidades aliadas";
-                logger.log(new UnicamenteObjetivoAliadoException(msg));
-                return;
-            }
-
-
             try {
+                validarPropietario("Solamente se pueden mover unidades propias");
                 ficha().mover(direccion);
                 fichaObjetivo.cambiarAccion(AccionEnGrilla.SELECCION);
                 fichaObjetivo.cambiarFicha(ficha());
@@ -140,5 +134,15 @@ public class ControladorFicha {
                 modoAtaque();
             }
         };
+    }
+
+    private void validarPropietario() {
+        validarPropietario("Unidad no es propia");
+    }
+
+    private void validarPropietario(String errorMsg) {
+        if (!ficha().propietario().equals(jugadorDeTurno.jugador())) {
+            throw new UnicamenteObjetivoAliadoException(errorMsg);
+        }
     }
 }
