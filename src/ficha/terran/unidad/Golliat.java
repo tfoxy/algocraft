@@ -16,8 +16,7 @@ public class Golliat extends UnidadTerrestre {
         vision = 8;
         movimientoMaximo = 4;
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
-        // TODO tecnologiasNecesarias
-        // TODO
+        tecnologiasNecesarias.add(Tecnologia.FABRICA);
         ocupacionEnTransporte = 2;
     }
 }

@@ -18,5 +18,6 @@ public class Espectro extends UnidadAerea {
         vision = 7;
         turnosParaCrear = 8;
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
+        tecnologiasNecesarias.add(Tecnologia.PUERTO_ESTELAR);
     }
 }

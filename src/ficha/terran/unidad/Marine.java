@@ -20,6 +20,7 @@ public class Marine extends UnidadTerrestre {
         turnosParaCrear = 3;
         movimientoMaximo = 3;
         tecnologiasNecesarias.add(Tecnologia.TERRAN);
+        tecnologiasNecesarias.add(Tecnologia.BARRACA);
         ocupacionEnTransporte = 1;
     }
 }
