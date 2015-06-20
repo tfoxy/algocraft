@@ -11,12 +11,12 @@ import java.util.List;
 
 public enum Raza {
     TERRAN {
-        final List<Tecnologia> TECHS =
+        private final List<Tecnologia> techs =
                 Collections.singletonList(Tecnologia.TERRAN);
 
         @Override
         public List<Tecnologia> tecnologiasIniciales() {
-            return TECHS;
+            return techs;
         }
 
         @Override
@@ -30,12 +30,12 @@ public enum Raza {
         }
     },
     PROTOSS {
-        final List<Tecnologia> TECHS =
+        private final List<Tecnologia> techs =
                 Collections.singletonList(Tecnologia.PROTOSS);
 
         @Override
         public List<Tecnologia> tecnologiasIniciales() {
-            return TECHS;
+            return techs;
         }
 
         @Override
