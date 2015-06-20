@@ -35,8 +35,7 @@ public class AlucinacionMagia extends Magia {
      */
     @Override
     protected void verificarObjetivo(Ficha ficha, Coordenada3d objetivo) {
-        ITablero mapa = ficha.tablero();
-        Ficha fichaObjetivo = mapa.getFicha(objetivo);
+        Ficha fichaObjetivo = ficha.tablero().getFicha(objetivo);
 
         if (!fichaObjetivo.propietario().equals(ficha.propietario())) {
             // TODO test para probar que solamente se puede aplicar a ficha del mismo jugador
@@ -52,8 +51,8 @@ public class AlucinacionMagia extends Magia {
 
     @Override
     protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
-        Set<Coordenada> casillasVisibles = CoordenadaUtil.areaDeCoordenadas(objetivo, 2);
-        for (Coordenada coordenada : casillasVisibles) {
+        final Set<Coordenada> casillasVecinas = CoordenadaUtil.areaDeCoordenadas(objetivo, 2);
+        for (Coordenada coordenada: casillasVecinas) {
             if (ficha.tablero().hayEspacio(new Coordenada3d(coordenada, objetivo.z))) {
                 Ficha fichaCopiar = ficha.tablero().getFicha(objetivo);
                 this.insertarEspectro(fichaCopiar, coordenada);
@@ -69,10 +68,5 @@ public class AlucinacionMagia extends Magia {
         alucinacion.setBasico(alucinacion.propietario(), alucinacion.tablero(), lugar);
         alucinacion.ponerEnJuego();
     }
-    
-    /*pero falta ver si el usario elige el lugar o sale alado de la ficha.
-     *  Voy a usar area de cordenada
-     *  y resolverlo como un repetir para toda la lista y un if.
-     */
 
 }
