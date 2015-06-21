@@ -103,7 +103,7 @@ public class RecursosDeJugador {
 
     public boolean haySuficienteRecursos(Recursos coste) {
         return coste.mineral() <= mineral
-                && coste.gas() < gas
+                && coste.gas() <= gas
                 && poblacion.haySuficiente(coste.poblacion());
     }
 

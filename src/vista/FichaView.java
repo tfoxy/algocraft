@@ -89,8 +89,8 @@ public class FichaView extends JPanel {
     private void addActionListeners(final ControladorFicha control) {
         botonAbajo.addActionListener(control.getMovimientoListener(Direccion.ABAJO));
         botonArriba.addActionListener(control.getMovimientoListener(Direccion.ARRIBA));
-        botonDerecha.addActionListener(control.getMovimientoListener(Direccion.DERECHA));
         botonIzquierda.addActionListener(control.getMovimientoListener(Direccion.IZQUIERDA));
+        botonDerecha.addActionListener(control.getMovimientoListener(Direccion.DERECHA));
 
         botonAtaque.addActionListener(control.getAtaqueListener());
         botonCargar.addActionListener(control.getCargarListener());

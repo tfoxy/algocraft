@@ -11,14 +11,15 @@ import java.awt.event.ActionListener;
 import juego.Jugador;
 
 import tablero.Coordenada;
+import tablero.ITablero;
 import tablero.Tablero;
 
 public class ControladorConstruccion {
 	
-	private Tablero tablero;
+	private ITablero tablero;
 	private Jugador jugador;
 	
-	public ControladorConstruccion(Tablero tablero, Jugador jugador) {
+	public ControladorConstruccion(ITablero tablero, Jugador jugador) {
 		this.tablero = tablero;
 		this.jugador = jugador;
 	}

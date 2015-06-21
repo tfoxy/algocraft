@@ -88,14 +88,13 @@ public class Juego extends Observable {
                 throw new IllegalStateException();
             }
 
-
             return new Juego(this);
         }
 
 
-		public Tablero tablero() { //cosas testaduras del compilador
-			return (Tablero) tablero;
-		}
+        public ITablero tablero() {
+            return tablero;
+        }
     }
 
 }
