@@ -7,11 +7,8 @@ import gui.modelo.Observable;
 import gui.modelo.Observer;
 import tablero.Direccion;
 
-import javax.swing.ActionMap;
 import javax.swing.BoxLayout;
-import javax.swing.InputMap;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.event.KeyEvent;
@@ -75,7 +72,7 @@ public class FichaView extends JPanel {
             }
         });
 
-        control.accionObservables().observe(new Observer<ControladorFicha>() {
+        control.accionObservables().addObserver(new Observer<ControladorFicha>() {
             @Override
             public void update(Observable<ControladorFicha> o, ControladorFicha control) {
                 actulizarFicha();

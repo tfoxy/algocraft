@@ -411,7 +411,7 @@ public abstract class Ficha implements Cloneable {
         public void validarCreacion() {
             propietario.recursos().validarSuficientesRecursos(coste);
             propietario.validarTecnologias(tecnologiasNecesarias);
-            super.validarCreacion();
+            estrategiaAnterior.validarCreacion();
         }
 
         @Override

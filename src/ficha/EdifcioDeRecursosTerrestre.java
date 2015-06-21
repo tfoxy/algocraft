@@ -1,5 +1,7 @@
 package ficha;
 
+import error.EdificioDeRecursosNecesitaFichaRecursoException;
+import error.FichaSobreOtraFichaException;
 import juego.RecursosDeJugador;
 
 public abstract class EdifcioDeRecursosTerrestre extends EdificioTerrestre {
@@ -15,6 +17,15 @@ public abstract class EdifcioDeRecursosTerrestre extends EdificioTerrestre {
 
         private boolean sePuedeEstrear() {
             return recursosVirgenes().haySuficienteRecursos(recursosExtraidosPorTurno);
+        }
+
+        @Override
+        public void validarCreacion() {
+            try {
+                super.validarCreacion();
+            } catch (FichaSobreOtraFichaException e) {
+                throw new EdificioDeRecursosNecesitaFichaRecursoException();
+            }
         }
 
         @Override

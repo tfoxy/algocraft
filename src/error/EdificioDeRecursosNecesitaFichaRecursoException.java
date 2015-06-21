@@ -2,7 +2,7 @@ package error;
 
 public class EdificioDeRecursosNecesitaFichaRecursoException extends NoSePuedeCrearFicha {
     public EdificioDeRecursosNecesitaFichaRecursoException() {
-        super("Edificio de recursos puede construirse solamente sobre recursos");
+        super("Solamente puede construirse sobre el recurso apropiado");
     }
 
     public EdificioDeRecursosNecesitaFichaRecursoException(String msg) {
