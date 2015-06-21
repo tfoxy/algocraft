@@ -16,6 +16,7 @@ import gui.modelo.Observable;
 import gui.modelo.ObservableActions;
 import gui.modelo.ObservableEnumActions;
 import gui.modelo.Observer;
+import magia.Magia;
 import tablero.Direccion;
 
 import ficha.Ficha;
@@ -29,6 +30,7 @@ public class ControladorFicha {
     private JuegoLogger logger = JuegoLogger.EMPTY;
 
     private Ficha ficha;
+    private Magia magiaSeleccionada;
 
     public ControladorFicha(FichaObjetivo fichaObjetivo, JugadorDeTurno jugadorDeTurno) {
         this.fichaObjetivo = fichaObjetivo;
