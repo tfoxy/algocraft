@@ -22,7 +22,6 @@ public class Jugador {
     private final List<Tecnologia> tecnologias;
     private boolean pasandoTurno;
     private List<Ficha> fichasAEliminar;
-    public Ficha[]  fichasDeMiraza;
 
     public Jugador(String nombre, Raza raza) {
         this(nombre, raza, 0, 0);
@@ -45,7 +44,6 @@ public class Jugador {
 
         pasandoTurno = false;
         fichasAEliminar = new ArrayList<>();
-        fichasDeMiraza = new FichasDeRaza().DarLista(raza);
     }
 
 

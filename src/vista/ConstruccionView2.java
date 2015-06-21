@@ -82,8 +82,7 @@ public class ConstruccionView2 extends JFrame{
         panelConstruccion.add(fichasACrearList);
         panelConstruccion.add(botonConstruir);
         frameTemp.add(panelConstruccion);
-        
-        botonConstruir.addActionListener(control.getConstruir(fichasACrearList.getActionCommand()));
+
 	}
 	
 	
