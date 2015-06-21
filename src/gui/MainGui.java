@@ -1,9 +1,7 @@
 package gui;
 
 import escenario.EscenarioSimple;
-import ficha.Ficha;
 import gui.controlador.ControladorJugador;
-import gui.controlador.KeyboardEvents;
 import gui.modelo.FichaObjetivo;
 import gui.modelo.FichaSeleccionada;
 import gui.modelo.JuegoLogger;
@@ -20,10 +18,7 @@ import juego.Raza;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import tablero.Coordenada;
-import tablero.Tablero;
 import vista.ConstruccionView2;
-import vista.ContruccionView;
 import vista.FichaView;
 import controladores.ControladorConstruccion;
 import controladores.ControladorFicha;

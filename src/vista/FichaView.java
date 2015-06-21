@@ -30,6 +30,7 @@ public class FichaView extends JPanel {
     private final JButton botonIzquierda = new JButton("Izquierda");
     private final JButton botonDerecha = new JButton("Derecha");
     private final JButton botonAtaque = new JButton("Ataque");
+    private final JButton botonCargar = new JButton("Cargar");
 
 
     public FichaView(ControladorFicha control) {
@@ -58,11 +59,13 @@ public class FichaView extends JPanel {
 
         JPanel panelBotonesDeAccion = new JPanel();
         panelBotonesDeAccion.add(botonAtaque);
+        panelBotonesDeAccion.add(botonCargar);
         add(panelBotonesDeAccion);
 
         addActionListeners(control);
 
         botonAtaque.setMnemonic(KeyEvent.VK_A);
+        botonCargar.setMnemonic(KeyEvent.VK_C);
 
         FichaSeleccionada fichaSeleccionada = control.fichaSeleccionada();
         cambiarFicha(fichaSeleccionada.ficha());
@@ -90,6 +93,7 @@ public class FichaView extends JPanel {
         botonIzquierda.addActionListener(control.getMovimientoListener(Direccion.IZQUIERDA));
 
         botonAtaque.addActionListener(control.getAtaqueListener());
+        botonCargar.addActionListener(control.getCargarListener());
 
         KeyboardMap keyboardMap = new KeyboardMap(this);
         keyboardMap.put("UP", control.getMovimientoListener(Direccion.ARRIBA));

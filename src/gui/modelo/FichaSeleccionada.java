@@ -76,6 +76,14 @@ public class FichaSeleccionada {
         }
     }
 
+    public void cargar() {
+        try {
+            ficha().cargar();
+        } catch (JuegoException exc) {
+            logger.log(exc);
+        }
+    }
+
     public Observable<Ficha> cambioDeFichaObservable() {
         return cambioDeFichaObservable;
     }
