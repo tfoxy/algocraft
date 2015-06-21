@@ -5,6 +5,8 @@ import ficha.Fichas;
 import tablero.Coordenada;
 import tablero.ITablero;
 
+import java.util.List;
+
 public class FichaParaConstruir {
 
     private Ficha ficha;
@@ -30,5 +32,9 @@ public class FichaParaConstruir {
         ficha.ponerEnJuego();
 
         fichaObjetivo.retornarAccionPorDefecto();
+    }
+
+    public List<Ficha> listaDeFichasPosibles() {
+        return jugadorDeTurno.jugador().raza().listaDeFichas();
     }
 }
