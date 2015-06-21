@@ -21,7 +21,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import tablero.Coordenada;
+import tablero.Tablero;
+import vista.ConstruccionView2;
+import vista.ContruccionView;
 import vista.FichaView;
+import controladores.ControladorConstruccion;
 import controladores.ControladorFicha;
 
 public final class MainGui {
@@ -35,7 +39,8 @@ public final class MainGui {
         Juego.Builder builder = new Juego.Builder();
         EscenarioSimple escenario = new EscenarioSimple(builder);
 
-        builder.agregarJugador(new Jugador("Player1", Raza.PROTOSS, 500, 200));
+        Jugador jugador1 = new Jugador("Player1", Raza.PROTOSS, 500, 200); //para probar "unitarimante"
+        builder.agregarJugador(jugador1);
         builder.agregarJugador(new Jugador("Player2", Raza.TERRAN, 500, 200));
 
         TableroObservable mapa = builder.hacerTableroObservable();
@@ -66,6 +71,10 @@ public final class MainGui {
 
         JFrame ventana = new VentanaPrincipal(grillaView, fichaView, jugadorView, loggerView);
         ventana.setVisible(true);
+        
+        //vista Experimental (estoy viendo si funciona)
+        ControladorConstruccion CC = new ControladorConstruccion(builder.tablero(),jugador1);
+        new ConstruccionView2 (jugador1);
     }
 
 }

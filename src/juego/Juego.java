@@ -2,6 +2,7 @@ package juego;
 
 import gui.modelo.TableroObservable;
 import tablero.ITablero;
+import tablero.Tablero;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +91,11 @@ public class Juego extends Observable {
 
             return new Juego(this);
         }
+
+
+		public Tablero tablero() { //cosas testaduras del compilador
+			return (Tablero) tablero;
+		}
     }
 
 }
