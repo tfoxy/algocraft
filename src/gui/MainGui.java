@@ -47,13 +47,9 @@ public final class MainGui {
 
 
         // Controladores
-        KeyboardEvents keyboardEvents = new KeyboardEvents();
-
         ControladorJugador controladorJugador = new ControladorJugador(jugadorDeTurno);
-        controladorJugador.listenKeyboard(keyboardEvents);
 
         ControladorFicha controladorFicha = new ControladorFicha(fichaObjetivo, jugadorDeTurno);
-        controladorFicha.listenKeyboard(keyboardEvents);
         controladorFicha.setJuegoLogger(juegoLogger);
 
         jugadorDeTurno.comenzarTurno();

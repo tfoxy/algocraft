@@ -33,10 +33,4 @@ public class ControladorJugador {
         return new TerminarTurnoListener();
     }
 
-    public void listenKeyboard(KeyboardEvents keyboard) {
-        final int ev = KeyEvent.KEY_PRESSED;
-        // Movido a JugadorView
-        //keyboard.addListener(ev, KeyEvent.VK_ENTER, new TerminarTurnoListener());
-    }
-
 }
