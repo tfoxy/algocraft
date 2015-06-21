@@ -18,14 +18,21 @@ public class FichaParaConstruir extends AbstractListModel<Ficha> implements Comb
     private Ficha ficha;
     private final FichaObjetivo fichaObjetivo;
     private final JugadorDeTurno jugadorDeTurno;
+    private final Observable<FichaParaConstruir> construccionObservable;
 
     public FichaParaConstruir(FichaObjetivo fichaObjetivo, JugadorDeTurno jugadorDeTurno) {
         this.ficha = null;
         this.fichaObjetivo = fichaObjetivo;
         this.jugadorDeTurno = jugadorDeTurno;
 
+        construccionObservable = new Observable<>();
+
         fichaObjetivo.accionObservable().addObserver(new CambiarAccionObserver());
         jugadorDeTurno.comenzarTurnoObservable().addObserver(new ComenzarTurnoObserver());
+    }
+
+    public Observable<FichaParaConstruir> getConstruccionObservable() {
+        return construccionObservable;
     }
 
     private void deseleccionar() {
@@ -38,6 +45,8 @@ public class FichaParaConstruir extends AbstractListModel<Ficha> implements Comb
         Ficha ficha = Fichas.newInstance(this.ficha).enConstruccion();
         ficha.setBasico(jugadorDeTurno.jugador(), mapa, coordenada);
         ficha.ponerEnJuego();
+
+        construccionObservable.notifyObservers(this);
 
         deseleccionar();
     }
