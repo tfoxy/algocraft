@@ -26,6 +26,13 @@ public class JugadorView extends JPanel {
     private JLabel nombreLabel = new JLabel();
     private JComboBox<Ficha> fichaParaConstruirCombobox;
     private JButton botonTerminarTurno = new JButton("Terminar turno");
+    
+    
+    private final JLabel gasLabel = new JLabel();
+    private final JLabel cristalLabel = new JLabel();
+    private final JLabel poblacionLabel = new JLabel();
+    private final JLabel poblacionMaximoLabel = new JLabel();
+
 
     public JugadorView(ControladorJugador control) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -35,7 +42,18 @@ public class JugadorView extends JPanel {
         fichaParaConstruirCombobox =
                 new JComboBox<>(jugadorDeTurno.fichaParaConstruir());
 
-        add(nombreLabel);
+        JPanel panelStats = new JPanel();
+        panelStats.add(nombreLabel);
+        panelStats.add(new JLabel(" Cristal:"));
+        panelStats.add(cristalLabel);
+        panelStats.add(new JLabel(" Gas:"));
+        panelStats.add(gasLabel);
+        panelStats.add(new JLabel(" Poblacion:"));
+        panelStats.add(poblacionLabel );
+        panelStats.add(new JLabel("/"));
+        panelStats.add(poblacionMaximoLabel );
+        
+        add(panelStats);
         add(fichaParaConstruirCombobox);
         add(botonTerminarTurno);
 
@@ -91,11 +109,18 @@ public class JugadorView extends JPanel {
         this.jugador = jugador;
         fichaParaConstruirCombobox.setMaximumRowCount(jugador.raza().listaDeFichas().size());
         actulizarJugador();
+        actulizarRecursos();
     }
 
     private void actulizarJugador() {
         nombreLabel.setText(jugador.nombre());
-
     }
 
+    private void actulizarRecursos() {
+    	gasLabel.setText(jugador.cantidadGas() + "");
+        cristalLabel.setText(jugador.cantidadMineral() + "");
+        poblacionLabel.setText(jugador.poblcacionActual() + "");
+        poblacionMaximoLabel.setText(jugador.poblacionPosible()+ "");
+    }
+    
 }
