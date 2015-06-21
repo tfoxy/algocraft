@@ -16,28 +16,9 @@ import java.awt.event.KeyEvent;
 public class ControladorJugador {
 
     private final JugadorDeTurno jugadorDeTurno;
-    private JuegoLogger juegoLogger = JuegoLogger.EMPTY;
 
-    public ControladorJugador(FichaObjetivo fichaObjetivo, JugadorDeTurno jugadorDeTurno) {
+    public ControladorJugador(JugadorDeTurno jugadorDeTurno) {
         this.jugadorDeTurno = jugadorDeTurno;
-
-        fichaObjetivo.fichaObservables().on(AccionEnGrilla.CONSTRUCCION,
-                new UbicarFichaParaConstruirObserver());
-    }
-
-    public void setJuegoLogger(JuegoLogger juegoLogger) {
-        this.juegoLogger = juegoLogger;
-    }
-
-    private class UbicarFichaParaConstruirObserver implements Observer<FichaObjetivo> {
-        @Override
-        public void update(Observable<FichaObjetivo> object, FichaObjetivo data) {
-            try {
-                jugadorDeTurno.fichaParaConstruir().ubicarEn(data.ficha().coordenada());
-            } catch (JuegoException e) {
-                juegoLogger.log(e);
-            }
-        }
     }
 
     public JugadorDeTurno jugadorDeTurno() {

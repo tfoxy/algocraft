@@ -5,6 +5,7 @@ import ficha.Ficha;
 import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardEvents;
 import gui.modelo.FichaObjetivo;
+import gui.modelo.FichaSeleccionada;
 import gui.modelo.JuegoLogger;
 import gui.modelo.JugadorDeTurno;
 import gui.modelo.TableroObservable;
@@ -41,16 +42,17 @@ public final class MainGui {
 
         Juego juego = escenario.construir();
 
+        JuegoLogger juegoLogger = new JuegoLogger();
         FichaObjetivo fichaObjetivo = new FichaObjetivo();
         JugadorDeTurno jugadorDeTurno = new JugadorDeTurno(juego, fichaObjetivo);
-        JuegoLogger juegoLogger = new JuegoLogger();
+        jugadorDeTurno.setJuegoLogger(juegoLogger);
+        FichaSeleccionada fichaSeleccionada = new FichaSeleccionada(fichaObjetivo, jugadorDeTurno);
+        fichaSeleccionada.setJuegoLogger(juegoLogger);
 
 
         // Controladores
-        ControladorJugador controladorJugador = new ControladorJugador(fichaObjetivo, jugadorDeTurno);
-        controladorJugador.setJuegoLogger(juegoLogger);
-        ControladorFicha controladorFicha = new ControladorFicha(fichaObjetivo, jugadorDeTurno);
-        controladorFicha.setJuegoLogger(juegoLogger);
+        ControladorJugador controladorJugador = new ControladorJugador(jugadorDeTurno);
+        ControladorFicha controladorFicha = new ControladorFicha(fichaSeleccionada);
 
         jugadorDeTurno.comenzarTurno();
 

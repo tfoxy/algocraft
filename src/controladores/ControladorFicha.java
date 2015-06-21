@@ -10,6 +10,7 @@ import gui.controlador.KeyboardEvents;
 import gui.modelo.AccionDeFicha;
 import gui.modelo.AccionEnGrilla;
 import gui.modelo.FichaObjetivo;
+import gui.modelo.FichaSeleccionada;
 import gui.modelo.JuegoLogger;
 import gui.modelo.JugadorDeTurno;
 import gui.modelo.Observable;
@@ -23,77 +24,20 @@ import ficha.Ficha;
 
 public class ControladorFicha {
 
-    private final FichaObjetivo fichaObjetivo;
-    private final JugadorDeTurno jugadorDeTurno;
-    private final Observable<Ficha> cambioDeFichaObservable;
-    private final ObservableActions<AccionDeFicha, ControladorFicha> accionObservables;
-    private JuegoLogger logger = JuegoLogger.EMPTY;
+    private final FichaSeleccionada fichaSeleccionada;
 
-    private Ficha ficha;
-    private Magia magiaSeleccionada;
-
-    public ControladorFicha(FichaObjetivo fichaObjetivo, JugadorDeTurno jugadorDeTurno) {
-        this.fichaObjetivo = fichaObjetivo;
-        this.jugadorDeTurno = jugadorDeTurno;
-
-        this.cambioDeFichaObservable = new Observable<>();
-        this.accionObservables = new ObservableEnumActions<>(AccionDeFicha.class);
-
-        fichaObjetivo.fichaObservables().on(AccionEnGrilla.SELECCION, new Observer<FichaObjetivo>() {
-            @Override
-            public void update(Observable<FichaObjetivo> object, FichaObjetivo data) {
-                seleccionar(data.ficha());
-            }
-        });
-
-        fichaObjetivo.fichaObservables().on(AccionEnGrilla.ATAQUE, new Observer<FichaObjetivo>() {
-            @Override
-            public void update(Observable<FichaObjetivo> object, FichaObjetivo data) {
-                atacar(data.ficha());
-            }
-        });
-    }
-
-    public ObservableActions<AccionDeFicha, ControladorFicha> accionObservables() {
-        return accionObservables;
-    }
-
-    public void modoAtaque() {
-        fichaObjetivo.cambiarAccion(AccionEnGrilla.ATAQUE);
-    }
-
-    private void atacar(Ficha objetivo) {
-        try {
-            validarPropietario("Solamente se puede atacar con unidades propias");
-            ficha().atacar(objetivo);
-            accionObservables.notify(AccionDeFicha.ATAQUE, this);
-        } catch (JuegoException exc) {
-            logger.log(exc);
-        }
-    }
-
-    public Ficha ficha() {
-        return ficha;
-    }
-
-    private void seleccionar(Ficha ficha) {
-        this.ficha = ficha;
-        cambioDeFichaObservable.notifyObservers(ficha);
-    }
-
-    public Observable<Ficha> cambioDeFichaObservable() {
-        return cambioDeFichaObservable;
-    }
-
-    public void setJuegoLogger(JuegoLogger juegoLogger) {
-        this.logger = juegoLogger;
+    public ControladorFicha(FichaSeleccionada fichaSeleccionada) {
+        this.fichaSeleccionada = fichaSeleccionada;
     }
 
 
-    //mover en todas las direcciones XD
-    private class MovimientoListener extends AnyEventListener {
+    public FichaSeleccionada fichaSeleccionada() {
+        return fichaSeleccionada;
+    }
 
-        private Direccion direccion;
+
+    private final class MovimientoListener extends AnyEventListener {
+        private final Direccion direccion;
 
         private MovimientoListener(Direccion direccion) {
             this.direccion = direccion;
@@ -101,15 +45,7 @@ public class ControladorFicha {
 
         @Override
         public void eventOcurred(AWTEvent e) {
-            try {
-                validarPropietario("Solamente se pueden mover unidades propias");
-                ficha().mover(direccion);
-                fichaObjetivo.cambiarAccion(AccionEnGrilla.SELECCION);
-                fichaObjetivo.cambiarFicha(ficha());
-                accionObservables.notify(AccionDeFicha.MOVIMIENTO, ControladorFicha.this);
-            } catch (JuegoException exc) {
-                logger.log(exc);
-            }
+            fichaSeleccionada.moverHacia(direccion);
         }
     }
 
@@ -121,18 +57,8 @@ public class ControladorFicha {
         return new AnyEventListener() {
             @Override
             public void eventOcurred(AWTEvent e) {
-                modoAtaque();
+                fichaSeleccionada.modoAtaque();
             }
         };
-    }
-
-    private void validarPropietario() {
-        validarPropietario("Unidad no es propia");
-    }
-
-    private void validarPropietario(String errorMsg) {
-        if (!ficha().propietario().equals(jugadorDeTurno.jugador())) {
-            throw new UnicamenteObjetivoPropioException(errorMsg);
-        }
     }
 }

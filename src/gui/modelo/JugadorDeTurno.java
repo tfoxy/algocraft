@@ -1,5 +1,6 @@
 package gui.modelo;
 
+import error.JuegoException;
 import ficha.Ficha;
 import juego.Juego;
 import juego.Jugador;
@@ -15,6 +16,8 @@ public class JugadorDeTurno {
     private final Observable<JugadorDeTurno> comenzarTurnoObservable;
     private final Observable<JugadorDeTurno> terminarTurnoObservable;
 
+    private JuegoLogger juegoLogger = JuegoLogger.EMPTY;
+
     public JugadorDeTurno(Juego juego, FichaObjetivo fichaObjetivo) {
         this.juego = juego;
         this.fichaObjetivo = fichaObjetivo;
@@ -23,6 +26,8 @@ public class JugadorDeTurno {
         this.fichaParaConstruir = new FichaParaConstruir(fichaObjetivo, this);
 
         this.comenzarTurnoObservable.addObserver(new SeleccionarPrimeraFicha());
+        fichaObjetivo.fichaObservables().on(AccionEnGrilla.CONSTRUCCION,
+                new UbicarFichaParaConstruirObserver());
     }
 
 
@@ -31,6 +36,17 @@ public class JugadorDeTurno {
         public void update(Observable<JugadorDeTurno> object, JugadorDeTurno data) {
             fichaObjetivo.cambiarAccion(AccionEnGrilla.SELECCION);
             fichaObjetivo.cambiarFicha(elegirNuevaFicha());
+        }
+    }
+
+    private class UbicarFichaParaConstruirObserver implements Observer<FichaObjetivo> {
+        @Override
+        public void update(Observable<FichaObjetivo> object, FichaObjetivo data) {
+            try {
+                fichaParaConstruir.ubicarEn(data.ficha().coordenada());
+            } catch (JuegoException e) {
+                juegoLogger.log(e);
+            }
         }
     }
 
@@ -74,5 +90,9 @@ public class JugadorDeTurno {
 
     public void comenzarTurno() {
         this.comenzarTurnoObservable.notifyObservers(this);
+    }
+
+    public void setJuegoLogger(JuegoLogger juegoLogger) {
+        this.juegoLogger = juegoLogger;
     }
 }

@@ -3,6 +3,7 @@ package vista;
 import controladores.ControladorFicha;
 import ficha.Ficha;
 import gui.controlador.KeyboardMap;
+import gui.modelo.FichaSeleccionada;
 import gui.modelo.Observable;
 import gui.modelo.Observer;
 import tablero.Direccion;
@@ -63,18 +64,19 @@ public class FichaView extends JPanel {
 
         botonAtaque.setMnemonic(KeyEvent.VK_A);
 
-        cambiarFicha(control.ficha());
+        FichaSeleccionada fichaSeleccionada = control.fichaSeleccionada();
+        cambiarFicha(fichaSeleccionada.ficha());
 
-        control.cambioDeFichaObservable().addObserver(new Observer<Ficha>() {
+        fichaSeleccionada.cambioDeFichaObservable().addObserver(new Observer<Ficha>() {
             @Override
             public void update(Observable<Ficha> o, Ficha ficha) {
                 cambiarFicha(ficha);
             }
         });
 
-        control.accionObservables().addObserver(new Observer<ControladorFicha>() {
+        fichaSeleccionada.accionObservables().addObserver(new Observer<FichaSeleccionada>() {
             @Override
-            public void update(Observable<ControladorFicha> o, ControladorFicha control) {
+            public void update(Observable<FichaSeleccionada> o, FichaSeleccionada data) {
                 actulizarFicha();
             }
         });
