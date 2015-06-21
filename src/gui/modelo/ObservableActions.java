@@ -40,7 +40,7 @@ public class ObservableActions<K, V> {
         }
     }
 
-    public void observe(Observer<V> observer) {
+    public void addObserver(Observer<V> observer) {
         for (Observable<V> observable: observableMap.values()) {
             observable.addObserver(observer);
         }

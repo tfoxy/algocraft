@@ -52,8 +52,8 @@ public final class MainGui {
 
 
         // Controladores
-        ControladorJugador controladorJugador = new ControladorJugador(jugadorDeTurno);
-
+        ControladorJugador controladorJugador = new ControladorJugador(fichaObjetivo, jugadorDeTurno);
+        controladorJugador.setJuegoLogger(juegoLogger);
         ControladorFicha controladorFicha = new ControladorFicha(fichaObjetivo, jugadorDeTurno);
         controladorFicha.setJuegoLogger(juegoLogger);
 

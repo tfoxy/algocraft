@@ -18,9 +18,9 @@ public class JugadorDeTurno {
     public JugadorDeTurno(Juego juego, FichaObjetivo fichaObjetivo) {
         this.juego = juego;
         this.fichaObjetivo = fichaObjetivo;
-        this.fichaParaConstruir = new FichaParaConstruir(fichaObjetivo, this);
         this.comenzarTurnoObservable = new Observable<>();
         this.terminarTurnoObservable = new Observable<>();
+        this.fichaParaConstruir = new FichaParaConstruir(fichaObjetivo, this);
 
         this.comenzarTurnoObservable.addObserver(new SeleccionarPrimeraFicha());
     }

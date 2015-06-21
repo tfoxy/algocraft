@@ -39,6 +39,7 @@ public class GrillaView extends JPanel {
         setFocusable(true);
 
         fichaObjetivo.accionObservable().addObserver(new CambioDeCursor());
+        fichaObjetivo.fichaObservables().addObserver(new FocusEnGrilla());
     }
 
 
@@ -50,4 +51,10 @@ public class GrillaView extends JPanel {
         }
     }
 
+    private class FocusEnGrilla implements Observer<FichaObjetivo> {
+        @Override
+        public void update(Observable<FichaObjetivo> object, FichaObjetivo data) {
+            requestFocus();
+        }
+    }
 }
