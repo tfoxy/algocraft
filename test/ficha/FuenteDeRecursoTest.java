@@ -76,6 +76,7 @@ public class FuenteDeRecursoTest {
         protoss.pasarTurno();
 
         assertEquals(201, protoss.cantidadGas());
+        assertEquals(0, nuevoRecurso.cantidadDeGas());
     }
 
     @Test

@@ -2,6 +2,7 @@ package ficha;
 
 import error.EdificioDeRecursosNecesitaFichaRecursoException;
 import error.FichaSobreOtraFichaException;
+import juego.Recursos;
 import juego.RecursosDeJugador;
 
 public abstract class EdifcioDeRecursosTerrestre extends EdificioTerrestre {
@@ -32,12 +33,16 @@ public abstract class EdifcioDeRecursosTerrestre extends EdificioTerrestre {
         public void pasarTurno() {
             super.pasarTurno();
 
+            final Recursos cantidadAExtraer;
+
             if (this.sePuedeEstrear()) {
-                propietario.agregarRecursos(recursosExtraidosPorTurno);
-                recursosVirgenes().gastar(recursosExtraidosPorTurno);
+                cantidadAExtraer = recursosExtraidosPorTurno;
             } else {
-                propietario.agregarRecursos(recursosVirgenes().dameRecursosLineales());
+                cantidadAExtraer = recursosVirgenes().dameRecursosLineales();
             }
+
+            propietario.agregarRecursos(cantidadAExtraer);
+            recursosVirgenes().gastar(cantidadAExtraer);
         }
     }
 
