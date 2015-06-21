@@ -11,12 +11,14 @@ public class JugadorDeTurno {
 
     private final Juego juego;
     private final FichaObjetivo fichaObjetivo;
+    private final FichaParaConstruir fichaParaConstruir;
     private final Observable<JugadorDeTurno> comenzarTurnoObservable;
     private final Observable<JugadorDeTurno> terminarTurnoObservable;
 
     public JugadorDeTurno(Juego juego, FichaObjetivo fichaObjetivo) {
         this.juego = juego;
         this.fichaObjetivo = fichaObjetivo;
+        this.fichaParaConstruir = new FichaParaConstruir(fichaObjetivo, this);
         this.comenzarTurnoObservable = new Observable<>();
         this.terminarTurnoObservable = new Observable<>();
 
@@ -48,6 +50,10 @@ public class JugadorDeTurno {
 
     public Juego juego() {
         return juego;
+    }
+
+    public FichaParaConstruir fichaParaConstruir() {
+        return fichaParaConstruir;
     }
 
     public void terminarTurno() {
