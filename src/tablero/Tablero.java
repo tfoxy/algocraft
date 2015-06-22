@@ -44,7 +44,7 @@ public class Tablero implements ITablero {
 
         if (x < 1 || x > longitudX
                 || y < 1 || y > longitudY
-                || z < Altura.TIERRA || z > Altura.AIRE) {
+                || z < Altura.MINIMA || z > Altura.MAXIMA) {
             throw new PosicionFueraDeLimiteException();
         }
     }

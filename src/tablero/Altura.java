@@ -1,18 +1,22 @@
 package tablero;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public final class Altura {
+    private Altura() {
+        // noop
+    }
+
     public static final int TIERRA = 1;
     public static final int AIRE = 2;
-
-    private Altura() {
-        // Utility class
-    }
 
     public static final List<Integer> VALORES = Arrays.asList(
             TIERRA,
             AIRE
     );
+
+    public static final int MINIMA = Collections.min(VALORES);
+    public static final int MAXIMA = Collections.max(VALORES);
 }
