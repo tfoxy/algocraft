@@ -2,6 +2,7 @@ package ficha;
 
 import error.CapacidadInsuficienteException;
 import error.DentroDeTransporteException;
+import error.EstadoYaExisteEnFichaException;
 import error.FichaSobreOtraFichaException;
 import error.FueraDeRangoException;
 import error.JuegoException;
@@ -27,6 +28,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -66,7 +68,7 @@ public abstract class Ficha implements Cloneable {
 
     protected int vision = 0;
     protected boolean dentroDeTransporte = false;
-    protected List<EstadoDeFicha> estados = new ArrayList<>();
+    protected Set<EstadoDeFicha> estados = new HashSet<>();
 
     protected List<Magia> magias = new ArrayList<>();
 
@@ -352,6 +354,12 @@ public abstract class Ficha implements Cloneable {
     private void aplicarEstados() {
         for (EstadoDeFicha estado: estados) {
             estado.aplicarEn(this);
+        }
+    }
+
+    public void agregarEstado(EstadoDeFicha estado) {
+        if (!this.estados.add(estado)) {
+            throw new EstadoYaExisteEnFichaException();
         }
     }
 
