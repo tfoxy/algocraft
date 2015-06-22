@@ -233,11 +233,7 @@ public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
 
     @Override
     public void quitarEnergia(int cantidad) {
-        if (energiaActual < cantidad) {
-            throw new EnergiaInsuficienteException();
-        }
-
-        energiaActual -= cantidad;
+        energiaActual = Math.max(0, energiaActual - cantidad);
     }
 
     @Override
