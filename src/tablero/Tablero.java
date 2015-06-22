@@ -6,6 +6,7 @@ import java.util.Map;
 import error.PosicionFueraDeLimiteException;
 import ficha.Ficha;
 import ficha.natural.terreno.TerrenoAire;
+import ficha.natural.terreno.TerrenoCielo;
 import ficha.natural.terreno.TerrenoTierra;
 import juego.Gaia;
 
@@ -29,9 +30,13 @@ public class Tablero implements ITablero {
 
 
     private Ficha getFichaVacia(Coordenada3d lugar) {
-        Ficha ficha = lugar.z == Altura.TIERRA
-                ? new TerrenoTierra()
-                : new TerrenoAire();
+        final Ficha ficha;
+        switch (lugar.z) {
+            case Altura.TIERRA: ficha = new TerrenoTierra(); break;
+            case Altura.AIRE: ficha = new TerrenoAire(); break;
+            case Altura.CIELO: ficha = new TerrenoCielo(); break;
+            default: throw new PosicionFueraDeLimiteException();
+        }
         ficha.setBasico(gaia, this, lugar);
         return ficha;
     }

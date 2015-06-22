@@ -2,6 +2,7 @@ package ficha.magia;
 
 import ficha.Ficha;
 import ficha.FichaCelestial;
+import ficha.TipoDeFicha;
 import tablero.CoordenadaUtil;
 
 import java.awt.Color;
@@ -19,6 +20,7 @@ public class TormentaPsionicaFicha extends FichaCelestial {
 
     public TormentaPsionicaFicha() {
         duracionRestante = DURACION;
+        this.tipoDeFicha.add(TipoDeFicha.MAGICA);
     }
 
     @Override
