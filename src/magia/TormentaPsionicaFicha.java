@@ -22,7 +22,7 @@ public class TormentaPsionicaFicha extends FichaAerea {
 
     @Override
     public void pasarTurno() {
-        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(tablero, coordenada, RANGO);
+        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(this, RANGO);
 
         for (Ficha ficha: fichas) {
             ficha.sufrirDanio(DANIO);

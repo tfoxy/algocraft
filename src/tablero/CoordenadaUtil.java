@@ -54,6 +54,9 @@ public final class CoordenadaUtil {
         }
     }
 
+    public static List<Ficha> fichasEnArea(Ficha ficha, int rango) {
+        return fichasEnArea(ficha.tablero(), ficha.coordenada(), rango);
+    }
 
     public static List<Ficha> fichasEnArea(ITablero mapa, Coordenada puntoMedio, int rango) {
         final Set<Coordenada> coordenadas = areaDeCoordenadas(puntoMedio, rango);
