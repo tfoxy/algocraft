@@ -8,6 +8,7 @@ import error.JuegoException;
 import error.MovimientoInsuficienteException;
 import error.TransporteNoContieneFichaException;
 import error.UnicamenteObjetivoPropioException;
+import ficha.estado.EstadoDeFicha;
 import juego.Recursos;
 import juego.Jugador;
 import juego.RecursosDeJugador;
@@ -65,6 +66,7 @@ public abstract class Ficha implements Cloneable {
 
     protected int vision = 0;
     protected boolean dentroDeTransporte = false;
+    protected List<EstadoDeFicha> estados = new ArrayList<>();
 
     protected List<Magia> magias = new ArrayList<>();
 
@@ -163,9 +165,7 @@ public abstract class Ficha implements Cloneable {
     public void atacar(Ficha defensor) {
         final Ataque ataque = defensor.tipoDeAtaqueRecibido(this);
 
-        if (!this.puedoAtacar(defensor, ataque.rango())) {
-            throw new FueraDeRangoException();
-        }
+        validarAtaque(defensor, ataque);
 
         disminuirMovimiento();
 
@@ -181,11 +181,18 @@ public abstract class Ficha implements Cloneable {
         }
     }
 
-    private boolean puedoAtacar(Ficha defensor, int rango) {
+    private boolean puedoAtacar(Ficha defensor, Ataque ataque) {
         Coordenada posicionAgresor = coordenada;
         Coordenada posicionDefensor = defensor.coordenada();
+        int distancia = posicionAgresor.distanciaAObjetivo(posicionDefensor);
 
-        return rango >= posicionAgresor.distanciaAObjetivo(posicionDefensor);
+        return ataque.rango() >= distancia;
+    }
+
+    private void validarAtaque(Ficha defensor, Ataque ataque) {
+        if (!this.puedoAtacar(defensor, ataque)) {
+            throw new FueraDeRangoException();
+        }
     }
 
     public abstract Ataque tipoDeAtaqueRecibido(Ficha atacante);
@@ -338,7 +345,14 @@ public abstract class Ficha implements Cloneable {
     }
 
     public void pasarTurno() {
+        aplicarEstados();
         estrategia.pasarTurno();
+    }
+
+    private void aplicarEstados() {
+        for (EstadoDeFicha estado: estados) {
+            estado.aplicarEn(this);
+        }
     }
 
     public boolean es(TipoDeFicha tipoDeFicha) {
