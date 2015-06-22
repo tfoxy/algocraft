@@ -1,4 +1,4 @@
-package magia;
+package ficha.magia;
 
 import ficha.Ficha;
 import ficha.FichaCelestial;

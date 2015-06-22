@@ -1,5 +1,6 @@
 package magia;
 
+import ficha.magia.TormentaPsionicaFicha;
 import tablero.Coordenada3d;
 import ficha.Ficha;
 import tablero.ITablero;
