@@ -1,7 +1,7 @@
 package magia;
 
 import error.EnergiaInsuficienteException;
-import error.UnicamenteObjetivoNoNaturalException;
+import error.EstadoYaExisteEnFichaException;
 import error.UnicamenteObjetivoUnidadException;
 import ficha.Ficha;
 import ficha.FichaAerea;
@@ -15,9 +15,13 @@ import juego.Raza;
 import org.junit.Before;
 import org.junit.Test;
 import stats.BarrasEscudoVidaEnergia;
+import stats.IBarras;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Tablero;
+
+import static org.hamcrest.Matchers.lessThan;
+import static org.junit.Assert.assertThat;
 
 public class RadiacionMagiaTest {
 
@@ -39,8 +43,9 @@ public class RadiacionMagiaTest {
     private Jugador jugador;
     private Jugador jugadorEnemigo;
     private Coordenada coordenada = new Coordenada(3, 3);
+    private Coordenada coordenadaVecina = new Coordenada(3, 4);
     private Coordenada3d coordenadaTerrestre = new Coordenada3d(3, 3, 1);
-    private Coordenada3d coordenadaAerea = new Coordenada3d(3, 3, 2);
+    private Coordenada3d coordenadaTerrestreVecina = new Coordenada3d(3, 4, 1);
     private FichaAerea naveCiencia;
 
     @Before
@@ -65,6 +70,13 @@ public class RadiacionMagiaTest {
         return fichaEnemiga;
     }
 
+    private Ficha ponerUnidadEnemigaVecina() {
+        FichaTerrestre fichaEnemiga = new Zealot();
+        fichaEnemiga.setBasico(jugadorEnemigo, mapa, coordenadaVecina);
+        fichaEnemiga.ponerEnJuego();
+        return fichaEnemiga;
+    }
+
 
     @Test(expected = UnicamenteObjetivoUnidadException.class)
     public void noSePuedeAplicarAFichaEspacial() {
@@ -72,7 +84,7 @@ public class RadiacionMagiaTest {
         espacio.setBasico(gaia, mapa, coordenada);
         espacio.ponerEnJuego();
 
-        ponerNaveCiencia(200);
+        ponerNaveCiencia(magia.coste() * 2);
 
         magia.realizar(naveCiencia, coordenadaTerrestre);
     }
@@ -91,6 +103,64 @@ public class RadiacionMagiaTest {
         ponerUnidadEnemiga();
 
         magia.realizar(naveCiencia, coordenadaTerrestre);
+    }
+
+    @Test(expected = EstadoYaExisteEnFichaException.class)
+    public void noSePuedeAplicarDosVecesEnLaMismaUnidad() {
+        ponerNaveCiencia(magia.coste() * 2);
+        ponerUnidadEnemiga();
+
+        magia.realizar(naveCiencia, coordenadaTerrestre);
+        magia.realizar(naveCiencia, coordenadaTerrestre);
+    }
+
+    @Test
+    public void realizaDanioALaUnidadAlPasarTurnoDeUnidad() {
+        ponerNaveCiencia(magia.coste());
+        Ficha ficha = ponerUnidadEnemiga();
+        IBarras barras = ficha.barras();
+
+        int vidaTotalInicial = barras.vidaActual() + barras.escudoActual();
+
+        magia.realizar(naveCiencia, coordenadaTerrestre);
+        ficha.pasarTurno();
+
+        int vidaTotal = barras.vidaActual() + barras.escudoActual();
+
+        assertThat(vidaTotal, lessThan(vidaTotalInicial));
+    }
+
+    @Test
+    public void realizaDanioALaUnidadAereaQueEsteDebajoDeUnidadIrradiada() {
+        ponerNaveCiencia(magia.coste());
+        Ficha ficha = ponerUnidadEnemiga();
+        IBarras barras = naveCiencia.barras();
+
+        int vidaTotalInicial = barras.vidaActual() + barras.escudoActual();
+
+        magia.realizar(naveCiencia, coordenadaTerrestre);
+        ficha.pasarTurno();
+
+        int vidaTotal = barras.vidaActual() + barras.escudoActual();
+
+        assertThat(vidaTotal, lessThan(vidaTotalInicial));
+    }
+
+    @Test
+    public void realizaDanioALaUnidadTerrestreVecina() {
+        ponerNaveCiencia(magia.coste());
+        Ficha ficha = ponerUnidadEnemiga();
+        Ficha fichaVecina = ponerUnidadEnemigaVecina();
+        IBarras barras = fichaVecina.barras();
+
+        int vidaTotalInicial = barras.vidaActual() + barras.escudoActual();
+
+        magia.realizar(naveCiencia, coordenadaTerrestre);
+        ficha.pasarTurno();
+
+        int vidaTotal = barras.vidaActual() + barras.escudoActual();
+
+        assertThat(vidaTotal, lessThan(vidaTotalInicial));
     }
 
 }
