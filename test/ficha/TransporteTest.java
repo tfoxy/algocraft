@@ -1,6 +1,7 @@
 package ficha;
 
 import error.CapacidadInsuficienteException;
+import error.DentroDeTransporteException;
 import error.FichaSobreOtraFichaException;
 import error.UnicamenteObjetivoPropioException;
 import ficha.natural.terreno.TerrenoEspacial;
@@ -12,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import tablero.Coordenada;
+import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.Tablero;
 
@@ -85,6 +87,20 @@ public class TransporteTest {
 
         transporte.cargar();
         transporte.descargar(unidad);
+    }
+
+    @Test
+    public void unidadDescargadaSeEncuentraDebajoDeTransporte() {
+        Ficha unidad = new Marine();
+        Coordenada3d coord3d = new Coordenada3d(coordenada, unidad.altura());
+        unidad.setBasico(jugador, mapa, coordenada);
+        unidad.ponerEnJuego();
+
+        transporte.cargar();
+        transporte.descargar(unidad);
+
+        Assert.assertEquals(coord3d, unidad.coordenada());
+        Assert.assertSame(unidad, mapa.getFicha(coord3d));
     }
 
     @Test
@@ -192,5 +208,28 @@ public class TransporteTest {
         unidad.ponerEnJuego();
 
         transporte.cargar();
+    }
+
+    @Test(expected = DentroDeTransporteException.class)
+    public void unidadNoPuedeMoverseDentroDeTransporte() {
+        Ficha unidad = new Marine();
+        unidad.setBasico(jugador, mapa, coordenada);
+        unidad.ponerEnJuego();
+
+        transporte.cargar();
+
+        unidad.mover(Direccion.ARRIBA);
+    }
+
+    @Test
+    public void unidadPuedeMoverseLuegoDeSerDescargada() {
+        Ficha unidad = new Marine();
+        unidad.setBasico(jugador, mapa, coordenada);
+        unidad.ponerEnJuego();
+
+        transporte.cargar();
+        transporte.descargar(unidad);
+
+        unidad.mover(Direccion.ARRIBA);
     }
 }
