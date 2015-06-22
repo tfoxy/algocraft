@@ -10,9 +10,9 @@ public final class ColorDeJugador {
         // noop
     }
 
-    public static final Color AZUL = Color.BLUE;
+    public static final Color AZUL = new Color(100, 149, 237);
     public static final Color ROJO = Color.RED;
-    public static final Color VERDE = Color.GREEN;
+    public static final Color VERDE = new Color(0, 192, 0);
     public static final Color AMARILLO = Color.YELLOW;
     public static final Color CYAN = Color.CYAN;
     public static final Color PURPURA = new Color(128, 0, 128);
