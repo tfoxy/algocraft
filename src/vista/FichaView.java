@@ -25,9 +25,7 @@ public class FichaView extends JPanel {
     private final JLabel nombreLabel = new JLabel();
     private final JLabel movimientoLabel = new JLabel();
     private final JLabel movimientoMaximoLabel = new JLabel();
-    private final JLabel vidaLabel = new JLabel();
-    private final JLabel escudoLabel = new JLabel();
-    private final JLabel energiaLabel = new JLabel();
+    private final JLabel barrasLabel = new JLabel();
 
     private final JButton botonArriba = new JButton("Arriba");
     private final JButton botonAbajo = new JButton("Abajo");
@@ -52,12 +50,8 @@ public class FichaView extends JPanel {
         panelStats.add(movimientoLabel);
         panelStats.add(new JLabel("/"));
         panelStats.add(movimientoMaximoLabel);
-        panelStats.add(new JLabel(" V"));
-        panelStats.add(vidaLabel);
-        panelStats.add(new JLabel(" E"));
-        panelStats.add(escudoLabel);
-        panelStats.add(new JLabel(" M"));
-        panelStats.add(energiaLabel);
+        panelStats.add(new JLabel(" "));
+        panelStats.add(barrasLabel);
         add(panelStats);
 
         JPanel panelBotonesMovimiento = new JPanel();
@@ -122,12 +116,22 @@ public class FichaView extends JPanel {
         nombreLabel.setText(ficha.nombre());
         movimientoLabel.setText(ficha.movimiento() + "");
         movimientoMaximoLabel.setText(ficha.movimientoMaximo() + "");
-        vidaLabel.setText(ficha.barras().vidaActual() + "");
-        escudoLabel.setText(ficha.barras().escudoActual() + "");
-        energiaLabel.setText(ficha.barras().energiaActual() + "");
+        barrasLabel.setText(ficha.barras().toShortString());
     }
 
     private static class FichasCargadasRenderer extends DefaultListCellRenderer {
+        private static String string(Ficha ficha) {
+            if (ficha == null)
+                return "Descargar...";
+            else
+                return String.format("%s %d/%d %s",
+                        ficha.nombre(),
+                        ficha.movimiento(),
+                        ficha.movimientoMaximo(),
+                        ficha.barras().toShortString()
+                );
+        }
+
         @Override
         public Component getListCellRendererComponent(JList<?> list,
                                                       Object value,
@@ -136,7 +140,7 @@ public class FichaView extends JPanel {
                                                       boolean cellHasFocus) {
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
             Ficha ficha = (Ficha) value;
-            setText(ficha == null ? "Descargar..." : ficha.nombre() + " " + ficha.barras());
+            setText(string(ficha));
             return this;
         }
     }

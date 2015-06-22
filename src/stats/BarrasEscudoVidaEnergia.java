@@ -2,6 +2,8 @@ package stats;
 
 import error.EnergiaInsuficienteException;
 
+import java.util.Collections;
+
 public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
     private static final Builder EMPTY_BUILDER = new Builder();
 
@@ -236,6 +238,32 @@ public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
         }
 
         energiaActual -= cantidad;
+    }
+
+    @Override
+    public String toShortString() {
+        StringBuilder builder = new StringBuilder();
+        concatBarras(builder, "V", vidaActual, vidaMaxima, vidaPorTurno);
+        concatBarras(builder, "E", escudoActual, escudoMaximo, escudoPorTurno);
+        concatBarras(builder, "M", energiaActual, energiaMaxima, energiaPorTurno);
+        return builder.toString();
+    }
+
+    private void concatBarras(StringBuilder stringBuilder,
+                                     String prefix,
+                                     int actual,
+                                     int maxima,
+                                     int porTurno) {
+        if (maxima > 0) {
+            if (stringBuilder.length() > 0)
+                stringBuilder.append(' ');
+
+            String str = String.format("%s:%d/%d", prefix, actual, maxima);
+            stringBuilder.append(str);
+
+            if (porTurno > 0)
+                stringBuilder.append("(+" + porTurno + ')');
+        }
     }
 
     @Override
