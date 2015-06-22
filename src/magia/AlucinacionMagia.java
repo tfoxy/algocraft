@@ -48,7 +48,8 @@ public class AlucinacionMagia extends Magia {
 
         final Set<Coordenada> casillasVecinas = CoordenadaUtil.areaDeCoordenadas(objetivo, RADIO);
         for (Coordenada coordenada: casillasVecinas) {
-            if (caster.tablero().hayEspacio(new Coordenada3d(coordenada, objetivo.z))) {
+            Coordenada3d coord3d = new Coordenada3d(coordenada, objetivo.z);
+            if (fichaObjetivo.puedoReemplazarFichaEnTablero(coord3d)) {
                 Ficha fichaCopiar = caster.tablero().getFicha(objetivo);
                 this.insertarEspectro(fichaCopiar, coordenada);
                 return;

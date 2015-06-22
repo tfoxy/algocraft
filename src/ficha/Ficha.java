@@ -143,9 +143,7 @@ public abstract class Ficha implements Cloneable {
     }
 
     public void disminuirMovimiento() {
-        if (movimiento <= 0) {
-            throw new MovimientoInsuficienteException();
-        }
+        validarMovimientoSuficiente();
 
         movimiento -= 1;
     }
@@ -208,11 +206,13 @@ public abstract class Ficha implements Cloneable {
             clone = (Ficha) super.clone();
         } catch (CloneNotSupportedException e) {
             // No debería ocurrir
-            throw new RuntimeException();
+            throw new RuntimeException(e.getMessage(), e.getCause());
         } //cuando esten echos los Texy intentar quitar el (casteo)
 
         clone.barras = this.barras.clone();
-        clone.transportacion = new Transportacion(transportacion.capacidad());
+        clone.transportacion = new Transportacion(this.transportacion.capacidad());
+        clone.tipoDeFicha = EnumSet.copyOf(this.tipoDeFicha);
+        clone.estados = new HashSet<>(this.estados);
 
         return clone;
     }
@@ -227,6 +227,7 @@ public abstract class Ficha implements Cloneable {
         clone.transportacion = Transportacion.VACIA;
         clone.magias = Collections.emptyList();
         clone.tipoDeFicha.add(TipoDeFicha.ALUCINACION);
+        clone.estados = new HashSet<>();
 
         return clone;
     }
@@ -258,7 +259,7 @@ public abstract class Ficha implements Cloneable {
         return transportacion.fichasCargadas();
     }
 
-    private void validarMovimientoSuficiente() {
+    public void validarMovimientoSuficiente() {
         if (movimiento <= 0) {
             throw new MovimientoInsuficienteException();
         }
@@ -340,9 +341,7 @@ public abstract class Ficha implements Cloneable {
             throw new DentroDeTransporteException();
         }
 
-        if (movimiento <= 0) {
-            throw new MovimientoInsuficienteException();
-        }
+        validarMovimientoSuficiente();
 
         verificarCoordenada(nuevaUbicacion);
     }
@@ -380,7 +379,7 @@ public abstract class Ficha implements Cloneable {
         return puedoReemplazarFichaEnTablero(coordenada);
     }
 
-    protected boolean puedoReemplazarFichaEnTablero(Coordenada3d nuevaCoordenada) {
+    public boolean puedoReemplazarFichaEnTablero(Coordenada3d nuevaCoordenada) {
         return tablero.getFicha(nuevaCoordenada).tipoDeFicha.contains(tipoDeFichaNecesaria);
     }
 

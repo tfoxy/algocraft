@@ -18,20 +18,26 @@ public abstract class Magia {
     }
 
     public final void realizar(Ficha caster, Coordenada3d objetivo) {
-        verificarSiPuedeRealizarla(caster, objetivo);
+        verificarSiPuedeRealizarla(caster);
+        verificarSiLlegaAlObjetivo(caster, objetivo);
 
         aplicar(caster, objetivo);
 
         caster.barras().quitarEnergia(coste);
+        caster.disminuirMovimiento();
     }
 
     protected abstract void aplicar(Ficha caster, Coordenada3d objetivo);
 
-    private void verificarSiPuedeRealizarla(Ficha ficha, Coordenada objetivo) {
-        if (ficha.barras().energiaActual() < coste) {
+    public void verificarSiPuedeRealizarla(Ficha caster) {
+        if (caster.barras().energiaActual() < coste) {
             throw new EnergiaInsuficienteException();
         }
-        if (ficha.coordenada().distanciaAObjetivo(objetivo) > rango) {
+        caster.validarMovimientoSuficiente();
+    }
+
+    private void verificarSiLlegaAlObjetivo(Ficha caster, Coordenada3d objetivo) {
+        if (caster.coordenada().distanciaAObjetivo(objetivo) > rango) {
             throw new FueraDeRangoException();
         }
     }
