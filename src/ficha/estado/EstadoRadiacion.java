@@ -9,6 +9,12 @@ public class EstadoRadiacion implements EstadoDeFicha {
     private static final int RANGO = 1;
     private static final int DANIO = 20;
 
+    public static final EstadoRadiacion INSTANCE = new EstadoRadiacion();
+
+    private EstadoRadiacion() {
+        // noop
+    }
+
     @Override
     public void aplicarEn(Ficha ficha) {
         List<Ficha> fichas = CoordenadaUtil.fichasEnArea(ficha, RANGO);

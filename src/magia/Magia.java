@@ -15,16 +15,15 @@ public abstract class Magia {
         this.rango = rango;
     }
 
-    public final void realizar(Ficha ficha, Coordenada3d objetivo) {
-        verificarSiPuedeRealizarla(ficha, objetivo);
-        verificarObjetivo(ficha, objetivo);
+    public final void realizar(Ficha caster, Coordenada3d objetivo) {
+        verificarSiPuedeRealizarla(caster, objetivo);
 
-        aplicar(ficha, objetivo);
+        aplicar(caster, objetivo);
 
-        ficha.barras().quitarEnergia(coste);
+        caster.barras().quitarEnergia(coste);
     }
 
-    protected abstract void aplicar(Ficha ficha, Coordenada3d objetivo);
+    protected abstract void aplicar(Ficha caster, Coordenada3d objetivo);
 
     private void verificarSiPuedeRealizarla(Ficha ficha, Coordenada objetivo) {
         if (ficha.barras().energiaActual() < coste) {
@@ -35,15 +34,11 @@ public abstract class Magia {
         }
     }
 
-    protected void verificarObjetivo(Ficha ficha, Coordenada3d objetivo) {
-        // noop: el objetivo es válido por defecto
-    }
-
-    int coste() {
+    public int coste() {
         return coste;
     }
 
-    int rango() {
+    public int rango() {
         return rango;
     }
 

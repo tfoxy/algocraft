@@ -30,31 +30,28 @@ public class AlucinacionMagia extends Magia {
     }
 
 
-    /**
-     * @throws UnicamenteObjetivoPropioException
-     */
-    @Override
-    protected void verificarObjetivo(Ficha ficha, Coordenada3d objetivo) {
-        Ficha fichaObjetivo = ficha.tablero().getFicha(objetivo);
-
-        if (!fichaObjetivo.propietario().equals(ficha.propietario())) {
-            // TODO test para probar que solamente se puede aplicar a ficha del mismo jugador
+    private void verificarObjetivo(Ficha objetivo, Ficha caster) {
+        if (!objetivo.propietario().equals(caster.propietario())) {
             throw new UnicamenteObjetivoPropioException();
         }
-        if (!fichaObjetivo.es(TipoDeFicha.UNIDAD)) {
+        if (!objetivo.es(TipoDeFicha.UNIDAD)) {
             throw new UnicamenteObjetivoUnidadException();
         }
-        if (fichaObjetivo.es(TipoDeFicha.ALUCINACION)) {
+        if (objetivo.es(TipoDeFicha.ALUCINACION)) {
             throw new UnicamenteObjetivoNoAlucinacionException();
         }
     }
 
     @Override
-    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
+    protected void aplicar(Ficha caster, Coordenada3d objetivo) {
+        Ficha fichaObjetivo = caster.tablero().getFicha(objetivo);
+
+        verificarObjetivo(fichaObjetivo, caster);
+
         final Set<Coordenada> casillasVecinas = CoordenadaUtil.areaDeCoordenadas(objetivo, 2);
         for (Coordenada coordenada: casillasVecinas) {
-            if (ficha.tablero().hayEspacio(new Coordenada3d(coordenada, objetivo.z))) {
-                Ficha fichaCopiar = ficha.tablero().getFicha(objetivo);
+            if (caster.tablero().hayEspacio(new Coordenada3d(coordenada, objetivo.z))) {
+                Ficha fichaCopiar = caster.tablero().getFicha(objetivo);
                 this.insertarEspectro(fichaCopiar, coordenada);
                 return;
             }
