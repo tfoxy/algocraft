@@ -22,7 +22,7 @@ public class TormentaPsionicaMagia extends Magia {
     protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
         final TormentaPsionicaFicha poder = new TormentaPsionicaFicha();
         final ITablero mapa = ficha.tablero();
-        poder.setBasico(mapa.gaia(), mapa, objetivo);
+        poder.setBasico(ficha.propietario(), mapa, objetivo);
         poder.ponerEnJuego();
     }
 }
