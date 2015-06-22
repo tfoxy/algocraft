@@ -4,6 +4,7 @@ import ficha.Ficha;
 import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardMap;
 import gui.modelo.FichaObjetivo;
+import gui.modelo.FichaParaConstruir;
 import gui.modelo.JugadorDeTurno;
 import gui.modelo.Observable;
 import gui.modelo.Observer;
@@ -65,7 +66,8 @@ public class JugadorView extends JPanel {
         botonTerminarTurno.setToolTipText("ENTER");
 
         cambiarJugador(jugadorDeTurno.jugador());
-
+ 
+        jugadorDeTurno.fichaParaConstruir().getConstruccionObservable().addObserver(new ConstruccionObserver());
         jugadorDeTurno.comenzarTurnoObservable().addObserver(new ComenzarTurnoObserver());
     }
 
@@ -77,6 +79,16 @@ public class JugadorView extends JPanel {
         keyboardMap.put("ENTER", control.getTerminarTurnoListener());
     }
 
+    private class ConstruccionObserver implements Observer<FichaParaConstruir> {
+
+		@Override
+		public void update(Observable<FichaParaConstruir> object,
+				FichaParaConstruir data) {
+			actulizarRecursos();
+		}
+
+    }
+    
     private class ComenzarTurnoObserver implements Observer<JugadorDeTurno> {
         @Override
         public void update(Observable<JugadorDeTurno> o, JugadorDeTurno jugadorDeTurno) {

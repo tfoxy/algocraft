@@ -67,9 +67,6 @@ public final class MainGui {
         JFrame ventana = new VentanaPrincipal(grillaView, fichaView, jugadorView, loggerView);
         ventana.setVisible(true);
         
-        //vista Experimental (estoy viendo si funciona)
-        ControladorConstruccion CC = new ControladorConstruccion(builder.tablero(),jugador1);
-        new ConstruccionView2 (jugador1);
     }
 
 }
