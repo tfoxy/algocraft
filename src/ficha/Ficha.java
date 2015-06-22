@@ -227,7 +227,7 @@ public abstract class Ficha implements Cloneable {
         clone.magias = Collections.emptyList();
         clone.tipoDeFicha.add(TipoDeFicha.ALUCINACION);
 
-        return this;
+        return clone;
     }
 
 
