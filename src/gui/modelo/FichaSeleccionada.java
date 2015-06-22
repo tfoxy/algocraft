@@ -73,6 +73,8 @@ public class FichaSeleccionada {
         try {
             validarPropietario("Solamente se puede atacar con unidades propias");
             ficha().atacar(objetivo);
+            String msg = "Ataque a " + objetivo.nombre() + " " + objetivo.barras().toShortString();
+            logger.log(msg);
             accionObservables.notify(AccionDeFicha.ATAQUE, this);
         } catch (JuegoException exc) {
             logger.log(exc);
