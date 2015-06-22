@@ -2,7 +2,7 @@ package error;
 
 public class CapacidadInsuficienteException extends TransporteException {
     public CapacidadInsuficienteException() {
-        super("Capacidad Insuficiente en el transporte");
+        super("Capacidad insuficiente en la unidad seleccionada");
     }
 
     public CapacidadInsuficienteException(String msg) {
