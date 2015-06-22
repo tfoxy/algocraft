@@ -69,6 +69,12 @@ public class EscenarioSimple {
         unidad.ponerEnJuego();
     }
 
+    private void nuevoTransporte(Jugador jugador, Coordenada coord) {
+        Ficha transporte = jugador.raza().nuevoTransporte();
+        transporte.setBasico(jugador, mapa, coord);
+        transporte.ponerEnJuego();
+    }
+
     public Juego construir() {
         Juego juego = builder.build();
 
@@ -95,6 +101,9 @@ public class EscenarioSimple {
 
         nuevaUnidadBasica(j1, c(2, PUNTO_MEDIO.y));
         nuevaUnidadBasica(j2, simetrica(c(2, PUNTO_MEDIO.y)));
+
+        nuevoTransporte(j1, c(3, PUNTO_MEDIO.y));
+        nuevoTransporte(j2, simetrica(c(3, PUNTO_MEDIO.y)));
 
         return juego;
     }
