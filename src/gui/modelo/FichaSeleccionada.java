@@ -9,6 +9,7 @@ import tablero.Direccion;
 public class FichaSeleccionada {
     private final FichaObjetivo fichaObjetivo;
     private final JugadorDeTurno jugadorDeTurno;
+    private final FichasCargadas fichasCargadas;
     private final Observable<Ficha> cambioDeFichaObservable;
     private final ObservableActions<AccionDeFicha, FichaSeleccionada> accionObservables;
     private JuegoLogger logger = JuegoLogger.EMPTY;
@@ -20,6 +21,7 @@ public class FichaSeleccionada {
         this.fichaObjetivo = fichaObjetivo;
         this.jugadorDeTurno = jugadorDeTurno;
 
+        this.fichasCargadas = new FichasCargadas(this);
         this.cambioDeFichaObservable = new Observable<>();
         this.accionObservables = new ObservableEnumActions<>(AccionDeFicha.class);
 
@@ -82,6 +84,18 @@ public class FichaSeleccionada {
         } catch (JuegoException exc) {
             logger.log(exc);
         }
+    }
+
+    public void descargar(Ficha ficha) {
+        try {
+            ficha().descargar(ficha);
+        } catch (JuegoException exc) {
+            logger.log(exc);
+        }
+    }
+
+    public FichasCargadas fichasCargadas() {
+        return fichasCargadas;
     }
 
     public Observable<Ficha> cambioDeFichaObservable() {

@@ -237,4 +237,18 @@ public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
 
         energiaActual -= cantidad;
     }
+
+    @Override
+    public String toString() {
+        return String.format("V:%d/%d(+%d) E:%d/%d(+%d) M:%d/%d(+%d)",
+                vidaActual,
+                vidaMaxima,
+                vidaPorTurno,
+                escudoActual,
+                escudoMaximo,
+                escudoPorTurno,
+                energiaActual,
+                energiaMaxima,
+                energiaPorTurno);
+    }
 }

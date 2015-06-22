@@ -9,9 +9,13 @@ import gui.modelo.Observer;
 import tablero.Direccion;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import java.awt.Component;
 import java.awt.event.KeyEvent;
 
 public class FichaView extends JPanel {
@@ -31,10 +35,16 @@ public class FichaView extends JPanel {
     private final JButton botonDerecha = new JButton("Derecha");
     private final JButton botonAtaque = new JButton("Ataque");
     private final JButton botonCargar = new JButton("Cargar");
+    private final JComboBox<Ficha> descargarCombobox;
 
 
     public FichaView(ControladorFicha control) {
+        FichaSeleccionada fichaSeleccionada = control.fichaSeleccionada();
+
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+        descargarCombobox = new JComboBox<>(fichaSeleccionada.fichasCargadas());
+        descargarCombobox.setRenderer(new FichasCargadasRenderer());
 
         JPanel panelStats = new JPanel();
         panelStats.add(nombreLabel);
@@ -60,6 +70,7 @@ public class FichaView extends JPanel {
         JPanel panelBotonesDeAccion = new JPanel();
         panelBotonesDeAccion.add(botonAtaque);
         panelBotonesDeAccion.add(botonCargar);
+        panelBotonesDeAccion.add(descargarCombobox);
         add(panelBotonesDeAccion);
 
         addActionListeners(control);
@@ -67,7 +78,6 @@ public class FichaView extends JPanel {
         botonAtaque.setMnemonic(KeyEvent.VK_A);
         botonCargar.setMnemonic(KeyEvent.VK_C);
 
-        FichaSeleccionada fichaSeleccionada = control.fichaSeleccionada();
         cambiarFicha(fichaSeleccionada.ficha());
 
         fichaSeleccionada.cambioDeFichaObservable().addObserver(new Observer<Ficha>() {
@@ -115,5 +125,19 @@ public class FichaView extends JPanel {
         vidaLabel.setText(ficha.barras().vidaActual() + "");
         escudoLabel.setText(ficha.barras().escudoActual() + "");
         energiaLabel.setText(ficha.barras().energiaActual() + "");
+    }
+
+    private static class FichasCargadasRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list,
+                                                      Object value,
+                                                      int index,
+                                                      boolean isSelected,
+                                                      boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            Ficha ficha = (Ficha) value;
+            setText(ficha == null ? "Descargar..." : ficha.nombre() + " " + ficha.barras());
+            return this;
+        }
     }
 }

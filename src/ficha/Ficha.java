@@ -135,7 +135,7 @@ public abstract class Ficha implements Cloneable {
 
         tablero.eliminarFichaEn(coordenada);
 
-        for (Ficha ficha: transportacion.fichasCargadas()) {
+        for (Ficha ficha: fichasCargadas()) {
             ficha.muerete();
         }
     }
@@ -246,6 +246,10 @@ public abstract class Ficha implements Cloneable {
         return transportacion.capacidad();
     }
 
+    public List<Ficha> fichasCargadas() {
+        return transportacion.fichasCargadas();
+    }
+
     private void validarDescarga(Ficha ficha) {
         if (!transportacion.contieneFicha(ficha)) {
             throw new TransporteNoContieneFichaException();
@@ -310,7 +314,7 @@ public abstract class Ficha implements Cloneable {
         tablero.eliminarFichaEn(ubicacion);
         this.disminuirMovimiento();
 
-        for (Ficha ficha: transportacion.fichasCargadas()) {
+        for (Ficha ficha: fichasCargadas()) {
             ficha.coordenada = coordenada;
         }
     }
