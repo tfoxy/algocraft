@@ -20,7 +20,7 @@ public class EmpMagia extends Magia {
     private static final int RADIO = 1;
 
     public EmpMagia() {
-        super(100, 6);
+        super("EMP", 100, 6);
     }
 
     @Override

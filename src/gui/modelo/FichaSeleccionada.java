@@ -10,18 +10,20 @@ public class FichaSeleccionada {
     private final FichaObjetivo fichaObjetivo;
     private final JugadorDeTurno jugadorDeTurno;
     private final FichasCargadas fichasCargadas;
+    private final MagiasDisponibles magiasDisponibles;
     private final Observable<Ficha> cambioDeFichaObservable;
     private final ObservableActions<AccionDeFicha, FichaSeleccionada> accionObservables;
     private JuegoLogger logger = JuegoLogger.EMPTY;
 
     private Ficha ficha;
-    private Magia magiaSeleccionada;
 
     public FichaSeleccionada(FichaObjetivo fichaObjetivo, JugadorDeTurno jugadorDeTurno) {
         this.fichaObjetivo = fichaObjetivo;
         this.jugadorDeTurno = jugadorDeTurno;
 
         this.fichasCargadas = new FichasCargadas(this);
+        this.magiasDisponibles = new MagiasDisponibles(fichaObjetivo);
+
         this.cambioDeFichaObservable = new Observable<>();
         this.accionObservables = new ObservableEnumActions<>(AccionDeFicha.class);
 
@@ -29,6 +31,7 @@ public class FichaSeleccionada {
                 = fichaObjetivo.fichaObservables();
         observables.on(AccionEnGrilla.SELECCION, new SeleccionObserver());
         observables.on(AccionEnGrilla.ATAQUE, new AtaqueObserver());
+        observables.on(AccionEnGrilla.EMISION_DE_MAGIA, new EmisionDeMagiaObserver());
     }
 
 
@@ -46,10 +49,18 @@ public class FichaSeleccionada {
         }
     }
 
+    private class EmisionDeMagiaObserver implements Observer<FichaObjetivo> {
+        @Override
+        public void update(Observable<FichaObjetivo> object, FichaObjetivo data) {
+            aplicarMagia(data.ficha());
+        }
+    }
+
 
     public void seleccionar(Ficha ficha) {
         this.ficha = ficha;
         fichasCargadas.cambiarTransporte(ficha);
+        magiasDisponibles.cambiarCaster(ficha);
         cambioDeFichaObservable.notifyObservers(ficha);
     }
 
@@ -81,6 +92,16 @@ public class FichaSeleccionada {
         }
     }
 
+    public void aplicarMagia(Ficha objetivo) {
+        try {
+            validarPropietario("Solamente se puede realizar magia con unidades propias");
+            magiasDisponibles.aplicarEn(objetivo.coordenada());
+            accionObservables.notify(AccionDeFicha.EMISION_DE_MAGIA, this);
+        } catch (JuegoException exc) {
+            logger.log(exc);
+        }
+    }
+
     public void cargar() {
         try {
             validarPropietario("Solamente se puede ordenar cargar a unidades propias");
@@ -107,6 +128,10 @@ public class FichaSeleccionada {
         return fichasCargadas;
     }
 
+    public MagiasDisponibles magiasDisponibles() {
+        return magiasDisponibles;
+    }
+
     public Observable<Ficha> cambioDeFichaObservable() {
         return cambioDeFichaObservable;
     }
@@ -123,11 +148,11 @@ public class FichaSeleccionada {
         this.logger = juegoLogger;
     }
 
-    private void validarPropietario() {
+    public void validarPropietario() {
         validarPropietario("Unidad no es propia");
     }
 
-    private void validarPropietario(String errorMsg) {
+    public void validarPropietario(String errorMsg) {
         if (!ficha().propietario().equals(jugadorDeTurno.jugador())) {
             throw new UnicamenteObjetivoPropioException(errorMsg);
         }

@@ -26,7 +26,7 @@ import tablero.ITablero;
 public class AlucinacionMagia extends Magia {
 
     public AlucinacionMagia() {
-        super(100, 4);
+        super("Alucinación", 100, 4);
     }
 
 

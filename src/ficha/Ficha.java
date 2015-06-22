@@ -393,6 +393,10 @@ public abstract class Ficha implements Cloneable {
         return nombre;
     }
 
+    public List<Magia> magias() {
+        return magias;
+    }
+
 
     protected interface FichaStrategy {
         void validarCreacion();

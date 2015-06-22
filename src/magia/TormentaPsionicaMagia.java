@@ -13,7 +13,7 @@ import tablero.ITablero;
 public class TormentaPsionicaMagia extends Magia {
 
     public TormentaPsionicaMagia() {
-        super(75, 5);
+        super("Tormenta Psionica", 75, 5);
     }
 
     // TODO test no se pueden crear dos tormentas en el mismo lugar

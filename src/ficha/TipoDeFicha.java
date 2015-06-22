@@ -18,5 +18,7 @@ public enum TipoDeFicha {
     AVANZADA,
     MAGICA,
     TRANSPORTE,
-    CELESTIAL, CASA
+    CELESTIAL,
+    CASA,
+    MAGIA
 }

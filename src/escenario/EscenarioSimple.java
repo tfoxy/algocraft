@@ -35,8 +35,8 @@ public class EscenarioSimple {
         return new Coordenada(x, y);
     }
 
-    private static int simetrica(int x, int medio) {
-        return 2 * medio - x;
+    private static int simetrica(int val, int medio) {
+        return 2 * medio - val;
     }
 
     private static Coordenada simetrica(Coordenada coord) {
@@ -76,6 +76,12 @@ public class EscenarioSimple {
         transporte.ponerEnJuego();
     }
 
+    private void nuevaUnidadMagica(Jugador jugador, Coordenada coord) {
+        Ficha unidad = jugador.raza().nuevaUnidadMagica();
+        unidad.setBasico(jugador, mapa, coord);
+        unidad.ponerEnJuego();
+    }
+
     public Juego construir() {
         Juego juego = builder.build();
 
@@ -106,9 +112,8 @@ public class EscenarioSimple {
         nuevoTransporte(j1, c(3, PUNTO_MEDIO.y));
         nuevoTransporte(j2, simetrica(c(3, PUNTO_MEDIO.y)));
 
-        Ficha tormenta = new TormentaPsionicaFicha();
-        tormenta.setBasico(j1, mapa, c(5, 4));
-        tormenta.ponerEnJuego();
+        nuevaUnidadMagica(j1, c(4, PUNTO_MEDIO.y));
+        nuevaUnidadMagica(j2, simetrica(c(4, PUNTO_MEDIO.y)));
 
         return juego;
     }

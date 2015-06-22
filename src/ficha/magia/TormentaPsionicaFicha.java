@@ -20,7 +20,7 @@ public class TormentaPsionicaFicha extends FichaCelestial {
 
     public TormentaPsionicaFicha() {
         duracionRestante = DURACION;
-        this.tipoDeFicha.add(TipoDeFicha.MAGICA);
+        this.tipoDeFicha.add(TipoDeFicha.MAGIA);
     }
 
     @Override

@@ -18,7 +18,7 @@ import tablero.Tablero;
 public class RadiacionMagia extends Magia {
 
     public RadiacionMagia() {
-        super(75, 5);
+        super("Radiación", 75, 5);
     }
 
     @Override

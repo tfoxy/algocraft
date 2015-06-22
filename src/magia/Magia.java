@@ -7,10 +7,12 @@ import tablero.Coordenada;
 import tablero.Coordenada3d;
 
 public abstract class Magia {
+    private final String nombre;
     private final int coste;
     private final int rango;
 
-    public Magia(int coste, int rango) {
+    public Magia(String nombre, int coste, int rango) {
+        this.nombre = nombre;
         this.coste = coste;
         this.rango = rango;
     }
@@ -42,4 +44,7 @@ public abstract class Magia {
         return rango;
     }
 
+    public String nombre() {
+        return nombre;
+    }
 }
