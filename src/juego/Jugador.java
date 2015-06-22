@@ -1,23 +1,26 @@
 package juego;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.JComboBox;
-
+import error.NombreDeJugadorEsCortoException;
 import error.TecnologiasInsuficientesException;
 import ficha.Ficha;
 
 
 public class Jugador {
 
+    public static final int LONGITUD_MINIMA_DE_NOMBRE = 4;
+
     private final Set<Ficha> fichas;
     private final String nombre;
     private final Raza raza;
+    private final Color color;
     private final RecursosDeJugador recursos;
     private final List<Tecnologia> tecnologias;
     private boolean pasandoTurno;
@@ -27,23 +30,40 @@ public class Jugador {
         this(nombre, raza, 0, 0);
     }
 
-
     public Jugador(String nombre,
                    Raza raza,
                    int cristalInicial,
                    int gasInicial) {
+        this(nombre, raza, new Recursos(cristalInicial, gasInicial), colorAlAzar());
+    }
+
+    public Jugador(String nombre,
+                   Raza raza,
+                   Recursos recursosIniciales,
+                   Color color) {
+        if (nombre.length() < LONGITUD_MINIMA_DE_NOMBRE) {
+            throw new NombreDeJugadorEsCortoException();
+        }
+
         this.nombre = nombre;
         this.raza = raza;
+        this.color = color;
 
         fichas = Collections.newSetFromMap(new IdentityHashMap<Ficha, Boolean>());
 
         tecnologias = new ArrayList<>();
         tecnologias.addAll(raza.tecnologiasIniciales());
 
-        recursos = new RecursosDeJugador(cristalInicial, gasInicial);
+        recursos = new RecursosDeJugador(recursosIniciales);
 
         pasandoTurno = false;
         fichasAEliminar = new ArrayList<>();
+    }
+
+
+    private static Color colorAlAzar() {
+        int index = new Random().nextInt(ColorDeJugador.LISTA.size());
+        return ColorDeJugador.LISTA.get(index);
     }
 
 
@@ -64,6 +84,11 @@ public class Jugador {
 
     public Raza raza() {
         return raza;
+    }
+
+
+    public Color color() {
+        return color;
     }
 
 
