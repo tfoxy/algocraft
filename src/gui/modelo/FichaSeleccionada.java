@@ -49,6 +49,7 @@ public class FichaSeleccionada {
 
     public void seleccionar(Ficha ficha) {
         this.ficha = ficha;
+        fichasCargadas.cambiarTransporte(ficha);
         cambioDeFichaObservable.notifyObservers(ficha);
     }
 
@@ -80,7 +81,9 @@ public class FichaSeleccionada {
 
     public void cargar() {
         try {
+            validarPropietario("Solamente se puede ordenar cargar a unidades propias");
             ficha().cargar();
+            fichasCargadas.fireAdded();
         } catch (JuegoException exc) {
             logger.log(exc);
         }
@@ -88,7 +91,9 @@ public class FichaSeleccionada {
 
     public void descargar(Ficha ficha) {
         try {
+            validarPropietario("Solamente se puede ordenar descargar a unidades propias");
             ficha().descargar(ficha);
+            fichasCargadas.fireRemoved();
         } catch (JuegoException exc) {
             logger.log(exc);
         }
