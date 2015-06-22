@@ -7,6 +7,7 @@ import error.FichaSobreOtraFichaException;
 import error.FueraDeRangoException;
 import error.JuegoException;
 import error.MovimientoInsuficienteException;
+import error.UnicamenteObjetivoNoEnConstruccionException;
 import error.TransporteNoContieneFichaException;
 import error.UnicamenteObjetivoPropioException;
 import ficha.estado.EstadoDeFicha;
@@ -220,6 +221,8 @@ public abstract class Ficha implements Cloneable {
     public Ficha espectro() {
         Ficha clone = this.clone();
 
+        estrategia.clonarEn(clone);
+
         clone.nombre = "Alucinación de " + this.nombre;
         clone.barras = this.barras.espectro();
         clone.ataqueAire = new Ataque(0, ataqueAire.rango());
@@ -228,6 +231,7 @@ public abstract class Ficha implements Cloneable {
         clone.magias = Collections.emptyList();
         clone.tipoDeFicha.add(TipoDeFicha.ALUCINACION);
         clone.estados = new HashSet<>();
+        clone.poblacionQueDa = 0;
 
         return clone;
     }
@@ -404,6 +408,7 @@ public abstract class Ficha implements Cloneable {
         void crear();
         void pasarTurno();
         void muerete();
+        void clonarEn(Ficha ficha);
     }
 
     protected class DefaultFichaStrategy implements FichaStrategy {
@@ -435,6 +440,11 @@ public abstract class Ficha implements Cloneable {
         @Override
         public void muerete() {
             propietario.perderPoblacionTotal(poblacionQueDa);
+        }
+
+        @Override
+        public void clonarEn(Ficha ficha) {
+            ficha.estrategia = ficha.new DefaultFichaStrategy();
         }
     }
 
@@ -501,6 +511,11 @@ public abstract class Ficha implements Cloneable {
         @Override
         public void muerete() {
             // noop
+        }
+
+        @Override
+        public void clonarEn(Ficha ficha) {
+            throw new UnicamenteObjetivoNoEnConstruccionException();
         }
     }
 

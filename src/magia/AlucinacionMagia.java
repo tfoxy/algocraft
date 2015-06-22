@@ -50,8 +50,7 @@ public class AlucinacionMagia extends Magia {
         for (Coordenada coordenada: casillasVecinas) {
             Coordenada3d coord3d = new Coordenada3d(coordenada, objetivo.z);
             if (fichaObjetivo.puedoReemplazarFichaEnTablero(coord3d)) {
-                Ficha fichaCopiar = caster.tablero().getFicha(objetivo);
-                this.insertarEspectro(fichaCopiar, coordenada);
+                this.insertarEspectro(fichaObjetivo, coordenada);
                 return;
             }
         }
