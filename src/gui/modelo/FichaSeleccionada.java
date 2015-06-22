@@ -84,6 +84,7 @@ public class FichaSeleccionada {
             validarPropietario("Solamente se puede ordenar cargar a unidades propias");
             ficha().cargar();
             fichasCargadas.fireAdded();
+            accionObservables.notify(AccionDeFicha.CARGAR, this);
         } catch (JuegoException exc) {
             logger.log(exc);
         }
@@ -94,6 +95,7 @@ public class FichaSeleccionada {
             validarPropietario("Solamente se puede ordenar descargar a unidades propias");
             ficha().descargar(ficha);
             fichasCargadas.fireRemoved();
+            accionObservables.notify(AccionDeFicha.DESCARGAR, this);
         } catch (JuegoException exc) {
             logger.log(exc);
         }
