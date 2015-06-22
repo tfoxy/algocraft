@@ -1,8 +1,5 @@
 package magia;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import error.FichaSobreOtraFichaException;
 import error.UnicamenteObjetivoNoAlucinacionException;
 import error.UnicamenteObjetivoPropioException;
@@ -12,8 +9,8 @@ import ficha.TipoDeFicha;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.CoordenadaUtil;
-import tablero.Direccion;
-import tablero.ITablero;
+
+import java.util.Set;
 
 /**
  * Es capaz de crear 2 copias de una propia unidad que son
@@ -24,6 +21,7 @@ import tablero.ITablero;
  * Las unidades alucinadas ​NO​ tienen vida, solo escudo.
  */
 public class AlucinacionMagia extends Magia {
+    private static final int RADIO = 1;
 
     public AlucinacionMagia() {
         super("Alucinación", 100, 4);
@@ -48,7 +46,7 @@ public class AlucinacionMagia extends Magia {
 
         verificarObjetivo(fichaObjetivo, caster);
 
-        final Set<Coordenada> casillasVecinas = CoordenadaUtil.areaDeCoordenadas(objetivo, 2);
+        final Set<Coordenada> casillasVecinas = CoordenadaUtil.areaDeCoordenadas(objetivo, RADIO);
         for (Coordenada coordenada: casillasVecinas) {
             if (caster.tablero().hayEspacio(new Coordenada3d(coordenada, objetivo.z))) {
                 Ficha fichaCopiar = caster.tablero().getFicha(objetivo);

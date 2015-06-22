@@ -214,12 +214,13 @@ public abstract class Ficha implements Cloneable {
         clone.barras = this.barras.clone();
         clone.transportacion = new Transportacion(transportacion.capacidad());
 
-        return this;
+        return clone;
     }
 
     public Ficha espectro() {
         Ficha clone = this.clone();
 
+        clone.nombre = "Alucinación de " + this.nombre;
         clone.barras = this.barras.espectro();
         clone.ataqueAire = new Ataque(0, ataqueAire.rango());
         clone.ataqueTierra = new Ataque(0, ataqueTierra.rango());
@@ -227,7 +228,7 @@ public abstract class Ficha implements Cloneable {
         clone.magias = Collections.emptyList();
         clone.tipoDeFicha.add(TipoDeFicha.ALUCINACION);
 
-        return this;
+        return clone;
     }
 
 
