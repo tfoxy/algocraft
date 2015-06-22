@@ -2,6 +2,7 @@ package escenario;
 
 
 import ficha.Ficha;
+import ficha.magia.TormentaPsionicaFicha;
 import ficha.natural.recurso.NodoMineral;
 import ficha.natural.recurso.Volcan;
 import ficha.natural.terreno.TerrenoEspacial;
@@ -104,6 +105,10 @@ public class EscenarioSimple {
 
         nuevoTransporte(j1, c(3, PUNTO_MEDIO.y));
         nuevoTransporte(j2, simetrica(c(3, PUNTO_MEDIO.y)));
+
+        Ficha tormenta = new TormentaPsionicaFicha();
+        tormenta.setBasico(j1, mapa, c(5, 4));
+        tormenta.ponerEnJuego();
 
         return juego;
     }

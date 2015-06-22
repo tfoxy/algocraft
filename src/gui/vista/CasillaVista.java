@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class CasillaVista extends JPanel {
 
+    private static final Color DEFAULT_BACKGROUND_COLOR = new JPanel().getBackground();
     private static final Border DEFAULT_BORDER =
             BorderFactory.createRaisedSoftBevelBorder();
     private static final Map<Color, Border> BORDERS_CACHE = new HashMap<>();
@@ -34,7 +35,7 @@ public class CasillaVista extends JPanel {
         mapa.addObserver(new JCasillaObserver(coordenada));
 
         setLayout(new GridLayout(2, 1));
-        setBorder(DEFAULT_BORDER);
+        cambiarBorde(mapa.getFichaCelestial(coordenada));
 
         add(aire);
         add(tierra);
@@ -66,12 +67,16 @@ public class CasillaVista extends JPanel {
 
     private void cambiarBorde(Ficha ficha) {
         final Border border;
+        final Color bgColor;
         if (ficha.es(TipoDeFicha.VACIA)) {
             border = DEFAULT_BORDER;
+            bgColor = DEFAULT_BACKGROUND_COLOR;
         } else {
             border = getBorde(ficha.miColor());
+            bgColor = ficha.miColor().brighter();
         }
         setBorder(border);
+        setBackground(bgColor);
     }
 
     private class JCasillaObserver extends CasillaObserver {
