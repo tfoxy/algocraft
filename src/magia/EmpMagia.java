@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class EmpMagia extends Magia {
 
-    private static final int RANGO = 1;
+    private static final int RADIO = 1;
 
     public EmpMagia() {
         super(100, 6);
@@ -26,7 +26,7 @@ public class EmpMagia extends Magia {
     @Override
     protected void aplicar(Ficha caster, Coordenada3d objetivo) {
         ITablero mapa = caster.tablero();
-        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(mapa, objetivo, RANGO);
+        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(mapa, objetivo, RADIO);
 
         for (Ficha ficha: fichas) {
             if (ficha.es(TipoDeFicha.UNIDAD)) {

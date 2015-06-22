@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TormentaPsionicaFicha extends FichaCelestial {
 
-    private static final int RANGO = 1;
+    private static final int RADIO = 1;
     private static final int DANIO = 100;
     private static final int DURACION = 2;
     private static final Color COLOR = new Color(135, 174, 222);
@@ -25,7 +25,7 @@ public class TormentaPsionicaFicha extends FichaCelestial {
 
     @Override
     public void pasarTurno() {
-        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(this, RANGO);
+        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(this, RADIO);
 
         for (Ficha ficha: fichas) {
             ficha.sufrirDanio(DANIO);

@@ -6,7 +6,7 @@ import tablero.CoordenadaUtil;
 import java.util.List;
 
 public class EstadoRadiacion implements EstadoDeFicha {
-    private static final int RANGO = 1;
+    private static final int RADIO = 1;
     private static final int DANIO = 20;
 
     public static final EstadoRadiacion INSTANCE = new EstadoRadiacion();
@@ -17,7 +17,7 @@ public class EstadoRadiacion implements EstadoDeFicha {
 
     @Override
     public void aplicarEn(Ficha ficha) {
-        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(ficha, RANGO);
+        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(ficha, RADIO);
 
         for (Ficha fichaEnArea: fichas) {
             fichaEnArea.sufrirDanio(DANIO);
