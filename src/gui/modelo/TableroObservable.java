@@ -1,6 +1,7 @@
 package gui.modelo;
 
 import ficha.Ficha;
+import juego.Gaia;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.ITablero;
@@ -75,5 +76,10 @@ public class TableroObservable extends Observable<Ficha> implements ITablero {
     @Override
     public int getLongitudY() {
         return tablero.getLongitudY();
+    }
+
+    @Override
+    public Gaia gaia() {
+        return tablero.gaia();
     }
 }

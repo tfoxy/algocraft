@@ -2,6 +2,7 @@ package magia;
 
 import tablero.Coordenada3d;
 import ficha.Ficha;
+import tablero.ITablero;
 
 /**
  * Inflige 100 unidades de daño a todas las unidades
@@ -14,10 +15,13 @@ public class TormentaPsionicaMagia extends Magia {
         super(75, 5);
     }
 
+    // TODO test no se pueden crear dos tormentas en el mismo lugar
+
     @Override
     protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
         final TormentaPsionicaFicha poder = new TormentaPsionicaFicha();
-        poder.setBasico(ficha.propietario(), ficha.tablero(), objetivo);
-        ficha.propietario().newFicha(poder);
+        final ITablero mapa = ficha.tablero();
+        poder.setBasico(mapa.gaia(), mapa, objetivo);
+        poder.ponerEnJuego();
     }
 }

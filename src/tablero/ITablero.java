@@ -1,6 +1,7 @@
 package tablero;
 
 import ficha.Ficha;
+import juego.Gaia;
 
 public interface ITablero {
     void verificar(Coordenada3d lugar);
@@ -26,4 +27,6 @@ public interface ITablero {
     int getLongitudX();
 
     int getLongitudY();
+
+    Gaia gaia();
 }

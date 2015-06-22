@@ -123,4 +123,9 @@ public class Tablero implements ITablero {
     public int getLongitudY() {
         return longitudY;
     }
+
+    @Override
+    public Gaia gaia() {
+        return gaia;
+    }
 }
