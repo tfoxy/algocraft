@@ -19,10 +19,10 @@ public class TormentaPsionicaMagia extends Magia {
     // TODO test no se pueden crear dos tormentas en el mismo lugar
 
     @Override
-    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
+    protected void aplicar(Ficha caster, Coordenada3d objetivo) {
         final TormentaPsionicaFicha poder = new TormentaPsionicaFicha();
-        final ITablero mapa = ficha.tablero();
-        poder.setBasico(ficha.propietario(), mapa, objetivo);
+        final ITablero mapa = caster.tablero();
+        poder.setBasico(caster.propietario(), mapa, objetivo);
         poder.ponerEnJuego();
     }
 }

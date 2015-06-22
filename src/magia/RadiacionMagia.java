@@ -22,8 +22,8 @@ public class RadiacionMagia extends Magia {
     }
 
     @Override
-    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
-        ITablero mapa = ficha.tablero();
+    protected void aplicar(Ficha caster, Coordenada3d objetivo) {
+        ITablero mapa = caster.tablero();
         Ficha fichaObjetivo = mapa.getFicha(objetivo);
 
         if (!fichaObjetivo.es(TipoDeFicha.UNIDAD)) {

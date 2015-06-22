@@ -249,6 +249,12 @@ public class BarrasEscudoVidaEnergia implements IBarras, Cloneable {
         return builder.toString();
     }
 
+    @Override
+    public void aplicarEmp() {
+        escudoActual = 0;
+        energiaActual = 0;
+    }
+
     private void concatBarras(StringBuilder stringBuilder,
                                      String prefix,
                                      int actual,
