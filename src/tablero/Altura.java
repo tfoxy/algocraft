@@ -11,10 +11,12 @@ public final class Altura {
 
     public static final int TIERRA = 1;
     public static final int AIRE = 2;
+    public static final int CIELO = 3;
 
     public static final List<Integer> VALORES = Arrays.asList(
             TIERRA,
-            AIRE
+            AIRE,
+            CIELO
     );
 
     public static final int MINIMA = Collections.min(VALORES);

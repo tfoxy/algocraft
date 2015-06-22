@@ -14,6 +14,11 @@ public class TableroObservable extends Observable<Ficha> implements ITablero {
     }
 
     @Override
+    public void verificar(Coordenada3d lugar) {
+        tablero.verificar(lugar);
+    }
+
+    @Override
     public Ficha getFicha(Coordenada3d lugar) {
         return tablero.getFicha(lugar);
     }
@@ -26,6 +31,11 @@ public class TableroObservable extends Observable<Ficha> implements ITablero {
     @Override
     public Ficha getFichaAerea(Coordenada lugar) {
         return tablero.getFichaAerea(lugar);
+    }
+
+    @Override
+    public Ficha getFichaCelestial(Coordenada lugar) {
+        return tablero.getFichaCelestial(lugar);
     }
 
     @Override

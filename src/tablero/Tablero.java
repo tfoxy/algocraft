@@ -37,7 +37,7 @@ public class Tablero implements ITablero {
     }
 
 
-    private void verificar(Coordenada3d lugar) {
+    public void verificar(Coordenada3d lugar) {
         int x = lugar.getX();
         int y = lugar.getY();
         int z = lugar.getZ();
@@ -73,6 +73,12 @@ public class Tablero implements ITablero {
     @Override
     public Ficha getFichaAerea(Coordenada lugar) {
         return getFicha(new Coordenada3d(lugar, Altura.AIRE));
+    }
+
+
+    @Override
+    public Ficha getFichaCelestial(Coordenada lugar) {
+        return getFicha(new Coordenada3d(lugar, Altura.CIELO));
     }
 
 
