@@ -15,7 +15,7 @@ public final class ColorDeJugador {
     public static final Color VERDE = new Color(0, 192, 0);
     public static final Color AMARILLO = Color.YELLOW;
     public static final Color CYAN = Color.CYAN;
-    public static final Color PURPURA = new Color(128, 0, 128);
+    public static final Color PURPURA = new Color(192, 0, 192);
     public static final Color NARANJA = Color.ORANGE;
 
     public static final List<Color> LISTA = Collections.unmodifiableList(
