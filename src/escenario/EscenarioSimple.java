@@ -4,6 +4,7 @@ package escenario;
 import ficha.Ficha;
 import ficha.natural.recurso.NodoMineral;
 import ficha.natural.recurso.Volcan;
+import ficha.natural.terreno.TerrenoEspacial;
 import juego.Gaia;
 import juego.Juego;
 import juego.Jugador;
@@ -56,6 +57,12 @@ public class EscenarioSimple {
         mineral.ponerEnJuego();
     }
 
+    private void nuevoTerrenoEspacial(Coordenada coord) {
+        Ficha terreno = new TerrenoEspacial();
+        terreno.setBasico(gaia, mapa, coord);
+        terreno.ponerEnJuego();
+    }
+
     private void nuevaUnidadBasica(Jugador jugador, Coordenada coord) {
         Ficha unidad = jugador.raza().nuevaUnidadBasica();
         unidad.setBasico(jugador, mapa, coord);
@@ -82,6 +89,9 @@ public class EscenarioSimple {
         nuevoVolcan(PUNTO_MEDIO);
         nuevoMineral(c(PUNTO_MEDIO.x, PUNTO_MEDIO.y - 1));
         nuevoMineral(c(PUNTO_MEDIO.x, PUNTO_MEDIO.y + 1));
+
+        nuevoTerrenoEspacial(c(PUNTO_MEDIO.x, 1));
+        nuevoTerrenoEspacial(simetrica(c(PUNTO_MEDIO.x, 1)));
 
         nuevaUnidadBasica(j1, c(2, PUNTO_MEDIO.y));
         nuevaUnidadBasica(j2, simetrica(c(2, PUNTO_MEDIO.y)));
