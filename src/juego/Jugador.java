@@ -9,7 +9,6 @@ import java.util.Random;
 import java.util.Set;
 
 import error.NombreDeJugadorEsCortoException;
-import error.TecnologiasInsuficientesException;
 import ficha.Ficha;
 
 
@@ -22,7 +21,7 @@ public class Jugador {
     private final Raza raza;
     private final Color color;
     private final RecursosDeJugador recursos;
-    private final List<Tecnologia> tecnologias;
+    private final TecnologiasDelJugador tecnologias;
     private boolean pasandoTurno;
     private List<Ficha> fichasAEliminar;
 
@@ -51,8 +50,8 @@ public class Jugador {
 
         fichas = Collections.newSetFromMap(new IdentityHashMap<Ficha, Boolean>());
 
-        tecnologias = new ArrayList<>();
-        tecnologias.addAll(raza.tecnologiasIniciales());
+        tecnologias = new TecnologiasDelJugador();
+        tecnologias.agregar(raza.tecnologiasIniciales());
 
         recursos = new RecursosDeJugador(recursosIniciales);
 
@@ -74,11 +73,6 @@ public class Jugador {
 
     public RecursosDeJugador recursos() {
         return recursos;
-    }
-
-
-    public List<Tecnologia> tecnologias() {
-        return Collections.unmodifiableList(tecnologias);
     }
 
 
@@ -167,13 +161,11 @@ public class Jugador {
     }
 
     public void agregarTecnologia(Tecnologia tecnologia) {
-        tecnologias.add(tecnologia);
+        this.tecnologias.agregar(tecnologia);
     }
 
     public void agregarTecnologias(List<Tecnologia> tecnologias) {
-        for (Tecnologia tecnologia: tecnologias) {
-            agregarTecnologia(tecnologia);
-        }
+        this.tecnologias.agregar(tecnologias);
     }
 
     public Set<Ficha> fichas() {
@@ -181,8 +173,6 @@ public class Jugador {
     }
 
     public void validarTecnologias(List<Tecnologia> tecnologias) {
-        if (!this.tecnologias.containsAll(tecnologias)) {
-            throw new TecnologiasInsuficientesException();
-        }
+        this.tecnologias.validarTenencia(tecnologias);
     }
 }
