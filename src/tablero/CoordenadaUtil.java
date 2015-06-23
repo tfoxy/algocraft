@@ -1,5 +1,6 @@
 package tablero;
 
+import com.google.common.base.Preconditions;
 import error.PosicionFueraDeLimiteException;
 import ficha.Ficha;
 
@@ -17,6 +18,8 @@ public final class CoordenadaUtil {
 
     public static Set<Coordenada> areaDeCoordenadas(Coordenada puntoMedio,
                                                     int radio) {
+        Preconditions.checkNotNull(puntoMedio, "Coordenada no debe ser nula");
+
         Set<Coordenada> set = new HashSet<>();
 
         if (radio >= 0) {

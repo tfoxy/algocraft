@@ -68,7 +68,7 @@ public abstract class Ficha implements Cloneable {
     protected Ataque ataqueTierra = Ataque.NULO;
     protected Ataque ataqueAire = Ataque.NULO;
 
-    protected int vision = 0;
+    protected int vision = 1;
     protected boolean dentroDeTransporte = false;
     protected boolean estaEnConstruccion = false;
     protected Set<EstadoDeFicha> estados = new HashSet<>();
@@ -490,6 +490,7 @@ public abstract class Ficha implements Cloneable {
         public void validarCreacion() {
             propietario.recursos().validarSuficientesRecursos(coste);
             propietario.validarTecnologias(tecnologiasNecesarias);
+            propietario.visibilidad().validarVisionEn(coordenada);
             estrategiaAnterior.validarCreacion();
         }
 

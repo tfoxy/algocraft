@@ -6,32 +6,38 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ficha.protoss.edificio.Pilon;
+import tablero.Coordenada;
+import tablero.ITablero;
+import tablero.Tablero;
 
 import static org.junit.Assert.assertEquals;
 
 public class ConstruccionTest {
 
     private Jugador protoss;
+    private ITablero mapa;
+    private Coordenada coordenada;
 
     @Before
     public void initialize() {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 500, 200);
+        mapa = new Tablero(20, 20);
+        coordenada = new Coordenada(10, 10);
+        protoss.visibilidad().verDesde(coordenada, 2);
     }
 
     @Test
     public void queTardeElTiempoCorrecto() {
         Ficha pilon = new Pilon().enConstruccion();
+        pilon.setBasico(protoss, mapa, coordenada);
+        pilon.ponerEnJuego();
 
-        pilon.propietario(protoss);
+        for (int i = 0; i < pilon.turnosParaCrear(); i++) {
+            assertEquals(protoss.poblacionPosible(), 0);
+            pilon.pasarTurno();
+        }
 
-        // TODO usar getter para tiempo de pilon y usar for
-        pilon.pasarTurno();
-        pilon.pasarTurno();
-        pilon.pasarTurno();
-        pilon.pasarTurno();
-        pilon.pasarTurno();
-
-        assertEquals(protoss.poblacionPosible(), 5);
+        assertEquals(protoss.poblacionPosible(), pilon.poblacionQueDa);
     }
 
     // TODO hacer tests

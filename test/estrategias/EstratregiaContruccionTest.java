@@ -32,9 +32,11 @@ public class EstratregiaContruccionTest {
     @Before
     public void initialize() {
         protoss = new Jugador("Poroto", Raza.PROTOSS, 500, 200);
-        pachaMama = new Gaia();
         mapa = new Tablero(20, 20);
         coordenada = new Coordenada(1, 1);
+        pachaMama = mapa.gaia();
+
+        protoss.cheats().verTodoElMapa(mapa);
     }
 
     //fichaTerrestre/casa
@@ -188,7 +190,5 @@ public class EstratregiaContruccionTest {
 
         assertEquals(nuevoRecurso, mapa.getFichaTerrestre(coordenada));
     }
-
-    // TODO test que pruebe TecnologiasInsuficientesException
 
 }

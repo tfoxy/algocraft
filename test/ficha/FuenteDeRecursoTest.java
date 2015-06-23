@@ -32,6 +32,7 @@ public class FuenteDeRecursoTest {
         protoss.agregarTecnologia(Tecnologia.ACCESO);
         nuevoEdificio = new Asimilador();
 
+        protoss.cheats().verTodoElMapa(mapa);
     }
 
 
@@ -81,6 +82,8 @@ public class FuenteDeRecursoTest {
 
     @Test
     public void noExtraSiNoEstaConsturido() {
+        protoss.cheats().verTodoElMapa(mapa);
+
         FuenteDeRecurso nuevoRecurso = new Volcan();
         nuevoRecurso.setBasico(pachaMama, mapa, coordenada);
         nuevoRecurso.ponerEnJuego();

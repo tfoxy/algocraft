@@ -3,6 +3,7 @@ package tablero;
 import java.util.HashSet;
 import java.util.Set;
 
+import error.CasillaFueraDeVisionException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
@@ -21,6 +22,10 @@ public class VisibilidadDelJugador {
         return visibilidad.contains(coordenada);
     }
 
+    public boolean puedeVer(Coordenada3d coordenada) {
+        return puedeVer(coordenada.proyeccion());
+    }
+
     public void addListener(SetChangeListener<? super Coordenada> listener) {
         visibilidad.addListener(listener);
     }
@@ -29,4 +34,13 @@ public class VisibilidadDelJugador {
         visibilidad.removeListener(listener);
     }
 
+    public void validarVisionEn(Coordenada coordenada) {
+        if (!puedeVer(coordenada)) {
+            throw new CasillaFueraDeVisionException(coordenada);
+        }
+    }
+
+    public void validarVisionEn(Coordenada3d coordenada) {
+        validarVisionEn(coordenada.proyeccion());
+    }
 }

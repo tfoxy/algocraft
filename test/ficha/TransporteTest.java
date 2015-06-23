@@ -196,6 +196,7 @@ public class TransporteTest {
 
     @Test(expected = CapacidadInsuficienteException.class)
     public void noPuedeCargarSiEstaEnConstruccion() {
+        jugador.cheats().verTodoElMapa(mapa);
         transporte.muerete();
 
         transporte = new NaveTransporteTerran().enConstruccion();

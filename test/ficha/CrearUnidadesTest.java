@@ -1,5 +1,6 @@
 package ficha;
 
+import error.CasillaFueraDeVisionException;
 import error.PoblacionInsuficienteException;
 import error.TecnologiaInsuficienteException;
 import ficha.protoss.edificio.Acceso;
@@ -26,6 +27,8 @@ public class CrearUnidadesTest {
 
     @Test
     public void puedeConstruirseSiCumpleLosRequisitos() {
+        protoss.cheats().verTodoElMapa(mapa);
+
         Ficha pilon = new Pilon();
         pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
         pilon.ponerEnJuego();
@@ -41,6 +44,8 @@ public class CrearUnidadesTest {
 
     @Test(expected = PoblacionInsuficienteException.class)
     public void noPuedeConstruirseSiNoTieneLaPoblacionSuficiente() {
+        protoss.cheats().verTodoElMapa(mapa);
+
         Ficha acceso = new Acceso();
         acceso.setBasico(protoss, mapa, new Coordenada(4, 3));
         acceso.ponerEnJuego();
@@ -52,6 +57,8 @@ public class CrearUnidadesTest {
 
     @Test(expected = TecnologiaInsuficienteException.class)
     public void noPuedeConstruirseSiNoTieneElEdificioNecesario() {
+        protoss.cheats().verTodoElMapa(mapa);
+
         Ficha pilon = new Pilon();
         pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
         pilon.ponerEnJuego();
@@ -63,6 +70,8 @@ public class CrearUnidadesTest {
 
     @Test(expected = TecnologiaInsuficienteException.class)
     public void noPuedeConstruirseSiSeDestruyeElEdificioNecesario() {
+        protoss.cheats().verTodoElMapa(mapa);
+
         Ficha pilon = new Pilon();
         pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
         pilon.ponerEnJuego();
@@ -80,6 +89,8 @@ public class CrearUnidadesTest {
 
     @Test
     public void puedeConstruirseSiNoSeDestruyenTodosLosEdificiosQueDenLaTecnologiaNecesaria() {
+        protoss.cheats().verTodoElMapa(mapa);
+
         Ficha pilon = new Pilon();
         pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
         pilon.ponerEnJuego();
@@ -101,6 +112,8 @@ public class CrearUnidadesTest {
 
     @Test(expected = TecnologiaInsuficienteException.class)
     public void noPuedeConstruirseSiSeDestruyenTodosLosEdificiosQueDenLaTecnologiaNecesaria() {
+        protoss.cheats().verTodoElMapa(mapa);
+
         Ficha pilon = new Pilon();
         pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
         pilon.ponerEnJuego();
@@ -123,6 +136,8 @@ public class CrearUnidadesTest {
 
     @Test(expected = TecnologiaInsuficienteException.class)
     public void noPuedeConstruirseSiElEdificioNecesarioEstaEnConstruccion() {
+        protoss.cheats().verTodoElMapa(mapa);
+
         Ficha pilon = new Pilon();
         pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
         pilon.ponerEnJuego();
@@ -138,6 +153,8 @@ public class CrearUnidadesTest {
 
     @Test
     public void puedeConstruirseSiTieneElEdificioNecesarioYOtroEdificioNecesarioQueEstabaEnConstruccionEsDestruido() {
+        protoss.cheats().verTodoElMapa(mapa);
+
         Ficha pilon = new Pilon();
         pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
         pilon.ponerEnJuego();
@@ -155,6 +172,13 @@ public class CrearUnidadesTest {
         Ficha unidad = new Zealot().enConstruccion();
         unidad.setBasico(protoss, mapa, new Coordenada(3, 3));
         unidad.ponerEnJuego();
+    }
+
+    @Test(expected = CasillaFueraDeVisionException.class)
+    public void noPuedeConstruirseDondeNoSeVe() {
+        Ficha pilon = new Pilon().enConstruccion();
+        pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
+        pilon.ponerEnJuego();
     }
 
 }

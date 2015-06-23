@@ -12,6 +12,8 @@ import java.util.Set;
 import error.NombreDeJugadorEsCortoException;
 import ficha.Ficha;
 import tablero.Coordenada;
+import tablero.ITablero;
+import tablero.Tablero;
 import tablero.VisibilidadDelJugador;
 
 
@@ -192,5 +194,19 @@ public class Jugador {
 
     public VisibilidadDelJugador visibilidad() {
         return visibilidad;
+    }
+
+    public Cheats cheats() {
+        return new Cheats();
+    }
+
+    public class Cheats {
+        public void verTodoElMapa(ITablero mapa) {
+            int x = mapa.getLongitudX() / 2 + 1;
+            int y = mapa.getLongitudY() / 2 + 1;
+            int vision = Math.max(x, y) * 2 + 1;
+
+            visibilidad.verDesde(new Coordenada(x, y), vision);
+        }
     }
 }

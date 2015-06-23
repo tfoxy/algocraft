@@ -10,6 +10,7 @@ public final class FichaTestUtil {
         ficha.propietario().agregarRecursos(ficha.coste());
         ficha.propietario().agregarPoblacionTotal(ficha.coste().poblacion());
         ficha.propietario().agregarTecnologias(ficha.tecnologiasNecesarias());
+        ficha.propietario().visibilidad().verDesde(ficha.coordenada(), 0);
     }
 
 }
