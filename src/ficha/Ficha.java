@@ -336,6 +336,7 @@ public abstract class Ficha implements Cloneable {
         tablero.insertar(this);
         tablero.eliminarFichaEn(ubicacion);
         this.disminuirMovimiento();
+        propietario.visibilidad().verDesde(coordenada, vision);
 
         for (Ficha ficha: fichasCargadas()) {
             ficha.coordenada = coordenada;
@@ -434,6 +435,7 @@ public abstract class Ficha implements Cloneable {
         public void crear() {
             propietario.agregarPoblacionTotal(poblacionQueDa);
             propietario.agregarTecnologias(tecnologiasQueDa);
+            propietario.visibilidad().verDesde(coordenada, vision);
             recuperarPuntosDeMovimiento();
         }
 

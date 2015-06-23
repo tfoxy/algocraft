@@ -12,7 +12,7 @@ public class VisibilidadDelJugador {
     private ObservableSet<Coordenada> visibilidad =
             FXCollections.observableSet(new HashSet<Coordenada>());
 
-    public void verDesdeEstePunto(Coordenada coordenada, int vision) {
+    public void verDesde(Coordenada coordenada, int vision) {
         Set<Coordenada> set = CoordenadaUtil.areaDeCoordenadas(coordenada, vision);
         visibilidad.addAll(set);
     }
