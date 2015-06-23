@@ -35,22 +35,33 @@ public class Tablero implements ITablero {
             case Altura.TIERRA: ficha = new TerrenoTierra(); break;
             case Altura.AIRE: ficha = new TerrenoAire(); break;
             case Altura.CIELO: ficha = new TerrenoCielo(); break;
-            default: throw new PosicionFueraDeLimiteException();
+            default: throw new PosicionFueraDeLimiteException(lugar);
         }
         ficha.setBasico(gaia, this, lugar);
         return ficha;
     }
 
 
-    public void verificar(Coordenada3d lugar) {
-        int x = lugar.getX();
-        int y = lugar.getY();
-        int z = lugar.getZ();
+    @Override
+    public void verificarEnArea(Coordenada lugar) {
+        int x = lugar.x;
+        int y = lugar.y;
 
         if (x < 1 || x > longitudX
-                || y < 1 || y > longitudY
-                || z < Altura.MINIMA || z > Altura.MAXIMA) {
-            throw new PosicionFueraDeLimiteException();
+                || y < 1 || y > longitudY) {
+            throw new PosicionFueraDeLimiteException(lugar);
+        }
+    }
+
+
+    @Override
+    public void verificar(Coordenada3d lugar) {
+        verificarEnArea(lugar);
+
+        int z = lugar.getZ();
+
+        if (z < Altura.MINIMA || z > Altura.MAXIMA) {
+            throw new PosicionFueraDeLimiteException(lugar);
         }
     }
 

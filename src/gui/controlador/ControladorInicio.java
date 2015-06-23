@@ -60,15 +60,15 @@ public class ControladorInicio {
             ControladorJugador controladorJugador = new ControladorJugador(jugadorDeTurno);
             ControladorFicha controladorFicha = new ControladorFicha(fichaSeleccionada);
 
-            jugadorDeTurno.comenzarTurno();
-
             // Vistas
             VentanaPrincipal.iniciarPropiedadesGlobales();
 
-            JPanel grillaView = new GrillaView(mapa, fichaObjetivo);
+            JPanel grillaView = new GrillaView(mapa, fichaObjetivo, jugadorDeTurno);
             JPanel fichaView = new FichaView(controladorFicha);
             JPanel jugadorView = new JugadorView(controladorJugador);
             JPanel loggerView = new LoggerView(juegoLogger);
+
+            jugadorDeTurno.comenzarTurno();
 
             JFrame ventana = new VentanaPrincipal(grillaView, fichaView, jugadorView, loggerView);
             ventana.setVisible(true);

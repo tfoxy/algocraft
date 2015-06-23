@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import error.CasillaFueraDeVisionException;
+import ficha.Ficha;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
@@ -14,7 +15,12 @@ public class VisibilidadDelJugador {
             FXCollections.observableSet(new HashSet<Coordenada>());
 
     public void verDesde(Coordenada coordenada, int vision) {
-        Set<Coordenada> set = CoordenadaUtil.areaDeCoordenadas(coordenada, vision);
+        Set<Coordenada> set = CoordenadaUtil.coordenadasEnArea(coordenada, vision);
+        visibilidad.addAll(set);
+    }
+
+    public void verDesde(Ficha ficha) {
+        Set<Coordenada> set = CoordenadaUtil.coordenadasEnArea(ficha, ficha.vision());
         visibilidad.addAll(set);
     }
 

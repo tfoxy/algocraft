@@ -15,7 +15,7 @@ public class CoordenadaUtilTest {
     @Test
     public void areaDeCoordenadasContieneCoordenadaVecinas() {
         final Set<Coordenada> set =
-                CoordenadaUtil.areaDeCoordenadas(new Coordenada(3, 3), 1);
+                CoordenadaUtil.coordenadasEnArea(new Coordenada(3, 3), 1);
 
         assertThat(set, hasItems(
                 new Coordenada(2, 3),
@@ -28,7 +28,7 @@ public class CoordenadaUtilTest {
     @Test
     public void areaDeCoordenadasNoContieneCoordenadaLejana() {
         final Set<Coordenada> set =
-                CoordenadaUtil.areaDeCoordenadas(new Coordenada(3, 3), 1);
+                CoordenadaUtil.coordenadasEnArea(new Coordenada(3, 3), 1);
 
         assertThat(set, not(hasItem(new Coordenada(1, 3))));
     }
@@ -36,7 +36,7 @@ public class CoordenadaUtilTest {
     @Test
     public void areaDeCoordenadasContieneCoordenadaEnBorde() {
         final Set<Coordenada> set =
-                CoordenadaUtil.areaDeCoordenadas(new Coordenada(3, 3), 2);
+                CoordenadaUtil.coordenadasEnArea(new Coordenada(3, 3), 2);
 
         assertThat(set, hasItem(new Coordenada(1, 3)));
     }
@@ -44,7 +44,7 @@ public class CoordenadaUtilTest {
     @Test
     public void areaDeCoordenadasContieneSolamenteSuCoordenadaSiRangoEsCero() {
         final Set<Coordenada> set =
-                CoordenadaUtil.areaDeCoordenadas(new Coordenada(3, 3), 0);
+                CoordenadaUtil.coordenadasEnArea(new Coordenada(3, 3), 0);
 
         assertThat(set, hasItem(new Coordenada(3, 3)));
         assertThat(set, hasSize(1));
@@ -53,7 +53,7 @@ public class CoordenadaUtilTest {
     @Test
     public void areaDeCoordenadasNoContieneCoordenadasSiRangoEsNegativo() {
         final Set<Coordenada> set =
-                CoordenadaUtil.areaDeCoordenadas(new Coordenada(3, 3), -1);
+                CoordenadaUtil.coordenadasEnArea(new Coordenada(3, 3), -1);
 
         assertThat(set, hasSize(0));
     }
@@ -61,7 +61,7 @@ public class CoordenadaUtilTest {
     @Test
     public void areaDeCoordenadasContieneCoordenadaLejanas() {
         final Set<Coordenada> set =
-                CoordenadaUtil.areaDeCoordenadas(new Coordenada(3, 3), 3);
+                CoordenadaUtil.coordenadasEnArea(new Coordenada(3, 3), 3);
 
         assertThat(set, hasItem(new Coordenada(1, 3)));
         assertThat(set, hasItem(new Coordenada(2, 2)));

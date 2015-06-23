@@ -15,6 +15,11 @@ public class TableroObservable extends Observable<Ficha> implements ITablero {
     }
 
     @Override
+    public void verificarEnArea(Coordenada lugar) {
+        tablero.verificarEnArea(lugar);
+    }
+
+    @Override
     public void verificar(Coordenada3d lugar) {
         tablero.verificar(lugar);
     }

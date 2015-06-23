@@ -1,11 +1,9 @@
 package error;
 
-public class PosicionFueraDeLimiteException extends JuegoException {
-    public PosicionFueraDeLimiteException() {
-        super("Posición fuera de mapa");
-    }
+import tablero.Coordenada;
 
-    public PosicionFueraDeLimiteException(String message) {
-        super(message);
+public class PosicionFueraDeLimiteException extends JuegoException {
+    public PosicionFueraDeLimiteException(Coordenada lugar) {
+        super("Posición " + lugar.toString() + " fuera de mapa");
     }
 }

@@ -8,7 +8,7 @@ public class CoordenadasVisibles {
     private Set<Coordenada> coordenadasVisibles = new HashSet<>();
 
     public void verDesdeEstePunto(Coordenada coordenada, int vision) {
-        coordenadasVisibles = CoordenadaUtil.areaDeCoordenadas(coordenada, vision);
+        coordenadasVisibles = CoordenadaUtil.coordenadasEnArea(coordenada, vision);
     }
 
     public boolean puedeVer(Coordenada coordenada) {

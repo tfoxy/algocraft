@@ -6,6 +6,7 @@ import gui.modelo.FichaObjetivo;
 import gui.modelo.TableroObservable;
 import tablero.Altura;
 import tablero.Coordenada;
+import tablero.ITablero;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -22,47 +23,24 @@ public class CasillaVista extends JPanel {
     private static final Color DEFAULT_BACKGROUND_COLOR = new JPanel().getBackground();
     private static final Border DEFAULT_BORDER =
             BorderFactory.createRaisedSoftBevelBorder();
-    private static final Map<Color, Border> BORDERS_CACHE = new HashMap<>();
 
+    private boolean estaVisible;
     private CasillaParaFicha tierra;
     private CasillaParaFicha aire;
 
-    public CasillaVista(Coordenada coordenada, TableroObservable mapa,
-                        FichaObjetivo fichaObjetivo) {
+    public CasillaVista(Coordenada coordenada, ITablero mapa, FichaObjetivo fichaObjetivo) {
         tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), fichaObjetivo);
         aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), fichaObjetivo);
-
-        mapa.addObserver(new JCasillaObserver(coordenada));
+        cambiarBorde(mapa.getFichaCelestial(coordenada));
 
         setLayout(new GridLayout(2, 1));
-        cambiarBorde(mapa.getFichaCelestial(coordenada));
 
         add(aire);
         add(tierra);
     }
 
-    private void repaintWith(Ficha ficha) {
-        CasillaParaFicha casillaParaFicha;
-
-        if (ficha.coordenada().z == Altura.TIERRA)
-            casillaParaFicha = tierra;
-        else if (ficha.coordenada().z == Altura.AIRE)
-            casillaParaFicha = aire;
-        else if (ficha.coordenada().z == Altura.CIELO) {
-            cambiarBorde(ficha);
-            return;
-        } else return;
-
-        casillaParaFicha.cambiarFicha(ficha);
-    }
-
     private Border getBorde(Color color) {
-        Border border = BORDERS_CACHE.get(color);
-        if (border == null) {
-            border = new SoftBevelBorder(BevelBorder.RAISED, color, color.darker());
-            BORDERS_CACHE.put(color, border);
-        }
-        return border;
+        return new SoftBevelBorder(BevelBorder.RAISED, color, color.darker());
     }
 
     private void cambiarBorde(Ficha ficha) {
@@ -79,15 +57,31 @@ public class CasillaVista extends JPanel {
         setBackground(bgColor);
     }
 
-    private class JCasillaObserver extends CasillaObserver {
-        public JCasillaObserver(Coordenada coordenada) {
-            super(coordenada);
+    public void mostrar(boolean mostrar) {
+        if (mostrar == estaVisible)
+            return;
+
+        if (mostrar) {
+            // TODO
+        } else {
+            // TODO
         }
 
-        @Override
-        protected void updateVista(Ficha fichaNueva) {
-            repaintWith(fichaNueva);
-        }
+        estaVisible = mostrar;
     }
 
+    public void actualizar(Ficha ficha) {
+        CasillaParaFicha casillaParaFicha;
+
+        if (ficha.coordenada().z == Altura.TIERRA)
+            casillaParaFicha = tierra;
+        else if (ficha.coordenada().z == Altura.AIRE)
+            casillaParaFicha = aire;
+        else if (ficha.coordenada().z == Altura.CIELO) {
+            cambiarBorde(ficha);
+            return;
+        } else return;
+
+        casillaParaFicha.cambiarFicha(ficha);
+    }
 }

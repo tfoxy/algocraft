@@ -46,7 +46,7 @@ public class AlucinacionMagia extends Magia {
 
         verificarObjetivo(fichaObjetivo, caster);
 
-        final Set<Coordenada> casillasVecinas = CoordenadaUtil.areaDeCoordenadas(objetivo, RADIO);
+        final Set<Coordenada> casillasVecinas = CoordenadaUtil.coordenadasEnArea(objetivo, RADIO);
         for (Coordenada coordenada: casillasVecinas) {
             Coordenada3d coord3d = new Coordenada3d(coordenada, objetivo.z);
             if (fichaObjetivo.puedoReemplazarFichaEnTablero(coord3d)) {

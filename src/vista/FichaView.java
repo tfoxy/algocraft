@@ -75,8 +75,6 @@ public class FichaView extends JPanel {
         botonAtaque.setMnemonic(KeyEvent.VK_A);
         botonCargar.setMnemonic(KeyEvent.VK_C);
 
-        cambiarFicha(fichaSeleccionada.ficha());
-
         fichaSeleccionada.cambioDeFichaObservable().addObserver(new Observer<Ficha>() {
             @Override
             public void update(Observable<Ficha> o, Ficha ficha) {
