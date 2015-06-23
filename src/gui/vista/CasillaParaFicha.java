@@ -16,7 +16,7 @@ import java.awt.Graphics;
 
 public class CasillaParaFicha extends JPanel {
 
-    private final JLabel label = new ResizableLabel(" ");
+    private final JLabel label = new ResizableLabel();
     private boolean selected = false;
     private Ficha ficha;
 
@@ -33,7 +33,6 @@ public class CasillaParaFicha extends JPanel {
 
     private void inicializarInterfaz() {
         Dimension dimension = getPreferredSize();
-
         setLayout(new BorderLayout());
 
         label.setFont(new Font(Font.MONOSPACED, Font.BOLD, 8));
@@ -82,7 +81,7 @@ public class CasillaParaFicha extends JPanel {
             grafico.fillRect(0, 0, dimension.width, dimension.height);
         }
 
-        label.setText(ficha.nombre().length() > 0 ? ficha.nombre().substring(0, 1) : " ");
+        label.setText(ficha.nombre().length() > 0 ? ficha.nombre().substring(0, 1) : "");
 
         setToolTipText(ficha.nombre() + " " + ficha.coordenada().toString());
     }

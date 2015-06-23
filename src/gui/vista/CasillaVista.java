@@ -32,15 +32,17 @@ public class CasillaVista extends JPanel {
     private Ficha fichaCelestial;
 
     public CasillaVista(Coordenada coordenada, ITablero mapa, FichaObjetivo fichaObjetivo) {
-        estaVisible = false;
+        estaVisible = true;
         tierra = new CasillaParaFicha(mapa.getFichaTerrestre(coordenada), fichaObjetivo);
         aire = new CasillaParaFicha(mapa.getFichaAerea(coordenada), fichaObjetivo);
         fichaCelestial = mapa.getFichaCelestial(coordenada);
 
         setLayout(new GridLayout(2, 1));
-        
-        setBorder(DEFAULT_BORDER);
-        setBackground(DEFAULT_NO_VISION_COLOR);
+
+        add(aire);
+        add(tierra);
+
+        mostrar(false);
     }
 
     private Border getBorde(Color color) {
@@ -68,12 +70,12 @@ public class CasillaVista extends JPanel {
         if (mostrar == estaVisible)
             return;
 
+        aire.setVisible(mostrar);
+        tierra.setVisible(mostrar);
+
         if (mostrar) {
-            add(aire);
-            add(tierra);
             actualizarFichaCelestial(fichaCelestial);
         } else {
-            removeAll();
             setBorder(DEFAULT_BORDER);
             setBackground(DEFAULT_NO_VISION_COLOR);
         }

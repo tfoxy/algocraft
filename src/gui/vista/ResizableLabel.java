@@ -1,6 +1,8 @@
 package gui.vista;
 
 import javax.swing.JLabel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -27,25 +29,59 @@ public class ResizableLabel extends JLabel {
     protected void init() {
         addComponentListener(new ComponentAdapter() {
             @Override
+            public void componentShown(ComponentEvent e) {
+                adaptLabelFont();
+            }
+
+            @Override
             public void componentResized(ComponentEvent e) {
-                adaptLabelFont(ResizableLabel.this);
+                adaptLabelFont();
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                adaptLabelFont();
+            }
+        });
+
+        addAncestorListener(new AncestorListener() {
+            @Override
+            public void ancestorAdded(AncestorEvent event) {
+                adaptLabelFont();
+            }
+
+            @Override
+            public void ancestorRemoved(AncestorEvent event) {
+                // noop
+            }
+
+            @Override
+            public void ancestorMoved(AncestorEvent event) {
+                adaptLabelFont();
             }
         });
     }
 
-    protected void adaptLabelFont(JLabel l) {
-        if (g == null) {
+    protected void adaptLabelFont() {
+        if (g == null || getText().isEmpty()) {
             return;
         }
-        Rectangle r = l.getBounds();
-        int fontSize = MIN_FONT_SIZE;
-        Font f = l.getFont();
-
+        Rectangle r = getBounds();
+        Font f = getFont();
         Rectangle r1 = new Rectangle();
         Rectangle r2 = new Rectangle();
+        int fontSize = f.getSize();
+
+        setSizeBasedOnTextSize(r1, fontSize);
+        setSizeBasedOnTextSize(r2, fontSize + 1);
+        if (r.contains(r1) && !r.contains(r2)) {
+            return;
+        }
+
+        fontSize = MIN_FONT_SIZE;
         while (fontSize < MAX_FONT_SIZE) {
-            r1.setSize(getTextSize(l, f.deriveFont(f.getStyle(), fontSize)));
-            r2.setSize(getTextSize(l, f.deriveFont(f.getStyle(), fontSize + 1)));
+            setSizeBasedOnTextSize(r1, fontSize);
+            setSizeBasedOnTextSize(r2, fontSize + 1);
             if (r.contains(r1) && !r.contains(r2)) {
                 break;
             }
@@ -56,11 +92,16 @@ public class ResizableLabel extends JLabel {
         repaint();
     }
 
-    private Dimension getTextSize(JLabel l, Font f) {
+    private void setSizeBasedOnTextSize(Rectangle r, int fontSize) {
+        Font f = getFont();
+        r.setSize(getTextSize(f.deriveFont(f.getStyle(), fontSize)));
+    }
+
+    private Dimension getTextSize(Font f) {
         Dimension size = new Dimension();
         g.setFont(f);
         FontMetrics fm = g.getFontMetrics(f);
-        size.width = fm.stringWidth(l.getText());
+        size.width = fm.stringWidth(getText());
         size.height = fm.getHeight();
 
         return size;
@@ -70,5 +111,11 @@ public class ResizableLabel extends JLabel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         this.g = g;
+    }
+
+    @Override
+    public void setText(String text) {
+        super.setText(text);
+        adaptLabelFont();
     }
 }
