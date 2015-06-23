@@ -36,7 +36,7 @@ public class JugadorView extends JPanel {
 
 
     public JugadorView(ControladorJugador control) {
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS)); //si se rompio fue esta linea eprdon.
 
         JugadorDeTurno jugadorDeTurno = control.jugadorDeTurno();
 
