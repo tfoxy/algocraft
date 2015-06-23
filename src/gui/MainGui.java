@@ -1,12 +1,14 @@
 package gui;
 
 import escenario.EscenarioSimple;
+import gui.controlador.ControladorFicha;
 import gui.controlador.ControladorJugador;
 import gui.modelo.FichaObjetivo;
 import gui.modelo.FichaSeleccionada;
 import gui.modelo.JuegoLogger;
 import gui.modelo.JugadorDeTurno;
 import gui.modelo.TableroObservable;
+import gui.vista.FichaView;
 import gui.vista.GrillaView;
 import gui.vista.JugadorView;
 import gui.vista.LoggerView;
@@ -19,9 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import vista.ConstruccionView2;
-import vista.FichaView;
 import controladores.ControladorConstruccion;
-import controladores.ControladorFicha;
 
 public final class MainGui {
 

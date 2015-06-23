@@ -11,7 +11,7 @@ import juego.Recursos;
 
 import tablero.Coordenada;
 import tablero.Tablero;
-import vista.VentanaColor;
+import vista.VentanaColo;
 
 
 
@@ -39,7 +39,7 @@ public class Juego2 {
 
     private void crearVetanaColor() {
 
-        JFrame ventanaColor = new VentanaColor(tamanioGrilla, modelo);
+        JFrame ventanaColor = new VentanaColo(tamanioGrilla, modelo);
 
         ventanaColor.setSize(500, 400);
 
