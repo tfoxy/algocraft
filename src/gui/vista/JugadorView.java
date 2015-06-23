@@ -1,6 +1,7 @@
 package gui.vista;
 
 import ficha.Ficha;
+import gui.controlador.ControlFinDelJuego;
 import gui.controlador.ControladorJugador;
 import gui.controlador.KeyboardMap;
 import gui.modelo.FichaObjetivo;
@@ -19,6 +20,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 public class JugadorView extends JPanel {
 
@@ -69,8 +71,19 @@ public class JugadorView extends JPanel {
  
         jugadorDeTurno.fichaParaConstruir().getConstruccionObservable().addObserver(new ConstruccionObserver());
         jugadorDeTurno.comenzarTurnoObservable().addObserver(new ComenzarTurnoObserver());
+        jugadorDeTurno.jugadorGanoObservable().addObserver(new jugadorGanoObservable());
     }
 
+    private class jugadorGanoObservable implements Observer<JugadorDeTurno> {
+
+		@Override
+		public void update(Observable<JugadorDeTurno> object,
+				JugadorDeTurno data) {
+			ControlFinDelJuego control = new ControlFinDelJuego();
+			new VistaGanador(jugador, control);
+		}
+
+    }
 
     private void addActionListeners(ControladorJugador control) {
         botonTerminarTurno.addActionListener(control.getTerminarTurnoListener());

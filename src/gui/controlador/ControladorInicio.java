@@ -14,6 +14,7 @@ import gui.vista.VistaInicio;
 
 import java.awt.AWTEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -40,8 +41,7 @@ public class ControladorInicio {
             Juego.Builder builder = new Juego.Builder();
             EscenarioSimple escenario = new EscenarioSimple(builder);
 
-            Jugador jugador1 = new Jugador(vistaInicio.getNombre(0), vistaInicio.getRaza1(), 500, 200); //para probar "unitarimante"
-            builder.agregarJugador(jugador1);
+            builder.agregarJugador(new Jugador(vistaInicio.getNombre(0), vistaInicio.getRaza1(), 500, 200));
             builder.agregarJugador(new Jugador(vistaInicio.getNombre(1), vistaInicio.getRaza2(), 500, 200));
 
             TableroObservable mapa = builder.hacerTableroObservable();
@@ -72,6 +72,8 @@ public class ControladorInicio {
 
             JFrame ventana = new VentanaPrincipal(grillaView, fichaView, jugadorView, loggerView);
             ventana.setVisible(true);
+            
+            vistaInicio.dispatchEvent(new WindowEvent(vistaInicio, WindowEvent.WINDOW_CLOSING));
         }
     }
 

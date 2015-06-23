@@ -180,4 +180,8 @@ public class Jugador {
     public void quitarTecnologias(Collection<Tecnologia> tecnologias) {
         this.tecnologias.quitar(tecnologias);
     }
+
+    public boolean perdi() {
+        return (fichas.size()==0);
+    }
 }
