@@ -1,11 +1,16 @@
 package gui.vista;
 
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Button;
 import java.awt.Container;
 import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.TextField;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,6 +19,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import juego.Raza;
 
@@ -24,11 +31,9 @@ import gui.controlador.ControladorInicio;
 import gui.modelo.RazasJugables;
 
 public class VistaInicio extends JFrame implements Observer{
-
 	
-	private final TextField textoNombre1 = new TextField("Nombre");
-    private JComboBox<Raza> RazaCombobox1;
-	private TextField textoNombre2 = new TextField("Nombre");
+	private TextField[] textoNombres = { new TextField("Nombre"), new TextField("Nombre")};
+    private JComboBox<Raza> RazaCombobox1; //hacer esto con array nos va a largar el codigo en ves de acortarlo.
     private JComboBox<Raza> RazaCombobox2;
  
 	private JLabel botones;
@@ -43,11 +48,11 @@ public class VistaInicio extends JFrame implements Observer{
         
         
 		JPanel frameTempJugador1 = new JPanel();
-		frameTempJugador1.add(textoNombre1);
+		frameTempJugador1.add(textoNombres[0]);
 		frameTempJugador1.add(RazaCombobox1);
 		
 		JPanel frameTempJugador2 = new JPanel();
-		frameTempJugador2.add(textoNombre2);
+		frameTempJugador2.add(textoNombres[1]);
 		frameTempJugador2.add(RazaCombobox2);
 		
 		
@@ -64,27 +69,33 @@ public class VistaInicio extends JFrame implements Observer{
 		addWindowListener(new CloseListener());
 		
 		botonJugar.addActionListener(control.jugarListener(this));
+		
+		URL url = null;
+		try {
+			url = new URL("http://www.mp3item.com/soundeffects/water02.wav");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AudioClip sonido = Applet.newAudioClip(url);
+	//	sonido.play();
+		sonido.loop();
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public String getNombre1() {
-		return textoNombre1.getText();
+		// TODO Auto-generated method stub	
 	}
 
 	public Raza getRaza1() {
 		return (Raza) RazaCombobox1.getSelectedItem();
 	}
 
-	public String getNombre2() {
-		return textoNombre2.getText();
-	}
-
 	public Raza getRaza2() {
 		return (Raza) RazaCombobox2.getSelectedItem();
+	}
+
+	public String getNombre(int i) {
+		return textoNombres[i].getText();
 	}
 }

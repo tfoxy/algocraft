@@ -40,9 +40,9 @@ public class ControladorInicio {
             Juego.Builder builder = new Juego.Builder();
             EscenarioSimple escenario = new EscenarioSimple(builder);
 
-            Jugador jugador1 = new Jugador(vistaInicio.getNombre1(), vistaInicio.getRaza1(), 500, 200); //para probar "unitarimante"
+            Jugador jugador1 = new Jugador(vistaInicio.getNombre(0), vistaInicio.getRaza1(), 500, 200); //para probar "unitarimante"
             builder.agregarJugador(jugador1);
-            builder.agregarJugador(new Jugador(vistaInicio.getNombre2(), vistaInicio.getRaza2(), 500, 200));
+            builder.agregarJugador(new Jugador(vistaInicio.getNombre(1), vistaInicio.getRaza2(), 500, 200));
 
             TableroObservable mapa = builder.hacerTableroObservable();
 
