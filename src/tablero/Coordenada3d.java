@@ -45,8 +45,8 @@ public class Coordenada3d extends Coordenada {
     }
 
     @Override
-    public Coordenada3d dameCordenadaHacia(Direccion direccion) {
-        Coordenada coordenada = super.dameCordenadaHacia(direccion);
+    public Coordenada3d dameCoordenadaHacia(Direccion direccion) {
+        Coordenada coordenada = super.dameCoordenadaHacia(direccion);
         return new Coordenada3d(coordenada.getX(), coordenada.getY(), z);
     }
 

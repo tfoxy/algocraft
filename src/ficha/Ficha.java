@@ -70,6 +70,7 @@ public abstract class Ficha implements Cloneable {
 
     protected int vision = 0;
     protected boolean dentroDeTransporte = false;
+    protected boolean estaEnConstruccion = false;
     protected Set<EstadoDeFicha> estados = new HashSet<>();
 
     protected List<Magia> magias = new ArrayList<>();
@@ -325,16 +326,16 @@ public abstract class Ficha implements Cloneable {
     }
 
     public void mover(Direccion direccion) {
-        Coordenada3d ubicacion = coordenada;
-        Coordenada3d nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
+        final Coordenada3d ubicacion = coordenada;
+        final Coordenada3d nuevaUbicacion = ubicacion.dameCoordenadaHacia(direccion);
 
         verificarMovimientoHacia(nuevaUbicacion);
 
         coordenada = nuevaUbicacion;
 
-        tablero.insertar(Ficha.this);
+        tablero.insertar(this);
         tablero.eliminarFichaEn(ubicacion);
-        Ficha.this.disminuirMovimiento();
+        this.disminuirMovimiento();
 
         for (Ficha ficha: fichasCargadas()) {
             ficha.coordenada = coordenada;
@@ -497,6 +498,7 @@ public abstract class Ficha implements Cloneable {
 
         @Override
         public void crear() {
+            estaEnConstruccion = true;
             invalidarPropiedades();
         }
 
@@ -508,6 +510,7 @@ public abstract class Ficha implements Cloneable {
             barras.pasarTurno();
 
             if (turnosFaltantes <= 0) {
+                estaEnConstruccion = false;
                 estrategia = estrategiaAnterior;
                 revalidarPropiedades();
                 estrategia.crear();
@@ -526,7 +529,10 @@ public abstract class Ficha implements Cloneable {
     }
 
     public Color miColor() {
-        return propietario.color();
+        Color color = propietario.color();
+        if (estaEnConstruccion)
+            color = color.brighter();
+        return color;
     }
 
 

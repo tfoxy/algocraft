@@ -40,7 +40,7 @@ public final class CoordenadaUtil {
             for (Coordenada coordenada : coordenadas) {
                 for (Direccion direccion : Direccion.values()) {
                     Coordenada nuevaCoordenada =
-                            coordenada.dameCordenadaHacia(direccion);
+                            coordenada.dameCoordenadaHacia(direccion);
 
                     if (set.add(nuevaCoordenada)) {
                         siguientes.add(nuevaCoordenada);

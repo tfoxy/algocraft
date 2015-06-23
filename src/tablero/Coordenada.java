@@ -54,7 +54,7 @@ public class Coordenada {
     }
 
     //new 6
-    public Coordenada dameCordenadaHacia(Direccion dirreccion) {
+    public Coordenada dameCoordenadaHacia(Direccion dirreccion) {
         return new Coordenada(x + dirreccion.getX(), y + dirreccion.getY());
     }
 
