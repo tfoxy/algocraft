@@ -18,7 +18,7 @@ public class JugadorDeTurno {
     private final Observable<JugadorDeTurno> comenzarTurnoObservable;
     private final Observable<JugadorDeTurno> terminarTurnoObservable;
     private final Observable<JugadorDeTurno> jugadorGanoObservable;
-    
+
     private JuegoLogger juegoLogger = JuegoLogger.EMPTY;
 
     public JugadorDeTurno(Juego juego, FichaObjetivo fichaObjetivo) {
@@ -26,7 +26,7 @@ public class JugadorDeTurno {
         this.fichaObjetivo = fichaObjetivo;
         this.comenzarTurnoObservable = new Observable<>();
         this.terminarTurnoObservable = new Observable<>();
-        this.jugadorGanoObservable = new Observable<>(); 
+        this.jugadorGanoObservable = new Observable<>();
         this.fichaParaConstruir = new FichaParaConstruir(fichaObjetivo, this);
 
         this.comenzarTurnoObservable.addObserver(new SeleccionarPrimeraFicha());
@@ -79,21 +79,22 @@ public class JugadorDeTurno {
     public void terminarTurno() {
         this.terminarTurnoObservable.notifyObservers(this);
 
-        String name =juego.jugadorActual().nombre(); 
+        String name = juego.jugadorActual().nombre();
         this.juego.pasarJugador();
-        if (juego.jugadorActual().perdi())
-        { //new VistaPerdedor(juego.jugadorActual()); 
-        //new VistaGanador(name);
-        
-        this.jugadorGanoObservable.notifyObservers(this);}
-        
+        if (juego.jugadorActual().perdi()) {
+            //new VistaPerdedor(juego.jugadorActual());
+            //new VistaGanador(name);
+
+            this.jugadorGanoObservable.notifyObservers(this);
+        }
+
         this.comenzarTurnoObservable.notifyObservers(this);
     }
 
     public Observable<JugadorDeTurno> jugadorGanoObservable() {
         return jugadorGanoObservable;
     }
-    
+
     public Observable<JugadorDeTurno> comenzarTurnoObservable() {
         return comenzarTurnoObservable;
     }

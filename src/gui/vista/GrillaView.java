@@ -1,10 +1,8 @@
 package gui.vista;
 
 import ficha.Ficha;
-import gui.modelo.AccionDeFicha;
 import gui.modelo.AccionEnGrilla;
 import gui.modelo.FichaObjetivo;
-import gui.modelo.FichaSeleccionada;
 import gui.modelo.JugadorDeTurno;
 import gui.modelo.Observable;
 import gui.modelo.Observer;
@@ -97,11 +95,18 @@ public class GrillaView extends JPanel {
     }
 
     private class ComenzarTurno implements Observer<JugadorDeTurno> {
+        private void actualizarVisibilidadDeCasillas() {
+            for (Map.Entry<Coordenada, CasillaVista> entry: casillas.entrySet()) {
+                entry.getValue().mostrar(visibilidad.puedeVer(entry.getKey()));
+            }
+        }
+
         @Override
         public void update(Observable<JugadorDeTurno> object, JugadorDeTurno data) {
             visibilidad.removeListener(actualizarVisiblidad);
             visibilidad = data.jugador().visibilidad();
             visibilidad.addListener(actualizarVisiblidad);
+            actualizarVisibilidadDeCasillas();
         }
     }
 }
