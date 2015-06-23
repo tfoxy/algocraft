@@ -11,6 +11,8 @@ import java.util.Set;
 
 import error.NombreDeJugadorEsCortoException;
 import ficha.Ficha;
+import tablero.Coordenada;
+import tablero.VisibilidadDelJugador;
 
 
 public class Jugador {
@@ -23,6 +25,7 @@ public class Jugador {
     private final Color color;
     private final RecursosDeJugador recursos;
     private final TecnologiasDelJugador tecnologias;
+    private final VisibilidadDelJugador visibilidad;
     private boolean pasandoTurno;
     private List<Ficha> fichasAEliminar;
 
@@ -55,6 +58,8 @@ public class Jugador {
         tecnologias.agregar(raza.tecnologiasIniciales());
 
         recursos = new RecursosDeJugador(recursosIniciales);
+
+        visibilidad = new VisibilidadDelJugador();
 
         pasandoTurno = false;
         fichasAEliminar = new ArrayList<>();
@@ -183,5 +188,9 @@ public class Jugador {
 
     public boolean perdi() {
         return fichas.isEmpty();
+    }
+
+    public VisibilidadDelJugador visibilidad() {
+        return visibilidad;
     }
 }
