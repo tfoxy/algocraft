@@ -11,7 +11,7 @@ public abstract class EdifcioDeRecursosTerrestre extends EdificioTerrestre {
         this.estrategia = new EdifcioDeRecursosStrategy();
     }
 
-    protected class EdifcioDeRecursosStrategy extends FichaStrategy {
+    protected class EdifcioDeRecursosStrategy extends DefaultFichaStrategy {
         private RecursosDeJugador recursosVirgenes() {
             return fuenteDeRecursos.recursosVirgenes();
         }

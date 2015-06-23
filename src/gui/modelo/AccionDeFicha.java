@@ -3,5 +3,5 @@ package gui.modelo;
 public enum AccionDeFicha {
     MOVIMIENTO,
     ATAQUE,
-    EMISION_DE_MAGIA
+    CARGAR, DESCARGAR, EMISION_DE_MAGIA
 }

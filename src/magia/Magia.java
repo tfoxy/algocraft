@@ -7,44 +7,50 @@ import tablero.Coordenada;
 import tablero.Coordenada3d;
 
 public abstract class Magia {
+    private final String nombre;
     private final int coste;
     private final int rango;
 
-    public Magia(int coste, int rango) {
+    public Magia(String nombre, int coste, int rango) {
+        this.nombre = nombre;
         this.coste = coste;
         this.rango = rango;
     }
 
-    public final void realizar(Ficha ficha, Coordenada3d objetivo) {
-        verificarSiPuedeRealizarla(ficha, objetivo);
-        verificarObjetivo(ficha, objetivo);
+    public final void realizar(Ficha caster, Coordenada3d objetivo) {
+        verificarSiPuedeRealizarla(caster);
+        verificarSiLlegaAlObjetivo(caster, objetivo);
 
-        aplicar(ficha, objetivo);
+        aplicar(caster, objetivo);
 
-        ficha.barras().quitarEnergia(coste);
+        caster.barras().quitarEnergia(coste);
+        caster.disminuirMovimiento();
     }
 
-    protected abstract void aplicar(Ficha ficha, Coordenada3d objetivo);
+    protected abstract void aplicar(Ficha caster, Coordenada3d objetivo);
 
-    private void verificarSiPuedeRealizarla(Ficha ficha, Coordenada objetivo) {
-        if (ficha.barras().energiaActual() < coste) {
+    public void verificarSiPuedeRealizarla(Ficha caster) {
+        if (caster.barras().energiaActual() < coste) {
             throw new EnergiaInsuficienteException();
         }
-        if (ficha.coordenada().distanciaAObjetivo(objetivo) > rango) {
+        caster.validarMovimientoSuficiente();
+    }
+
+    private void verificarSiLlegaAlObjetivo(Ficha caster, Coordenada3d objetivo) {
+        if (caster.coordenada().distanciaAObjetivo(objetivo) > rango) {
             throw new FueraDeRangoException();
         }
     }
 
-    protected void verificarObjetivo(Ficha ficha, Coordenada3d objetivo) {
-        // noop: el objetivo es válido por defecto
-    }
-
-    int coste() {
+    public int coste() {
         return coste;
     }
 
-    int rango() {
+    public int rango() {
         return rango;
     }
 
+    public String nombre() {
+        return nombre;
+    }
 }

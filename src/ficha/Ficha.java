@@ -1,15 +1,16 @@
 package ficha;
 
 import error.CapacidadInsuficienteException;
+import error.DentroDeTransporteException;
+import error.EstadoYaExisteEnFichaException;
 import error.FichaSobreOtraFichaException;
 import error.FueraDeRangoException;
 import error.JuegoException;
 import error.MovimientoInsuficienteException;
-import error.RecursosInsuficientesException;
-import error.TecnologiasInsuficientesException;
+import error.UnicamenteObjetivoNoEnConstruccionException;
 import error.TransporteNoContieneFichaException;
 import error.UnicamenteObjetivoPropioException;
-import juego.Gaia;
+import ficha.estado.EstadoDeFicha;
 import juego.Recursos;
 import juego.Jugador;
 import juego.RecursosDeJugador;
@@ -22,13 +23,13 @@ import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.Direccion;
 import tablero.ITablero;
-import vista.ConstanteColores;
 import juego.Tecnologia;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -67,10 +68,12 @@ public abstract class Ficha implements Cloneable {
     protected Ataque ataqueAire = Ataque.NULO;
 
     protected int vision = 0;
+    protected boolean dentroDeTransporte = false;
+    protected Set<EstadoDeFicha> estados = new HashSet<>();
 
     protected List<Magia> magias = new ArrayList<>();
 
-    protected FichaStrategy estrategia = new FichaStrategy();
+    protected FichaStrategy estrategia = new DefaultFichaStrategy();
 
 
     //gets
@@ -135,15 +138,13 @@ public abstract class Ficha implements Cloneable {
 
         tablero.eliminarFichaEn(coordenada);
 
-        for (Ficha ficha: transportacion.fichasCargadas()) {
+        for (Ficha ficha: fichasCargadas()) {
             ficha.muerete();
         }
     }
 
     public void disminuirMovimiento() {
-        if (movimiento <= 0) {
-            throw new MovimientoInsuficienteException();
-        }
+        validarMovimientoSuficiente();
 
         movimiento -= 1;
     }
@@ -165,9 +166,7 @@ public abstract class Ficha implements Cloneable {
     public void atacar(Ficha defensor) {
         final Ataque ataque = defensor.tipoDeAtaqueRecibido(this);
 
-        if (!this.puedoAtacar(defensor, ataque.rango())) {
-            throw new FueraDeRangoException();
-        }
+        validarAtaque(defensor, ataque);
 
         disminuirMovimiento();
 
@@ -183,11 +182,18 @@ public abstract class Ficha implements Cloneable {
         }
     }
 
-    private boolean puedoAtacar(Ficha defensor, int rango) {
+    private boolean puedoAtacar(Ficha defensor, Ataque ataque) {
         Coordenada posicionAgresor = coordenada;
         Coordenada posicionDefensor = defensor.coordenada();
+        int distancia = posicionAgresor.distanciaAObjetivo(posicionDefensor);
 
-        return rango >= posicionAgresor.distanciaAObjetivo(posicionDefensor);
+        return ataque.rango() >= distancia;
+    }
+
+    private void validarAtaque(Ficha defensor, Ataque ataque) {
+        if (!this.puedoAtacar(defensor, ataque)) {
+            throw new FueraDeRangoException();
+        }
     }
 
     public abstract Ataque tipoDeAtaqueRecibido(Ficha atacante);
@@ -201,26 +207,33 @@ public abstract class Ficha implements Cloneable {
             clone = (Ficha) super.clone();
         } catch (CloneNotSupportedException e) {
             // No debería ocurrir
-            throw new RuntimeException();
+            throw new RuntimeException(e.getMessage(), e.getCause());
         } //cuando esten echos los Texy intentar quitar el (casteo)
 
         clone.barras = this.barras.clone();
-        clone.transportacion = new Transportacion(transportacion.capacidad());
+        clone.transportacion = new Transportacion(this.transportacion.capacidad());
+        clone.tipoDeFicha = EnumSet.copyOf(this.tipoDeFicha);
+        clone.estados = new HashSet<>(this.estados);
 
-        return this;
+        return clone;
     }
 
     public Ficha espectro() {
         Ficha clone = this.clone();
 
+        estrategia.clonarEn(clone);
+
+        clone.nombre = "Alucinación de " + this.nombre;
         clone.barras = this.barras.espectro();
         clone.ataqueAire = new Ataque(0, ataqueAire.rango());
         clone.ataqueTierra = new Ataque(0, ataqueTierra.rango());
         clone.transportacion = Transportacion.VACIA;
         clone.magias = Collections.emptyList();
         clone.tipoDeFicha.add(TipoDeFicha.ALUCINACION);
+        clone.estados = new HashSet<>();
+        clone.poblacionQueDa = 0;
 
-        return this;
+        return clone;
     }
 
 
@@ -246,18 +259,32 @@ public abstract class Ficha implements Cloneable {
         return transportacion.capacidad();
     }
 
+    public List<Ficha> fichasCargadas() {
+        return transportacion.fichasCargadas();
+    }
+
+    public void validarMovimientoSuficiente() {
+        if (movimiento <= 0) {
+            throw new MovimientoInsuficienteException();
+        }
+    }
+
     private void validarDescarga(Ficha ficha) {
         if (!transportacion.contieneFicha(ficha)) {
             throw new TransporteNoContieneFichaException();
         }
 
-        if (ficha.movimiento <= 0) {
-            throw new MovimientoInsuficienteException();
-        }
+        ficha.validarMovimientoSuficiente();
 
         Coordenada3d nuevaCoordenada = new Coordenada3d(coordenada, ficha.altura());
 
         this.verificarCoordenada(nuevaCoordenada);
+    }
+
+    private void desembarcar() {
+        tablero.insertar(this);
+        this.disminuirMovimiento();
+        dentroDeTransporte = false;
     }
 
     public void descargar(Ficha ficha) {
@@ -265,8 +292,7 @@ public abstract class Ficha implements Cloneable {
 
         ficha.coordenada(coordenada.proyeccion());
 
-        tablero.insertar(ficha);
-
+        ficha.desembarcar();
         transportacion.descargar(ficha);
     }
 
@@ -280,11 +306,14 @@ public abstract class Ficha implements Cloneable {
         transportacion.cargar(fichaACargar);
 
         tablero.eliminarFichaEn(fichaACargar.coordenada);
-
         fichaACargar.coordenada = coordenada;
+        fichaACargar.dentroDeTransporte = true;
     }
 
-    //mover
+    public boolean estaDentroDeTransporte() {
+        return dentroDeTransporte;
+    }
+
     public boolean intentarMovimiento(Direccion direccion) {
         try {
             this.mover(direccion);
@@ -298,25 +327,44 @@ public abstract class Ficha implements Cloneable {
         Coordenada3d ubicacion = coordenada;
         Coordenada3d nuevaUbicacion = ubicacion.dameCordenadaHacia(direccion);
 
-        if (movimiento <= 0) {
-            throw new MovimientoInsuficienteException();
-        }
-
-        verificarCoordenada(nuevaUbicacion);
+        verificarMovimientoHacia(nuevaUbicacion);
 
         coordenada = nuevaUbicacion;
 
-        tablero.insertar(this);
+        tablero.insertar(Ficha.this);
         tablero.eliminarFichaEn(ubicacion);
-        this.disminuirMovimiento();
+        Ficha.this.disminuirMovimiento();
 
-        for (Ficha ficha: transportacion.fichasCargadas()) {
+        for (Ficha ficha: fichasCargadas()) {
             ficha.coordenada = coordenada;
         }
     }
 
+    private void verificarMovimientoHacia(Coordenada3d nuevaUbicacion) {
+        if (dentroDeTransporte) {
+            throw new DentroDeTransporteException();
+        }
+
+        validarMovimientoSuficiente();
+
+        verificarCoordenada(nuevaUbicacion);
+    }
+
     public void pasarTurno() {
+        aplicarEstados();
         estrategia.pasarTurno();
+    }
+
+    private void aplicarEstados() {
+        for (EstadoDeFicha estado: estados) {
+            estado.aplicarEn(this);
+        }
+    }
+
+    public void agregarEstado(EstadoDeFicha estado) {
+        if (!this.estados.add(estado)) {
+            throw new EstadoYaExisteEnFichaException();
+        }
     }
 
     public boolean es(TipoDeFicha tipoDeFicha) {
@@ -335,7 +383,7 @@ public abstract class Ficha implements Cloneable {
         return puedoReemplazarFichaEnTablero(coordenada);
     }
 
-    protected boolean puedoReemplazarFichaEnTablero(Coordenada3d nuevaCoordenada) {
+    public boolean puedoReemplazarFichaEnTablero(Coordenada3d nuevaCoordenada) {
         return tablero.getFicha(nuevaCoordenada).tipoDeFicha.contains(tipoDeFichaNecesaria);
     }
 
@@ -349,37 +397,59 @@ public abstract class Ficha implements Cloneable {
         return nombre;
     }
 
+    public List<Magia> magias() {
+        return magias;
+    }
 
-    protected class FichaStrategy {
 
+    protected interface FichaStrategy {
+        void validarCreacion();
+        void gastarRecursos();
+        void crear();
+        void pasarTurno();
+        void muerete();
+        void clonarEn(Ficha ficha);
+    }
+
+    protected class DefaultFichaStrategy implements FichaStrategy {
+        @Override
         public void validarCreacion() {
             if (!puedoReemplazarFichaEnTablero()) {
                 throw new FichaSobreOtraFichaException();
             }
         }
 
+        @Override
         public void gastarRecursos() {
             propietario.recursos().poblacion().aumentarActualForzadamente(coste.poblacion());
         }
 
+        @Override
         public void crear() {
             propietario.agregarPoblacionTotal(poblacionQueDa);
             propietario.agregarTecnologias(tecnologiasQueDa);
             recuperarPuntosDeMovimiento();
         }
 
+        @Override
         public void pasarTurno() {
             barras.pasarTurno();
             recuperarPuntosDeMovimiento();
         }
 
+        @Override
         public void muerete() {
             propietario.perderPoblacionTotal(poblacionQueDa);
+        }
+
+        @Override
+        public void clonarEn(Ficha ficha) {
+            ficha.estrategia = ficha.new DefaultFichaStrategy();
         }
     }
 
 
-    private class ConstruccionStrategy extends FichaStrategy {
+    private class ConstruccionStrategy extends DefaultFichaStrategy {
         private int turnosFaltantes = turnosParaCrear;
         private FichaStrategy estrategiaAnterior = estrategia;
         private Transportacion transportacionAnterior = transportacion;
@@ -442,22 +512,15 @@ public abstract class Ficha implements Cloneable {
         public void muerete() {
             // noop
         }
+
+        @Override
+        public void clonarEn(Ficha ficha) {
+            throw new UnicamenteObjetivoNoEnConstruccionException();
+        }
     }
 
-    //Hauxiliar mientras se acrea capa grafica
     public Color miColor() {
-        if (propietario.nombre().equals(new Gaia().nombre())) {
-            return Color.white;
-        }
-
-        switch (propietario.raza()) {
-            case TERRAN:
-                return ConstanteColores.amarilloSol;
-            case PROTOSS:
-                return ConstanteColores.azulMarino;
-            default:
-                return Color.white;
-        }
+        return propietario.color();
     }
 
 

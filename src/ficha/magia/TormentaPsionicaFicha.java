@@ -1,28 +1,31 @@
-package magia;
+package ficha.magia;
 
 import ficha.Ficha;
-import ficha.FichaAerea;
+import ficha.FichaCelestial;
+import ficha.TipoDeFicha;
 import tablero.CoordenadaUtil;
 
+import java.awt.Color;
 import java.util.List;
 
-public class TormentaPsionicaFicha extends FichaAerea {
+public class TormentaPsionicaFicha extends FichaCelestial {
 
-    private static final int RANGO = 1;
+    private static final int RADIO = 1;
     private static final int DANIO = 100;
     private static final int DURACION = 2;
+    private static final Color COLOR = new Color(135, 174, 222);
 
     private int duracionRestante;
 
 
     public TormentaPsionicaFicha() {
         duracionRestante = DURACION;
+        this.tipoDeFicha.add(TipoDeFicha.MAGIA);
     }
-
 
     @Override
     public void pasarTurno() {
-        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(tablero, coordenada, RANGO);
+        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(this, RADIO);
 
         for (Ficha ficha: fichas) {
             ficha.sufrirDanio(DANIO);
@@ -31,8 +34,13 @@ public class TormentaPsionicaFicha extends FichaAerea {
         duracionRestante--;
 
         if (duracionRestante <= 0) {
-            propietario.perder(this);
+            this.muerete();
         }
     }
 
+
+    @Override
+    public Color miColor() {
+        return COLOR;
+    }
 }

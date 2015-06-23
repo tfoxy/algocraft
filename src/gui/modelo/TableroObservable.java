@@ -1,6 +1,7 @@
 package gui.modelo;
 
 import ficha.Ficha;
+import juego.Gaia;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.ITablero;
@@ -11,6 +12,11 @@ public class TableroObservable extends Observable<Ficha> implements ITablero {
 
     public TableroObservable(ITablero tablero) {
         this.tablero = tablero;
+    }
+
+    @Override
+    public void verificar(Coordenada3d lugar) {
+        tablero.verificar(lugar);
     }
 
     @Override
@@ -26,6 +32,11 @@ public class TableroObservable extends Observable<Ficha> implements ITablero {
     @Override
     public Ficha getFichaAerea(Coordenada lugar) {
         return tablero.getFichaAerea(lugar);
+    }
+
+    @Override
+    public Ficha getFichaCelestial(Coordenada lugar) {
+        return tablero.getFichaCelestial(lugar);
     }
 
     @Override
@@ -65,5 +76,10 @@ public class TableroObservable extends Observable<Ficha> implements ITablero {
     @Override
     public int getLongitudY() {
         return tablero.getLongitudY();
+    }
+
+    @Override
+    public Gaia gaia() {
+        return tablero.gaia();
     }
 }

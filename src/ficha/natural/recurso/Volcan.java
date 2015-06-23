@@ -8,6 +8,7 @@ import java.awt.Color;
 public class Volcan extends FuenteDeRecurso {
 
     private static final int GAS_POR_DEFECTO = 5000;
+    private static final Color COLOR_VERDE_NEON = new Color(57, 255, 20);
 
     public Volcan() {
         this(GAS_POR_DEFECTO);
@@ -22,7 +23,7 @@ public class Volcan extends FuenteDeRecurso {
 
     @Override
     public Color miColor() {
-        return Color.GREEN;
+        return COLOR_VERDE_NEON;
     }
 
 }

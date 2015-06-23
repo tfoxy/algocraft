@@ -1,8 +1,5 @@
 package magia;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import error.FichaSobreOtraFichaException;
 import error.UnicamenteObjetivoNoAlucinacionException;
 import error.UnicamenteObjetivoPropioException;
@@ -12,8 +9,8 @@ import ficha.TipoDeFicha;
 import tablero.Coordenada;
 import tablero.Coordenada3d;
 import tablero.CoordenadaUtil;
-import tablero.Direccion;
-import tablero.ITablero;
+
+import java.util.Set;
 
 /**
  * Es capaz de crear 2 copias de una propia unidad que son
@@ -24,38 +21,36 @@ import tablero.ITablero;
  * Las unidades alucinadas ​NO​ tienen vida, solo escudo.
  */
 public class AlucinacionMagia extends Magia {
+    private static final int RADIO = 1;
 
     public AlucinacionMagia() {
-        super(100, 4);
+        super("Alucinación", 100, 4);
     }
 
 
-    /**
-     * @throws UnicamenteObjetivoPropioException
-     */
-    @Override
-    protected void verificarObjetivo(Ficha ficha, Coordenada3d objetivo) {
-        Ficha fichaObjetivo = ficha.tablero().getFicha(objetivo);
-
-        if (!fichaObjetivo.propietario().equals(ficha.propietario())) {
-            // TODO test para probar que solamente se puede aplicar a ficha del mismo jugador
+    private void verificarObjetivo(Ficha objetivo, Ficha caster) {
+        if (!objetivo.propietario().equals(caster.propietario())) {
             throw new UnicamenteObjetivoPropioException();
         }
-        if (!fichaObjetivo.es(TipoDeFicha.UNIDAD)) {
+        if (!objetivo.es(TipoDeFicha.UNIDAD)) {
             throw new UnicamenteObjetivoUnidadException();
         }
-        if (fichaObjetivo.es(TipoDeFicha.ALUCINACION)) {
+        if (objetivo.es(TipoDeFicha.ALUCINACION)) {
             throw new UnicamenteObjetivoNoAlucinacionException();
         }
     }
 
     @Override
-    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
-        final Set<Coordenada> casillasVecinas = CoordenadaUtil.areaDeCoordenadas(objetivo, 2);
+    protected void aplicar(Ficha caster, Coordenada3d objetivo) {
+        Ficha fichaObjetivo = caster.tablero().getFicha(objetivo);
+
+        verificarObjetivo(fichaObjetivo, caster);
+
+        final Set<Coordenada> casillasVecinas = CoordenadaUtil.areaDeCoordenadas(objetivo, RADIO);
         for (Coordenada coordenada: casillasVecinas) {
-            if (ficha.tablero().hayEspacio(new Coordenada3d(coordenada, objetivo.z))) {
-                Ficha fichaCopiar = ficha.tablero().getFicha(objetivo);
-                this.insertarEspectro(fichaCopiar, coordenada);
+            Coordenada3d coord3d = new Coordenada3d(coordenada, objetivo.z);
+            if (fichaObjetivo.puedoReemplazarFichaEnTablero(coord3d)) {
+                this.insertarEspectro(fichaObjetivo, coordenada);
                 return;
             }
         }

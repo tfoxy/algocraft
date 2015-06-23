@@ -2,8 +2,10 @@ package escenario;
 
 
 import ficha.Ficha;
+import ficha.magia.TormentaPsionicaFicha;
 import ficha.natural.recurso.NodoMineral;
 import ficha.natural.recurso.Volcan;
+import ficha.natural.terreno.TerrenoEspacial;
 import juego.Gaia;
 import juego.Juego;
 import juego.Jugador;
@@ -33,8 +35,8 @@ public class EscenarioSimple {
         return new Coordenada(x, y);
     }
 
-    private static int simetrica(int x, int medio) {
-        return 2 * medio - x;
+    private static int simetrica(int val, int medio) {
+        return 2 * medio - val;
     }
 
     private static Coordenada simetrica(Coordenada coord) {
@@ -56,8 +58,26 @@ public class EscenarioSimple {
         mineral.ponerEnJuego();
     }
 
+    private void nuevoTerrenoEspacial(Coordenada coord) {
+        Ficha terreno = new TerrenoEspacial();
+        terreno.setBasico(gaia, mapa, coord);
+        terreno.ponerEnJuego();
+    }
+
     private void nuevaUnidadBasica(Jugador jugador, Coordenada coord) {
         Ficha unidad = jugador.raza().nuevaUnidadBasica();
+        unidad.setBasico(jugador, mapa, coord);
+        unidad.ponerEnJuego();
+    }
+
+    private void nuevoTransporte(Jugador jugador, Coordenada coord) {
+        Ficha transporte = jugador.raza().nuevoTransporte();
+        transporte.setBasico(jugador, mapa, coord);
+        transporte.ponerEnJuego();
+    }
+
+    private void nuevaUnidadMagica(Jugador jugador, Coordenada coord) {
+        Ficha unidad = jugador.raza().nuevaUnidadMagica();
         unidad.setBasico(jugador, mapa, coord);
         unidad.ponerEnJuego();
     }
@@ -83,8 +103,17 @@ public class EscenarioSimple {
         nuevoMineral(c(PUNTO_MEDIO.x, PUNTO_MEDIO.y - 1));
         nuevoMineral(c(PUNTO_MEDIO.x, PUNTO_MEDIO.y + 1));
 
+        nuevoTerrenoEspacial(c(PUNTO_MEDIO.x, 1));
+        nuevoTerrenoEspacial(simetrica(c(PUNTO_MEDIO.x, 1)));
+
         nuevaUnidadBasica(j1, c(2, PUNTO_MEDIO.y));
         nuevaUnidadBasica(j2, simetrica(c(2, PUNTO_MEDIO.y)));
+
+        nuevoTransporte(j1, c(3, PUNTO_MEDIO.y));
+        nuevoTransporte(j2, simetrica(c(3, PUNTO_MEDIO.y)));
+
+        nuevaUnidadMagica(j1, c(4, PUNTO_MEDIO.y));
+        nuevaUnidadMagica(j2, simetrica(c(4, PUNTO_MEDIO.y)));
 
         return juego;
     }

@@ -6,12 +6,17 @@ import gui.controlador.KeyboardMap;
 import gui.modelo.FichaSeleccionada;
 import gui.modelo.Observable;
 import gui.modelo.Observer;
+import magia.Magia;
 import tablero.Direccion;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import java.awt.Component;
 import java.awt.event.KeyEvent;
 
 public class FichaView extends JPanel {
@@ -20,10 +25,7 @@ public class FichaView extends JPanel {
 
     private final JLabel nombreLabel = new JLabel();
     private final JLabel movimientoLabel = new JLabel();
-    private final JLabel movimientoMaximoLabel = new JLabel();
-    private final JLabel vidaLabel = new JLabel();
-    private final JLabel escudoLabel = new JLabel();
-    private final JLabel energiaLabel = new JLabel();
+    private final JLabel barrasLabel = new JLabel();
 
     private final JButton botonArriba = new JButton("Arriba");
     private final JButton botonAbajo = new JButton("Abajo");
@@ -31,23 +33,27 @@ public class FichaView extends JPanel {
     private final JButton botonDerecha = new JButton("Derecha");
     private final JButton botonAtaque = new JButton("Ataque");
     private final JButton botonCargar = new JButton("Cargar");
+    private final JComboBox<Ficha> descargarCombobox;
+    private final JComboBox<Magia> magiasCombobox;
 
 
     public FichaView(ControladorFicha control) {
+        FichaSeleccionada fichaSeleccionada = control.fichaSeleccionada();
+
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+        descargarCombobox = new JComboBox<>(fichaSeleccionada.fichasCargadas());
+        descargarCombobox.setRenderer(new FichasCargadasRenderer());
+
+        magiasCombobox = new JComboBox<>(fichaSeleccionada.magiasDisponibles());
+        magiasCombobox.setRenderer(new MagiasDisponiblesRenderer());
 
         JPanel panelStats = new JPanel();
         panelStats.add(nombreLabel);
         panelStats.add(new JLabel(" "));
         panelStats.add(movimientoLabel);
-        panelStats.add(new JLabel("/"));
-        panelStats.add(movimientoMaximoLabel);
-        panelStats.add(new JLabel(" V"));
-        panelStats.add(vidaLabel);
-        panelStats.add(new JLabel(" E"));
-        panelStats.add(escudoLabel);
-        panelStats.add(new JLabel(" M"));
-        panelStats.add(energiaLabel);
+        panelStats.add(new JLabel(" "));
+        panelStats.add(barrasLabel);
         add(panelStats);
 
         JPanel panelBotonesMovimiento = new JPanel();
@@ -60,6 +66,8 @@ public class FichaView extends JPanel {
         JPanel panelBotonesDeAccion = new JPanel();
         panelBotonesDeAccion.add(botonAtaque);
         panelBotonesDeAccion.add(botonCargar);
+        panelBotonesDeAccion.add(descargarCombobox);
+        panelBotonesDeAccion.add(magiasCombobox);
         add(panelBotonesDeAccion);
 
         addActionListeners(control);
@@ -67,7 +75,6 @@ public class FichaView extends JPanel {
         botonAtaque.setMnemonic(KeyEvent.VK_A);
         botonCargar.setMnemonic(KeyEvent.VK_C);
 
-        FichaSeleccionada fichaSeleccionada = control.fichaSeleccionada();
         cambiarFicha(fichaSeleccionada.ficha());
 
         fichaSeleccionada.cambioDeFichaObservable().addObserver(new Observer<Ficha>() {
@@ -110,10 +117,66 @@ public class FichaView extends JPanel {
 
     private void actulizarFicha() {
         nombreLabel.setText(ficha.nombre());
-        movimientoLabel.setText(ficha.movimiento() + "");
-        movimientoMaximoLabel.setText(ficha.movimientoMaximo() + "");
-        vidaLabel.setText(ficha.barras().vidaActual() + "");
-        escudoLabel.setText(ficha.barras().escudoActual() + "");
-        energiaLabel.setText(ficha.barras().energiaActual() + "");
+        movimientoLabel.setText(getMovimientoString());
+        barrasLabel.setText(ficha.barras().toShortString());
+    }
+
+    private String getMovimientoString() {
+        if (ficha.movimientoMaximo() > 0) {
+            return ficha.movimiento() + "/" + ficha.movimientoMaximo();
+        } else {
+            return "";
+        }
+    }
+
+    private static class FichasCargadasRenderer extends DefaultListCellRenderer {
+        private static String string(Ficha ficha) {
+            if (ficha == null)
+                return "Descargar...";
+            else
+                return String.format("%s %d/%d %s",
+                        ficha.nombre(),
+                        ficha.movimiento(),
+                        ficha.movimientoMaximo(),
+                        ficha.barras().toShortString()
+                );
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList<?> list,
+                                                      Object value,
+                                                      int index,
+                                                      boolean isSelected,
+                                                      boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            Ficha ficha = (Ficha) value;
+            setText(string(ficha));
+            return this;
+        }
+    }
+
+    private static class MagiasDisponiblesRenderer extends DefaultListCellRenderer {
+        private static String string(Magia magia) {
+            if (magia == null)
+                return "Emitir magia...";
+            else
+                return String.format("%s C:%d R:%d",
+                        magia.nombre(),
+                        magia.coste(),
+                        magia.rango()
+                );
+        }
+
+        @Override
+        public Component getListCellRendererComponent(JList<?> list,
+                                                      Object value,
+                                                      int index,
+                                                      boolean isSelected,
+                                                      boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            Magia magia = (Magia) value;
+            setText(string(magia));
+            return this;
+        }
     }
 }

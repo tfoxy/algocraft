@@ -87,4 +87,19 @@ public final class BarrasInvencible implements IBarras {
     public void quitarEnergia(int cantidad) {
         throw new EnergiaInsuficienteException();
     }
+
+    @Override
+    public String toShortString() {
+        return "";
+    }
+
+    @Override
+    public void aplicarEmp() {
+        // noop
+    }
+
+    @Override
+    public String toString() {
+        return "Invencible V:0/0(+0) E:0/0(+0) M:0/0(+0)";
+    }
 }

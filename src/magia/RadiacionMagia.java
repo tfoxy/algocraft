@@ -4,6 +4,7 @@ import error.UnicamenteObjetivoNoNaturalException;
 import error.UnicamenteObjetivoUnidadException;
 import ficha.Ficha;
 import ficha.TipoDeFicha;
+import ficha.estado.EstadoRadiacion;
 import tablero.Coordenada3d;
 import tablero.ITablero;
 import tablero.Tablero;
@@ -17,22 +18,19 @@ import tablero.Tablero;
 public class RadiacionMagia extends Magia {
 
     public RadiacionMagia() {
-        super(75, 5);
+        super("Radiación", 75, 5);
     }
 
     @Override
-    protected void verificarObjetivo(Ficha ficha, Coordenada3d objetivo) {
-        ITablero mapa = ficha.tablero();
+    protected void aplicar(Ficha caster, Coordenada3d objetivo) {
+        ITablero mapa = caster.tablero();
         Ficha fichaObjetivo = mapa.getFicha(objetivo);
 
         if (!fichaObjetivo.es(TipoDeFicha.UNIDAD)) {
             throw new UnicamenteObjetivoUnidadException();
         }
-    }
 
-    @Override
-    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
-        // TODO aplicar RadiacionMagia
+        fichaObjetivo.agregarEstado(EstadoRadiacion.INSTANCE);
     }
 
 }

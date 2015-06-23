@@ -69,11 +69,21 @@ public class RecursosDeJugador {
     private int gas;
     private final Poblacion poblacion;
 
+    public RecursosDeJugador(Recursos recursosIniciales) {
+        this(
+                recursosIniciales.mineral(),
+                recursosIniciales.gas(),
+                recursosIniciales.poblacion() > 0
+                        ? recursosIniciales.poblacion()
+                        : POBLACION_MAXIMA
+        );
+    }
+
     public RecursosDeJugador(int mineral, int gas) {
         this(mineral, gas, POBLACION_MAXIMA);
     }
 
-    RecursosDeJugador(int mineral, int gas, int poblacionMaxima) {
+    public RecursosDeJugador(int mineral, int gas, int poblacionMaxima) {
         this.mineral = mineral;
         this.gas = gas;
         poblacion = new Poblacion(poblacionMaxima);

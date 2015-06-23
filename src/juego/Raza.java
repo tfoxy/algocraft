@@ -42,6 +42,8 @@ public enum Raza {
     private final List<Ficha> listaDeFichas;
     private final Ficha unidadBasica;
     private final Ficha casa;
+    private final Ficha transporte;
+    private final Ficha unidadMagica;
 
 
     Raza(TipoDeFicha tipoDeFicha, Tecnologia tecnologia) {
@@ -57,6 +59,8 @@ public enum Raza {
 
         this.unidadBasica = Fichas.listaDe(listaDeFichas, TipoDeFicha.BASICA).get(0);
         this.casa = Fichas.listaDe(listaDeFichas, TipoDeFicha.CASA).get(0);
+        this.transporte = Fichas.listaDe(listaDeFichas, TipoDeFicha.TRANSPORTE).get(0);
+        this.unidadMagica = Fichas.listaDe(listaDeFichas, TipoDeFicha.MAGICA).get(0);
     }
 
 
@@ -74,5 +78,13 @@ public enum Raza {
 
     public Ficha nuevaCasa() {
         return Fichas.newInstance(casa);
+    }
+
+    public Ficha nuevoTransporte() {
+        return Fichas.newInstance(transporte);
+    }
+
+    public Ficha nuevaUnidadMagica() {
+        return Fichas.newInstance(unidadMagica);
     }
 }

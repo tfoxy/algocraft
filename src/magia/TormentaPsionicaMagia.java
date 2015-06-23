@@ -1,7 +1,9 @@
 package magia;
 
+import ficha.magia.TormentaPsionicaFicha;
 import tablero.Coordenada3d;
 import ficha.Ficha;
+import tablero.ITablero;
 
 /**
  * Inflige 100 unidades de daño a todas las unidades
@@ -11,13 +13,16 @@ import ficha.Ficha;
 public class TormentaPsionicaMagia extends Magia {
 
     public TormentaPsionicaMagia() {
-        super(75, 5);
+        super("Tormenta Psionica", 75, 5);
     }
 
+    // TODO test no se pueden crear dos tormentas en el mismo lugar
+
     @Override
-    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
+    protected void aplicar(Ficha caster, Coordenada3d objetivo) {
         final TormentaPsionicaFicha poder = new TormentaPsionicaFicha();
-        poder.setBasico(ficha.propietario(), ficha.tablero(), objetivo);
-        ficha.propietario().newFicha(poder);
+        final ITablero mapa = caster.tablero();
+        poder.setBasico(caster.propietario(), mapa, objetivo);
+        poder.ponerEnJuego();
     }
 }

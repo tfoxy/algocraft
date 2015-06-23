@@ -30,4 +30,8 @@ public interface IBarras extends Cloneable {
     IBarras clone();
 
     void quitarEnergia(int cantidad);
+
+    String toShortString();
+
+    void aplicarEmp();
 }

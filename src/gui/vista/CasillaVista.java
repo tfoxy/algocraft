@@ -1,8 +1,7 @@
 package gui.vista;
 
-import controladores.ControladorFicha;
 import ficha.Ficha;
-import gui.modelo.ElementObservable;
+import ficha.TipoDeFicha;
 import gui.modelo.FichaObjetivo;
 import gui.modelo.TableroObservable;
 import tablero.Altura;
@@ -10,10 +9,20 @@ import tablero.Coordenada;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.SoftBevelBorder;
+import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.Observer;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CasillaVista extends JPanel {
+
+    private static final Color DEFAULT_BACKGROUND_COLOR = new JPanel().getBackground();
+    private static final Border DEFAULT_BORDER =
+            BorderFactory.createRaisedSoftBevelBorder();
+    private static final Map<Color, Border> BORDERS_CACHE = new HashMap<>();
 
     private CasillaParaFicha tierra;
     private CasillaParaFicha aire;
@@ -26,7 +35,7 @@ public class CasillaVista extends JPanel {
         mapa.addObserver(new JCasillaObserver(coordenada));
 
         setLayout(new GridLayout(2, 1));
-        setBorder(BorderFactory.createRaisedSoftBevelBorder());
+        cambiarBorde(mapa.getFichaCelestial(coordenada));
 
         add(aire);
         add(tierra);
@@ -37,10 +46,37 @@ public class CasillaVista extends JPanel {
 
         if (ficha.coordenada().z == Altura.TIERRA)
             casillaParaFicha = tierra;
-        else
+        else if (ficha.coordenada().z == Altura.AIRE)
             casillaParaFicha = aire;
+        else if (ficha.coordenada().z == Altura.CIELO) {
+            cambiarBorde(ficha);
+            return;
+        } else return;
 
         casillaParaFicha.cambiarFicha(ficha);
+    }
+
+    private Border getBorde(Color color) {
+        Border border = BORDERS_CACHE.get(color);
+        if (border == null) {
+            border = new SoftBevelBorder(BevelBorder.RAISED, color, color.darker());
+            BORDERS_CACHE.put(color, border);
+        }
+        return border;
+    }
+
+    private void cambiarBorde(Ficha ficha) {
+        final Border border;
+        final Color bgColor;
+        if (ficha.es(TipoDeFicha.VACIA)) {
+            border = DEFAULT_BORDER;
+            bgColor = DEFAULT_BACKGROUND_COLOR;
+        } else {
+            border = getBorde(ficha.miColor());
+            bgColor = ficha.miColor().brighter();
+        }
+        setBorder(border);
+        setBackground(bgColor);
     }
 
     private class JCasillaObserver extends CasillaObserver {

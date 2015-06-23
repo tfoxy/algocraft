@@ -9,6 +9,7 @@ import java.awt.Color;
 public class NodoMineral extends FuenteDeRecurso {
 
     private static final int MINERALES_POR_DEFECTO = 1500;
+    private static final Color COLOR_AZUR = new Color(0, 127, 255);
 
     public NodoMineral() {
         this(MINERALES_POR_DEFECTO);
@@ -21,8 +22,11 @@ public class NodoMineral extends FuenteDeRecurso {
         this.tipoDeFicha.add(TipoDeFicha.MINERAL);
     }
 
+
+
     @Override
     public Color miColor() {
-        return Color.CYAN;
+        // Color Azur
+        return COLOR_AZUR;
     }
 }

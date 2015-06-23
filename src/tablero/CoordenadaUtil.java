@@ -16,12 +16,12 @@ public final class CoordenadaUtil {
 
 
     public static Set<Coordenada> areaDeCoordenadas(Coordenada puntoMedio,
-                                                    int rango) {
+                                                    int radio) {
         Set<Coordenada> set = new HashSet<>();
 
-        if (rango >= 0) {
+        if (radio >= 0) {
             set.add(puntoMedio);
-            recorrerEnAnchura(set, puntoMedio, rango);
+            recorrerEnAnchura(set, puntoMedio, radio);
         }
 
         return set;
@@ -30,11 +30,11 @@ public final class CoordenadaUtil {
 
     private static void recorrerEnAnchura(Set<Coordenada> set,
                                           Coordenada puntoMedio,
-                                          int rango) {
+                                          int radio) {
         ArrayList<Coordenada> coordenadas = new ArrayList<>();
         coordenadas.add(puntoMedio);
 
-        while (rango > 0) {
+        while (radio > 0) {
             final ArrayList<Coordenada> siguientes = new ArrayList<>();
 
             for (Coordenada coordenada : coordenadas) {
@@ -48,15 +48,18 @@ public final class CoordenadaUtil {
                 }
             }
 
-            rango -= 1;
+            radio -= 1;
 
             coordenadas = siguientes;
         }
     }
 
+    public static List<Ficha> fichasEnArea(Ficha ficha, int radio) {
+        return fichasEnArea(ficha.tablero(), ficha.coordenada(), radio);
+    }
 
-    public static List<Ficha> fichasEnArea(ITablero mapa, Coordenada puntoMedio, int rango) {
-        final Set<Coordenada> coordenadas = areaDeCoordenadas(puntoMedio, rango);
+    public static List<Ficha> fichasEnArea(ITablero mapa, Coordenada puntoMedio, int radio) {
+        final Set<Coordenada> coordenadas = areaDeCoordenadas(puntoMedio, radio);
         final List<Ficha> fichas = new ArrayList<>(coordenadas.size());
 
         for (Coordenada coordenada: coordenadas) {

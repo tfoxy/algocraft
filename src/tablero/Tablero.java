@@ -6,6 +6,7 @@ import java.util.Map;
 import error.PosicionFueraDeLimiteException;
 import ficha.Ficha;
 import ficha.natural.terreno.TerrenoAire;
+import ficha.natural.terreno.TerrenoCielo;
 import ficha.natural.terreno.TerrenoTierra;
 import juego.Gaia;
 
@@ -29,22 +30,26 @@ public class Tablero implements ITablero {
 
 
     private Ficha getFichaVacia(Coordenada3d lugar) {
-        Ficha ficha = lugar.z == Altura.TIERRA
-                ? new TerrenoTierra()
-                : new TerrenoAire();
+        final Ficha ficha;
+        switch (lugar.z) {
+            case Altura.TIERRA: ficha = new TerrenoTierra(); break;
+            case Altura.AIRE: ficha = new TerrenoAire(); break;
+            case Altura.CIELO: ficha = new TerrenoCielo(); break;
+            default: throw new PosicionFueraDeLimiteException();
+        }
         ficha.setBasico(gaia, this, lugar);
         return ficha;
     }
 
 
-    private void verificar(Coordenada3d lugar) {
+    public void verificar(Coordenada3d lugar) {
         int x = lugar.getX();
         int y = lugar.getY();
         int z = lugar.getZ();
 
         if (x < 1 || x > longitudX
                 || y < 1 || y > longitudY
-                || z < Altura.TIERRA || z > Altura.AIRE) {
+                || z < Altura.MINIMA || z > Altura.MAXIMA) {
             throw new PosicionFueraDeLimiteException();
         }
     }
@@ -73,6 +78,12 @@ public class Tablero implements ITablero {
     @Override
     public Ficha getFichaAerea(Coordenada lugar) {
         return getFicha(new Coordenada3d(lugar, Altura.AIRE));
+    }
+
+
+    @Override
+    public Ficha getFichaCelestial(Coordenada lugar) {
+        return getFicha(new Coordenada3d(lugar, Altura.CIELO));
     }
 
 
@@ -116,5 +127,10 @@ public class Tablero implements ITablero {
     @Override
     public int getLongitudY() {
         return longitudY;
+    }
+
+    @Override
+    public Gaia gaia() {
+        return gaia;
     }
 }

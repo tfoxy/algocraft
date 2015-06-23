@@ -1,7 +1,12 @@
 package magia;
 
 import ficha.Ficha;
+import ficha.TipoDeFicha;
 import tablero.Coordenada3d;
+import tablero.CoordenadaUtil;
+import tablero.ITablero;
+
+import java.util.List;
 
 /**
  * Tira un misil que al impactar en un radio, causa que las ​unidades enemigas
@@ -12,12 +17,21 @@ import tablero.Coordenada3d;
  */
 public class EmpMagia extends Magia {
 
+    private static final int RADIO = 1;
+
     public EmpMagia() {
-        super(100, 6);
+        super("EMP", 100, 6);
     }
 
     @Override
-    protected void aplicar(Ficha ficha, Coordenada3d objetivo) {
-        // TODO aplicar EmpMagia
+    protected void aplicar(Ficha caster, Coordenada3d objetivo) {
+        ITablero mapa = caster.tablero();
+        List<Ficha> fichas = CoordenadaUtil.fichasEnArea(mapa, objetivo, RADIO);
+
+        for (Ficha ficha: fichas) {
+            if (ficha.es(TipoDeFicha.UNIDAD)) {
+                ficha.barras().aplicarEmp();
+            }
+        }
     }
 }
