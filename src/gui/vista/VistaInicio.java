@@ -39,12 +39,12 @@ public class VistaInicio extends JFrame implements Observer{
 	private JLabel botones;
 	private Button botonJugar = new Button("Jugar"); 
 	
-	public VistaInicio(ControladorInicio control) {
+	public VistaInicio(ControladorInicio control){
         Container container = getContentPane();
         container.setLayout(new GridBagLayout());
 
-		RazaCombobox1 =  new JComboBox<>(new RazasJugables());
-		RazaCombobox2 =  new JComboBox<>(new RazasJugables());
+		RazaCombobox1 =  new JComboBox<>(Raza.values());
+		RazaCombobox2 =  new JComboBox<>(Raza.values());
         
         
 		JPanel frameTempJugador1 = new JPanel();
@@ -65,21 +65,20 @@ public class VistaInicio extends JFrame implements Observer{
 		container.add(botones);
 		setSize(500,100);  
 		setVisible(true); 
-
-		addWindowListener(new CloseListener());
 		
 		botonJugar.addActionListener(control.jugarListener(this));
 		
-		URL url = null;
+		/*URL url = null;
 		try {
-			url = new URL("http://www.mp3item.com/soundeffects/water02.wav");
+			url = new URL("file:///home/geco/git/algocraft/src/gui/vista/Musica.wav");
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		AudioClip sonido = Applet.newAudioClip(url);
-	//	sonido.play();
 		sonido.loop();
+		Por si despues se quiere seguir intentando. pero por lo pronto se tendria que borrar.
+		*/
 	}
 
 	@Override

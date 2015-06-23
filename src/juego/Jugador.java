@@ -181,8 +181,13 @@ public class Jugador {
     }
 
     public void validarTecnologias(List<Tecnologia> tecnologias) {
+
         if (!this.tecnologias.containsAll(tecnologias)) {
             throw new TecnologiasInsuficientesException();
         }
+    }
+
+    public boolean perdi() {
+    	return (fichas.size()==0);
     }
 }
