@@ -182,6 +182,6 @@ public class Jugador {
     }
 
     public boolean perdi() {
-        return (fichas.size()==0);
+        return fichas.isEmpty();
     }
 }
