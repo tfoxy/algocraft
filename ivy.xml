@@ -7,6 +7,7 @@
     </configurations>
 
     <dependencies>
+        <dependency org="com.google.guava" name="guava" rev="12.0" />
         <dependency org="org.hamcrest" name="hamcrest-all" rev="1.3"/>
         <dependency org="org.mockito" name="mockito-all" rev="1.9.0" conf="build->default"/>
         <dependency org="junit" name="junit" rev="4.11" conf="build->default"/>

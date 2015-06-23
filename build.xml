@@ -51,7 +51,7 @@
         <mkdir dir="${build}/tests"/>
     </target>
 
-    <target name="compilar.aplicacion" depends="setup, resolve">
+    <target name="compilar.aplicacion" depends="setup, resolve-deps">
         <javac srcdir="src" destdir="${build}" includeantruntime="false" debug="yes" target="1.7">
         </javac>
     </target>
@@ -173,14 +173,14 @@
     <!-- End of 'Ivy installation -->
 
     <!-- Resolve dependencies -->
-    <target name="resolve" unless="skip.deps" depends="install-ivy" description="--> retrieve dependencies with ivy">
+    <target name="resolve-deps" unless="skip.deps" depends="install-ivy" description="--> retrieve dependencies with ivy">
         <ivy:retrieve conf="build" pattern="${libs}/[artifact]-[type]-[revision].[ext]"/>
         <ivy:retrieve conf="analysis" pattern="${libs}/analysis/[artifact](-[classifier]).[ext]"/>
 
     </target>
     <!-- End of 'Resolve dependencies -->
 
-    <target name="run-pmd" depends="setup, resolve">
+    <target name="run-pmd" depends="setup, resolve-deps">
         <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask">
             <classpath refid="pmd.classpath"/>
         </taskdef>
