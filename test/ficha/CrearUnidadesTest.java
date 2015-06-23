@@ -121,4 +121,40 @@ public class CrearUnidadesTest {
         unidad.ponerEnJuego();
     }
 
+    @Test(expected = TecnologiaInsuficienteException.class)
+    public void noPuedeConstruirseSiElEdificioNecesarioEstaEnConstruccion() {
+        Ficha pilon = new Pilon();
+        pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
+        pilon.ponerEnJuego();
+
+        Ficha acceso = new Acceso().enConstruccion();
+        acceso.setBasico(protoss, mapa, new Coordenada(4, 3));
+        acceso.ponerEnJuego();
+
+        Ficha unidad = new Zealot().enConstruccion();
+        unidad.setBasico(protoss, mapa, new Coordenada(3, 3));
+        unidad.ponerEnJuego();
+    }
+
+    @Test
+    public void puedeConstruirseSiTieneElEdificioNecesarioYOtroEdificioNecesarioQueEstabaEnConstruccionEsDestruido() {
+        Ficha pilon = new Pilon();
+        pilon.setBasico(protoss, mapa, new Coordenada(2, 3));
+        pilon.ponerEnJuego();
+
+        Ficha acceso = new Acceso();
+        acceso.setBasico(protoss, mapa, new Coordenada(4, 3));
+        acceso.ponerEnJuego();
+
+        Ficha accesoEnConstruccion = new Acceso().enConstruccion();
+        accesoEnConstruccion.setBasico(protoss, mapa, new Coordenada(5, 3));
+        accesoEnConstruccion.ponerEnJuego();
+
+        accesoEnConstruccion.muerete();
+
+        Ficha unidad = new Zealot().enConstruccion();
+        unidad.setBasico(protoss, mapa, new Coordenada(3, 3));
+        unidad.ponerEnJuego();
+    }
+
 }
