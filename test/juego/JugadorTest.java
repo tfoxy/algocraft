@@ -21,7 +21,7 @@ public class JugadorTest {
 
         jugador.newFicha(unidad);
 
-        jugador.perder(unidad);
+        jugador.perderFicha(unidad);
 
         jugador.pasarTurno();
 
@@ -36,7 +36,7 @@ public class JugadorTest {
         jugador.newFicha(primerUnidad);
         jugador.newFicha(segundaUnidad);
 
-        jugador.perder(segundaUnidad);
+        jugador.perderFicha(segundaUnidad);
 
         jugador.pasarTurno();
 

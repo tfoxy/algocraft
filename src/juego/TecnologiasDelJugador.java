@@ -25,7 +25,9 @@ public class TecnologiasDelJugador {
     }
 
     public void quitar(Collection<Tecnologia> tecnologias) {
-        this.tecnologias.removeAll(tecnologias);
+        for (Tecnologia tecnologia: tecnologias) {
+            quitar(tecnologia);
+        }
     }
 
     public boolean tiene(Tecnologia tecnologia) {

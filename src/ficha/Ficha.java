@@ -27,6 +27,7 @@ import juego.Tecnologia;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -401,6 +402,10 @@ public abstract class Ficha implements Cloneable {
         return magias;
     }
 
+    public Collection<Tecnologia> tecnologiasQueDa() {
+        return Collections.unmodifiableList(tecnologiasQueDa);
+    }
+
 
     protected interface FichaStrategy {
         void validarCreacion();
@@ -440,6 +445,7 @@ public abstract class Ficha implements Cloneable {
         @Override
         public void muerete() {
             propietario.perderPoblacionTotal(poblacionQueDa);
+            propietario.quitarTecnologias(tecnologiasQueDa);
         }
 
         @Override

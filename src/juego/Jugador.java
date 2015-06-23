@@ -2,6 +2,7 @@ package juego;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -104,12 +105,17 @@ public class Jugador {
     }
 
 
-    public void perder(Ficha ficha) {
+    private void perder(Ficha ficha) {
         if (pasandoTurno) {
             fichasAEliminar.add(ficha);
         } else {
             fichas.remove(ficha);
         }
+    }
+
+    public void perderFicha(Ficha ficha) {
+        perderPoblacionActual(ficha.coste().poblacion());
+        this.perder(ficha);
     }
 
 
@@ -137,11 +143,6 @@ public class Jugador {
 
     public void perderPoblacionActual(int cantidad) {
         recursos.poblacion().cambiarActual(-cantidad);
-    }
-
-    public void perderFicha(Ficha ficha) {
-        perderPoblacionActual(ficha.coste().poblacion());
-        this.perder(ficha);
     }
 
     public int cantidadGas() {
@@ -172,7 +173,11 @@ public class Jugador {
         return Collections.unmodifiableSet(fichas);
     }
 
-    public void validarTecnologias(List<Tecnologia> tecnologias) {
+    public void validarTecnologias(Collection<Tecnologia> tecnologias) {
         this.tecnologias.validarTenencia(tecnologias);
+    }
+
+    public void quitarTecnologias(Collection<Tecnologia> tecnologias) {
+        this.tecnologias.quitar(tecnologias);
     }
 }
