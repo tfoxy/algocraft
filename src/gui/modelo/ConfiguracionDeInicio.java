@@ -1,6 +1,8 @@
 package gui.modelo;
 
 import error.JuegoException;
+import error.JugadoresConMismoColorException;
+import error.JugadoresConMismoNombreException;
 import escenario.EscenarioSimple;
 import juego.ColorDeJugador;
 import juego.Juego;
@@ -8,8 +10,12 @@ import juego.Jugador;
 import juego.Raza;
 import juego.Recursos;
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ConfiguracionDeInicio {
 
@@ -26,7 +32,7 @@ public class ConfiguracionDeInicio {
     }
 
     public List<PropiedadesDeJugador> getJugadores() {
-        return jugadores;
+        return Collections.unmodifiableList(jugadores);
     }
 
     public Observable<Juego> getInicioDeJuegoObservable() {
@@ -35,6 +41,18 @@ public class ConfiguracionDeInicio {
 
     public void setLogger(JuegoLogger logger) {
         this.logger = logger;
+    }
+
+    private void verificarPropiedades() {
+        Set<String> nombreSet = new HashSet<>();
+        Set<Color> colorSet = new HashSet<>();
+
+        for (PropiedadesDeJugador props: jugadores) {
+            if (!nombreSet.add(props.getNombre()))
+                throw new JugadoresConMismoNombreException();
+            if (!colorSet.add(props.getColor()))
+                throw new JugadoresConMismoColorException();
+        }
     }
 
     private Juego construirJuego() {
@@ -55,6 +73,7 @@ public class ConfiguracionDeInicio {
 
     public void iniciarJuego() {
         try {
+            verificarPropiedades();
             Juego juego = construirJuego();
             inicioDeJuegoObservable.notifyObservers(juego);
         } catch (JuegoException e) {

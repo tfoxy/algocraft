@@ -46,7 +46,7 @@ public class PropiedadesDeJugador {
         return colorModel;
     }
 
-    private String getNombre() {
+    public String getNombre() {
         try {
             return nombreModel.getText(0, nombreModel.getLength());
         } catch (BadLocationException e) {
@@ -54,11 +54,11 @@ public class PropiedadesDeJugador {
         }
     }
 
-    private Raza getRaza() {
+    public Raza getRaza() {
         return (Raza) razaModel.getSelectedItem();
     }
 
-    private Color getColor() {
+    public Color getColor() {
         return (Color) colorModel.getSelectedItem();
     }
 
