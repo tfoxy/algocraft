@@ -1,6 +1,5 @@
-package controladores;
+package gui.controlador;
 
-import gui.controlador.AnyEventListener;
 import gui.modelo.FichaSeleccionada;
 import tablero.Direccion;
 

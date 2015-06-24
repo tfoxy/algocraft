@@ -1,8 +1,6 @@
-package vista;
+package gui.vista;
 
-import controladores.ControladorFicha;
 import ficha.Ficha;
-import ficha.terran.unidad.Marine;
 import gui.controlador.KeyboardMap;
 import gui.modelo.FichaSeleccionada;
 import gui.modelo.Observable;
@@ -18,8 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import java.awt.Component;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
 public class FichaView extends JPanel {
