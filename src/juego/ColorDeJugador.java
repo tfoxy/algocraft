@@ -16,7 +16,6 @@ public final class ColorDeJugador {
     public static final Color AMARILLO = Color.YELLOW;
     public static final Color CYAN = Color.CYAN;
     public static final Color PURPURA = new Color(192, 0, 192);
-    public static final Color NARANJA = Color.ORANGE;
 
     public static final List<Color> LISTA = Collections.unmodifiableList(
             Arrays.asList(
@@ -25,8 +24,7 @@ public final class ColorDeJugador {
                     VERDE,
                     AMARILLO,
                     CYAN,
-                    PURPURA,
-                    NARANJA
+                    PURPURA
             )
     );
 }
