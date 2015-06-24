@@ -33,8 +33,6 @@ public class VistaGanador extends JFrame {
         panelStats.add(new JLabel(" A Ganado El juego"));
         panelStats.add(botonSalir);
 
-        addWindowListener(new VentanaPrincipal.CloseListener());
-
         container.add(panelStats);
 
         setSize(500, 100);

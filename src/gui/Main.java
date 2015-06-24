@@ -1,13 +1,13 @@
 package gui;
 
 
-import gui.controlador.ControladorInicio;
-import gui.vista.VistaInicio;
+public final class Main {
+    private Main() {
+        // noop
+    }
 
-public class Main {
-	
-	public static void main(String[] args){
-	ControladorInicio control = new ControladorInicio();
-	new VistaInicio(control);
+    public static void main(String[] args) {
+        VentanaPrincipal ventana = new VentanaPrincipal();
+        ventana.mostrarInicio();
     }
 }

@@ -2,77 +2,48 @@ package gui.vista;
 
 
 import gui.controlador.ControladorInicio;
+import gui.modelo.ConfiguracionDeInicio;
+import gui.modelo.PropiedadesDeJugador;
 import juego.Raza;
 
+import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import java.awt.Button;
-import java.awt.Container;
-import java.awt.GridBagLayout;
-import java.awt.TextField;
+import java.awt.Color;
+import java.awt.GridLayout;
 
-public class VistaInicio extends JFrame {
+public class VistaInicio extends JPanel {
 
-    private TextField[] textoNombres = {new TextField("Nombre"), new TextField("Nombre")};
-    private JComboBox<Raza> razaCombobox1; //hacer esto con array nos va a largar el codigo en ves de acortarlo.
-    private JComboBox<Raza> razaCombobox2;
+    public VistaInicio(ConfiguracionDeInicio model, ControladorInicio control, LoggerView loggerView) {
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-    private JLabel botones;
-    private Button botonJugar = new Button("Jugar");
+        JPanel jugadoresPanel = new JPanel(new GridLayout(0, 1));
 
-    public VistaInicio(ControladorInicio control) {
-        Container container = getContentPane();
-        container.setLayout(new GridBagLayout());
+        for (PropiedadesDeJugador jugador: model.getJugadores()) {
+            JPanel jugadorPanel = new JPanel();
 
-        razaCombobox1 = new JComboBox<>(Raza.values());
-        razaCombobox2 = new JComboBox<>(Raza.values());
+            JTextField nombreField = new JTextField(jugador.getNombreModel(), null, 20);
+            jugadorPanel.add(nombreField);
 
+            JComboBox<Raza> razaCombobox = new JComboBox<>(jugador.getRazaModel());
+            jugadorPanel.add(razaCombobox);
 
-        JPanel frameTempJugador1 = new JPanel();
-        frameTempJugador1.add(textoNombres[0]);
-        frameTempJugador1.add(razaCombobox1);
+            JComboBox<Color> colorCombobox = new JComboBox<>(jugador.getColorModel());
+            jugadorPanel.add(colorCombobox);
 
-        JPanel frameTempJugador2 = new JPanel();
-        frameTempJugador2.add(textoNombres[1]);
-        frameTempJugador2.add(razaCombobox2);
-
-
-        container.add(frameTempJugador1);
-        container.add(frameTempJugador2);
+            jugadoresPanel.add(jugadorPanel);
+        }
 
         JPanel botones = new JPanel();
+        Button botonJugar = new Button("Jugar");
         botones.add(botonJugar);
 
-        container.add(botones);
-        setSize(500, 100);
-        setVisible(true);
+        add(jugadoresPanel);
+        add(loggerView);
+        add(botones);
 
-        botonJugar.addActionListener(control.jugarListener(this));
-
-		/*URL url = null;
-        try {
-			url = new URL("file:///home/geco/git/algocraft/src/gui/vista/Musica.wav");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		AudioClip sonido = Applet.newAudioClip(url);
-		sonido.loop();
-		Por si despues se quiere seguir intentando. pero por lo pronto se tendria que borrar.
-		*/
-    }
-
-    public Raza getRaza1() {
-        return (Raza) razaCombobox1.getSelectedItem();
-    }
-
-    public Raza getRaza2() {
-        return (Raza) razaCombobox2.getSelectedItem();
-    }
-
-    public String getNombre(int i) {
-        return textoNombres[i].getText();
+        botonJugar.addActionListener(control.jugarListener());
     }
 }
