@@ -16,8 +16,10 @@ import gui.vista.GrillaView;
 import gui.vista.JuegoView;
 import gui.vista.JugadorView;
 import gui.vista.LoggerView;
+import gui.vista.VistaGanador;
 import gui.vista.VistaInicio;
 import juego.Juego;
+import juego.Jugador;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,6 +27,8 @@ import javax.swing.JPanel;
 import javax.swing.ToolTipManager;
 import javax.swing.WindowConstants;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -59,13 +63,13 @@ public class VentanaPrincipal extends JFrame {
         setVisible(true);
     }
 
-    private static class TituloView extends JPanel {
+    private static final class TituloView extends JPanel {
         private TituloView() {
             add(new JLabel("ALGOCRAFT"));
         }
     }
 
-    private static class CargaView extends JPanel {
+    private static final class CargaView extends JPanel {
         private CargaView(String msg) {
             add(new JLabel("CARGANDO " + msg + "..."));
         }
@@ -121,6 +125,8 @@ public class VentanaPrincipal extends JFrame {
         FichaObjetivo fichaObjetivo = new FichaObjetivo();
         JugadorDeTurno jugadorDeTurno = new JugadorDeTurno(juego, fichaObjetivo);
         jugadorDeTurno.setJuegoLogger(logger);
+        jugadorDeTurno.jugadorGanoObservable().addObserver(new VictoriaDeJugadorObserver());
+
         FichaSeleccionada fichaSeleccionada = new FichaSeleccionada(fichaObjetivo, jugadorDeTurno);
         fichaSeleccionada.setJuegoLogger(logger);
 
@@ -137,5 +143,27 @@ public class VentanaPrincipal extends JFrame {
 
         JPanel juegoView = new JuegoView(grillaView, fichaView, jugadorView, loggerView);
         reemplazarPanel(juegoView);
+    }
+
+
+    private class VictoriaDeJugadorObserver implements Observer<JugadorDeTurno> {
+        @Override
+        public void update(Observable<JugadorDeTurno> object,
+                           JugadorDeTurno data) {
+            mostrarGanador(data.jugador());
+        }
+    }
+
+    private void mostrarGanador(Jugador jugador) {
+        JPanel ganadorPanel = new VistaGanador(jugador, new MostrarInicioListener());
+
+        reemplazarPanel(ganadorPanel);
+    }
+
+    private class MostrarInicioListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            mostrarInicio();
+        }
     }
 }
