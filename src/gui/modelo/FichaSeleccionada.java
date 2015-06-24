@@ -32,6 +32,8 @@ public class FichaSeleccionada {
         observables.on(AccionEnGrilla.SELECCION, new SeleccionObserver());
         observables.on(AccionEnGrilla.ATAQUE, new AtaqueObserver());
         observables.on(AccionEnGrilla.EMISION_DE_MAGIA, new EmisionDeMagiaObserver());
+
+        accionObservables.on(AccionDeFicha.ATAQUE, new VerificarMuerte());
     }
 
 
@@ -155,6 +157,15 @@ public class FichaSeleccionada {
     public void validarPropietario(String errorMsg) {
         if (!ficha().propietario().equals(jugadorDeTurno.jugador())) {
             throw new UnicamenteObjetivoPropioException(errorMsg);
+        }
+    }
+
+    private static class VerificarMuerte implements Observer<FichaSeleccionada> {
+        @Override
+        public void update(Observable<FichaSeleccionada> object, FichaSeleccionada data) {
+            if (data.ficha().barras().estaMuerto()) {
+                data.jugadorDeTurno.seleccionarSiguienteFicha();
+            }
         }
     }
 }

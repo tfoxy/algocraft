@@ -2,8 +2,6 @@ package gui.modelo;
 
 import error.JuegoException;
 import ficha.Ficha;
-import gui.vista.VistaGanador;
-import gui.vista.VistaPerdedor;
 import juego.Juego;
 import juego.Jugador;
 import tablero.Coordenada;
@@ -29,17 +27,16 @@ public class JugadorDeTurno {
         this.jugadorGanoObservable = new Observable<>();
         this.fichaParaConstruir = new FichaParaConstruir(fichaObjetivo, this);
 
-        this.comenzarTurnoObservable.addObserver(new SeleccionarPrimeraFicha());
+        this.comenzarTurnoObservable.addObserver(new SeleccionarSiguienteFicha());
         fichaObjetivo.fichaObservables().on(AccionEnGrilla.CONSTRUCCION,
                 new UbicarFichaParaConstruirObserver());
     }
 
 
-    private class SeleccionarPrimeraFicha implements Observer<JugadorDeTurno> {
+    private class SeleccionarSiguienteFicha implements Observer<JugadorDeTurno> {
         @Override
         public void update(Observable<JugadorDeTurno> object, JugadorDeTurno data) {
-            fichaObjetivo.cambiarAccion(AccionEnGrilla.SELECCION);
-            fichaObjetivo.cambiarFicha(elegirNuevaFicha());
+            seleccionarSiguienteFicha();
         }
     }
 
@@ -55,7 +52,13 @@ public class JugadorDeTurno {
     }
 
 
-    private Ficha elegirNuevaFicha() {
+    public void seleccionarSiguienteFicha() {
+        fichaObjetivo.cambiarAccion(AccionEnGrilla.SELECCION);
+        fichaObjetivo.cambiarFicha(siguienteFicha());
+    }
+
+
+    private Ficha siguienteFicha() {
         try {
             return jugador().fichas().iterator().next();
         } catch (NoSuchElementException exception) {
