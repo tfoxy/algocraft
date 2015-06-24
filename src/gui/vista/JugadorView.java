@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 
 public class JugadorView extends JPanel {
@@ -38,19 +39,26 @@ public class JugadorView extends JPanel {
 
         fichaParaConstruirCombobox =
                 new JComboBox<>(jugadorDeTurno.fichaParaConstruir());
+        fichaParaConstruirCombobox.setRenderer(new FichaParaConstruirRenderer());
+
+        botonTerminarTurno.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JPanel panelStats = new JPanel();
         panelStats.add(nombreLabel);
         panelStats.add(new JLabel(" "));
         panelStats.add(recursosLabel);
 
+        JPanel fichaParaConstruirPanel = new JPanel();
+        fichaParaConstruirPanel.add(fichaParaConstruirCombobox);
+
+        JPanel terminarTurnoPanel = new JPanel();
+        terminarTurnoPanel.add(botonTerminarTurno);
+
         add(panelStats);
-        add(fichaParaConstruirCombobox);
-        add(botonTerminarTurno);
+        add(fichaParaConstruirPanel);
+        add(terminarTurnoPanel);
 
         addActionListeners(control);
-
-        fichaParaConstruirCombobox.setRenderer(new FichaParaConstruirRenderer());
 
         botonTerminarTurno.setMnemonic(KeyEvent.VK_T);
         botonTerminarTurno.setToolTipText("ENTER");

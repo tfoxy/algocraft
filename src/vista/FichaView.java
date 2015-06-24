@@ -2,6 +2,7 @@ package vista;
 
 import controladores.ControladorFicha;
 import ficha.Ficha;
+import ficha.terran.unidad.Marine;
 import gui.controlador.KeyboardMap;
 import gui.modelo.FichaSeleccionada;
 import gui.modelo.Observable;
@@ -17,11 +18,16 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import java.awt.Component;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
 public class FichaView extends JPanel {
 
     private Ficha ficha;
+
+    private final JPanel panelBotonesMovimiento;
+    private final JPanel panelBotonesDeAccion;
 
     private final JLabel nombreLabel = new JLabel();
     private final JLabel movimientoLabel = new JLabel();
@@ -56,14 +62,14 @@ public class FichaView extends JPanel {
         panelStats.add(barrasLabel);
         add(panelStats);
 
-        JPanel panelBotonesMovimiento = new JPanel();
+        panelBotonesMovimiento = new JPanel();
         panelBotonesMovimiento.add(botonArriba);
         panelBotonesMovimiento.add(botonAbajo);
         panelBotonesMovimiento.add(botonIzquierda);
         panelBotonesMovimiento.add(botonDerecha);
         add(panelBotonesMovimiento);
 
-        JPanel panelBotonesDeAccion = new JPanel();
+        panelBotonesDeAccion = new JPanel();
         panelBotonesDeAccion.add(botonAtaque);
         panelBotonesDeAccion.add(botonCargar);
         panelBotonesDeAccion.add(descargarCombobox);
@@ -75,12 +81,7 @@ public class FichaView extends JPanel {
         botonAtaque.setMnemonic(KeyEvent.VK_A);
         botonCargar.setMnemonic(KeyEvent.VK_C);
 
-        fichaSeleccionada.cambioDeFichaObservable().addObserver(new Observer<Ficha>() {
-            @Override
-            public void update(Observable<Ficha> o, Ficha ficha) {
-                cambiarFicha(ficha);
-            }
-        });
+        fichaSeleccionada.cambioDeFichaObservable().addObserver(new CambioDeFicha());
 
         fichaSeleccionada.accionObservables().addObserver(new Observer<FichaSeleccionada>() {
             @Override
@@ -111,6 +112,13 @@ public class FichaView extends JPanel {
     private void cambiarFicha(Ficha ficha) {
         this.ficha = ficha;
         actulizarFicha();
+
+        // Mostrar solamente los botones que sean necesarios para la ficha
+        panelBotonesMovimiento.setVisible(ficha.movimientoMaximo() > 0);
+        botonAtaque.setVisible(ficha.tieneAtaque());
+        botonCargar.setVisible(ficha.capacidadEnTransporte() > 0);
+        descargarCombobox.setVisible(ficha.capacidadEnTransporte() > 0);
+        magiasCombobox.setVisible(ficha.magias().size() > 0);
     }
 
     private void actulizarFicha() {
@@ -175,6 +183,13 @@ public class FichaView extends JPanel {
             Magia magia = (Magia) value;
             setText(string(magia));
             return this;
+        }
+    }
+
+    private class CambioDeFicha implements Observer<Ficha> {
+        @Override
+        public void update(Observable<Ficha> object, Ficha data) {
+            cambiarFicha(data);
         }
     }
 }

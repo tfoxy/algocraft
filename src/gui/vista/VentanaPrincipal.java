@@ -47,7 +47,7 @@ public class VentanaPrincipal extends JFrame {
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 1;
         gbc.gridwidth = 1;
-        gbc.weightx = 0;
+        gbc.weightx = 1;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.EAST;
         container.add(jugadorView, gbc);

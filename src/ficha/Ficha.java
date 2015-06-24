@@ -412,6 +412,10 @@ public abstract class Ficha implements Cloneable {
         return vision;
     }
 
+    public boolean tieneAtaque() {
+        return ataqueTierra.rango() >= 0 || ataqueAire.rango() >= 0;
+    }
+
 
     protected interface FichaStrategy {
         void validarCreacion();
@@ -536,10 +540,7 @@ public abstract class Ficha implements Cloneable {
     }
 
     public Color miColor() {
-        Color color = propietario.color();
-        if (estaEnConstruccion)
-            color = color.brighter();
-        return color;
+        return propietario.color();
     }
 
 
