@@ -20,9 +20,6 @@ import juego.Raza;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import vista.ConstruccionView2;
-import controladores.ControladorConstruccion;
-
 public final class MainGui {
 
     private MainGui() {

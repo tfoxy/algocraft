@@ -7,6 +7,8 @@ import javax.swing.WindowConstants;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -71,6 +73,14 @@ public class VentanaPrincipal extends JFrame {
         // enable anti-aliased text:
         System.setProperty("awt.useSystemAAFontSettings", "on");
         System.setProperty("swing.aatext", "true");
+    }
+
+    public static class CloseListener extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            e.getWindow().setVisible(false);
+            System.exit(0);
+        }
     }
 
 }
