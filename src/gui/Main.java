@@ -7,6 +7,7 @@ public final class Main {
     }
 
     public static void main(String[] args) {
+        VentanaPrincipal.iniciarPropiedadesGlobales();
         VentanaPrincipal ventana = new VentanaPrincipal();
         ventana.mostrarInicio();
     }

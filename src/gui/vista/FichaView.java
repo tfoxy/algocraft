@@ -55,9 +55,11 @@ public class FichaView extends JPanel {
         panelStats.add(nombreLabel);
         panelStats.add(new JLabel(" "));
         panelStats.add(movimientoLabel);
-        panelStats.add(new JLabel(" "));
-        panelStats.add(barrasLabel);
         add(panelStats);
+
+        JPanel barrasPanel = new JPanel();
+        barrasPanel.add(barrasLabel);
+        add(barrasPanel);
 
         panelBotonesMovimiento = new JPanel();
         panelBotonesMovimiento.add(botonArriba);

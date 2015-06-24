@@ -21,6 +21,12 @@ import gui.vista.VistaInicio;
 import juego.Juego;
 import juego.Jugador;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,6 +35,8 @@ import javax.swing.WindowConstants;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -37,14 +45,13 @@ public class VentanaPrincipal extends JFrame {
     private final Container container;
 
     public VentanaPrincipal() {
-        iniciarPropiedadesGlobales();
         setPropiedadesDeVentana();
 
         logger = new JuegoLogger();
         loggerView = new LoggerView(logger);
         container = this.getContentPane();
 
-        reemplazarPanel(new TituloView());
+        reemplazarContenido(new TituloView());
         ponerMusica();
     }
 
@@ -63,41 +70,41 @@ public class VentanaPrincipal extends JFrame {
         setVisible(true);
     }
 
-    private static final class TituloView extends JPanel {
+    private static final class TituloView extends JLabel {
         private TituloView() {
-            add(new JLabel("ALGOCRAFT"));
+            super("ALGOCRAFT");
         }
     }
 
-    private static final class CargaView extends JPanel {
+    private static final class CargaView extends JLabel {
         private CargaView(String msg) {
-            add(new JLabel("CARGANDO " + msg + "..."));
+            super("CARGANDO " + msg + "...");
         }
     }
 
-    private void reemplazarPanel(JPanel panel) {
+    private void reemplazarContenido(JComponent component) {
         container.removeAll();
-        container.add(panel);
+        container.add(component);
         pack();
         setLocationRelativeTo(null);
     }
 
     private void ponerMusica() {
-        /*URL url = null;
         try {
-			url = new URL("file:///home/geco/git/algocraft/src/gui/vista/Musica.wav");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		AudioClip sonido = Applet.newAudioClip(url);
-		sonido.loop();
-		Por si despues se quiere seguir intentando. pero por lo pronto se tendria que borrar.
-		*/
+            Clip clip = AudioSystem.getClip();
+            InputStream inputStream = ClassLoader.getSystemResourceAsStream("music/music.wav");
+            if (inputStream != null) {
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(inputStream);
+                clip.open(audioStream);
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
+        } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void mostrarInicio() {
-        reemplazarPanel(new CargaView("Inicio"));
+        reemplazarContenido(new CargaView("Inicio"));
 
         ConfiguracionDeInicio configJuego = new ConfiguracionDeInicio();
         configJuego.setLogger(logger);
@@ -106,7 +113,7 @@ public class VentanaPrincipal extends JFrame {
         ControladorInicio control = new ControladorInicio(configJuego);
 
         JPanel panel = new VistaInicio(configJuego, control, loggerView);
-        reemplazarPanel(panel);
+        reemplazarContenido(panel);
     }
 
     private class InicioDeJuego implements Observer<Juego> {
@@ -117,7 +124,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void iniciarJuego(Juego juego) {
-        reemplazarPanel(new CargaView("Juego"));
+        reemplazarContenido(new CargaView("Juego"));
 
         // Modelo
         TableroObservable mapa = (TableroObservable) juego.tablero();
@@ -142,7 +149,7 @@ public class VentanaPrincipal extends JFrame {
         jugadorDeTurno.comenzarTurno();
 
         JPanel juegoView = new JuegoView(grillaView, fichaView, jugadorView, loggerView);
-        reemplazarPanel(juegoView);
+        reemplazarContenido(juegoView);
     }
 
 
@@ -157,7 +164,7 @@ public class VentanaPrincipal extends JFrame {
     private void mostrarGanador(Jugador jugador) {
         JPanel ganadorPanel = new VistaGanador(jugador, new MostrarInicioListener());
 
-        reemplazarPanel(ganadorPanel);
+        reemplazarContenido(ganadorPanel);
     }
 
     private class MostrarInicioListener implements ActionListener {

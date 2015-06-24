@@ -41,9 +41,10 @@ public class JugadorView extends JPanel {
 
         botonTerminarTurno.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        JPanel panelNombre = new JPanel();
+        panelNombre.add(nombreLabel);
+
         JPanel panelStats = new JPanel();
-        panelStats.add(nombreLabel);
-        panelStats.add(new JLabel(" "));
         panelStats.add(recursosLabel);
 
         JPanel fichaParaConstruirPanel = new JPanel();
@@ -52,6 +53,7 @@ public class JugadorView extends JPanel {
         JPanel terminarTurnoPanel = new JPanel();
         terminarTurnoPanel.add(botonTerminarTurno);
 
+        add(panelNombre);
         add(panelStats);
         add(fichaParaConstruirPanel);
         add(terminarTurnoPanel);
