@@ -1,6 +1,7 @@
 package gui.vista;
 
 import ficha.Ficha;
+import gui.controlador.ControladorFicha;
 import gui.controlador.KeyboardMap;
 import gui.modelo.FichaSeleccionada;
 import gui.modelo.Observable;
