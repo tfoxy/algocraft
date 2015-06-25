@@ -45,7 +45,6 @@ public class RadiacionMagiaTest {
     private Coordenada coordenada = new Coordenada(3, 3);
     private Coordenada coordenadaVecina = new Coordenada(3, 4);
     private Coordenada3d coordenadaTerrestre = new Coordenada3d(3, 3, 1);
-    private Coordenada3d coordenadaTerrestreVecina = new Coordenada3d(3, 4, 1);
     private FichaAerea naveCiencia;
 
     @Before

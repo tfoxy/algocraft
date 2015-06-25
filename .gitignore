@@ -11,6 +11,7 @@ algocraft.iml
 # Proyecto base
 *.sw*
 build/
+dev-libs/
 libs/
 tmp/
 build.xml.old

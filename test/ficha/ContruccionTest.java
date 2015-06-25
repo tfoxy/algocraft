@@ -1,4 +1,4 @@
-package estrategias;
+package ficha;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +22,7 @@ import ficha.protoss.edificio.Asimilador;
 import ficha.protoss.edificio.Pilon;
 import ficha.protoss.unidad.Zealot;
 
-public class EstratregiaContruccionTest {
+public class ContruccionTest {
 
     private Jugador protoss;
     private Jugador pachaMama; //vende patria
@@ -37,6 +37,20 @@ public class EstratregiaContruccionTest {
         pachaMama = mapa.gaia();
 
         protoss.cheats().verTodoElMapa(mapa);
+    }
+
+    @Test
+    public void queTardeElTiempoCorrecto() {
+        Ficha pilon = new Pilon().enConstruccion();
+        pilon.setBasico(protoss, mapa, coordenada);
+        pilon.ponerEnJuego();
+
+        for (int i = 0; i < pilon.turnosParaCrear(); i++) {
+            assertEquals(protoss.poblacionPosible(), 0);
+            pilon.pasarTurno();
+        }
+
+        assertEquals(protoss.poblacionPosible(), pilon.poblacionQueDa);
     }
 
     //fichaTerrestre/casa

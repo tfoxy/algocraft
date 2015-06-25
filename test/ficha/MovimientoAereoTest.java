@@ -1,4 +1,4 @@
-package estrategias;
+package ficha;
 
 import juego.Jugador;
 import juego.Raza;
@@ -12,31 +12,31 @@ import tablero.Direccion;
 import tablero.Tablero;
 import error.NoSePuedeCrearFicha;
 import ficha.Ficha;
+import ficha.UnidadAerea;
 import ficha.UnidadTerrestre;
-
+import ficha.protoss.unidad.Scout;
 import ficha.protoss.unidad.Zealot;
 
-public class ExtrategiaVivaMovimientoTest {
+public class MovimientoAereoTest {
 
-    //en si tiene qeu tener los Test de todos sus modulos. Asi que se le tiene que agregar test mientras se les agrega modulo.
     private Tablero mapa;
     private Ficha unidad;
     private Jugador jugador;
     private Coordenada lugar;
-    private UnidadTerrestre otraUnidad;
+    private UnidadAerea otraUnidad;
 
     @Before
     public void initialize() {
         jugador = new Jugador("miNombre", Raza.PROTOSS);
 
-        otraUnidad = new Zealot();
-        unidad = new Zealot();
+        otraUnidad = new Scout();
+        unidad = new Scout();
 
         mapa = new Tablero(20, 20);
         lugar = new Coordenada(3, 3);
 
         unidad.setBasico(jugador, mapa, lugar);
-        unidad.ponerEnJuego(); //no tiene sentido rebuildar aun algo que se usa solo para los test.
+        unidad.ponerEnJuego();
     }
 
 

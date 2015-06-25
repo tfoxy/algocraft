@@ -1,4 +1,4 @@
-package estrategias;
+package ficha;
 
 import juego.Jugador;
 import juego.Raza;
@@ -12,25 +12,24 @@ import tablero.Direccion;
 import tablero.Tablero;
 import error.NoSePuedeCrearFicha;
 import ficha.Ficha;
-import ficha.UnidadAerea;
 import ficha.UnidadTerrestre;
-import ficha.protoss.unidad.Scout;
+
 import ficha.protoss.unidad.Zealot;
 
-public class ExtrategiaVivaMovimientoAereoTest {
+public class MovimientoTest {
 
     private Tablero mapa;
     private Ficha unidad;
     private Jugador jugador;
     private Coordenada lugar;
-    private UnidadAerea otraUnidad;
+    private UnidadTerrestre otraUnidad;
 
     @Before
     public void initialize() {
         jugador = new Jugador("miNombre", Raza.PROTOSS);
 
-        otraUnidad = new Scout();
-        unidad = new Scout();
+        otraUnidad = new Zealot();
+        unidad = new Zealot();
 
         mapa = new Tablero(20, 20);
         lugar = new Coordenada(3, 3);
@@ -58,7 +57,7 @@ public class ExtrategiaVivaMovimientoAereoTest {
     }
 
     @Test
-    public void noPuedeMoverseDondeNoHayOtraUnidad() {
+    public void noPuedeMoverseDondeHayOtraUnidad() {
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 4));
         otraUnidad.ponerEnJuego();
 
@@ -70,7 +69,7 @@ public class ExtrategiaVivaMovimientoAereoTest {
     public void puedeInsertarseDondeHabiaOtraUnidadAntesDeMoverse() {
         unidad.intentarMovimiento(Direccion.ARRIBA);
 
-        otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 3));
+        otraUnidad.setBasico(jugador, mapa, lugar);
         otraUnidad.ponerEnJuego();
     }
 
@@ -86,8 +85,6 @@ public class ExtrategiaVivaMovimientoAereoTest {
 
     @Test
     public void puedeMoverseDondeHabiaOtraUnidadAntesDeMoverse() {
-        UnidadTerrestre otraUnidad = new Zealot();
-
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 2));
         otraUnidad.ponerEnJuego();
 
@@ -100,7 +97,6 @@ public class ExtrategiaVivaMovimientoAereoTest {
     public void noPuedeMoverseDondeOtraUnidadSeMovio() {
         otraUnidad.setBasico(jugador, mapa, new Coordenada(3, 5));
         otraUnidad.ponerEnJuego();
-
 
         otraUnidad.intentarMovimiento(Direccion.ABAJO);
 
