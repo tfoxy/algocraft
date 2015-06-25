@@ -18,3 +18,6 @@ build.xml.old
 
 # Ant reports
 pmd_report.html
+
+# uml
+uml/*.png

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ficha.Ficha</OriginalElement>
+  <nodes>
+    <node x="620.25" y="168.0">ficha.Ficha.DefaultFichaStrategy</node>
+    <node x="1002.4326923076924" y="168.0">ficha.natural.terreno.TerrenoEspacial</node>
+    <node x="348.0576923076923" y="89.0">ficha.FichaCelestial</node>
+    <node x="1190.875" y="89.0">ficha.FichaTerrestre</node>
+    <node x="846.4326923076924" y="168.0">ficha.EdificioTerrestre</node>
+    <node x="0.0" y="247.0">ficha.TransporteAereo</node>
+    <node x="554.75" y="247.0">ficha.Ficha.ConstruccionStrategy</node>
+    <node x="1346.375" y="168.0">ficha.natural.terreno.TerrenoTierra</node>
+    <node x="12.5" y="168.0">ficha.UnidadAerea</node>
+    <node x="909.125" y="247.0">ficha.EdifcioDeRecursosTerrestre</node>
+    <node x="1254.375" y="247.0">ficha.natural.recurso.NodoMineral</node>
+    <node x="1485.375" y="168.0">ficha.UnidadTerrestre</node>
+    <node x="765.3076923076924" y="326.0">ficha.EdifcioDeRecursosTerrestre.EdifcioDeRecursosStrategy</node>
+    <node x="1158.375" y="247.0">ficha.natural.recurso.Volcan</node>
+    <node x="598.75" y="0.0">ficha.Ficha</node>
+    <node x="274.50000000000006" y="168.0">ficha.natural.terreno.TerrenoCielo</node>
+    <node x="766.125" y="247.0">ficha.CasaTerrestre</node>
+    <node x="77.55769230769238" y="89.0">ficha.FichaAerea</node>
+    <node x="407.50000000000006" y="168.0">ficha.magia.TormentaPsionicaFicha</node>
+    <node x="607.5" y="89.0">ficha.Ficha.FichaStrategy</node>
+    <node x="1180.375" y="168.0">ficha.FuenteDeRecurso</node>
+    <node x="147.5" y="168.0">ficha.natural.terreno.TerrenoAire</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ficha.EdificioTerrestre" target="ficha.FichaTerrestre">
+      <point x="0.0" y="-14.5" />
+      <point x="914.4326923076924" y="138.0" />
+      <point x="1203.375" y="138.0" />
+      <point x="-50.0" y="14.5" />
+    </edge>
+    <edge source="ficha.natural.recurso.Volcan" target="ficha.FuenteDeRecurso">
+      <point x="0.0" y="-14.5" />
+      <point x="1196.375" y="222.0" />
+      <point x="1216.875" y="222.0" />
+      <point x="-36.5" y="14.5" />
+    </edge>
+    <edge source="ficha.FichaTerrestre" target="ficha.Ficha">
+      <point x="0.0" y="-14.5" />
+      <point x="1253.375" y="49.0" />
+      <point x="660.1666666666667" y="49.0" />
+      <point x="27.91666666666663" y="14.5" />
+    </edge>
+    <edge source="ficha.natural.terreno.TerrenoTierra" target="ficha.FichaTerrestre">
+      <point x="0.0" y="-14.5" />
+      <point x="1405.875" y="148.0" />
+      <point x="1278.375" y="148.0" />
+      <point x="25.0" y="14.5" />
+    </edge>
+    <edge source="ficha.TransporteAereo" target="ficha.UnidadAerea">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="ficha.Ficha.DefaultFichaStrategy" target="ficha.Ficha">
+      <point x="41.25" y="-14.5" />
+      <point x="744.0" y="148.0" />
+      <point x="738.0" y="148.0" />
+      <point x="738.0" y="59.0" />
+      <point x="649.0" y="59.0" />
+      <point x="16.75" y="14.5" />
+    </edge>
+    <edge source="ficha.EdifcioDeRecursosTerrestre" target="ficha.EdificioTerrestre">
+      <point x="0.0" y="-14.5" />
+      <point x="1013.125" y="222.0" />
+      <point x="948.4326923076924" y="222.0" />
+      <point x="34.0" y="14.5" />
+    </edge>
+    <edge source="ficha.FichaCelestial" target="ficha.Ficha">
+      <point x="0.0" y="-14.5" />
+      <point x="408.0576923076923" y="59.0" />
+      <point x="615.5" y="59.0" />
+      <point x="-16.75" y="14.5" />
+    </edge>
+    <edge source="ficha.EdifcioDeRecursosTerrestre.EdifcioDeRecursosStrategy" target="ficha.EdifcioDeRecursosTerrestre">
+      <point x="50.75" y="-14.5" />
+      <point x="917.5576923076924" y="301.0" />
+      <point x="1013.125" y="301.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="ficha.FuenteDeRecurso" target="ficha.FichaTerrestre">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="ficha.EdifcioDeRecursosTerrestre.EdifcioDeRecursosStrategy" target="ficha.Ficha.DefaultFichaStrategy">
+      <point x="-50.75" y="-14.5" />
+      <point x="816.0576923076924" y="301.0" />
+      <point x="744.0" y="301.0" />
+      <point x="41.25" y="14.5" />
+    </edge>
+    <edge source="ficha.natural.terreno.TerrenoCielo" target="ficha.FichaCelestial">
+      <point x="0.0" y="-14.5" />
+      <point x="331.00000000000006" y="148.0" />
+      <point x="378.0576923076923" y="148.0" />
+      <point x="-30.0" y="14.5" />
+    </edge>
+    <edge source="ficha.CasaTerrestre" target="ficha.EdificioTerrestre">
+      <point x="0.0" y="-14.5" />
+      <point x="827.625" y="222.0" />
+      <point x="880.4326923076924" y="222.0" />
+      <point x="-34.0" y="14.5" />
+    </edge>
+    <edge source="ficha.Ficha.ConstruccionStrategy" target="ficha.Ficha.DefaultFichaStrategy">
+      <point x="42.25" y="-14.5" />
+      <point x="681.5" y="222.0" />
+      <point x="661.5" y="222.0" />
+      <point x="-41.25" y="14.5" />
+    </edge>
+    <edge source="ficha.natural.recurso.NodoMineral" target="ficha.FuenteDeRecurso">
+      <point x="0.0" y="-14.5" />
+      <point x="1310.375" y="222.0" />
+      <point x="1289.875" y="222.0" />
+      <point x="36.5" y="14.5" />
+    </edge>
+    <edge source="ficha.natural.terreno.TerrenoAire" target="ficha.FichaAerea">
+      <point x="0.0" y="-14.5" />
+      <point x="201.0" y="148.0" />
+      <point x="155.55769230769238" y="148.0" />
+      <point x="26.0" y="14.5" />
+    </edge>
+    <edge source="ficha.UnidadAerea" target="ficha.FichaAerea">
+      <point x="0.0" y="-14.5" />
+      <point x="70.0" y="148.0" />
+      <point x="103.55769230769238" y="148.0" />
+      <point x="-26.0" y="14.5" />
+    </edge>
+    <edge source="ficha.Ficha.DefaultFichaStrategy" target="ficha.Ficha.FichaStrategy">
+      <point x="-41.25" y="-14.5" />
+      <point x="661.5" y="148.0" />
+      <point x="667.5" y="148.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="ficha.natural.terreno.TerrenoEspacial" target="ficha.FichaTerrestre">
+      <point x="0.0" y="-14.5" />
+      <point x="1069.9326923076924" y="148.0" />
+      <point x="1228.375" y="148.0" />
+      <point x="-25.0" y="14.5" />
+    </edge>
+    <edge source="ficha.Ficha.ConstruccionStrategy" target="ficha.Ficha">
+      <point x="-42.25" y="-14.5" />
+      <point x="597.0" y="69.0" />
+      <point x="626.6666666666667" y="69.0" />
+      <point x="-5.583333333333371" y="14.5" />
+    </edge>
+    <edge source="ficha.UnidadTerrestre" target="ficha.FichaTerrestre">
+      <point x="0.0" y="-14.5" />
+      <point x="1553.375" y="138.0" />
+      <point x="1303.375" y="138.0" />
+      <point x="50.0" y="14.5" />
+    </edge>
+    <edge source="ficha.Ficha.FichaStrategy" target="ficha.Ficha">
+      <point x="0.0" y="-14.5" />
+      <point x="667.5" y="69.0" />
+      <point x="637.8333333333335" y="69.0" />
+      <point x="5.583333333333371" y="14.5" />
+    </edge>
+    <edge source="ficha.magia.TormentaPsionicaFicha" target="ficha.FichaCelestial">
+      <point x="0.0" y="-14.5" />
+      <point x="497.00000000000006" y="148.0" />
+      <point x="438.0576923076923" y="148.0" />
+      <point x="30.0" y="14.5" />
+    </edge>
+    <edge source="ficha.FichaAerea" target="ficha.Ficha">
+      <point x="0.0" y="-14.5" />
+      <point x="129.55769230769238" y="49.0" />
+      <point x="604.3333333333335" y="49.0" />
+      <point x="-27.91666666666663" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5897027600849257" x="932.0" y="178.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

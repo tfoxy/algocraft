@@ -1,0 +1,33 @@
+@startuml
+class JuegoView
+
+JuegoView --> JugadorView
+JuegoView --> FichaView
+JuegoView --> GrillaView
+JuegoView --> LoggerView
+
+JugadorView --> JugadorDeTurno
+FichaView --> FichaSeleccionada
+GrillaView --> TableroObservable
+GrillaView --> FichaObjetivo
+GrillaView -> JugadorDeTurno
+LoggerView --> JuegoLogger
+
+JugadorDeTurno -> JuegoLogger
+JugadorDeTurno <- FichaSeleccionada
+JugadorDeTurno --> FichaObjetivo
+FichaSeleccionada -> JuegoLogger
+FichaSeleccionada --> MagiasDisponibles
+
+
+JugadorDeTurno <--> FichaParaConstruir
+JugadorDeTurno --> Juego
+
+Juego --> TableroObservable
+FichaParaConstruir --> FichaObjetivo
+
+hide members
+hide circle
+hide methods
+
+@enduml
