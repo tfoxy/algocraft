@@ -82,16 +82,13 @@ public class JugadorDeTurno {
     public void terminarTurno() {
         this.terminarTurnoObservable.notifyObservers(this);
 
-        String name = juego.jugadorActual().nombre();
-        this.juego.pasarJugador();
-        if (juego.jugadorActual().perdi()) {
-            //new VistaPerdedor(juego.jugadorActual());
-            //new VistaGanador(name);
+        this.juego.pasarTurno();
 
+        if (juego.estaTerminado()) {
             this.jugadorGanoObservable.notifyObservers(this);
+        } else {
+            this.comenzarTurnoObservable.notifyObservers(this);
         }
-
-        this.comenzarTurnoObservable.notifyObservers(this);
     }
 
     public Observable<JugadorDeTurno> jugadorGanoObservable() {

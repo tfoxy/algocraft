@@ -1,28 +1,32 @@
 package juego;
 
+import com.google.common.collect.Iterators;
 import gui.modelo.TableroObservable;
 import tablero.ITablero;
-import tablero.Tablero;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
 public class Juego extends Observable {
 
-    private final Gaia gaia;
     private final List<Jugador> jugadores;
     private final ITablero tablero;
-    private int jugadorActualIndex = 0;
+    private final Iterator<Jugador> jugadorActualIterator;
+    private Jugador jugadorActual;
 
     private Juego(Builder builder) {
-        gaia = builder.gaia;
         jugadores = builder.jugadores;
         tablero = builder.tablero;
+
+        jugadorActualIterator = Iterators.cycle(jugadores);
+
+        pasarJugador();
     }
 
     public Gaia gaia() {
-        return gaia;
+        return tablero.gaia();
     }
 
     public ITablero tablero() {
@@ -34,30 +38,48 @@ public class Juego extends Observable {
     }
 
     public Jugador jugadorActual() {
-        return jugadores.get(jugadorActualIndex);
+        return jugadorActual;
     }
 
-    public void pasarJugador() {
-        jugadorActual().pasarTurno();
+    public void pasarTurno() {
+        if (!estaTerminado()) {
+            jugadorActual().pasarTurno();
 
-        jugadorActualIndex++;
-        if (jugadorActualIndex >= jugadores.size())
-            jugadorActualIndex = 0;
+            quitarPerdedoresYPasarJugador();
+        }
+    }
+
+    public boolean estaTerminado() {
+        return jugadores.size() <= 1;
+    }
+
+    private void quitarPerdedoresYPasarJugador() {
+        int cantidadDeJugadores = jugadores.size();
+        Jugador jugadorAux = jugadorActual;
+
+        for (int i = 0; i < cantidadDeJugadores; i++) {
+            if (jugadorActual.perdi())
+                jugadorActualIterator.remove();
+            pasarJugador();
+        }
+
+        if (jugadorActual.equals(jugadorAux))
+            pasarJugador();
+    }
+
+    private void pasarJugador() {
+        if (jugadorActualIterator.hasNext()) {
+            jugadorActual = jugadorActualIterator.next();
+        } else {
+            // En caso de que no haya más jugadores, se considera que gaia ganó la partida
+            jugadorActual = gaia();
+        }
     }
 
 
     public static class Builder {
-        private static final int POBLACION_MAXIMA = 200;
-
-        private final Gaia gaia = new Gaia();
         private final List<Jugador> jugadores = new ArrayList<>();
         private ITablero tablero = null;
-        private int poblacionMaxima = POBLACION_MAXIMA;
-
-
-        public Gaia gaia() {
-            return gaia;
-        }
 
 
         public Builder agregarJugador(Jugador jugador) {

@@ -28,7 +28,7 @@ public class EscenarioSimple {
     public EscenarioSimple(Juego.Builder builder) {
         this.builder = builder;
 
-        builder.tablero(new Tablero(W, H, builder.gaia()));
+        builder.tablero(new Tablero(W, H));
     }
 
     private static Coordenada c(int x, int y) {
