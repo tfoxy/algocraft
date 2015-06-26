@@ -25,8 +25,8 @@ public class GrillaView extends JPanel {
     static {
         CURSORS.put(AccionEnGrilla.SELECCION, Cursor.getDefaultCursor());
         CURSORS.put(AccionEnGrilla.ATAQUE, new Cursor(Cursor.CROSSHAIR_CURSOR));
-        CURSORS.put(AccionEnGrilla.EMISION_DE_MAGIA, new Cursor(Cursor.WAIT_CURSOR));
-        CURSORS.put(AccionEnGrilla.CONSTRUCCION, new Cursor(Cursor.HAND_CURSOR));
+        CURSORS.put(AccionEnGrilla.EMISION_DE_MAGIA, new Cursor(Cursor.HAND_CURSOR));
+        CURSORS.put(AccionEnGrilla.CONSTRUCCION, new Cursor(Cursor.MOVE_CURSOR));
     }
 
 
