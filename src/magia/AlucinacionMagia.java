@@ -59,7 +59,7 @@ public class AlucinacionMagia extends Magia {
     }
 
     public void insertarEspectro(Ficha fichaCopiar, Coordenada lugar) {
-        Ficha alucinacion = fichaCopiar.espectro();
+        Ficha alucinacion = fichaCopiar.crearAlucinacion();
         alucinacion.setBasico(alucinacion.propietario(), alucinacion.tablero(), lugar);
         alucinacion.ponerEnJuego();
     }

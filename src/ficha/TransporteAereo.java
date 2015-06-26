@@ -1,11 +1,6 @@
 package ficha;
 
-import error.FichaACargarDebeEstarDebajoDeTransporte;
-import error.FichaSobreOtraFichaException;
-import error.MovimientoInsuficienteException;
-import error.TransporteNoContieneFichaException;
 import stats.Transportacion;
-import tablero.Coordenada3d;
 
 public class TransporteAereo extends UnidadAerea {
 

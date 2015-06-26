@@ -220,7 +220,7 @@ public abstract class Ficha implements Cloneable {
         return clone;
     }
 
-    public Ficha espectro() {
+    public Ficha crearAlucinacion() {
         Ficha clone = this.clone();
 
         estrategia.clonarEn(clone);
@@ -410,6 +410,14 @@ public abstract class Ficha implements Cloneable {
 
     public boolean tieneAtaque() {
         return ataqueTierra.rango() >= 0 || ataqueAire.rango() >= 0;
+    }
+
+    public Ataque ataqueTierra() {
+        return ataqueTierra;
+    }
+
+    public Ataque ataqueAire() {
+        return ataqueAire;
     }
 
 
